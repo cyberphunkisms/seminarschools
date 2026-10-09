@@ -11,7 +11,7 @@ const crypto = require('crypto');
  * to classify records from prose or receive research-only fields.
  */
 
-const EXPECTED_MONITORING_MARKER_COUNT = 134;
+const EXPECTED_MONITORING_MARKER_COUNT = 136;
 const CLOCK_PRECISIONS = new Set(['exact', 'estimated', 'approximate']);
 const SEARCH_GROUPS = Object.freeze([
   'title',
@@ -23,7 +23,7 @@ const SEARCH_GROUPS = Object.freeze([
   'topics',
   'format'
 ]);
-const PERSISTED_SEARCH_GROUPS = Object.freeze(['aliases', 'topics', 'format']);
+const PERSISTED_SEARCH_GROUPS = Object.freeze(['aliases', 'topics', 'format', 'people']);
 const TEMPORAL_TYPES = Object.freeze([
   'global-instant',
   'local-date-time',
@@ -65,10 +65,12 @@ const PUBLIC_EVENT_KEYS = Object.freeze([
   'country',
   'date',
   'end_date',
+  'end_date_precision',
   'date_precision',
   'time_precision',
   'type',
   'record_kind',
+  'destination_status',
   'confirmation_status',
   'lifecycle_status',
   'writing_bands',
@@ -464,9 +466,20 @@ function normalizedList(values) {
 }
 
 function isMonitoringMarker(event) {
-  if (!event || event.date_precision !== 'estimated') return false;
+  if (!event) return false;
+  if (event.date_precision === 'unknown') return true;
   const evidence = `${event.description || ''} ${event.raw_excerpt || ''}`;
-  return /\bmonitoring marker\b/i.test(evidence);
+  // Legacy source watches inherited exact placeholder dates from the importer.
+  // Explicit watch evidence, rather than that inherited precision, determines
+  // whether an unconfirmed record can be published as a dated occurrence.
+  if (event.confirmation_status === 'unconfirmed') {
+    if (/\bProjected source watch\b/i.test(evidence)) return true;
+    // Historical annual windows are research leads, not dated occurrences.
+    // Require date-related language in the same clause so a projected film or
+    // a lecture about economic projections remains a real calendar event.
+    if (/\b(?:date|deadline|window|calls?)\b[^.!?]{0,100}\b(?:projected|placeholder)\b|\b(?:projected|placeholder)\b[^.!?]{0,100}\b(?:date|deadline|window|cycle)\b/i.test(evidence)) return true;
+  }
+  return event.date_precision === 'estimated' && /\bmonitoring marker\b/i.test(evidence);
 }
 
 function publicationSurface(event) {
@@ -586,6 +599,9 @@ function opportunityWhat(event) {
   if (/\b(application|admission|registration|submission|program)\b/.test(structured)) {
     return 'opportunity:applications';
   }
+  // Older imports used `cfp` for all academic opportunities. An existing
+  // explicit fellowship band is stronger evidence than that legacy type.
+  if (normalizedList(event.academic_bands).includes('fellowships')) return 'opportunity:funding';
   if (event.type === 'cfp') return 'opportunity:cfp';
   if (event.type === 'contest') return 'opportunity:competitions';
   if (['workshop', 'program'].includes(event.type)) return 'opportunity:applications';
@@ -645,10 +661,16 @@ function classifyWhat(event) {
 }
 
 function classifyPlace(event) {
-  const city = normalizeSearchText(event.city);
+  const declaredCity = normalizeSearchText(event.city);
   const venue = normalizeSearchText(event.venue);
+  // Existing venue text can name the city even when the city field is empty.
+  // Do not let a placeholder hide those records from their regional filter.
+  const missingCity = ['', 'unknown', 'location unconfirmed', 'lieu non confirme'].includes(declaredCity);
+  const city = missingCity ? venue : declaredCity;
   const combined = `${city} ${venue}`;
   if (/\b(online|virtual|zoom|global)\b/.test(combined) || event.corridor_zone === 'online-global') return 'online';
+  // Cambridge also names cities outside Ontario; the venue must disambiguate.
+  if (missingCity && /\bcambridge\b/.test(venue) && !/\b(ontario|canada)\b/.test(venue)) return 'other';
   if (['toronto', 'mississauga', 'brampton', 'markham', 'vaughan', 'oakville', 'richmond hill'].some(value => city.includes(value))) return 'toronto-gta';
   if (['hamilton', 'burlington'].some(value => city.includes(value))) return 'hamilton';
   if (['guelph', 'waterloo', 'kitchener', 'cambridge'].some(value => city.includes(value))) return 'guelph-waterloo';
@@ -778,7 +800,12 @@ function classifyAudiences(event) {
   if (/university|graduate|undergraduate|postdoc|doctoral|phd|masters|cegep/.test(structured)) values.push('university');
   if (/teacher|educator|school staff/.test(structured)) values.push('educators');
   if (/family|families|all ages/.test(structured)) values.push('families');
-  if (!values.length || /public|open to all|adult/.test(structured)) values.push('public');
+  const access = normalizeSearchText(event.public_access_status || '');
+  const restrictions = normalizeSearchText(list(event.access_restrictions).join(' '));
+  const restricted = /restricted|members? only|delegates? only|invitation|invite only|not public|private|unconfirmed|unclear|pending|selected participants/.test(access)
+    || /membership|members? only|delegates? only|invitation|invite only|not open to (?:the )?public/.test(restrictions);
+  if (!restricted && (/\bpublic\b|^open$|open to all/.test(access)
+    || /\bpublic\b|open to all|all ages/.test(structured))) values.push('public');
   return unique(values);
 }
 
@@ -918,7 +945,9 @@ function buildSearchGroups(event, facets) {
     title: normalizedList([event.title]),
     description: normalizedList([event.description]),
     aliases: normalizedList(curatedSearchAliases(event, facets)),
-    people: normalizedList([event.speaker_or_director]),
+    people: normalizedList([event.speaker_or_director,
+      ...list(event.presence_claims).filter(claim => ['confirmed', 'role-confirmed'].includes(claim?.status)).map(claim => claim.person)
+    ]),
     organizer: normalizedList([event.organizer, event.source_name]),
     place: normalizedList([event.venue, event.city, event.country]),
     topics: unique(topicLabels),
@@ -990,6 +1019,7 @@ function baseProjection(event, seriesIndex) {
     country: event.country,
     type: event.type,
     record_kind: event.record_kind,
+    destination_status: event.destination_status,
     confirmation_status: event.confirmation_status,
     lifecycle_status: event.lifecycle_status || 'active',
     writing_bands: event.writing_bands,
@@ -1014,10 +1044,12 @@ function projectChronologyEvent(event, seriesIndex) {
     date: sanitizeDate(event.date, event.time_precision),
     end_date: sanitizeDate(event.end_date, event.time_precision),
     date_precision: event.date_precision,
+    end_date_precision: event.end_date_precision,
     time_precision: event.time_precision,
     temporal: projectTemporal(event)
   });
   projected.search = base.search;
+  projected.facets = Object.fromEntries(COMMON_FACET_AXES.map(axis => [axis, base.facets[axis] || []]));
   return projected;
 }
 
@@ -1029,6 +1061,7 @@ function projectWatchlistEvent(event, seriesIndex) {
     temporal: projectTemporal(event, true)
   });
   projected.search = base.search;
+  projected.facets = Object.fromEntries(COMMON_FACET_AXES.map(axis => [axis, base.facets[axis] || []]));
   return projected;
 }
 

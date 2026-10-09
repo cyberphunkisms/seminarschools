@@ -599,8 +599,16 @@ class PublicBuildLock {
     }
   }
 
-  assertNoRollbackState() {
+  assertNoRollbackState({postCommit = false} = {}) {
     if (lstatIfPresent(this.previousOut)) {
+      if (postCommit && this.owned && this.owner && this.stagingUnboundForCommit) {
+        this._requireEmptyOverlayAuthorization();
+        if (isValidOverlayTombstone(this.previousOut, 'previous')) return;
+        if (inspectDirectoryOnlySkeleton(this.previousOut).kind === 'directory-only-skeleton') {
+          this._reconcilePreviousDirectoryOverlay({writeTombstone: true});
+          return;
+        }
+      }
       throw new Error(
         `PUBLIC DEPLOY BUILD FAILED — unverifiable rollback tree is present: ${this.previousOut}`,
       );
@@ -1695,6 +1703,14 @@ class PublicBuildLock {
   discardOwnedStaging() {
     const stageStat = lstatIfPresent(this.buildOut);
     if (!stageStat) return false;
+    // A previously quarantined empty overlay can replay its exact tombstone
+    // after a successful commit. Accept only that known marker, under this
+    // live owner and its already-authorized post-commit recovery lease.
+    if (this.owned && this.owner && this.stagingUnboundForCommit
+        && isValidOverlayTombstone(this.buildOut, 'staging')) {
+      this._requireEmptyOverlayAuthorization();
+      return false;
+    }
     if (stageStat.isSymbolicLink() || !stageStat.isDirectory()) {
       throw new Error('owned staging path changed before cleanup');
     }
@@ -1730,7 +1746,7 @@ class PublicBuildLock {
       // A controlled failure after bindStaging must not leave a now-ownerless
       // tree that the next build is forbidden to guess about. Delete only a
       // staging tree carrying this exact cryptographic owner record.
-      this.assertNoRollbackState();
+      this.assertNoRollbackState({postCommit: true});
       this.discardOwnedStaging();
       const lockStat = lstatIfPresent(this.lockDir);
       if (!lockStat || lockStat.isSymbolicLink() || !lockStat.isDirectory()) {

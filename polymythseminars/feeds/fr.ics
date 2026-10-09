@@ -7,6 +7,57 @@ X-WR-CALNAME:Polymythcal — French-language listings · Fiches de langue f
  rançaise
 X-WR-TIMEZONE:America/Toronto
 BEGIN:VEVENT
+UID:9cd255e0ff8d8cb56940@seminarschools.com
+DTSTAMP:20261001T000000Z
+DTSTART;VALUE=DATE:20250925
+DTEND;VALUE=DATE:20261109
+SUMMARY:Everlasting (Sans trêve)
+LOCATION:Centre Canadien d’Architecture\, Maison Shaughnessy\, Montréal\
+ , Montréal
+URL:https://seminarschools.com/polymythseminars/events/research-85a2572dda8
+ 1/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:f3d494689cabd002c352@seminarschools.com
+DTSTAMP:20261001T000000Z
+DTSTART;VALUE=DATE:20251218
+DTEND;VALUE=DATE:20261019
+SUMMARY:À l’écoute des archives
+LOCATION:Centre Canadien d’Architecture\, Vitrines\, 1920 rue Baile\, Mon
+ tréal\, Montréal
+URL:https://seminarschools.com/polymythseminars/events/research-4025b4d53bc
+ 6/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:6ca92c0a1e63473147d1@seminarschools.com
+DTSTAMP:20261001T000000Z
+DTSTART;VALUE=DATE:20260105
+DTEND;VALUE=DATE:20270111
+SUMMARY:Transcription en ligne : Carnets de Siza
+LOCATION:Online via FromThePage\, Online
+DESCRIPTION:Online public transcription of Álvaro Siza’s notebooks throu
+ gh the CCA’s FromThePage project. Participation window January 5\, 2026
+ –January 10\, 2027\; separate live sessions are announced on the officia
+ l page.
+URL:https://seminarschools.com/polymythseminars/events/research-fc94dabfcb6
+ d/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:11448b6f2442ce8f825e@seminarschools.com
+DTSTAMP:20261001T000000Z
+DTSTART;VALUE=DATE:20260521
+DTEND;VALUE=DATE:20270111
+SUMMARY:L’atout de la ville c’est qu’elle n’a jamais été parfaite
+LOCATION:Centre Canadien d’Architecture\, Salles principales\, Montréal\
+ , Montréal
+URL:https://seminarschools.com/polymythseminars/events/research-d011f85a057
+ 1/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:15d76caf7de8dbc40acf@seminarschools.com
 DTSTAMP:20260721T160000Z
 DTSTART;VALUE=DATE:20260721
@@ -52,17 +103,6 @@ LOCATION:Location unconfirmed · Lieu non confirmé\, Vaudreuil-Dorion
 DESCRIPTION:Schedule note: Recurring summer program.
 URL:https://seminarschools.com/polymythseminars/events/research-dbd4f8f30b1
  8/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:9cd255e0ff8d8cb56940@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260721
-DTEND;VALUE=DATE:20261109
-SUMMARY:Everlasting (Sans trêve)
-LOCATION:Location unconfirmed · Lieu non confirmé\, Montréal
-URL:https://seminarschools.com/polymythseminars/events/research-85a2572dda8
- 1/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
@@ -122,17 +162,6 @@ URL:https://seminarschools.com/polymythseminars/events/research-170d166cdf2
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:11448b6f2442ce8f825e@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260721
-DTEND;VALUE=DATE:20270111
-SUMMARY:L’atout de la ville c’est qu’elle n’a jamais été parfaite
-LOCATION:Location unconfirmed · Lieu non confirmé\, Montréal
-URL:https://seminarschools.com/polymythseminars/events/research-d011f85a057
- 1/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:404e1d58a780654328b1@seminarschools.com
 DTSTAMP:20260721T160000Z
 DTSTART;VALUE=DATE:20260721
@@ -165,28 +194,6 @@ SUMMARY:Paola Pivi : Venez voir Mensonges mensonges
 LOCATION:Location unconfirmed · Lieu non confirmé\, Montréal
 URL:https://seminarschools.com/polymythseminars/events/research-85aa6871ad6
  5/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:6ca92c0a1e63473147d1@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260721
-DTEND;VALUE=DATE:20270111
-SUMMARY:Transcription en ligne : Carnets de Siza
-LOCATION:Location unconfirmed · Lieu non confirmé\, Montréal
-URL:https://seminarschools.com/polymythseminars/events/research-fc94dabfcb6
- d/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:f3d494689cabd002c352@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260721
-DTEND;VALUE=DATE:20261019
-SUMMARY:À l’écoute des archives
-LOCATION:Location unconfirmed · Lieu non confirmé\, Montréal
-URL:https://seminarschools.com/polymythseminars/events/research-4025b4d53bc
- 6/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
@@ -443,17 +450,30 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:687a3c1bfe401fcbbd6b@seminarschools.com
-DTSTAMP:20260815T033000Z
-DTSTART;VALUE=DATE:20260829
+DTSTAMP:20261003T110658Z
+DTSTART;VALUE=DATE:20260827
 DTEND;VALUE=DATE:20261006
 SUMMARY:Québec general election cycle 2026
 LOCATION:Québec and authorized out-of-Québec voting routes\, Québec
-DESCRIPTION:The fixed-date provincial election calendar links the expected 
- writ period\, out-of-Québec registration\, advance voting options\, and O
- ctober 5 election day.
+DESCRIPTION:Provincial election cycle from the announced August 27 call to 
+ October 5 polling day. Registration and voting options have separate deadl
+ ines and hours.
 URL:https://seminarschools.com/polymythseminars/events/quebec-general-elect
  ion-cycle-2026/
 STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:60dd2b3dc3dda9616291@seminarschools.com
+DTSTAMP:20261003T110658Z
+DTSTART;VALUE=DATE:20260827
+DTEND;VALUE=DATE:20260828
+SUMMARY:Québec general election — election call
+LOCATION:Québec\, Québec
+DESCRIPTION:Élections Québec announced the election call on August 27\, 2
+ 026\, with polling day on October 5.
+URL:https://seminarschools.com/polymythseminars/events/quebec-election-call
+ -expected-2026/
+STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:a1d89d5cbded8575ec53@seminarschools.com
@@ -585,16 +605,18 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:01de192a19b0e65eb8d4@seminarschools.com
-DTSTAMP:20260815T033000Z
-DTSTART:20260916T040000Z
+DTSTAMP:20261003T110658Z
+DTSTART;VALUE=DATE:20260916
+DTEND;VALUE=DATE:20260917
 SUMMARY:Québec general election — registration deadline for voting outsi
  de Québec
 LOCATION:Online / Élections Québec\, Online
-DESCRIPTION:Deadline for eligible electors using the outside-Québec voting
-  route to complete registration.
+DESCRIPTION:Registration to vote outside Québec closes September 16\, 2026
+ . The day is confirmed\; the exact deadline clock remains unverified. Chec
+ k the organizer’s application instructions.
 URL:https://seminarschools.com/polymythseminars/events/quebec-election-outs
  ide-registration-deadline-2026/
-STATUS:CONFIRMED
+STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:31f90c492552e8b86055@seminarschools.com
@@ -639,30 +661,34 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:27a11f0005bcdfe9b3a4@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261003T110658Z
 DTSTART;VALUE=DATE:20260925
 DTEND;VALUE=DATE:20261002
 SUMMARY:Québec general election — advance and special voting options per
  iod
 LOCATION:Voting locations and authorized special routes across Québec\, Qu
  ébec
-DESCRIPTION:Official voting options are available during the published pre-
- election period\, with route-specific eligibility and schedules.
+DESCRIPTION:Returning-officer voting is offered September 25–26 and Septe
+ mber 29–October 1\; advance polling is September 27–28. Hours and camp
+ us options vary by date and location. This date span does not represent co
+ ntinuous opening.
 URL:https://seminarschools.com/polymythseminars/events/quebec-election-voti
  ng-options-period-2026/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:fd9c3122ac08dbd78dba@seminarschools.com
-DTSTAMP:20260815T033000Z
-DTSTART;VALUE=DATE:20261005
-DTEND;VALUE=DATE:20261006
+DTSTAMP:20261003T110658Z
+DTSTART:20261005T133000Z
+DTEND:20261006T000000Z
 SUMMARY:Québec general election day 2026
 LOCATION:Voting places across Québec\, Québec
-DESCRIPTION:Fixed-date provincial general election day.
+DESCRIPTION:Provincial election polling day\, 9:30 am–8 pm Eastern time. 
+ Use Élections Québec’s address lookup to find the assigned polling pla
+ ce.
 URL:https://seminarschools.com/polymythseminars/events/quebec-general-elect
  ion-day-2026/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:a4fb0975489be7d51cd3@seminarschools.com

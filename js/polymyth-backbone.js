@@ -162,14 +162,14 @@
     return items
       .map((link) => {
         const url = link.normalized || link.printed;
+        const review = link.sourceLinkReview;
+        const sourceCell = review?.status === "unavailable"
+          ? '<code>' + esc(link.printed || url) + '</code><span class="source-note">Original source unavailable. ' + esc(review.note) + '</span>'
+          : '<a rel="noreferrer" href="' + esc(externalHref(url)) + '">' + esc(displayUrl(url)) + ' ↗</a>';
         return (
           "<tr><td>" +
           esc(link.id) +
-          '</td><td class="url-cell"><a rel="noreferrer" href="' +
-          esc(externalHref(url)) +
-          '">' +
-          esc(displayUrl(url)) +
-          " ↗</a></td><td>" +
+          '</td><td class="url-cell">' + sourceCell + '</td><td>' +
           esc(link.nearbyProject) +
           "</td><td>" +
           esc(link.contextClassifications.join(", ")) +
@@ -311,7 +311,7 @@
       if (Object.hasOwn(tables, requestedTab)) tab = requestedTab;
       query = params.get("q") || "";
       const response = await fetch(
-        "/polymythlib/data/backbone-index.json?v=20260728-g0-3",
+        "/polymythlib/data/backbone-index.json?v=sha256-84d118988d59",
         { cache: "force-cache" },
       );
       if (!response.ok) throw new Error("Data request failed");

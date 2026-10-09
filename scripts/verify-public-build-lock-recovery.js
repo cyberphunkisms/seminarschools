@@ -239,7 +239,7 @@ function rejectedEmptyOverlayState(name, setup, expected) {
   }
 }
 
-function verifyFreshLifecycle() {
+function verifyFreshLifecycle(replayedTombstone = false, replayedPrevious = false) {
   const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ss-public-lock-fresh-'));
   try {
     const root = path.join(tempRoot, 'site');
@@ -264,8 +264,18 @@ function verifyFreshLifecycle() {
     lock.unbindStaging();
     assert.strictEqual(fs.existsSync(path.join(buildOut, STAGE_MARKER_NAME)), false);
     fs.renameSync(buildOut, path.join(root, 'public'));
+    if (replayedTombstone) {
+      fs.writeFileSync(buildOut, `${JSON.stringify({schema: 'seminar-schools-public-build-overlay-tombstone-v1', path: 'staging'})}\n`);
+    }
+    if (replayedPrevious) fs.mkdirSync(path.join(previousOut, 'empty', 'nested'), {recursive: true});
     lock.release();
-    assertNoPublicTransients(root, 'fresh release');
+    if (replayedTombstone || replayedPrevious) {
+      assert.strictEqual(lock.inspectTransientState().action, 'reclaim-overlay-tombstones');
+      if (replayedTombstone) assert.strictEqual(fs.lstatSync(buildOut).isFile(), true);
+      if (replayedPrevious) assert.strictEqual(fs.lstatSync(previousOut).isFile(), true);
+    } else {
+      assertNoPublicTransients(root, 'fresh release');
+    }
   } finally {
     fs.rmSync(tempRoot, {recursive: true, force: true});
   }
@@ -1288,6 +1298,8 @@ for (const forbidden of [
 
 verifyDefaultQuarantineIsRepositoryLocal();
 verifyFreshLifecycle();
+verifyFreshLifecycle(true);
+verifyFreshLifecycle(false, true);
 verifyRecoverableDeadOwner();
 verifyRecoverableDeadOwnerDirectoryOverlay();
 verifyRecoverableLocklessDeadStagingTree();

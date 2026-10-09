@@ -5,13 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:05a1b94400a3b77dcfa3@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20261030
+DTSTAMP:20261003T110658Z
+DTSTART:20261030T220000Z
+DTEND:20261031T010000Z
 SUMMARY:Waterloo Vampire Hangout
-LOCATION:Location unconfirmed · Lieu non confirmé
-DESCRIPTION:Waterloo Vampire Hangout
+LOCATION:Waterloo Public Square
+DESCRIPTION:Free\, family-friendly evening with music and a vampire fashi
+ on show. Weather-dependent\; check the organizer for updates.
 URL:https://seminarschools.com/polymythseminars/events/research-2a15af660
  16d/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

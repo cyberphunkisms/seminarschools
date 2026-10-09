@@ -87,7 +87,15 @@
       const value = normalizeText(match[2] || match[3]);
       const rawField = normalizeText(match[1]);
       const field = FIELD_ALIASES[rawField] || rawField || '';
-      if (value) terms.push({ value, phrase: Boolean(match[2]), field });
+      // Normalization turns internal punctuation into word boundaries. Apply
+      // the existing unquoted AND semantics to each word, preserving field
+      // scope; quoted text remains one adjacent phrase.
+      if (value) {
+        const phrase = Boolean(match[2]);
+        for (const part of phrase ? [value] : value.split(' ')) {
+          terms.push({ value: part, phrase, field });
+        }
+      }
     }
     return terms;
   }
@@ -239,7 +247,7 @@
     return { id: String(id || ''), role, title: String(relation.title || record?.series_title || ''), occurrence_count: Number(relation.occurrence_count || 0) };
   }
 
-  function groupSeries(records, sort = 'soonest', locale = 'en-CA') {
+  function groupSeries(records, sort = 'soonest', locale = 'en-CA', catalogue = records) {
     const groups = [];
     const bySeries = new Map();
     for (const record of records || []) {
@@ -258,6 +266,15 @@
       group.events.push(item);
       if (relation.role === 'parent') group.parent = item;
       else group.occurrences.push(item);
+    }
+    // Parent context is independent of matching occurrences. Never add a
+    // filtered-out parent to the result count or the matching event collection.
+    for (const record of catalogue || []) {
+      const relation = normalizedRelation(record);
+      const group = bySeries.get(relation.id);
+      if (group && !group.parent && relation.role === 'parent') {
+        group.parent = record.series ? record : { ...record, series: relation };
+      }
     }
     for (const group of bySeries.values()) group.occurrences = sortRecords(group.occurrences, 'soonest', locale);
     return groups.sort((left, right) => compareRecords(
@@ -321,13 +338,27 @@
     };
   }
 
+  const zoneValidity = new Map();
+  const dateFormatters = new Map();
+  function dateFormatter(locale, options) {
+    const key = locale + JSON.stringify(options);
+    if (!dateFormatters.has(key)) {
+      if (dateFormatters.size >= 128) dateFormatters.delete(dateFormatters.keys().next().value);
+      dateFormatters.set(key, new Intl.DateTimeFormat(locale, options));
+    }
+    return dateFormatters.get(key);
+  }
   function validTimeZone(value) {
     const zone = String(value || '').trim();
     if (!zone) return false;
+    if (zoneValidity.has(zone)) return zoneValidity.get(zone);
+    if (zoneValidity.size >= 128) zoneValidity.delete(zoneValidity.keys().next().value);
     try {
-      new Intl.DateTimeFormat('en-CA', { timeZone: zone }).format(new Date(0));
+      dateFormatter('en-CA', { timeZone: zone }).format(new Date(0));
+      zoneValidity.set(zone, true);
       return true;
     } catch (_error) {
+      zoneValidity.set(zone, false);
       return false;
     }
   }
@@ -342,7 +373,7 @@
     if (!raw.includes('T') || !zonedType || !validTimeZone(zone)) return `${rawDay[1]}-${rawDay[2]}-${rawDay[3]}`;
     const instant = new Date(raw);
     if (Number.isNaN(instant.getTime())) return '';
-    const parts = new Intl.DateTimeFormat('en-CA', {
+    const parts = dateFormatter('en-CA', {
       timeZone: zone, year: 'numeric', month: '2-digit', day: '2-digit'
     }).formatToParts(instant);
     const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
@@ -357,7 +388,7 @@
     const zone = String(temporal?.timezone || '').trim();
     if (validTimeZone(zone)) {
       return {
-        text: new Intl.DateTimeFormat(locale, {
+        text: dateFormatter(locale, {
           hour: 'numeric', minute: '2-digit', timeZone: zone, timeZoneName: 'short'
         }).format(instant),
         timeZone: zone
@@ -366,7 +397,7 @@
     const match = /T(\d{2}):(\d{2})(?::\d{2})?(Z|[+-]\d{2}:\d{2})$/.exec(raw);
     if (!match) return null;
     const clock = new Date(Date.UTC(2000, 0, 1, Number(match[1]), Number(match[2])));
-    const time = new Intl.DateTimeFormat(locale, { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }).format(clock);
+    const time = dateFormatter(locale, { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }).format(clock);
     const offset = match[3].toUpperCase();
     return {
       text: `${time} ${offset === 'Z' || offset === '+00:00' ? 'UTC' : `UTC${offset.replace('-', '−')}`}`,

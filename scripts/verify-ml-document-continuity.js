@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 'use strict';
+const {currentConceptArtifactHash}=require('./lib/ml-concept-release-binding');
 
 const crypto = require('crypto');
 const fs = require('fs');
@@ -180,14 +181,21 @@ try {
 }
 if (!annotationOnlyRejected) throw new Error('annotation-only document-continuity mutation was accepted');
 
-const artifactHashes = mlStarUpdate.artifact_sha256 || {};
+// Historical release objects remain immutable; later deltas bind current bytes.
+const artifactHashes = {
+  ...(mlStarUpdate.artifact_sha256 || {}),
+  ...(releaseManifest.ml_star_citation_ouroboros_update_2026_09_08?.artifact_sha256 || {}),
+  ...(releaseManifest.ml_star_antifluff_update_2026_09_08?.artifact_sha256 || {}),
+  ...(releaseManifest.ml_star_synopsis_syn_update_2026_09_08?.artifact_sha256 || {}),
+  ...(releaseManifest.ml_star_ouroboros_update_2026_09_11?.artifact_sha256 || {}),
+};
 for (const relative of [
   SOURCE_PATH,
   'polymyth/methodologylist/mephistodata-rule-hardening-addendum.js',
   'scripts/fixtures/ml-document-continuity/fixtures.json',
   'scripts/verify-ml-document-continuity.js',
 ]) {
-  if (artifactHashes[relative] !== sha256(fs.readFileSync(path.join(ROOT, relative)))) {
+  if (currentConceptArtifactHash(releaseManifest,relative,artifactHashes[relative]) !== sha256(fs.readFileSync(path.join(ROOT, relative)))) {
     throw new Error(`release artifact hash is missing or stale: ${relative}`);
   }
 }

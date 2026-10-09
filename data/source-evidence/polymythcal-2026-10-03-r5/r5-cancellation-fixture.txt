@@ -1,0 +1,1 @@
+PASSED: the real featured-feed generator excludes a cancelled future occurrence before the 64-event cap and fills all 64 slots with active records. No production files were written.

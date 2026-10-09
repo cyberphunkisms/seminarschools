@@ -26,6 +26,19 @@
 [functions]
   directory = "netlify/functions"
 
+# Stable short alias for the teacher resources catalog.
+[[redirects]]
+  from = "/TR"
+  to = "/teacherresources/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/TR/"
+  to = "/teacherresources/"
+  status = 301
+  force = true
+
 # Form processing: Netlify auto-detects forms with data-netlify="true"
 # in published HTML. Active public forms include:
 #   "bookwormcard" — matrix-chat at /bb/

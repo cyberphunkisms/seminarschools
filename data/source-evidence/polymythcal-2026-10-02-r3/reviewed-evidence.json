@@ -1,0 +1,1125 @@
+{
+  "schema_version": 1,
+  "review_id": "2026-10-02-source-followup-r3",
+  "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+  "scope": "Short publisher quotations, verified field values, source URLs and retrieval provenance; historical predecessor records are in the corrections ledger.",
+  "retrievals": [
+    {
+      "source_url": "https://gceps.princeton.edu/upcomingandrecentevents/",
+      "retrieved_at": "2026-10-02T18:57:49.905745+00:00",
+      "method": "official publisher content read through web retrieval; direct UCHV HTTP access returned 403; full response is not represented as a raw HTML snapshot"
+    },
+    {
+      "source_url": "https://nationalhumanitiescenter.org/nhc-announces-2026-27-fellows/",
+      "final_url": "https://nationalhumanitiescenter.org/nhc-announces-2026-27-fellows/",
+      "retrieved_at": "2026-10-02T18:50:44.217131+00:00",
+      "http_status": 200,
+      "sha256": "bb8e43cef2b8489bad5692057df88589a8cc4656392dd04c1cf968f89fabeeed",
+      "method": "direct official HTML retrieval; SHA-256 of retrieved response, full page retained only in scratch research"
+    },
+    {
+      "source_url": "https://nationalhumanitiescenter.org/residential-fellowships/",
+      "final_url": "https://nationalhumanitiescenter.org/residential-fellowships/",
+      "retrieved_at": "2026-10-02T18:49:36.584770+00:00",
+      "http_status": 200,
+      "sha256": "136ef2dfaa28be90ff2ab19628bc6e06b11c94bb16d85ea4764486dd1c3fd9cf",
+      "method": "direct official HTML retrieval; SHA-256 of retrieved response, full page retained only in scratch research"
+    },
+    {
+      "source_url": "https://politics.princeton.edu/event-series/political-philosophy-colloquium",
+      "retrieved_at": "2026-10-02T18:57:49.905745+00:00",
+      "method": "official publisher content read through web retrieval; direct UCHV HTTP access returned 403; full response is not represented as a raw HTML snapshot"
+    },
+    {
+      "source_url": "https://politics.princeton.edu/events/political-philosophy-colloquium-laura-k-field",
+      "retrieved_at": "2026-10-02T18:57:49.905745+00:00",
+      "method": "official publisher content read through web retrieval; direct UCHV HTTP access returned 403; full response is not represented as a raw HTML snapshot"
+    },
+    {
+      "source_url": "https://politics.princeton.edu/events/political-philosophy-colloquium-lois-mcnay",
+      "retrieved_at": "2026-10-02T18:57:49.905745+00:00",
+      "method": "official publisher content read through web retrieval; direct UCHV HTTP access returned 403; full response is not represented as a raw HTML snapshot"
+    },
+    {
+      "source_url": "https://politics.princeton.edu/events/political-philosophy-colloquium-shterna-friedman",
+      "retrieved_at": "2026-10-02T18:57:49.905745+00:00",
+      "method": "official publisher content read through web retrieval; direct UCHV HTTP access returned 403; full response is not represented as a raw HTML snapshot"
+    },
+    {
+      "source_url": "https://politics.princeton.edu/events/political-philosophy-colloquium-stefan-eich",
+      "retrieved_at": "2026-10-02T18:57:49.905745+00:00",
+      "method": "official publisher content read through web retrieval; direct UCHV HTTP access returned 403; full response is not represented as a raw HTML snapshot"
+    },
+    {
+      "source_url": "https://uchv.princeton.edu/events",
+      "retrieved_at": "2026-10-02T18:57:49.905745+00:00",
+      "method": "official publisher content read through web retrieval; direct UCHV HTTP access returned 403; full response is not represented as a raw HTML snapshot"
+    },
+    {
+      "source_url": "https://uchv.princeton.edu/events/democratically-governing-geoengineering-research",
+      "retrieved_at": "2026-10-02T18:57:49.905745+00:00",
+      "method": "official publisher content read through web retrieval; direct UCHV HTTP access returned 403; full response is not represented as a raw HTML snapshot"
+    },
+    {
+      "source_url": "https://uchv.princeton.edu/events/events-archive",
+      "retrieved_at": "2026-10-02T18:57:49.905745+00:00",
+      "method": "official publisher content read through web retrieval; direct UCHV HTTP access returned 403; full response is not represented as a raw HTML snapshot"
+    },
+    {
+      "source_url": "https://uchv.princeton.edu/events/james-moffett-29-lecture-ethics-0",
+      "retrieved_at": "2026-10-02T18:57:49.905745+00:00",
+      "method": "official publisher content read through web retrieval; direct UCHV HTTP access returned 403; full response is not represented as a raw HTML snapshot"
+    },
+    {
+      "source_url": "https://uchv.princeton.edu/events/program-ethics-and-public-affairs-1",
+      "retrieved_at": "2026-10-02T18:57:49.905745+00:00",
+      "method": "official publisher content read through web retrieval; direct UCHV HTTP access returned 403; full response is not represented as a raw HTML snapshot"
+    },
+    {
+      "source_url": "https://uchv.princeton.edu/events/program-ethics-and-public-affairs-2",
+      "retrieved_at": "2026-10-02T18:57:49.905745+00:00",
+      "method": "official publisher content read through web retrieval; direct UCHV HTTP access returned 403; full response is not represented as a raw HTML snapshot"
+    },
+    {
+      "source_url": "https://uchv.princeton.edu/events/program-ethics-and-public-affairs-3",
+      "retrieved_at": "2026-10-02T18:57:49.905745+00:00",
+      "method": "official publisher content read through web retrieval; direct UCHV HTTP access returned 403; full response is not represented as a raw HTML snapshot"
+    },
+    {
+      "source_url": "https://uchv.princeton.edu/events/program-ethics-and-public-affairs-4",
+      "retrieved_at": "2026-10-02T18:57:49.905745+00:00",
+      "method": "official publisher content read through web retrieval; direct UCHV HTTP access returned 403; full response is not represented as a raw HTML snapshot"
+    },
+    {
+      "source_url": "https://uchv.princeton.edu/events/psyche-and-city",
+      "retrieved_at": "2026-10-02T18:57:49.905745+00:00",
+      "method": "official publisher content read through web retrieval; direct UCHV HTTP access returned 403; full response is not represented as a raw HTML snapshot"
+    },
+    {
+      "source_url": "https://uchv.princeton.edu/events/what-does-political-equality-require",
+      "retrieved_at": "2026-10-02T18:57:49.905745+00:00",
+      "method": "official publisher content read through web retrieval; direct UCHV HTTP access returned 403; full response is not represented as a raw HTML snapshot"
+    },
+    {
+      "source_url": "https://www.coc.ca/tickets/2627-season/ariadne-auf-naxos",
+      "final_url": "https://www.coc.ca/tickets/2627-season/ariadne-auf-naxos",
+      "retrieved_at": "2026-10-02T18:49:35.447819+00:00",
+      "http_status": 200,
+      "sha256": "7f21ee3f9d6d2904e089912362ebf55d0d6eb8855be00b56674d1d12175598ee",
+      "method": "direct official HTML retrieval; SHA-256 of retrieved response, full page retained only in scratch research"
+    },
+    {
+      "source_url": "https://www.coc.ca/tickets/2627-season/centre-stage",
+      "final_url": "https://www.coc.ca/tickets/2627-season/centre-stage",
+      "retrieved_at": "2026-10-02T18:49:36.783185+00:00",
+      "http_status": 200,
+      "sha256": "66f5d7ad1ccd16912293e0293708e672d88aae262ebe40381e26a35a27ecd53c",
+      "method": "direct official HTML retrieval; SHA-256 of retrieved response, full page retained only in scratch research"
+    },
+    {
+      "source_url": "https://www.coc.ca/tickets/2627-season/cosi-fan-tutte",
+      "final_url": "https://www.coc.ca/tickets/2627-season/cosi-fan-tutte",
+      "retrieved_at": "2026-10-02T18:49:35.257758+00:00",
+      "http_status": 200,
+      "sha256": "6c07ca09ad5bfb10d82e5eeaa9cf4f98bd497c1bdae1c6817251cc56386ae6cc",
+      "method": "direct official HTML retrieval; SHA-256 of retrieved response, full page retained only in scratch research"
+    },
+    {
+      "source_url": "https://www.coc.ca/tickets/2627-season/empire-of-wild",
+      "final_url": "https://www.coc.ca/tickets/2627-season/empire-of-wild",
+      "retrieved_at": "2026-10-02T18:49:36.812646+00:00",
+      "http_status": 200,
+      "sha256": "79fccebd18bef2088077fac92c6fd755263e708f9f8a35d40025473a5184aeb3",
+      "method": "direct official HTML retrieval; SHA-256 of retrieved response, full page retained only in scratch research"
+    },
+    {
+      "source_url": "https://www.coc.ca/tickets/2627-season/la-traviata",
+      "final_url": "https://www.coc.ca/tickets/2627-season/la-traviata",
+      "retrieved_at": "2026-10-02T18:49:35.323918+00:00",
+      "http_status": 200,
+      "sha256": "1116cfb73e3b6302de57ad94a6e34a159afd3565a800d8f69e671178d84f7a33",
+      "method": "direct official HTML retrieval; SHA-256 of retrieved response, full page retained only in scratch research"
+    },
+    {
+      "source_url": "https://www.coc.ca/tickets/2627-season/the-elixir-of-love",
+      "final_url": "https://www.coc.ca/tickets/2627-season/the-elixir-of-love",
+      "retrieved_at": "2026-10-02T18:49:36.901238+00:00",
+      "http_status": 200,
+      "sha256": "3ec90160437ab8537b0ce664acccfc8af8d138a9c83499aab0a008c599cf8cb8",
+      "method": "direct official HTML retrieval; SHA-256 of retrieved response, full page retained only in scratch research"
+    },
+    {
+      "source_url": "https://www.coc.ca/tickets/2627-season/the-turn-of-the-screw",
+      "final_url": "https://www.coc.ca/tickets/2627-season/the-turn-of-the-screw",
+      "retrieved_at": "2026-10-02T18:49:35.301101+00:00",
+      "http_status": 200,
+      "sha256": "fd84b3dc5838244919f47f157e68fee53f4dd87f543b89b890e4ad946c59d217",
+      "method": "direct official HTML retrieval; SHA-256 of retrieved response, full page retained only in scratch research"
+    },
+    {
+      "source_url": "https://www.toronto.ca/city-government/elections/key-dates/",
+      "final_url": "https://www.toronto.ca/city-government/elections/key-dates/",
+      "retrieved_at": "2026-10-02T18:49:36.185543+00:00",
+      "http_status": 200,
+      "sha256": "314d0dd2f72ea6438a1d4787110d8e68c65d527199d736f12365bd55a438a151",
+      "method": "direct official HTML retrieval; SHA-256 of retrieved response, full page retained only in scratch research"
+    }
+  ],
+  "records": [
+    {
+      "event_id": "political-philosophy-colloquium-stephen-eich-2026-10-08-bda35ae9",
+      "source_urls": [
+        "https://politics.princeton.edu/events/political-philosophy-colloquium-stefan-eich",
+        "https://uchv.princeton.edu/events"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "October 8, 2026, 4:30 PM",
+      "excerpt_sha256": "c3830e9971319d568e0cff91d391dd762950cedbd33a16315b430c49f58495cb",
+      "reviewed_values": {
+        "city": "Princeton",
+        "province": "New Jersey",
+        "country": "United States",
+        "timezone": "America/New_York",
+        "corridor_zone": "outside-corridor",
+        "source_url": "https://politics.princeton.edu/events/political-philosophy-colloquium-stefan-eich",
+        "venue": "Corwin Hall, Room 127",
+        "age_band": "Princeton University ID holders",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "title": "Political Philosophy Colloquium: Stefan Eich",
+        "speaker_or_director": "Stefan Eich, Georgetown University",
+        "description": "Political Philosophy Colloquium: Stefan Eich. Princeton University ID holders. Venue: Corwin Hall, Room 127, Princeton, New Jersey.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Reviewed this occurrence on the official event page: date/start, named speaker, venue and attendance restriction. Corrected the inherited Canadian location. Stable record ID retained."
+    },
+    {
+      "event_id": "political-philosophy-colloquium-shterna-friedman-2026-09-24-d916e1b8",
+      "source_urls": [
+        "https://politics.princeton.edu/events/political-philosophy-colloquium-shterna-friedman",
+        "https://uchv.princeton.edu/events"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "Open to University ID holders",
+      "excerpt_sha256": "1b18e6816a301ec310c6f80238f3a41c0fbb714a1cfd0285baf21682bf4e294a",
+      "reviewed_values": {
+        "city": "Princeton",
+        "province": "New Jersey",
+        "country": "United States",
+        "timezone": "America/New_York",
+        "corridor_zone": "outside-corridor",
+        "source_url": "https://politics.princeton.edu/events/political-philosophy-colloquium-shterna-friedman",
+        "venue": "Corwin Hall, Room 127",
+        "age_band": "Princeton University ID holders",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "end_date": null,
+        "end_date_precision": "unknown",
+        "description": "Political Philosophy Colloquium: Shterna Friedman. Princeton University ID holders. Venue: Corwin Hall, Room 127, Princeton, New Jersey. The organizer publishes the 4:30 p.m. start; an end time has not been verified.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Reviewed this occurrence on the official event page: date/start, named speaker, venue and attendance restriction. Corrected the inherited Canadian location. Stable record ID retained. Removed an unsupported end time; original retained in predecessor evidence."
+    },
+    {
+      "event_id": "political-philosophy-colloquium-laura-field-2027-03-04-66b2da34",
+      "source_urls": [
+        "https://politics.princeton.edu/events/political-philosophy-colloquium-laura-k-field",
+        "https://uchv.princeton.edu/events"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "March 4, 2027, 4:30 PM",
+      "excerpt_sha256": "f75603bbf331a0d6a1d3debffcbe21eca4ab6c813e6e9142b0954ccb1146aee0",
+      "reviewed_values": {
+        "city": "Princeton",
+        "province": "New Jersey",
+        "country": "United States",
+        "timezone": "America/New_York",
+        "corridor_zone": "outside-corridor",
+        "source_url": "https://politics.princeton.edu/events/political-philosophy-colloquium-laura-k-field",
+        "venue": "Corwin Hall, Room 127",
+        "age_band": "Princeton University ID holders",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "title": "Political Philosophy Colloquium: Laura K. Field",
+        "speaker_or_director": "Laura K. Field",
+        "end_date": null,
+        "end_date_precision": "unknown",
+        "description": "Political Philosophy Colloquium: Laura K. Field. Princeton University ID holders. Venue: Corwin Hall, Room 127, Princeton, New Jersey. The organizer publishes the 4:30 p.m. start; an end time has not been verified.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Reviewed this occurrence on the official event page: date/start, named speaker, venue and attendance restriction. Corrected the inherited Canadian location. Stable record ID retained. Removed an unsupported end time; original retained in predecessor evidence."
+    },
+    {
+      "event_id": "political-philosophy-colloquium-lois-mcnay-2027-04-01-45312cd8",
+      "source_urls": [
+        "https://politics.princeton.edu/events/political-philosophy-colloquium-lois-mcnay",
+        "https://uchv.princeton.edu/events"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "April 1, 2027, 4:30 PM",
+      "excerpt_sha256": "d3738dd103ba0b62180782cb9667f523693303f49b509e90c16a8d66316a14a9",
+      "reviewed_values": {
+        "city": "Princeton",
+        "province": "New Jersey",
+        "country": "United States",
+        "timezone": "America/New_York",
+        "corridor_zone": "outside-corridor",
+        "source_url": "https://politics.princeton.edu/events/political-philosophy-colloquium-lois-mcnay",
+        "venue": "Corwin Hall, Room 127",
+        "age_band": "Princeton University ID holders",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "end_date": null,
+        "end_date_precision": "unknown",
+        "description": "Political Philosophy Colloquium: Lois McNay. Princeton University ID holders. Venue: Corwin Hall, Room 127, Princeton, New Jersey. The organizer publishes the 4:30 p.m. start; an end time has not been verified.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Reviewed this occurrence on the official event page: date/start, named speaker, venue and attendance restriction. Corrected the inherited Canadian location. Stable record ID retained. Removed an unsupported end time; original retained in predecessor evidence."
+    },
+    {
+      "event_id": "program-in-ethics-and-public-affairs-ryan-pevnick-2026-10-15-7383334e",
+      "source_urls": [
+        "https://uchv.princeton.edu/events/what-does-political-equality-require",
+        "https://uchv.princeton.edu/events"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "Oct 15, 2026, 4:30 pm – 6:00 pm",
+      "excerpt_sha256": "1ae9438f7de2176ff05b3a2cf439091c3d193666e0982f66941401535ce421a8",
+      "reviewed_values": {
+        "city": "Princeton",
+        "province": "New Jersey",
+        "country": "United States",
+        "timezone": "America/New_York",
+        "corridor_zone": "outside-corridor",
+        "source_url": "https://uchv.princeton.edu/events/what-does-political-equality-require",
+        "venue": "Wooten Hall, Room 301 (Kerstetter Room)",
+        "age_band": "Princeton University ID holders and other academic affiliates",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "title": "What Does Political Equality Require? — Ryan Pevnick",
+        "description": "What Does Political Equality Require? — Ryan Pevnick. Princeton University ID holders and other academic affiliates. Venue: Wooten Hall, Room 301 (Kerstetter Room), Princeton, New Jersey.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Reviewed this occurrence on the official event page: date/start, named speaker, venue and attendance restriction. Corrected the inherited Canadian location. Stable record ID retained."
+    },
+    {
+      "event_id": "james-a-moffett-29-lecture-in-ethics-2026-10-29-db94496b",
+      "source_urls": [
+        "https://uchv.princeton.edu/events/democratically-governing-geoengineering-research",
+        "https://uchv.princeton.edu/events"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "Oct 29, 2026, 4:30 pm – 6:00 pm",
+      "excerpt_sha256": "b4d839b95b3d08296ae4e4abf2e9761e9fee173b8ba03c7acd74b2f51ca7e51d",
+      "reviewed_values": {
+        "city": "Princeton",
+        "province": "New Jersey",
+        "country": "United States",
+        "timezone": "America/New_York",
+        "corridor_zone": "outside-corridor",
+        "source_url": "https://uchv.princeton.edu/events/democratically-governing-geoengineering-research",
+        "venue": "Friend Center, Lecture Hall 101",
+        "age_band": "Open to the public",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "title": "Democratically Governing Geoengineering Research — Anna Stilz",
+        "description": "Democratically Governing Geoengineering Research — Anna Stilz. Open to the public. Venue: Friend Center, Lecture Hall 101, Princeton, New Jersey. The organizer also provides a public livestream from the event page.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Reviewed this occurrence on the official event page: date/start, named speaker, venue and attendance restriction. Corrected the inherited Canadian location. Stable record ID retained."
+    },
+    {
+      "event_id": "program-in-ethics-and-public-affairs-robert-wright-2026-11-05-58a1558b",
+      "source_urls": [
+        "https://uchv.princeton.edu/events/program-ethics-and-public-affairs-1",
+        "https://uchv.princeton.edu/events"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "Nov 5, 2026, 4:30 pm – 6:00 pm",
+      "excerpt_sha256": "2b024c17196358abb22df43117a73e08b8e680728556ba65ff8608b0c8ca4ee3",
+      "reviewed_values": {
+        "city": "Princeton",
+        "province": "New Jersey",
+        "country": "United States",
+        "timezone": "America/New_York",
+        "corridor_zone": "outside-corridor",
+        "source_url": "https://uchv.princeton.edu/events/program-ethics-and-public-affairs-1",
+        "venue": "Wooten Hall, Room 301 (Kerstetter Room)",
+        "age_band": "Princeton University ID holders and other academic affiliates",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "description": "Program in Ethics and Public Affairs: Robert Wright. Princeton University ID holders and other academic affiliates. Venue: Wooten Hall, Room 301 (Kerstetter Room), Princeton, New Jersey.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Reviewed this occurrence on the official event page: date/start, named speaker, venue and attendance restriction. Corrected the inherited Canadian location. Stable record ID retained."
+    },
+    {
+      "event_id": "program-in-ethics-and-public-affairs-johanna-thoma-2027-02-25-8c009078",
+      "source_urls": [
+        "https://uchv.princeton.edu/events/program-ethics-and-public-affairs-2",
+        "https://uchv.princeton.edu/events"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "Feb 25, 2027, 4:30 pm – 6:00 pm",
+      "excerpt_sha256": "e641f385b7d6ebf42f101c1f5c8b04d7843bf8f934cbb4cc557df5baab86a27b",
+      "reviewed_values": {
+        "city": "Princeton",
+        "province": "New Jersey",
+        "country": "United States",
+        "timezone": "America/New_York",
+        "corridor_zone": "outside-corridor",
+        "source_url": "https://uchv.princeton.edu/events/program-ethics-and-public-affairs-2",
+        "venue": "Wooten Hall, Room 301 (Kerstetter Room)",
+        "age_band": "Princeton University ID holders and other academic affiliates",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "description": "Program in Ethics and Public Affairs: Johanna Thoma. Princeton University ID holders and other academic affiliates. Venue: Wooten Hall, Room 301 (Kerstetter Room), Princeton, New Jersey.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Reviewed this occurrence on the official event page: date/start, named speaker, venue and attendance restriction. Corrected the inherited Canadian location. Stable record ID retained."
+    },
+    {
+      "event_id": "program-in-ethics-and-public-affairs-david-temin-2027-03-18-8779498a",
+      "source_urls": [
+        "https://uchv.princeton.edu/events/program-ethics-and-public-affairs-3",
+        "https://uchv.princeton.edu/events"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "Mar 18, 2027, 4:30 pm – 6:00 pm",
+      "excerpt_sha256": "9fc434ef7e337adc64f9616737cfda14f7e01d902cacecaa0aaf80e72a2ddd6b",
+      "reviewed_values": {
+        "city": "Princeton",
+        "province": "New Jersey",
+        "country": "United States",
+        "timezone": "America/New_York",
+        "corridor_zone": "outside-corridor",
+        "source_url": "https://uchv.princeton.edu/events/program-ethics-and-public-affairs-3",
+        "venue": "Wooten Hall, Room 301 (Kerstetter Room)",
+        "age_band": "Princeton University ID holders and other academic affiliates",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "description": "Program in Ethics and Public Affairs: David Temin. Princeton University ID holders and other academic affiliates. Venue: Wooten Hall, Room 301 (Kerstetter Room), Princeton, New Jersey.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Reviewed this occurrence on the official event page: date/start, named speaker, venue and attendance restriction. Corrected the inherited Canadian location. Stable record ID retained."
+    },
+    {
+      "event_id": "program-in-ethics-and-public-affairs-jeffrey-howard-2027-04-15-3c960d8d",
+      "source_urls": [
+        "https://uchv.princeton.edu/events/program-ethics-and-public-affairs-4",
+        "https://uchv.princeton.edu/events"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "Apr 15, 2027, 4:30 pm – 6:00 pm",
+      "excerpt_sha256": "ebc180e131dea395f89665f58383ec2231daf4b056277ca8dad2926e0f6bb2ea",
+      "reviewed_values": {
+        "city": "Princeton",
+        "province": "New Jersey",
+        "country": "United States",
+        "timezone": "America/New_York",
+        "corridor_zone": "outside-corridor",
+        "source_url": "https://uchv.princeton.edu/events/program-ethics-and-public-affairs-4",
+        "venue": "Wooten Hall, Room 301 (Kerstetter Room)",
+        "age_band": "Princeton University ID holders and other academic affiliates",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "description": "Program in Ethics and Public Affairs: Jeffrey Howard. Princeton University ID holders and other academic affiliates. Venue: Wooten Hall, Room 301 (Kerstetter Room), Princeton, New Jersey.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Reviewed this occurrence on the official event page: date/start, named speaker, venue and attendance restriction. Corrected the inherited Canadian location. Stable record ID retained."
+    },
+    {
+      "event_id": "psyche-and-the-city-tanner-lectures-on-human-values-day-1-2027-03-24-35d565cc",
+      "source_urls": [
+        "https://uchv.princeton.edu/events/psyche-and-city",
+        "https://uchv.princeton.edu/events"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "Mar 24, 2027, 4:30 pm – 6:30 pm",
+      "excerpt_sha256": "bf72775f5a31ad1062c30785704047b57719bdfe437c9c7a04d96164361dc029",
+      "reviewed_values": {
+        "city": "Princeton",
+        "province": "New Jersey",
+        "country": "United States",
+        "timezone": "America/New_York",
+        "corridor_zone": "outside-corridor",
+        "source_url": "https://uchv.princeton.edu/events/psyche-and-city",
+        "venue": "Friend Center, Lecture Hall 101",
+        "age_band": "Open to the public",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "description": "Psyche and the City, Tanner Lectures on Human Values, day 1. Open to the public. Venue: Friend Center, Lecture Hall 101, Princeton, New Jersey.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Reviewed this occurrence on the official event page: date/start, named speaker, venue and attendance restriction. Corrected the inherited Canadian location. Stable record ID retained."
+    },
+    {
+      "event_id": "psyche-and-the-city-tanner-lectures-on-human-values-day-2-2027-03-25-9d22410c",
+      "source_urls": [
+        "https://uchv.princeton.edu/events/psyche-and-city",
+        "https://uchv.princeton.edu/events"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "Mar 25, 2027, 4:30 pm – 6:30 pm",
+      "excerpt_sha256": "d5dba6ffb56e5ebdd9df32d01e95662e7b6fdda2f3cdf2e2ed9c56e52626d0f9",
+      "reviewed_values": {
+        "city": "Princeton",
+        "province": "New Jersey",
+        "country": "United States",
+        "timezone": "America/New_York",
+        "corridor_zone": "outside-corridor",
+        "source_url": "https://uchv.princeton.edu/events/psyche-and-city",
+        "venue": "Friend Center, Lecture Hall 101",
+        "age_band": "Open to the public",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "description": "Psyche and the City, Tanner Lectures on Human Values, day 2. Open to the public. Venue: Friend Center, Lecture Hall 101, Princeton, New Jersey.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Reviewed this occurrence on the official event page: date/start, named speaker, venue and attendance restriction. Corrected the inherited Canadian location. Stable record ID retained."
+    },
+    {
+      "event_id": "james-a-moffett-29-lecture-in-ethics-gina-schouten-2027-04-08-0d97e1a5",
+      "source_urls": [
+        "https://uchv.princeton.edu/events/james-moffett-29-lecture-ethics-0",
+        "https://uchv.princeton.edu/events"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "Apr 8, 2027, 4:30 pm – 6:00 pm",
+      "excerpt_sha256": "6748227de95f690b3b906070552127543b095bb0f2dddf281f7ca0f61edb2bdd",
+      "reviewed_values": {
+        "city": "Princeton",
+        "province": "New Jersey",
+        "country": "United States",
+        "timezone": "America/New_York",
+        "corridor_zone": "outside-corridor",
+        "source_url": "https://uchv.princeton.edu/events/james-moffett-29-lecture-ethics-0",
+        "venue": "Princeton University — room not yet published",
+        "age_band": "Open to the public",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "description": "James A. Moffett '29 Lecture in Ethics: Gina Schouten. Open to the public. Venue: Princeton University — room not yet published, Princeton, New Jersey.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Reviewed this occurrence on the official event page: date/start, named speaker, venue and attendance restriction. Corrected the inherited Canadian location. Stable record ID retained. The room is unpublished; no exact room is asserted."
+    },
+    {
+      "event_id": "gerontocracy-in-america-how-the-old-are-hoarding-power-and-wealth-and-what-t-2026-09-17-d0dd7a87",
+      "source_urls": [
+        "https://gceps.princeton.edu/upcomingandrecentevents/",
+        "https://uchv.princeton.edu/events/events-archive"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "Thursday, September 17, 2026, from 12:15-1:15 p.m.",
+      "excerpt_sha256": "fc943fee0fde402677f961dcb3669573d118a58f86a25b6542cdee59c8eac1fd",
+      "reviewed_values": {
+        "city": "Princeton",
+        "province": "New Jersey",
+        "country": "United States",
+        "timezone": "America/New_York",
+        "corridor_zone": "outside-corridor",
+        "source_url": "https://gceps.princeton.edu/upcomingandrecentevents/",
+        "date": "2026-09-17T12:15-04:00",
+        "end_date": "2026-09-17T13:15-04:00",
+        "venue": "Robertson Hall, Bowl 016",
+        "age_band": "Open to the public and Princeton University community",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "description": "Samuel Moyn discusses Gerontocracy in America at Princeton on September 17, 2026, from 12:15 to 1:15 p.m. in Robertson Hall, Bowl 016. Open to the public and the Princeton University community; the organizer lists a livestream and recording.",
+        "previous_dates": [
+          "2026-09-17T16:30:00-04:00",
+          "2026-09-17T16:30-04:00"
+        ],
+        "date_change_reason": "source-correction",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "The title identifies the lunchtime book talk. Corrected afternoon time, room and audience from the official archived schedule. Broad multi-event archive remains research-only; no exact destination is asserted."
+    },
+    {
+      "event_id": "political-philosophy-colloquium-eric-matthew-nelson-2027-04-29-d5a2a3f3",
+      "source_urls": [
+        "https://politics.princeton.edu/event-series/political-philosophy-colloquium"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "city": "Princeton",
+        "province": "New Jersey",
+        "country": "United States",
+        "timezone": "America/New_York",
+        "corridor_zone": "outside-corridor"
+      },
+      "review_note": "Location-only review: Princeton institutional address supports New Jersey, United States. This occurrence/date was not independently reconfirmed; existing unconfirmed status and absent specific destination retained."
+    },
+    {
+      "event_id": "la-traviata-verdi-2026-09-18",
+      "source_urls": [
+        "https://www.coc.ca/tickets/2627-season/la-traviata"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "September 18 - October 17, 2026",
+      "excerpt_sha256": "b70aa79d294d3383386adc69a636233a5a586ec4035719ca141e7f5710973c24",
+      "reviewed_values": {
+        "source_url": "https://www.coc.ca/tickets/2627-season/la-traviata",
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "corridor_zone": "toronto",
+        "venue": "Four Seasons Centre for the Performing Arts, 145 Queen Street West",
+        "date_precision": "date",
+        "time_precision": "not-applicable",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "description": "Canadian Opera Company 2026/27 season at the Four Seasons Centre, Toronto. Production run: September 18 - October 17, 2026. Performances occur on selected dates; consult the production page for individual dates, times and tickets.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official production page verifies the date or run, Toronto venue and direct ticket destination. No individual performance clock is inferred."
+    },
+    {
+      "event_id": "cos-fan-tutte-mozart-2026-10-03",
+      "source_urls": [
+        "https://www.coc.ca/tickets/2627-season/cosi-fan-tutte"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "October 3 - 18, 2026",
+      "excerpt_sha256": "72308e6733b501d6fa96c6a27f80131e88a630dd69e8b5b93e6a23061ed3e6d2",
+      "reviewed_values": {
+        "source_url": "https://www.coc.ca/tickets/2627-season/cosi-fan-tutte",
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "corridor_zone": "toronto",
+        "venue": "Four Seasons Centre for the Performing Arts, 145 Queen Street West",
+        "date_precision": "date",
+        "time_precision": "not-applicable",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "description": "Canadian Opera Company 2026/27 season at the Four Seasons Centre, Toronto. Production run: October 3 - 18, 2026. Performances occur on selected dates; consult the production page for individual dates, times and tickets.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official production page verifies the date or run, Toronto venue and direct ticket destination. No individual performance clock is inferred."
+    },
+    {
+      "event_id": "the-turn-of-the-screw-britten-2027-01-23",
+      "source_urls": [
+        "https://www.coc.ca/tickets/2627-season/the-turn-of-the-screw"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "January 23 - February 17, 2027",
+      "excerpt_sha256": "cc814e55e6f6527f16769066a7cab0cbb2313bf63a7bf6346fb249b358906107",
+      "reviewed_values": {
+        "source_url": "https://www.coc.ca/tickets/2627-season/the-turn-of-the-screw",
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "corridor_zone": "toronto",
+        "venue": "Four Seasons Centre for the Performing Arts, 145 Queen Street West",
+        "date_precision": "date",
+        "time_precision": "not-applicable",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "description": "Canadian Opera Company 2026/27 season at the Four Seasons Centre, Toronto. Production run: January 23 - February 17, 2027. Performances occur on selected dates; consult the production page for individual dates, times and tickets.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official production page verifies the date or run, Toronto venue and direct ticket destination. No individual performance clock is inferred."
+    },
+    {
+      "event_id": "ariadne-auf-naxos-r-strauss-2027-02-04",
+      "source_urls": [
+        "https://www.coc.ca/tickets/2627-season/ariadne-auf-naxos"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "February 4 - 20, 2027",
+      "excerpt_sha256": "9189197119815b885cf193f73f3a34a05f49fe8743f79d83f9cca81dfdbc42d7",
+      "reviewed_values": {
+        "source_url": "https://www.coc.ca/tickets/2627-season/ariadne-auf-naxos",
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "corridor_zone": "toronto",
+        "venue": "Four Seasons Centre for the Performing Arts, 145 Queen Street West",
+        "date_precision": "date",
+        "time_precision": "not-applicable",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "description": "Canadian Opera Company 2026/27 season at the Four Seasons Centre, Toronto. Production run: February 4 - 20, 2027. Performances occur on selected dates; consult the production page for individual dates, times and tickets.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official production page verifies the date or run, Toronto venue and direct ticket destination. No individual performance clock is inferred."
+    },
+    {
+      "event_id": "empire-of-wild-world-premiere-2027-05-01",
+      "source_urls": [
+        "https://www.coc.ca/tickets/2627-season/empire-of-wild"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "May 1 - 21, 2027",
+      "excerpt_sha256": "059b9e2761a995c79826d855636e93af326e870f6c34a75ad4065106ddbec10b",
+      "reviewed_values": {
+        "source_url": "https://www.coc.ca/tickets/2627-season/empire-of-wild",
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "corridor_zone": "toronto",
+        "venue": "Four Seasons Centre for the Performing Arts, 145 Queen Street West",
+        "date_precision": "date",
+        "time_precision": "not-applicable",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "description": "Canadian Opera Company 2026/27 season at the Four Seasons Centre, Toronto. Production run: May 1 - 21, 2027. Performances occur on selected dates; consult the production page for individual dates, times and tickets.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official production page verifies the date or run, Toronto venue and direct ticket destination. No individual performance clock is inferred."
+    },
+    {
+      "event_id": "the-elixir-of-love-donizetti-2027-05-08",
+      "source_urls": [
+        "https://www.coc.ca/tickets/2627-season/the-elixir-of-love"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "May 8 - 29, 2027",
+      "excerpt_sha256": "f78021bb660f06a53d6acf1946e84edcd7e31f4367093cae4f7acdc0ac8f4368",
+      "reviewed_values": {
+        "source_url": "https://www.coc.ca/tickets/2627-season/the-elixir-of-love",
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "corridor_zone": "toronto",
+        "venue": "Four Seasons Centre for the Performing Arts, 145 Queen Street West",
+        "date_precision": "date",
+        "time_precision": "not-applicable",
+        "confirmation_status": "confirmed",
+        "qualification_reasons": [],
+        "description": "Canadian Opera Company 2026/27 season at the Four Seasons Centre, Toronto. Production run: May 8 - 29, 2027. Performances occur on selected dates; consult the production page for individual dates, times and tickets.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official production page verifies the date or run, Toronto venue and direct ticket destination. No individual performance clock is inferred."
+    },
+    {
+      "event_id": "coc-centre-stage-ensemble-studio-competition-gala-2026-10-22",
+      "source_urls": [
+        "https://www.coc.ca/tickets/2627-season/centre-stage"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "October 22, 2026",
+      "excerpt_sha256": "b30f3696dc4a074974c9fe226241634081754d2e61ef3aab14d49839891b6ee4",
+      "reviewed_values": {
+        "source_url": "https://www.coc.ca/tickets/2627-season/centre-stage",
+        "city": "Toronto",
+        "province": "Ontario",
+        "country": "Canada",
+        "corridor_zone": "toronto",
+        "venue": "Four Seasons Centre for the Performing Arts, 145 Queen Street West",
+        "date_precision": "date",
+        "time_precision": "unknown",
+        "confirmation_status": "unconfirmed",
+        "qualification_reasons": [
+          "time-unconfirmed"
+        ],
+        "description": "Canadian Opera Company 2026/27 season at the Four Seasons Centre, Toronto. Gala date: October 22, 2026. Consult the event page for ticketing and performance time.",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00",
+        "date": "2026-10-22T00:00-04:00",
+        "end_date": null,
+        "end_date_precision": "unknown"
+      },
+      "review_note": "Official Centre Stage page confirms October 22, 2026 and the Toronto venue. Performance clock is not verified, so unknown time and qualified status remain. Direct event/ticket page is verified."
+    },
+    {
+      "event_id": "toronto-municipal-election-cycle-2026",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "date_precision": "date",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-nomination-deadline-2026",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-candidate-certification-2026",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "date_precision": "date",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-manage-campaign-session-2026-08-24",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-voter-services-open-2026-09-01",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "date_precision": "date",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-voter-card-mail-cutoff-2026",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-mail-vote-request-deadline-2026",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-spending-limits-2026",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "date_precision": "date",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-voter-cards-mailed-2026",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "date_precision": "date",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-sign-period-opens-2026",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "date_precision": "date",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-advance-voting-2026",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "date": "2026-10-06T00:00-04:00",
+        "end_date": "2026-10-11T00:00-04:00",
+        "date_precision": "date",
+        "end_date_precision": "date",
+        "time_precision": "not-applicable",
+        "description": "Advance voting runs October 6–11, 2026, from 10 a.m. to 7 p.m. each day. The date range covers separate daily sessions; voting is not open overnight.",
+        "previous_dates": [],
+        "date_change_reason": "precision-correction",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page. Precision-only representation changes are not public rescheduling history; the complete old clocks remain preserved in private predecessor records."
+    },
+    {
+      "event_id": "toronto-election-kids-vote-weekend-2026",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "date": "2026-10-10T00:00-04:00",
+        "end_date": "2026-10-11T00:00-04:00",
+        "date_precision": "date",
+        "end_date_precision": "date",
+        "time_precision": "not-applicable",
+        "description": "Kids Vote Weekend runs October 10–11, 2026, from 10 a.m. to 7 p.m. each day. The date range covers separate daily sessions; voting is not open overnight.",
+        "previous_dates": [],
+        "date_change_reason": "precision-correction",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page. Precision-only representation changes are not public rescheduling history; the complete old clocks remain preserved in private predecessor records."
+    },
+    {
+      "event_id": "toronto-election-mail-package-deadline-2026",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-third-party-registration-deadline-2026",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "date_precision": "date",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-municipal-election-day-2026",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-sign-removal-deadline-2026",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "date": "2026-10-29T00:00-04:00",
+        "date_precision": "date",
+        "time_precision": "not-applicable",
+        "description": "Election signs must be removed by the end of October 29, 2026. The official schedule does not specify an exact clock time.",
+        "previous_dates": [],
+        "date_change_reason": "precision-correction",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page. Precision-only representation changes are not public rescheduling history; the complete old clocks remain preserved in private predecessor records."
+    },
+    {
+      "event_id": "toronto-election-initial-campaign-period-ends-2026",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "date_precision": "date",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-initial-financial-statement-2027",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-initial-financial-grace-2027",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-initial-compliance-audit-2027",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "date_precision": "date",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-supplementary-campaign-period-end-2027",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "date_precision": "date",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-supplementary-financial-statement-2027",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-supplementary-financial-grace-2027",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "date_precision": "date",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-supplementary-compliance-audit-2027",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "date_precision": "date",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "toronto-election-contribution-rebate-deadline-2027",
+      "source_urls": [
+        "https://www.toronto.ca/city-government/elections/key-dates/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "date_precision": "date",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Official 2026 Toronto election cycle schedule explicitly contains this milestone (or the parent cycle) and the related 2027 compliance dates. Use a labelled official-series schedule destination; do not describe it as an individual event page."
+    },
+    {
+      "event_id": "national-humanities-center-fellowship-deadline-projected-2026-10-02-5980fd79",
+      "source_urls": [
+        "https://nationalhumanitiescenter.org/nhc-announces-2026-27-fellows/",
+        "https://nationalhumanitiescenter.org/residential-fellowships/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "for the 2027–28 academic year on July 1, 2026 with a deadline of October 1, 2026.",
+      "excerpt_sha256": "b8086f51330fcd7096875266a14f15f0c6220f6c3e139ba85c0c61788753dc5e",
+      "reviewed_values": {
+        "source_url": "https://nationalhumanitiescenter.org/nhc-announces-2026-27-fellows/",
+        "description": "The National Humanities Center’s dated April 1, 2026 announcement states that applications for the 2027–28 residential fellowships were due October 1, 2026. This record preserves that historical cycle; the rolling program page now describes a later competition.",
+        "review_status": "manual",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00"
+      },
+      "review_note": "Dated April 1, 2026 institutional announcement explicitly confirms the 2027–28 application cycle and October 1, 2026 deadline. Preserve historical cycle and date. Rolling page now advertises 2028–29; it is not evidence to overwrite this record."
+    },
+    {
+      "event_id": "nhc-residential-fellowship-2027-28",
+      "source_urls": [
+        "https://nationalhumanitiescenter.org/nhc-announces-2026-27-fellows/",
+        "https://nationalhumanitiescenter.org/residential-fellowships/"
+      ],
+      "reviewed_at": "2026-10-02T18:57:49.905745+00:00",
+      "short_publisher_excerpt": "",
+      "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reviewed_values": {
+        "source_url": "https://nationalhumanitiescenter.org/nhc-announces-2026-27-fellows/",
+        "description": "The National Humanities Center’s dated April 1, 2026 announcement states that applications for the 2027–28 residential fellowships were due October 1, 2026. This record preserves that historical cycle; the rolling program page now describes a later competition.",
+        "review_status": "manual",
+        "last_checked_at": "2026-10-02T18:57:49.905745+00:00",
+        "lifecycle_status": "registration-closed"
+      },
+      "review_note": "Dated April 1, 2026 institutional announcement explicitly confirms the 2027–28 application cycle and October 1, 2026 deadline. Preserve historical cycle and date. Rolling page now advertises 2028–29; it is not evidence to overwrite this record. A second pre-existing record describes the same cycle; retain its ID and align the historical evidence and closed state.",
+      "shared_evidence_record": "national-humanities-center-fellowship-deadline-projected-2026-10-02-5980fd79"
+    }
+  ]
+}

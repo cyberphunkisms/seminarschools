@@ -9,6 +9,8 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
+const {ensureLock, writeJsonAtomic, recordManualObservation} = require('./lib/harvest-publication');
+ensureLock(ROOT, __filename);
 const SEMINARS = process.env.POLYMYTHCAL_SEMINARS_PATH
   ? path.resolve(process.env.POLYMYTHCAL_SEMINARS_PATH)
   : path.join(ROOT, 'seminars', 'events.json');
@@ -19,7 +21,7 @@ const MASTER = process.env.POLYMYTHCAL_MASTER_PATH
   ? path.resolve(process.env.POLYMYTHCAL_MASTER_PATH)
   : path.join(ROOT, 'data', 'polymyth-seminar-events.json');
 function read(p) { return JSON.parse(fs.readFileSync(p, 'utf8')); }
-function write(p, d) { fs.writeFileSync(p, JSON.stringify(d, null, 2) + '\n'); }
+function write(p, d) { writeJsonAtomic(p, d); }
 const hash = value => crypto.createHash('sha256').update(value).digest('hex').slice(0, 24);
 const words = value => String(value || '').toLowerCase().replace(/[^\p{L}\p{N}_]+/gu, '');
 
@@ -58,7 +60,7 @@ function matchAliases(event) {
   const aliases = storedAliases(event);
   const uid = String(event.external_uid || event.uid || event.event_uid || '').trim();
   const url = canonicalUrl(event.source_url);
-  if (uid) aliases.push(`raw-uid:${uid}`);
+  if (uid) aliases.push(`raw-uid:${String(event.source_id || '').trim().toLowerCase()}:${uid}`);
   if (url) aliases.push(`raw-url:${url}:${words(event.title).slice(0, 180)}`);
   return new Set(aliases);
 }
@@ -170,6 +172,7 @@ for (const incomingRaw of preparedHarvest) {
     const old = events[existingIndex];
     const canonicalId = old.id || incoming.id;
     if (old.review_status === 'manual' && incoming.review_status !== 'manual') {
+      recordManualObservation(old, incoming);
       old.secondary_types = [...new Set([...(old.secondary_types || []), ...(incoming.secondary_types || []), incoming.type].filter(Boolean))]
         .filter(t => t !== old.type);
       if (!old.parent_id && incoming.parent_id) old.parent_id = incoming.parent_id;
@@ -181,6 +184,7 @@ for (const incomingRaw of preparedHarvest) {
       events[existingIndex] = {
         ...old,
         ...incoming,
+        ...((old.source_observations || incoming.source_observations) ? {source_observations: [...new Map([...(old.source_observations || []), ...(incoming.source_observations || [])].map(row => [row.key, row])).values()]} : {}),
         id: canonicalId,
         identity_key: old.identity_key || incoming.identity_key,
         identity_aliases: [...new Set([...storedAliases(old), ...storedAliases(incoming)])],

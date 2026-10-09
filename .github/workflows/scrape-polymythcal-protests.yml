@@ -30,8 +30,11 @@ jobs:
           cache-dependency-path: |
             requirements-harvest.txt
             requirements-harvest-browser.txt
+            requirements-audit.lock
       - name: Install calendar dependencies
-        run: python3 -m pip install --disable-pip-version-check --requirement requirements-harvest-browser.txt
+        run: |
+          python3 -m pip install --disable-pip-version-check --require-hashes --requirement requirements-audit.lock
+          npm ci --no-audit --no-fund
       - name: Restore retained parsed-response cache
         uses: actions/cache/restore@v5
         with:

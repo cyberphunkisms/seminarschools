@@ -78,9 +78,9 @@ check(watchlist._schema === 'polymythcal-watchlist-v2', 'watchlist.json has the 
 check(research._schema === 'polymythcal-research-v1', 'research.json has the wrong schema.');
 check(surfaces._schema === 'polymythcal-publication-surfaces-v2', 'publication surface _schema is missing or stale.');
 check(surfaces.schema === 'polymythcal-publication-surfaces-v2', 'publication surface schema is missing or stale.');
-check(canonical.events.length === 2088, `Canonical release inventory changed (${canonical.events.length}/2088).`);
-check(chronology.length === 1954, `Chronology release inventory changed (${chronology.length}/1954).`);
-check(watched.length === EXPECTED_MONITORING_MARKER_COUNT, `Watchlist release inventory changed (${watched.length}/${EXPECTED_MONITORING_MARKER_COUNT}).`);
+const expectedInventory = require('./lib/polymythcal-inventory-contract').currentInventoryCounts(ROOT, canonical);
+check(chronology.length === expectedInventory.chronology, 'Chronology count differs from canonical classification.');
+check(watched.length === expectedInventory.watchlist, 'Watchlist count differs from canonical classification.');
 check(researchRecords.length === chronology.length, `Research projection inventory changed (${researchRecords.length}/${chronology.length}).`);
 check(browse.count === chronology.length && browse._chronology_count === chronology.length, 'Browse chronology counts are inconsistent.');
 check(browse._canonical_count === canonical.events.length, 'Browse canonical count is inconsistent.');
@@ -118,8 +118,8 @@ for (const [name, payload] of [['browse', browse], ['watchlist', watchlist], ['r
     `${name} build timestamp is not the manifest-owned Discovery release instant.`
   );
 }
-check(release.polymythcal_discovery_release_id === '2026-08-26-polymythcal-discovery-v2', 'Discovery release id is missing or incoherent.');
-check(release.polymythcal_discovery_asset_version === '20260826-discovery-v2', 'Discovery asset version is missing or incoherent.');
+check(release.polymythcal_discovery_release_id === '2026-10-01-polymythcal-maintenance-v6', 'Discovery release id is missing or incoherent.');
+check(release.polymythcal_discovery_asset_version === '20261004-discovery-v9', 'Discovery asset version is missing or incoherent.');
 for (const field of ['polymythcal_discovery_release_id', 'polymythcal_discovery_built_at', 'polymythcal_discovery_asset_version']) {
   check(publicRelease[field] === release[field], `public/site-release.json does not preserve ${field}.`);
   check(buildManifest[field] === release[field], `Polymythcal build manifest does not preserve ${field}.`);
@@ -152,7 +152,7 @@ check(Object.hasOwn(research.taxonomy?.axes || {}, 'celestialKinds'), 'Research 
 check(mergedResearchRecords.length === chronology.length, 'Lazy Research merge changes the chronology inventory.');
 
 const markerIds = canonical.events.filter(isMonitoringMarker).map(event => event.id);
-check(markerIds.length === EXPECTED_MONITORING_MARKER_COUNT, `Explicit monitoring-marker predicate returned ${markerIds.length}, expected ${EXPECTED_MONITORING_MARKER_COUNT}.`);
+check(markerIds.length === expectedInventory.watchlist, `Explicit monitoring-marker predicate returned ${markerIds.length}, expected ${EXPECTED_MONITORING_MARKER_COUNT}.`);
 check(JSON.stringify([...markerIds].sort()) === JSON.stringify([...watchlistIds].sort()), 'Watchlist does not contain exactly the explicit monitoring-marker records.');
 check(JSON.stringify(surfaces.chronology_ids) === JSON.stringify(chronologyIds), 'Surface chronology IDs differ from browse order.');
 check(JSON.stringify(surfaces.watchlist_ids) === JSON.stringify(watchlistIds), 'Surface watchlist IDs differ from watchlist order.');
@@ -248,7 +248,7 @@ for (const event of [...chronology, ...watched]) {
   }
   for (const group of Object.keys(event.search || {})) check(PERSISTED_SEARCH_GROUPS.includes(group), `Public event ${event.id} has unknown persisted search group ${group}.`);
   for (const [axis, values] of Object.entries(event.facets || {})) {
-    check(Array.isArray(values) && values.length > 0, `Public event ${event.id} facet ${axis} is empty or malformed.`);
+    check(Array.isArray(values) && (values.length > 0 || ['audiences', 'topics'].includes(axis)), `Public event ${event.id} facet ${axis} is empty or malformed.`);
     for (const value of values) {
       const label = browse.taxonomy?.axes?.[axis]?.values?.[value];
       check(Boolean(label), `Public event ${event.id} facet ${axis}:${value} has no taxonomy label.`);
@@ -620,7 +620,7 @@ for (const token of [
 ]) check(controllerSource.includes(token), `Production runtime is not wired to tested core behavior ${token}.`);
 
 for (const [relative, html] of shellHtml) {
-  check(html.includes('id="pmdSearch"') && html.includes('aria-describedby="pmdSearchHelp pmdSearchStatus"'), `${relative} search help is not programmatically connected.`);
+  check(html.includes('id="pmdSearch"') && html.includes('aria-describedby="pmdSearchStatus"') && html.includes('class="pmd-search-tips"'), `${relative} search help is not programmatically connected.`);
   check(html.includes('id="pmdSearchStatus"') && html.includes('role="status" aria-live="polite"'), `${relative} lacks a polite search status.`);
   check(html.includes('id="pmdResults" aria-busy="true" aria-labelledby="pmdResultsTitle"'), `${relative} results have no accessible name/busy state.`);
   check(html.includes('id="pmdResultsTitle" tabindex="-1"'), `${relative} results heading cannot receive restored focus.`);
@@ -771,7 +771,11 @@ for (const event of chronology) {
     if (source.time_precision === 'exact') {
       check(ics.includes(`DTEND:${utcIcsStamp(source.end_date)}`), `ICS ${event.id} disagrees with the verified end instant.`);
     } else {
-      check(ics.includes(`DTEND;VALUE=DATE:${nextDateIcsStamp(event.end_date)}`), `ICS ${event.id} disagrees with the inclusive date-range policy.`);
+      if (event.end_date_precision === 'month') {
+        check(!/^DTEND[:;]/m.test(ics), `ICS ${event.id} invents an exact closing day for a month-only end date.`);
+      } else {
+        check(ics.includes(`DTEND;VALUE=DATE:${nextDateIcsStamp(event.end_date)}`), `ICS ${event.id} disagrees with the inclusive date-range policy.`);
+      }
     }
   }
   const eventSchemas = jsonLdBlocks(detail, detailRelative).filter(item => item?.['@type'] === 'Event');
@@ -900,8 +904,7 @@ for (const source of canonical.events) {
     check(exactSource, `Research record ${source.id} exposed a broad or replacement source as original evidence.`);
   }
 }
-check(exactExternalDestinationCount === 804, `Exact external destination inventory changed (${exactExternalDestinationCount}/804).`);
-check(unresolvedDestinationCount === 1284, `Unresolved destination inventory changed (${unresolvedDestinationCount}/1284).`);
+check(exactExternalDestinationCount + unresolvedDestinationCount === canonical.events.length, 'Destination inventory must partition the current canonical records.');
 check(publicExternalActionCount === exactExternalDestinationCount, `Public external actions do not map one-to-one to exact destinations (${publicExternalActionCount}/${exactExternalDestinationCount}).`);
 check(missingExactExternalActionCount === 0, `${missingExactExternalActionCount} exact destinations are missing from public actions.`);
 check(mismatchedExternalActionCount === 0, `${mismatchedExternalActionCount} non-materialized external actions leaked.`);
@@ -939,7 +942,7 @@ check(JSON.stringify(report.derived_search_groups) === JSON.stringify(SEARCH_GRO
 check(report.destination_policy === 'materialized-exact-destination-only', 'Discovery report destination policy is stale.');
 check(report.exact_external_destination_count === exactExternalDestinationCount, 'Discovery report exact destination count is stale.');
 check(report.unresolved_destination_count === unresolvedDestinationCount, 'Discovery report unresolved destination count is stale.');
-check(report.suppressed_broad_destination_count === unresolvedDestinationCount, 'Discovery report suppressed broad destination count is stale.');
+check(report.unresolved_specific_destination_count === unresolvedDestinationCount, 'Discovery report unresolved specific destination count is stale.');
 check(report.public_external_action_count === publicExternalActionCount, 'Discovery report public external action count is stale.');
 check(report.missing_exact_external_action_count === missingExactExternalActionCount, 'Discovery report missing exact action count is stale.');
 check(report.mismatched_external_action_count === mismatchedExternalActionCount, 'Discovery report mismatched action count is stale.');

@@ -439,6 +439,8 @@ async function settleScrollSample(page, fraction, geometryMode = 'scroll', fallb
         const rawProgress = clampUnit(actual / range);
         const stops = [...document.querySelectorAll('main h2, main section[id], article h2')]
           .slice(0, 80)
+          // Hidden fallback/panel headings have no rendered outline position.
+          .filter(node => node.getClientRects().length > 0)
           .map(node => clampUnit((node.getBoundingClientRect().top + actual) / range))
           .filter(stop => stop > 0.02 && stop < 0.98)
           .sort((a, b) => a - b)
@@ -722,6 +724,11 @@ async function waitForVirtualMotion(page, previousProgress, direction) {
       if (!layer || layer.getAttribute('data-geometry-motion-source') !== 'wheel') return false;
       const progress = Number.parseFloat(layer.getAttribute('data-geometry-progress') || '');
       if (!Number.isFinite(progress) || (progress - previous) * expectedDirection <= progressTolerance) return false;
+      // The 360 ms input-driven catch-up is intentional. Test idle motion
+      // after the renderer reaches its target, within a bounded deadline.
+      const target = Number.parseFloat(layer.getAttribute('data-geometry-target-progress') || '');
+      if (layer.getAttribute('data-geometry-settled') !== 'true'
+          || !Number.isFinite(target) || Math.abs(progress - target) > 0.0001) return false;
       const cameras = [...layer.querySelectorAll(':scope > .indra-camera')];
       return cameras.length === 2 && cameras.every(camera => {
         const cameraProgress = progress;
@@ -731,7 +738,7 @@ async function waitForVirtualMotion(page, previousProgress, direction) {
       });
     },
     { previous: previousProgress, expectedDirection: direction, progressTolerance: GEOMETRY_PROGRESS_TOLERANCE },
-    { timeout: SCROLL_SETTLE_TIMEOUT_MS, polling: 20 },
+    { timeout: 1200, polling: 20 },
   );
   await settled.dispose();
 }

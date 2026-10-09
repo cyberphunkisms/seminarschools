@@ -77,7 +77,7 @@ The roster is larger than one run's budget, so coverage rotates across the shard
 2. **This run's shard.** Of every remaining source not in the deterministic-success skip list, including sources whose `default_type` is `screening`, `cfp`, or `contest`, crawl only those whose zero-based position in the `sources` array satisfies `position % SHARD_COUNT == SHARD`. The runner accounts for all out-of-shard rows; do not emit them.
 3. **Urgency reserve.** If budget remains after the every-run set and assigned shard, crawl at most five extra `cfp`, `contest`, or `screening` sources where the listing itself suggests a deadline or event within the next 30 days. Record those as `crawled-urgency-reserve` in the source accounting.
 
-Across a complete shard cycle this covers the full roster without trying to crawl 140+ sources in one action run. Within the run, if the budget runs low, finish the every-run set before starting the shard, and record any source you could not reach as `budget-exhausted` rather than silently dropping it. Before the budget is exhausted, write a valid JSON file with the records already verified; a smaller verified harvest is better than a failed run.
+Across a complete shard cycle this covers the full roster without trying to crawl 140+ sources in one action run. Within the run, if the budget runs low, finish the every-run set before starting the shard, and record any source you could not reach as `budget-exhausted` rather than silently dropping it. Before the budget is exhausted, return valid JSON with the records already verified; a smaller verified harvest is better than a failed run.
 
 **FEEDS FIRST.** When a source carries a `feed_url` field, fetch the feed BEFORE the `events_url`. Formats and how to read them: `ics` parses as iCalendar VEVENT blocks; `wp-tribe-json` returns a JSON object with an `events` array (title, start_date, venue, url fields); `bibliocommons-v2-html` is a server-rendered listing page that parses like normal HTML. If the feed returns 404, an error, or zero events, fall back to `events_url` and note `feed_failed` in that source's accounting entry, because the probable-tagged feeds are unconfirmed until a run proves them. A working feed is cheaper and more reliable than the HTML page; prefer it every run.
 
@@ -118,7 +118,7 @@ Every event must use a `source_id` from your compact accounting rows. Each row's
 
 ## Output format
 
-Write a single JSON object to `/tmp/seminars-output.json` matching `/data/seminars-schema.json`. The top-level shape is:
+Return a single JSON object matching the host-supplied `data/seminars-schema.json`. The top-level shape is:
 
 ```json
 {
@@ -173,9 +173,9 @@ Do not read `/data/manual-events.json` and do not include its entries in your ou
 
 ## Output
 
-Write the final JSON to `/tmp/seminars-output.json`. Print a one-line summary to stdout with event count and per-source breakdown. Then exit.
+Return the final JSON object as your response. The host parses and writes it before validation.
 
-Do not emit anything else to stdout. The output file is the deliverable.
+Do not include commentary or Markdown fences around the JSON.
 
 Qualification rule: keep listings with missing time/place in the main chronology as UNCONFIRMED and record the exact missing fact.
 

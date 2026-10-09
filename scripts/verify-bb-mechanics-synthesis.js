@@ -8,17 +8,18 @@ const failures = [];
 const must = (label, ok) => { if (!ok) failures.push(label); };
 
 const html = read('polymyth/bookwormburrows/index.html');
+const seed=require('./lib/parse-seed-with-addenda').parseSeedWithAddenda(html);
 const txt = read('polymyth/bookwormburrows.txt');
 const rules = read('polymyth/polymythdnd/ruleset.md');
 const cl = read('BB_CL_2026-07-10.md');
 const regen = read('scripts/regen-bookwormburrows-txt.js');
 
 for (const id of ['dm-017','dm-018','dm-032','dm-112','dm-117','dm-118','dm-119','bw-007','dim-001','ses-008','char-008']) {
-  must(`${id} exists in BB HTML`, html.includes(`id:'${id}'`));
+  must(`${id} exists in BB HTML`, seed.some(e=>e.id===id));
   must(`${id} exists in BB text mirror`, txt.includes(`ID: ${id}`));
 }
 must('Narrative Priority is active', rules.includes('Narrative Priority Protocol') && rules.includes('contextual tools'));
-must('Old universal Hope/Fear engine is superseded', html.includes("id:'dm-100'") && html.includes('[SUPERSEDED 2026-07-10]'));
+must('Old universal Hope/Fear engine is superseded', seed.some(e=>e.id==='dm-100') && html.includes('[SUPERSEDED 2026-07-10]'));
 must('PVP and compulsion are possible', rules.includes('Persuasion, intimidation, deception, compulsion, theft, restraint, and harm'));
 must('Affective modifiers exceed Hope/Fear', rules.includes('Affective and personality modifiers') && rules.includes('anxiety, pride, anger, grief'));
 must('Teacher can override AI', rules.includes('teacher may inspect, revise, or replace the proposal') || rules.includes('teacher may refine or override'));
@@ -31,8 +32,8 @@ must('World-model rendering is optional and non-authoritative', html.includes('i
 must('Provider handling is declared and has manual fallback', html.includes('model-training or reuse') && html.includes('BB sends no student data to that provider'));
 must('Provider use of student data for model training is prohibited', html.includes('A provider may not use student data, student work, or campaign records for model training') && html.includes('Disclosure of training use does not make that lifecycle acceptable'));
 must('Dimension build is medium-native and keeps sealed figures sealed', html.includes('full eight-stage arena standard applies to inhabited narrative') && html.includes('does not perform a sealed canonical figure or event'));
-must('Dimension entry preserves source medium and does not universalize the mirror', html.includes("id:'dim-001'") && html.includes("t:'Source or medium as dimension'") && html.includes('No mirror is universal'));
-must('Legacy Inception rule does not license synthetic canonical performance', html.includes("t:'Inception arena rule — DM builds the documented surround") && html.includes('neither may voice or respond as a sealed canonical figure') && !html.includes('voice the canonical NPCs from their verbatim primary-source lines'));
+must('Dimension entry preserves source medium and does not universalize the mirror', seed.some(e=>e.id==='dim-001') && seed.some(e=>e.t==='Source or medium as dimension') && html.includes('No mirror is universal'));
+must('Legacy Inception rule does not license synthetic canonical performance', seed.some(e=>e.t.startsWith('Inception arena rule — DM builds the documented surround')) && html.includes('neither may voice or respond as a sealed canonical figure') && !html.includes('voice the canonical NPCs from their verbatim primary-source lines'));
 must('Legacy canon-play permissions are reconciled', html.includes('never synthetically witnessed from a generated new position') && html.includes('The canonical climax remains in the anchor source') && html.includes('never synthetically replayed, voiced, or witnessed from a generated angle') && !html.includes('witness events from new positions') && !html.includes('witnesses the canon events from an angle') && !html.includes('encounter at hour seven'));
 must('Narration law excludes sealed figures', html.includes('PERMITTED CAMPAIGN NPC DIALOGUE') && html.includes('A sealed source figure remains in the anchor source') && !html.includes('characters speak from inside their own day in their canonical voices'));
 must('Legacy many-variable rule obeys minimization and manual parity', html.includes('CAUSALLY RICH, MINIMUM-SUFFICIENT FICTIONAL STATE') && html.includes('Manual play may keep a simpler necessary subset') && !html.includes('AI tracks all invisibly') && !html.includes('real-life-equivalent variable-density'));

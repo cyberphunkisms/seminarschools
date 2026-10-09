@@ -6,6 +6,7 @@ const crypto = require("crypto");
 const path = require("path");
 const vm = require("vm");
 const zlib = require("zlib");
+const { polymythCommonsDestination } = require("./lib/external-destination-contracts");
 
 const root = path.resolve(__dirname, "..");
 const failures = [];
@@ -209,18 +210,14 @@ expect(
 );
 
 const sourceDestinationProjects = (data.projects || []).filter(
-  (project) =>
-    (project.verified && project.currentCanonicalUrl) ||
-    (project.bookPrintedUrls || []).find(Boolean),
+  (project) => Boolean(polymythCommonsDestination(project).href),
 );
 expect(
-  sourceDestinationProjects.length === 120,
-  "exactly 120 Commons records must have a direct project/source destination",
+  sourceDestinationProjects.length === 118,
+  "exactly 118 Commons records must have a direct project/source destination",
 );
 for (const project of sourceDestinationProjects) {
-  const rawDestination = project.verified && project.currentCanonicalUrl
-    ? project.currentCanonicalUrl
-    : project.bookPrintedUrls.find(Boolean);
+  const rawDestination = polymythCommonsDestination(project).href;
   const destination = /^https?:\/\//i.test(rawDestination)
     ? rawDestination
     : `https://${String(rawDestination).replace(/^\/+/, "")}`;

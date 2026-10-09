@@ -1,0 +1,39 @@
+POLYMYTHCAL WEBSITE FIXES — REVISION 7, 3 OCTOBER 2026
+
+Complete editable website, including built public/.
+
+SCOPE
+This pass repairs existing features and records. It adds no filters, controls,
+routes, recommendations, subscriptions or event records. All 2,086 stable IDs
+remain; 1,873 chronology and 213 monitoring records. Existing filter options
+and taxonomy are unchanged.
+
+REPAIRS
+- Filtered series retain their proper parent heading, detail link and save ID.
+- Relevance sorting no longer hides future sessions in the ongoing section.
+- Series metadata distinguishes the matching session from the parent series.
+- Saved searches use meaningful labels; saved events show dates and places.
+- Unknown or restricted audiences are no longer assumed to be open to all.
+- Existing speaker search indexes confirmed structured participant names.
+- Existing navigation remains reachable on narrow screens; header spacing
+  is reduced without shrinking touch targets or removing controls.
+- Two Nuit Blanche records now agree on their verified city, local interval,
+  public access and official event destination, with both stable IDs retained.
+- The existing University Lecture Series record now names Kim Echlin and uses
+  the official February 4, 2027 date and 2–3 p.m. interval.
+- Thirteen Proust records retain their estimated times and now carry the
+  matching unconfirmed qualification. Their source review dates are unchanged.
+- Two existing U of T Philosophy source entries point to the current event
+  index and its supported adapter. No source or harvest schedule is added.
+- Cache versions are updated for the repaired existing assets.
+
+VALIDATION
+The full canonical build, focused static and responsive browser checks,
+geometry browser checks and isolated full rebuild idempotence gate passed.
+The archive is read back against member SHA-256 hashes and sizes. The existing
+release receipt gives exact counts, results and private evidence paths.
+
+REMAINING SOURCE LIMITS
+This is a software and existing-record repair pass, not a fresh verification
+of every source. Unavailable destinations, uncertain facts and stale source
+reviews remain explicit. No production deployment or repository push occurred.

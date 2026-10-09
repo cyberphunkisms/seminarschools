@@ -73,13 +73,16 @@ async function verifyLocale(browser, base, locale) {
     const card = page.locator(`[data-event-id="${FULL_NOON_ID}"]`);
     equal(await card.count(), 1, `${locale}: Full Noon Fest card rendered once`);
     const actions = card.locator('.pm-card-actions > a');
-    equal(await actions.count(), 2, `${locale}: Full Noon card has Details plus one exact external action`);
-    check((await actions.nth(0).getAttribute('class') || '').split(/\s+/).includes('primary-link'), `${locale}: Details is the first card action`);
-    equal(new URL(await actions.nth(0).getAttribute('href')).pathname, `${prefix}events/${FULL_NOON_ID}/`, `${locale}: first action targets localized internal Details`);
-    check(!(await actions.nth(1).getAttribute('class') || '').split(/\s+/).includes('primary-link'), `${locale}: exact external page is a separate non-primary second action`);
-    equal(await actions.nth(1).getAttribute('href'), FULL_NOON_URL, `${locale}: Full Noon external action uses the exact reviewed URL`);
-    check((await actions.nth(1).getAttribute('rel') || '').split(/\s+/).includes('noreferrer'), `${locale}: Full Noon external action retains safe relationship metadata`);
-    check((await actions.nth(1).innerText()).toLocaleLowerCase(french ? 'fr-CA' : 'en-CA').includes(french ? 'page officielle de la série' : 'official series page'), `${locale}: Full Noon action identifies recurring-series scope`);
+    equal(await actions.count(), 2, `${locale}: Full Noon card has one exact external action plus Details`);
+    // The accepted actions release supersedes the earlier Details-first card.
+    // Keep this browser contract aligned with test-polymythcal-actions-flows.js
+    // and WEBSITE_SOURCE_FIRST_DISCOVERY_WRAPPING_GEOMETRY_HARVEST_AUDIT_2026-08-09.md.
+    check((await actions.nth(0).getAttribute('class') || '').split(/\s+/).includes('primary-link'), `${locale}: reviewed external destination is the first primary action`);
+    equal(await actions.nth(0).getAttribute('href'), FULL_NOON_URL, `${locale}: Full Noon external action uses the exact reviewed URL`);
+    check((await actions.nth(0).getAttribute('rel') || '').split(/\s+/).includes('noreferrer'), `${locale}: Full Noon external action retains safe relationship metadata`);
+    check((await actions.nth(0).innerText()).toLocaleLowerCase(french ? 'fr-CA' : 'en-CA').includes(french ? 'page officielle de la série' : 'official series page'), `${locale}: Full Noon action identifies recurring-series scope`);
+    check(!(await actions.nth(1).getAttribute('class') || '').split(/\s+/).includes('primary-link'), `${locale}: internal Details remains a separate secondary action`);
+    equal(new URL(await actions.nth(1).getAttribute('href')).pathname, `${prefix}events/${FULL_NOON_ID}/`, `${locale}: second action targets localized internal Details`);
 
     const detailUrl = `${base}${prefix}events/${FULL_NOON_ID}/`;
     await page.goto(detailUrl, {waitUntil:'domcontentloaded',timeout:READY_TIMEOUT});
@@ -90,16 +93,68 @@ async function verifyLocale(browser, base, locale) {
 
     await page.goto(`${base}${prefix}?time=all&q=${encodeURIComponent('HASTAC opportunities and CFP scan')}`, {waitUntil:'domcontentloaded',timeout:READY_TIMEOUT});
     await waitForCalendar(page);
+    equal(await page.locator(`[data-event-id="${GENERIC_ID}"]`).count(), 0,
+      `${locale}: a projected source watch cannot appear in dated calendar results`);
+    await page.goto(`${base}${prefix}monitoring/?q=${encodeURIComponent('HASTAC opportunities and CFP scan')}`, {waitUntil:'domcontentloaded',timeout:READY_TIMEOUT});
+    await waitForCalendar(page);
     const genericCard = page.locator(`[data-event-id="${GENERIC_ID}"]`);
     equal(await genericCard.count(), 1, `${locale}: generic-source regression card rendered once`);
     equal(await genericCard.locator('.pm-card-actions > a').count(), 1, `${locale}: generic opportunities index is not surfaced as a second card action`);
-    check((await genericCard.locator('.pm-card-actions > a').first().getAttribute('class') || '').split(/\s+/).includes('primary-link'), `${locale}: generic-source card still starts with internal Details`);
+    equal(new URL(await genericCard.locator('.pm-card-actions > a').first().getAttribute('href')).pathname, `${prefix}events/${GENERIC_ID}/`, `${locale}: generic-source card retains its localized internal Details`);
+    equal(await genericCard.locator('.pm-card-actions > a.primary-link').count(), 0, `${locale}: generic source is not promoted to a verified primary action`);
+    check((await genericCard.locator('.pmd-link-missing').innerText()).includes(french ? 'Aucun lien public vérifié' : 'No verified public link'), `${locale}: missing verified destination remains explicit`);
     await page.goto(`${base}${prefix}events/${GENERIC_ID}/`, {waitUntil:'domcontentloaded',timeout:READY_TIMEOUT});
     equal(await page.locator('.pm-event-action.primary').count(), 0, `${locale}: generic-source detail page has no external CTA`);
+    equal(await page.locator('a[href$=".ics"]').count(), 0, `${locale}: projected source watch has no calendar download`);
+
+    const scholasticId = 'scholastic-art-and-writing-awards-2026';
+    const fundingId = 'national-humanities-center-fellowship-deadline-projected-2026-10-02-5980fd79';
+    const gettyId = 'getty-scholar-grants-projected-2026-10-01-409d574a';
+    await page.goto(`${base}${prefix}?time=all&q=Scholastic`, {waitUntil:'domcontentloaded'});
+    await waitForCalendar(page);
+    equal(await page.locator(`[data-event-id="${scholasticId}"]`).count(), 0, `${locale}: regional deadline placeholder is absent from calendar`);
+    equal(await page.locator('[data-event-id="scholastic-art-writing-awards-2027-open"]').count(), 1, `${locale}: confirmed Scholastic opening stays on the calendar`);
+    await page.goto(`${base}${prefix}monitoring/?q=Scholastic`, {waitUntil:'domcontentloaded'});
+    await waitForCalendar(page);
+    const scholastic = page.locator(`[data-event-id="${scholasticId}"]`);
+    equal(await scholastic.count(), 1, `${locale}: regional deadline remains discoverable on watchlist`);
+    const scholasticText = await scholastic.innerText();
+    check(scholasticText.includes('$15') && scholasticText.includes('$40') && !scholasticText.includes('Ten dollar'), `${locale}: both current fee amounts are visible`);
+    await page.goto(`${base}${prefix}events/${scholasticId}/`, {waitUntil:'domcontentloaded'});
+    equal(await page.locator('a[href$=".ics"]').count(), 0, `${locale}: regional deadline has no ICS action`);
+
+    await page.goto(`${base}${prefix}?time=all&what=opportunity%3Afunding&q=National%20Humanities%20Center`, {waitUntil:'domcontentloaded'});
+    await waitForCalendar(page);
+    const funding = page.locator(`[data-event-id="${fundingId}"]`);
+    equal(await funding.count(), 1, `${locale}: corrected fellowship is found with funding filter`);
+    check((await funding.locator('.pmd-card-trust').innerText()).includes(french ? 'Inscriptions fermées' : 'Registration closed'), `${locale}: closed application status is visible`);
+    await page.goto(`${base}${prefix}monitoring/?what=opportunity%3Afunding&q=Getty`, {waitUntil:'domcontentloaded'});
+    await waitForCalendar(page);
+    const getty = page.locator(`[data-event-id="${gettyId}"]`);
+    equal(await getty.count(), 1, `${locale}: Getty is found with funding filter`);
+    equal(await getty.locator('.pmd-card-date').innerText(), french ? 'Annulé ou suspendu' : 'Cancelled or paused', `${locale}: paused program is not presented as waiting for a date`);
     check(errors.length === 0, `${locale}: destination browser flow has no page or console errors`, errors.join(' | '));
   } finally {
     await context.close();
   }
+}
+
+async function verifyStaticFallback(browser, base, locale) {
+  const context = await browser.newContext({javaScriptEnabled:false,locale:locale === 'fr' ? 'fr-CA' : 'en-CA'});
+  await context.route('**/*', route => new URL(route.request().url()).origin === new URL(base).origin
+    ? route.continue() : route.fulfill({status:204,body:''}));
+  const page = await context.newPage();
+  const prefix = locale === 'fr' ? '/polymythseminars/fr/' : '/polymythseminars/';
+  try {
+    for (const route of ['', 'research/', 'monitoring/']) {
+      await page.goto(`${base}${prefix}${route}`, {waitUntil:'domcontentloaded'});
+      check(await page.locator('#pmdFallback').isVisible(), `${locale} ${route}: existing fallback is visible without JavaScript`);
+      equal(await page.locator('#pmdFallback li').count(), 24, `${locale} ${route}: 24 static listings are retained`);
+      const destination = await page.locator('#pmdFallback li > a').first().getAttribute('href');
+      const response = await page.goto(`${base}${destination}`, {waitUntil:'domcontentloaded'});
+      equal(response.status(), 200, `${locale} ${route}: static detail link works without JavaScript`);
+    }
+  } finally { await context.close(); }
 }
 
 async function main() {
@@ -110,6 +165,8 @@ async function main() {
   try {
     await verifyLocale(browser, base, 'en');
     await verifyLocale(browser, base, 'fr');
+    await verifyStaticFallback(browser, base, 'en');
+    await verifyStaticFallback(browser, base, 'fr');
   } finally {
     await browser.close();
     await new Promise((resolve) => server.close(resolve));
@@ -119,7 +176,7 @@ async function main() {
     failures.forEach((failure) => console.error(` - ${failure}`));
     process.exit(1);
   }
-  console.log(`POLYMYTHCAL DESTINATION BROWSER CHECK PASSED — ${assertions} assertions across English/French, exact Full Noon actions, Details-first order, detail pages, and fail-closed generic-source cards.`);
+  console.log(`POLYMYTHCAL DESTINATION BROWSER CHECK PASSED — ${assertions} assertions across English/French, source actions, projected dates, fellowship filters, lifecycle labels, and JavaScript-free listing links.`);
 }
 
 main().catch((error) => {

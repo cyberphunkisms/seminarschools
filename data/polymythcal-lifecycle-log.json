@@ -1,22 +1,76 @@
 {
-  "generated_at": "2026-07-23T15:07:58+00:00",
-  "previous_count": 839,
-  "input_count": 839,
-  "output_count": 838,
+  "generated_at": "2026-10-01T06:21:24+00:00",
+  "previous_count": 2086,
+  "input_count": 2086,
+  "output_count": 2086,
   "changes": [
     {
-      "identity_key": "2a731be0c80e51e047ff",
-      "change": "collapsed-shadow",
-      "reason": "overlapping-title-city-shadow",
-      "title": "The Let Down Reflex at the FOFA Gallery",
-      "winner_id": "fdc0f440490c",
-      "winner_identity_key": "2a731be0c80e51e047ff",
-      "shadow_id": "research-90988e54ea05",
-      "shadow_identity_key": "5a34126e195202c2490a",
-      "preserved_legacy_ids": [
-        "research-90988e54ea05",
-        "5a34126e195202c2490a"
-      ]
+      "identity_key": "7c491db349b6c0b0214d",
+      "change": "projection-correction",
+      "from": "2026-05-26T10:00-04:00",
+      "to": "2026-05-01",
+      "title": "April Hickox: Vantage Point – Passing"
+    },
+    {
+      "identity_key": "76d262e519184019c14c",
+      "change": "projection-correction",
+      "from": "2026-07-04T23:59-04:00",
+      "to": "2026-07-04",
+      "title": "CFP: University of Toronto Philosophy Graduate Conference 2026"
+    },
+    {
+      "identity_key": "2d7518efd66f78e40a85",
+      "change": "rescheduled",
+      "from": "2026-07-24T00:00-04:00",
+      "to": "2026-07-03T00:00-04:00",
+      "title": "Gananoque Free Waterfront Concert Series"
+    },
+    {
+      "identity_key": "674e124e0bfab1e20aaf",
+      "change": "rescheduled",
+      "title": "Brockville Rescheduled Fireworks"
+    },
+    {
+      "identity_key": "0c8a9d77717d45359050",
+      "change": "projection-correction",
+      "from": "2026-08-19T00:00-06:00",
+      "to": "2026-08-19",
+      "title": "Banff Futurisms Intensive Writing Residency application deadline"
+    },
+    {
+      "identity_key": "dc27b0b55c097006d16a",
+      "change": "projection-correction",
+      "from": "2026-09-22T00:00-04:00",
+      "to": "2026-09-22",
+      "title": "ACLA 2027 paper proposals"
+    },
+    {
+      "identity_key": "4ab564b37e7a7c72bf01",
+      "change": "projection-correction",
+      "from": "2026-10-01T00:00-07:00",
+      "to": "2026-10-01",
+      "title": "Canadian Literature CFP: Phyllis Webb at 100"
+    },
+    {
+      "identity_key": "bdc7b9081245818ba7b8",
+      "change": "projection-correction",
+      "from": "2026-10-16T09:00-04:00",
+      "to": "2026-10-16",
+      "title": "University of Toronto Philosophy Graduate Conference 2026"
+    },
+    {
+      "identity_key": "4accc022630209886140",
+      "change": "projection-correction",
+      "from": "2027-02-25T19:30-05:00",
+      "to": "2027-02-25",
+      "title": "Cabaret — post-show talkback"
+    },
+    {
+      "identity_key": "a13498752e49332294d2",
+      "change": "projection-correction",
+      "from": "2027-04-15T19:30-04:00",
+      "to": "2027-04-15",
+      "title": "Creditors — post-show talkback"
     }
   ],
   "status": "updated"

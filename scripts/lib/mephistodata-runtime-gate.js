@@ -5,12 +5,18 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const {parseSeedWithAddenda} = require('./parse-seed-with-addenda');
+const {CONTEXT_SCHEMA: CONCEPT_CONTEXT_SCHEMA, SELECTION_SCHEMA: CONCEPT_SELECTION_SCHEMA,
+  APPLICATION_SCHEMA: CONCEPT_APPLICATION_SCHEMA, createConceptControls} = require('./mephistodata-concept-application');
 
 const DEFAULT_OPENER = 'Mephistodata would say:';
 const BLOOM_OPENER = 'Mephistodata bloomed:';
 const OUROBOROS_OWNER = 'method-ouroborosanalyses-current-2026-08-23';
 const DEGORGONIFIED_FEMINISM_LABEL = 'degorgonified feminism';
-const PLAN_VERSION = 'mephistodata-runtime-gate.v4.2026-09-05';
+const SYNOPSIS_LABEL = 'Synopsis';
+const SYN_CODEWORD = 'syn';
+const SYNOPSIS_OWNER = 'coreplus-handler-mephistodata-execution-gates-2026-08-26';
+const PLAN_VERSION = 'mephistodata-runtime-gate.v7.2026-10-05';
+const OUROBOROS_CONTEXT_SCHEMA = 'ouroboros-claim-fidelity.v1.2026-09-11';
 const DRAFT_SCAN_ATTESTATION_SCHEMA = 'mephistodata-draft-work-status-scan.v1.2026-09-05';
 const WORK_ATTESTATION_SCHEMA = 'mephistodata-work-attestation.v1.2026-09-05';
 const CORRECTION_ATTESTATION_SCHEMA = 'mephistodata-correction-attestation.v1.2026-09-05';
@@ -1210,6 +1216,39 @@ function invokesDegorgonifiedFeminism(value) {
   return false;
 }
 
+function invokesSyn(value) {
+  const visible = maskControlLabelProtectedSpans(value);
+  const token = /\bsyn\b/ig;
+  let match;
+  while ((match = token.exec(visible)) !== null) {
+    const sentenceStart = Math.max(visible.lastIndexOf('.', match.index - 1), visible.lastIndexOf('!', match.index - 1), visible.lastIndexOf('?', match.index - 1), visible.lastIndexOf('\n', match.index - 1)) + 1;
+    const nextStops = [visible.indexOf('.', match.index + match[0].length), visible.indexOf('!', match.index + match[0].length), visible.indexOf('?', match.index + match[0].length), visible.indexOf('\n', match.index + match[0].length)].filter(index => index >= 0);
+    const sentenceEnd = nextStops.length ? Math.min(...nextStops) : visible.length;
+    const sentence = visible.slice(sentenceStart, sentenceEnd).trim().toLowerCase();
+    const explicitInvocation = sentence === SYN_CODEWORD || /\b(?:activate|apply|attempt|do|give me|invoke|perform|return|run|use)\b[\s\S]{0,80}\bsyn\b/i.test(sentence);
+    const sourceOrMetalinguistic = /\b(?:source|text|article|quotation|quote|wording|phrase|label|term|token|codeword)\b[\s\S]{0,100}\b(?:contains?|mentions?|occurs?|occurrence|says?|uses?|reads?|appears?|means?|defines?|wording|syn)\b/i.test(sentence) || /\b(?:discuss|analy[sz]e|inspect|quote|define|explain)\b[\s\S]{0,80}\b(?:wording|phrase|label|term|token|codeword|syn)\b/i.test(sentence);
+    if (explicitInvocation || !sourceOrMetalinguistic) return true;
+  }
+  return false;
+}
+
+function resolveSynopsisOperation(request, ownerRecords) {
+  const owners = ownerRecords.filter(entry => entry.id === SYNOPSIS_OWNER);
+  if (owners.length === 0) reject('MISSING_SYNOPSIS_OWNER', `Missing canonical owner: ${SYNOPSIS_OWNER}`);
+  if (owners.length !== 1) reject('AMBIGUOUS_SYNOPSIS_OWNER', `Canonical owner is not unique: ${SYNOPSIS_OWNER}`);
+  const owner = owners[0];
+  const body = String(owner.b || '');
+  const required = ['SYNOPSIS TECHNICAL DEFINITION.', 'SYN ACTIVATION.', 'compressed, self-contained, checkable, and source-faithful', 'zero loss of essential meaning, structure, uncertainty, or decision value at the declared scale', 'The attempt stays within the frozen task, creates no unsolicited second output', 'An exact unquoted operator use of syn makes the technical Synopsis the required output for the current turn.'];
+  const recomputedSha = canonicalEntrySha(owner);
+  if ((owner.semantic_sha256 && owner.semantic_sha256 !== recomputedSha) || !required.every(needle => body.includes(needle))) reject('STALE_SYNOPSIS_OWNER', `Canonical Synopsis owner has stale or incomplete form: ${SYNOPSIS_OWNER}`);
+  if (request.synopsis_owner_snapshot !== undefined) {
+    const snapshot = request.synopsis_owner_snapshot;
+    if (!snapshot || typeof snapshot !== 'object' || Array.isArray(snapshot) || snapshot.id !== SYNOPSIS_OWNER || snapshot.semantic_sha256 !== recomputedSha) reject('STALE_SYNOPSIS_OWNER_SNAPSHOT', `Synopsis owner snapshot does not match ${SYNOPSIS_OWNER}`);
+  }
+  const explicit = invokesSyn(request.current_message);
+  return {token: SYN_CODEWORD, technical_term: SYNOPSIS_LABEL, mode: explicit ? 'explicit' : 'attempt', required: explicit, owner_id: SYNOPSIS_OWNER, owner_semantic_sha256: recomputedSha, output_contract: explicit ? 'technical-synopsis-current-target' : 'internal-compression-completeness-attempt'};
+}
+
 function definitionOwnerMatches(entry, spec) {
   if (!entry || !spec) return false;
   if (spec.id) return entry.id === spec.id;
@@ -1313,9 +1352,12 @@ function resolveNamedMethod(request, ownerRecords) {
     'QUESTION-GENERATION HIJACK.',
     'review the whole conversation',
     'ironmanning all sides',
-    'answer every question that can be answered',
-    'genuinely unanswerable residue',
+    'answer every question as far as the record permits',
+    'PARTIALLY UNRESOLVED',
+    'ACADEMIC RESIDUE',
+    'TLDRLAYMAN RESIDUE',
     'Zero residue is valid',
+    'Apply material prior answers, corrections, and connected premises together before classifying any remainder.',
   ];
   if (paragraphs.length !== 4 || !required.every(needle => body.includes(needle))) {
     reject('STALE_METHOD_OWNER', `Canonical owner has stale or incomplete form: ${ownerId}`);
@@ -1331,7 +1373,7 @@ function resolveNamedMethod(request, ownerRecords) {
     token: 'Ouroborosanalyses',
     owner_id: ownerId,
     owner_semantic_sha256: ownerSha,
-    output_contract: 'genuine-residue-only',
+    output_contract: 'classified-residue-academic-then-tldrlayman',
   };
 }
 
@@ -1366,10 +1408,14 @@ function planRequest(request, options = {}) {
   const ownerRecords = options.owner_records || canonicalOwnerRecords(options.root);
   if (!Array.isArray(ownerRecords)) reject('MALFORMED_OWNER_REGISTRY', 'Owner registry must be an array.');
   const namedMethod = resolveNamedMethod(request, ownerRecords);
+  const ouroborosContext = namedMethod && request.ouroboros_context !== undefined
+    ? validateOuroborosContext(request.ouroboros_context)
+    : null;
   const definitionBundleInvoked = invokesDegorgonifiedFeminism(request.current_message);
+  const synopsisInvoked = invokesSyn(request.current_message);
   const correctionRequired = correctionRequirement(request);
   if (!request.ml_active) {
-    if (namedMethod || definitionBundleInvoked || correctionRequired || request.mode === 'bloom' || request.bloom_explicit === true) {
+    if (namedMethod || definitionBundleInvoked || synopsisInvoked || correctionRequired || request.mode === 'bloom' || request.bloom_explicit === true) {
       reject('ACTIVATION_CONFLICT', 'A project method or register was requested while ML* was marked inactive.');
     }
     const plan = {
@@ -1379,6 +1425,7 @@ function planRequest(request, options = {}) {
       opener: null,
       named_method: null,
       definition_bundle: null,
+      synopsis_operation: null,
       correction_required: null,
       current_message_sha256: sha256(request.current_message),
       allow_question_first: Boolean(request.surviving_question),
@@ -1389,6 +1436,7 @@ function planRequest(request, options = {}) {
   const definitionBundle = definitionBundleInvoked
     ? resolveDefinitionBundle(request, ownerRecords)
     : null;
+  const synopsisOperation = resolveSynopsisOperation(request, ownerRecords);
   const bloom = inferBloom(request);
   const plan = {
     version: PLAN_VERSION,
@@ -1396,7 +1444,10 @@ function planRequest(request, options = {}) {
     mode: bloom ? 'bloom' : 'default',
     opener: bloom ? BLOOM_OPENER : DEFAULT_OPENER,
     named_method: namedMethod,
+    ouroboros_context: ouroborosContext,
+    ouroboros_context_sha256: ouroborosContext ? sha256(JSON.stringify(ouroborosContext)) : null,
     definition_bundle: definitionBundle,
+    synopsis_operation: synopsisOperation,
     correction_required: correctionRequired,
     current_message_sha256: sha256(request.current_message),
     allow_question_first: Boolean(request.surviving_question || namedMethod),
@@ -1584,36 +1635,260 @@ function validateDegorgonifiedFeminismBundle(body) {
   }
 }
 
-function validateOuroboros(body, trace) {
+// These checks bind a delivery to records supplied before generation. They verify
+// hashes, quotations, attribution relationships, scope and dependency accounting.
+// They cannot certify that a host supplied an exhaustive conversation, assigned
+// truthful semantic metadata, or understood an argument. That remains a source
+// and semantic-review obligation, not a claim earned by passing this validator.
+const OUROBOROS_TARGET_SCOPES = new Set([
+  'user-argument', 'assistant-work', 'external-argument', 'source-evidence', 'method',
+]);
+
+function ouroborosText(value) {
+  return typeof value === 'string' && Boolean(value.trim());
+}
+
+function ouroborosIds(value, nonempty = false) {
+  return Array.isArray(value) && (!nonempty || value.length > 0)
+    && value.every(ouroborosText) && new Set(value).size === value.length;
+}
+
+function ouroborosSourceRef(ref, sources) {
+  const source = ref && sources.get(ref.source_id);
+  if (!source || !Number.isInteger(ref.start) || !Number.isInteger(ref.end)
+      || ref.start < 0 || ref.end <= ref.start || ref.end > source.text.length
+      || !ouroborosText(ref.quote) || source.text.slice(ref.start, ref.end) !== ref.quote) {
+    reject('OUROBOROS_SOURCE_BINDING_FAILURE', 'Every quotation must match its registered source and exact UTF-16 character span.');
+  }
+  return source;
+}
+
+function ouroborosRefs(refs, sources) {
+  if (!Array.isArray(refs) || refs.length === 0) {
+    reject('OUROBOROS_SOURCE_BINDING_FAILURE', 'A located source basis is required.');
+  }
+  const seen = new Set();
+  for (const ref of refs) {
+    ouroborosSourceRef(ref, sources);
+    const key = `${ref.source_id}:${ref.start}:${ref.end}`;
+    if (seen.has(key)) reject('OUROBOROS_SOURCE_BINDING_FAILURE', 'Source references must not repeat the same span.');
+    seen.add(key);
+  }
+}
+
+function ouroborosClosure(ids, records, dependencyKey) {
+  const visited = new Set();
+  const active = new Set();
+  function visit(id) {
+    const record = records.get(id);
+    if (!record || active.has(id)) {
+      reject('OUROBOROS_DEPENDENCY_FAILURE', 'Every dependency must resolve without a cycle.');
+    }
+    if (visited.has(id)) return;
+    active.add(id);
+    for (const dependency of record[dependencyKey]) visit(dependency);
+    active.delete(id);
+    visited.add(id);
+  }
+  for (const id of ids) visit(id);
+  return visited;
+}
+
+function validateOuroborosContext(supplied) {
+  if (!supplied || typeof supplied !== 'object' || Array.isArray(supplied)
+      || supplied.schema_version !== OUROBOROS_CONTEXT_SCHEMA
+      || !ouroborosIds(supplied.conversation_ids, true)
+      || !ouroborosIds(supplied.target_scopes, true)
+      || !supplied.target_scopes.every(scope => OUROBOROS_TARGET_SCOPES.has(scope))
+      || !Array.isArray(supplied.sources) || !Array.isArray(supplied.claims)
+      || !Array.isArray(supplied.responses)) {
+    reject('MALFORMED_OUROBOROS_CONTEXT', 'The pre-generation context needs its schema, conversation population, target scopes, sources, claims and responses.');
+  }
+  const context = JSON.parse(JSON.stringify(supplied));
+  const sources = new Map();
+  for (const source of context.sources) {
+    if (!source || !ouroborosText(source.id) || sources.has(source.id)
+        || !['conversation', 'artifact', 'external'].includes(source.kind)
+        || !['user', 'assistant', 'external'].includes(source.author)
+        || !ouroborosText(source.locator) || !ouroborosText(source.text)
+        || source.sha256 !== sha256(source.text)) {
+      reject('OUROBOROS_SOURCE_BINDING_FAILURE', 'Source records require a unique id, author, kind, locator and matching text hash.');
+    }
+    sources.set(source.id, source);
+  }
+  const conversationSources = context.sources.filter(source => source.kind === 'conversation').map(source => source.id);
+  if (!sameUniqueSet(context.conversation_ids, conversationSources)) {
+    reject('INCOMPLETE_WHOLE_CONVERSATION_REVIEW', 'Every declared conversation unit needs a complete corresponding source record.');
+  }
+  const claims = new Map();
+  for (const claim of context.claims) {
+    // "disputed" marks disputed wording, attribution or adoption in this
+    // register. A current claim remains current when a critic disputes its truth.
+    if (!claim || !ouroborosText(claim.id) || claims.has(claim.id)
+        || !ouroborosText(claim.scope) || !ouroborosIds(claim.depends_on_claim_ids)
+        || !['current', 'superseded', 'disputed'].includes(claim.status)) {
+      reject('MALFORMED_OUROBOROS_CONTEXT', 'Claims require unique ids, exact scopes, statuses and dependency ids.');
+    }
+    const source = ouroborosSourceRef(claim.source_ref, sources);
+    const authorByAuthority = {'user-authored': 'user', 'assistant-authored': 'assistant', external: 'external'};
+    if (claim.authority === 'user-adopted') {
+      if (!claim.adoption || claim.adoption.purpose !== 'semantic-adoption'
+          || ouroborosSourceRef(claim.adoption.source_ref, sources).author !== 'user') {
+        reject('OUROBOROS_ADOPTION_FAILURE', 'Adoption requires a located user statement registered as semantic adoption. Mutation permission is insufficient.');
+      }
+    } else if (source.author !== authorByAuthority[claim.authority] || claim.adoption !== undefined) {
+      reject('OUROBOROS_ATTRIBUTION_FAILURE', 'Claim authority must match source authorship or a separate explicit semantic adoption record.');
+    }
+    claims.set(claim.id, claim);
+  }
+  ouroborosClosure([...claims.keys()], claims, 'depends_on_claim_ids');
+  const responses = new Map();
+  for (const response of context.responses) {
+    if (!response || !ouroborosText(response.id) || responses.has(response.id)
+        || !['answer', 'correction'].includes(response.kind)
+        || !['settled', 'partial', 'unresolved'].includes(response.status)
+        || !ouroborosIds(response.addresses_claim_ids, true)
+        || !response.addresses_claim_ids.every(id => claims.has(id))
+        || !ouroborosIds(response.depends_on_response_ids)) {
+      reject('MALFORMED_OUROBOROS_CONTEXT', 'Prior answers and corrections require located claims, resolution status and explicit dependencies.');
+    }
+    ouroborosSourceRef(response.source_ref, sources);
+    responses.set(response.id, response);
+  }
+  ouroborosClosure([...responses.keys()], responses, 'depends_on_response_ids');
+  return context;
+}
+
+function validateOuroborosIssueProvenance(issue, context, sources, claims, responses) {
+  const claim = claims.get(issue.target_claim_id);
+  if (!claim || !context.target_scopes.includes(issue.target_scope)
+      || issue.claim_scope !== claim.scope) {
+    reject('OUROBOROS_TARGET_FAILURE', `Issue ${issue.id} changed or omitted its registered target or scope.`);
+  }
+  if ((issue.target_scope === 'user-argument'
+       && (!['user-authored', 'user-adopted'].includes(claim.authority) || claim.status !== 'current'))
+      || (issue.target_scope === 'assistant-work'
+        && sources.get(claim.source_ref.source_id).author !== 'assistant')
+      || (issue.target_scope === 'external-argument' && claim.authority !== 'external')) {
+    reject('OUROBOROS_ATTRIBUTION_FAILURE', `Issue ${issue.id} does not reach the authored or adopted claim of the named target.`);
+  }
+  const dependencyClaims = ouroborosClosure([claim.id], claims, 'depends_on_claim_ids');
+  const directlyRelevant = [...responses.values()].filter(response => response.addresses_claim_ids.some(id => dependencyClaims.has(id)));
+  const relevantIds = ouroborosClosure(directlyRelevant.map(response => response.id), responses, 'depends_on_response_ids');
+  const assessments = issue.response_assessments;
+  if (!Array.isArray(assessments)
+      || assessments.some(assessment => !assessment || !ouroborosText(assessment.response_id)
+        || !ouroborosText(assessment.application) || !ouroborosText(assessment.remaining_effect))
+      || !sameUniqueSet(assessments.map(assessment => assessment.response_id), [...relevantIds])
+      || !ouroborosText(issue.combined_response) || !ouroborosText(issue.disposition_basis)) {
+    reject('OUROBOROS_PRIOR_RESPONSE_FAILURE', `Issue ${issue.id} must assess every relevant answer and correction, their dependencies and their combined effect.`);
+  }
+  if (issue.answerable) {
+    const resolution = issue.resolution;
+    if (!resolution || !['prior-response', 'correction', 'independent-reasoning'].includes(resolution.kind)
+        || !ouroborosIds(resolution.response_ids) || !ouroborosText(resolution.explanation)) {
+      reject('OUROBOROS_RESOLUTION_FAILURE', `Resolved issue ${issue.id} needs a specific source-bound resolution.`);
+    }
+    ouroborosRefs(resolution.source_refs, sources);
+    if (resolution.response_ids.some(id => !relevantIds.has(id))
+        || (resolution.kind !== 'independent-reasoning' && resolution.response_ids.length === 0)
+        || (resolution.kind === 'correction' && resolution.response_ids.some(id => responses.get(id).kind !== 'correction'))) {
+      reject('OUROBOROS_DEPENDENCY_FAILURE', `Issue ${issue.id} cannot be resolved by an unrelated answer or correction.`);
+    }
+    if (issue.reopening && issue.reopening.length) {
+      reject('OUROBOROS_REOPENING_FAILURE', 'A fully resolved issue cannot simultaneously reopen a prior answer.');
+    }
+    return;
+  }
+  const findings = {
+    'argument-defect': ['user-argument', 'external-argument'],
+    'assistant-defect': ['assistant-work'],
+    'method-defect': ['method'],
+    'evidence-limit': [...OUROBOROS_TARGET_SCOPES],
+  };
+  if (!findings[issue.finding_type] || !findings[issue.finding_type].includes(issue.target_scope)
+      || !ouroborosText(issue.residual_inference)
+      || issue.basis_kind !== (issue.finding_type === 'evidence-limit' ? 'evidence-limit' : 'demonstrated')) {
+    reject('OUROBOROS_UNGROUNDED_RESIDUE', `Issue ${issue.id} requires a demonstrated inference in its actual target or a separately classified evidence limitation.`);
+  }
+  ouroborosRefs(issue.basis_refs, sources);
+  // A settled answer about a supporting premise does not settle every downstream
+  // question. Reopening applies only to answers registered against this target.
+  const settled = [...relevantIds].filter(id => {
+    const response = responses.get(id);
+    return response.status === 'settled' && response.addresses_claim_ids.includes(claim.id);
+  });
+  const reopening = issue.reopening === undefined ? [] : issue.reopening;
+  if (!Array.isArray(reopening) || reopening.some(item => !item)
+      || !sameUniqueSet(reopening.map(item => item.response_id), settled)) {
+    reject('OUROBOROS_REOPENING_FAILURE', `Issue ${issue.id} must explain precisely why each settled answer is being reopened.`);
+  }
+  for (const item of reopening) {
+    if (!['contrary-evidence', 'overlooked-evidence', 'counterargument'].includes(item.reason)
+        || !ouroborosText(item.remaining_defect)) {
+      reject('OUROBOROS_REOPENING_FAILURE', 'A settled answer needs located contrary evidence, overlooked evidence or a counterargument and an exact remaining defect.');
+    }
+    ouroborosRefs(item.source_refs, sources);
+    const answeredRef = responses.get(item.response_id).source_ref;
+    if (item.source_refs.every(ref => ref.source_id === answeredRef.source_id
+        && ref.start === answeredRef.start && ref.end === answeredRef.end)) {
+      reject('OUROBOROS_REOPENING_FAILURE', 'Repeating the prior answer alone is not evidence for reopening it.');
+    }
+  }
+}
+
+function validateOuroboros(body, trace, context) {
   if (!trace || typeof trace !== 'object') reject('MISSING_OUROBOROS_TRACE', 'Ouroborosanalyses requires a trace.');
-  if (!sameUniqueSet(trace.conversation_ids, trace.reviewed_ids)) {
+  if (!context) reject('MISSING_OUROBOROS_CONTEXT', 'Ouroborosanalyses delivery requires a source and claim context frozen before generation.');
+  if (!sameUniqueSet(trace.conversation_ids, trace.reviewed_ids)
+      || !sameUniqueSet(context.conversation_ids, trace.conversation_ids)) {
     reject('INCOMPLETE_WHOLE_CONVERSATION_REVIEW', 'The whole conversation set was not reviewed exactly once.');
   }
   if (!Array.isArray(trace.issues)) reject('MALFORMED_OUROBOROS_TRACE', 'Issues must be an array.');
+  const allowedClasses = new Set(['UNRESOLVABLE', 'PARTIALLY UNRESOLVED', 'NOT ADEQUATELY RESOLVED']);
   const seen = new Set();
-  const residue = [];
+  const survivors = [];
+  const sources = new Map(context.sources.map(source => [source.id, source]));
+  const claims = new Map(context.claims.map(claim => [claim.id, claim]));
+  const responses = new Map(context.responses.map(response => [response.id, response]));
   for (const issue of trace.issues) {
-    if (!issue || !issue.id || seen.has(issue.id) || !String(issue.question || '').trim()) {
+    if (!issue || !ouroborosText(issue.id) || seen.has(issue.id) || !ouroborosText(issue.question)) {
       reject('MALFORMED_OUROBOROS_TRACE', 'Every issue requires a unique id and question.');
     }
     seen.add(issue.id);
-    if (!Array.isArray(issue.positions) || new Set(issue.positions.filter(Boolean)).size < 2) {
+    if (!Array.isArray(issue.positions) || !issue.positions.every(ouroborosText)
+        || new Set(issue.positions.map(position => position.trim())).size < 2) {
       reject('FAILED_IRONMAN', `Issue ${issue.id} does not preserve opposing positions.`);
     }
     if (typeof issue.answerable !== 'boolean') reject('MALFORMED_OUROBOROS_TRACE', 'answerable must be boolean.');
+    validateOuroborosIssueProvenance(issue, context, sources, claims, responses);
     if (issue.answerable) {
-      if (!String(issue.answer || '').trim() || issue.residue_text) {
-        reject('ANSWERABLE_ISSUE_IN_RESIDUE', `Answerable issue ${issue.id} was not removed.`);
+      if (!String(issue.answer || '').trim() || issue.residue_text || issue.academic_text || issue.layman_text || issue.resolution_class) {
+        reject('ANSWERABLE_ISSUE_IN_RESIDUE', `Fully resolved issue ${issue.id} was not removed.`);
       }
-    } else {
-      if (issue.answer || !String(issue.unanswerable_basis || '').trim() || !String(issue.residue_text || '').trim()) {
-        reject('UNSUPPORTED_RESIDUE', `Residue ${issue.id} lacks an unanswerable basis.`);
-      }
-      residue.push(issue.residue_text.trim());
+      continue;
     }
+    const resolutionClass = String(issue.resolution_class || '').trim().toUpperCase();
+    const basis = String(issue.unresolved_basis || issue.unanswerable_basis || '').trim();
+    const academic = String(issue.academic_text || '').trim();
+    const layman = String(issue.layman_text || '').trim();
+    if (issue.answer || !allowedClasses.has(resolutionClass) || !basis || !academic || !layman) {
+      reject('UNSUPPORTED_RESIDUE', `Surviving issue ${issue.id} lacks its classification, unresolved basis, academic treatment, or TLDRLAYMAN treatment.`);
+    }
+    survivors.push({
+      question: String(issue.question).trim(),
+      resolutionClass,
+      academic,
+      layman,
+    });
   }
-  const expected = residue.length ? residue.join('\n') : 'Zero genuine unanswerables remain.';
-  if (body !== expected) reject('NON_RESIDUE_OUTPUT', 'Ouroborosanalyses delivery contains material outside genuine residue.');
+  let expected = 'Zero unresolved residue remains.';
+  if (survivors.length) {
+    const academic = survivors.map(item => `[${item.resolutionClass}] ${item.question}\n${item.academic}`).join('\n\n');
+    const layman = survivors.map(item => `[${item.resolutionClass}] ${item.question}\n${item.layman}`).join('\n\n');
+    expected = `ACADEMIC RESIDUE\n${academic}\n\nTLDRLAYMAN RESIDUE\n${layman}`;
+  }
+  if (body !== expected) reject('NON_RESIDUE_OUTPUT', 'Ouroborosanalyses must contain only the classified academic residue followed by the same residue in TLDRLAYMAN form.');
 }
 
 function firstSentenceIsQuestion(body) {
@@ -1652,16 +1927,19 @@ function assertDeliverableWithTrust(plan, draft, evidence = {}, trust = null) {
   const correctionRetraction = validateFalseClaimCorrection(plan, body, evidence, trust, deliveryContext);
   validateCompletionClaims(body, evidence, correctionRetraction ? [correctionRetraction] : [], trust, deliveryContext, draftScan);
   if (plan.named_method && plan.named_method.owner_id === OUROBOROS_OWNER) {
-    validateOuroboros(body, evidence.ouroboros);
+    validateOuroboros(body, evidence.ouroboros, plan.ouroboros_context);
   }
   if (draftScan.unsupported_claim_ids.length) {
     reject('UNSUPPORTED_DRAFT_WORK_STATUS', 'The host-classified work-status claim lacks a supported evidence verdict.');
   }
+  const conceptApplication = conceptControls.delivery(plan, draft, evidence, trust);
   return deepFreeze({
     ok: true,
     mode: plan.mode,
     named_method: plan.named_method ? plan.named_method.token : null,
     definition_bundle: plan.definition_bundle ? plan.definition_bundle.token : null,
+    synopsis_operation: plan.synopsis_operation ? plan.synopsis_operation.mode : null,
+    concept_application: conceptApplication,
     draft_sha256: sha256(draft),
   });
 }
@@ -1679,22 +1957,39 @@ function createRuntimeGate(configuration = {}) {
   const draftVerifier = typeof configuration.verifyDraftWorkStatusAttestation === 'function'
     ? configuration.verifyDraftWorkStatusAttestation
     : null;
+  const conceptSelectionVerifier = typeof configuration.verifyConceptSelectionAttestation === 'function'
+    ? configuration.verifyConceptSelectionAttestation : null;
+  const conceptApplicationVerifier = typeof configuration.verifyConceptApplicationAttestation === 'function'
+    ? configuration.verifyConceptApplicationAttestation : null;
   const workVerifierId = workVerifier && String(configuration.workVerifierId || '').trim();
   const correctionVerifierId = correctionVerifier && String(configuration.correctionVerifierId || '').trim();
   const draftVerifierId = draftVerifier && String(configuration.draftVerifierId || '').trim();
+  const conceptSelectionVerifierId = conceptSelectionVerifier && String(configuration.conceptSelectionVerifierId || '').trim();
+  const conceptApplicationVerifierId = conceptApplicationVerifier && String(configuration.conceptApplicationVerifierId || '').trim();
   if ((workVerifier && !workVerifierId) || (correctionVerifier && !correctionVerifierId)
-      || (draftVerifier && !draftVerifierId)) {
+      || (draftVerifier && !draftVerifierId)
+      || (conceptSelectionVerifier && !conceptSelectionVerifierId)
+      || (conceptApplicationVerifier && !conceptApplicationVerifierId)) {
     reject('MALFORMED_TRUST_BOOTSTRAP', 'Each bootstrap verifier requires one exact immutable verifier identity.');
   }
   const trust = Object.freeze({
     verifyWorkAttestation: workVerifier,
     verifyCorrectionAttestation: correctionVerifier,
     verifyDraftWorkStatusAttestation: draftVerifier,
+    verifyConceptSelectionAttestation: conceptSelectionVerifier,
+    verifyConceptApplicationAttestation: conceptApplicationVerifier,
     workVerifierId: workVerifierId || null,
     correctionVerifierId: correctionVerifierId || null,
     draftVerifierId: draftVerifierId || null,
+    conceptSelectionVerifierId: conceptSelectionVerifierId || null,
+    conceptApplicationVerifierId: conceptApplicationVerifierId || null,
   });
   return Object.freeze({
+    planRequest(request, options = {}) {
+      if (arguments.length > 2) reject('CALLER_SUPPLIED_TRUST_ROOT', 'Per-plan trust-root injection is forbidden.');
+      const owners = options.owner_records || canonicalOwnerRecords(options.root);
+      return conceptControls.plan(planRequest(request, {owner_records: owners}), request, owners, trust);
+    },
     assertDeliverable(plan, draft, evidence = {}) {
       if (arguments.length > 3) {
         reject('CALLER_SUPPLIED_TRUST_ROOT', 'Per-delivery verifier or trust-root injection is forbidden.');
@@ -1704,6 +1999,7 @@ function createRuntimeGate(configuration = {}) {
   });
 }
 
+const conceptControls = createConceptControls({reject, sha256, deepFreeze, canonicalEntrySha});
 const DEFAULT_RUNTIME_GATE = createRuntimeGate();
 
 function assertDeliverable(plan, draft, evidence = {}) {
@@ -1720,8 +2016,15 @@ module.exports = {
   DEFAULT_OPENER,
   MephistodataGateError,
   OUROBOROS_OWNER,
+  OUROBOROS_CONTEXT_SCHEMA,
   PLAN_VERSION,
+  SYNOPSIS_LABEL,
+  SYNOPSIS_OWNER,
+  SYN_CODEWORD,
   CORRECTION_ATTESTATION_SCHEMA,
+  CONCEPT_CONTEXT_SCHEMA,
+  CONCEPT_SELECTION_SCHEMA,
+  CONCEPT_APPLICATION_SCHEMA,
   DRAFT_SCAN_ATTESTATION_SCHEMA,
   WORK_ATTESTATION_SCHEMA,
   assertDeliverable,
@@ -1730,6 +2033,7 @@ module.exports = {
   createRuntimeGate,
   definitionOwnerMatches,
   invokesDegorgonifiedFeminism,
+  invokesSyn,
   isCategoricalRetraction,
   standaloneAssertedStatementSpan,
   localDraftClaimBindings,

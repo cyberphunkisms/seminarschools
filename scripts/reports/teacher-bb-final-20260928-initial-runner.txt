@@ -1,0 +1,705 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> seminar-schools-leizu-pipeline@1.0.7 verify:all:built
+> node scripts/run-python.js scripts/run-with-build-lock.py --delivery-root .. -- node scripts/verify-all-runner.js --reuse-build
+
+VERIFY ALL FAST — 195 checks, concurrency 4, timeout 600000ms, mode: reuse verified canonical build
+PASS   1184ms  node scripts/verify-public-deploy-parity.js
+PASS    193ms  node scripts/verify-release-asset-identity.js
+PASS   1032ms  node scripts/verify-polymythcal-destination-specificity.js
+PASS  50908ms  node scripts/verify-polymythcal-discovery-v2.js
+PASS   7804ms  node scripts/verify-front-facing-boundary.js
+PASS   4273ms  node scripts/verify-visible-geometry.js
+PASS   3054ms  node scripts/verify-meaningful-geometry.js
+PASS   1782ms  node scripts/verify-geometry.js
+PASS  10215ms  node scripts/verify-geometry-route-variation.js
+PASS   6709ms  node scripts/test-polymythcal-comprehensive-flows.js
+PASS    186ms  node scripts/test-comprehensive-runtime.cjs
+PASS  12312ms  node scripts/run-python.js scripts/verify-polymyth-coherence-workbook.py
+PASS  12554ms  node scripts/verify-polymyth-entry-points.js
+PASS  39041ms  node scripts/run-python.js scripts/verify-audit45-translations.py
+PASS   8542ms  node scripts/verify-audit49-metadata-surface.js
+PASS    678ms  node scripts/verify-audit49-runtime-efficiency.js
+PASS  10215ms  node scripts/verify-audit49-build-packaging-efficiency.js
+PASS    270ms  node scripts/verify-page-size-budget.js
+PASS   1020ms  node scripts/verify-asset-weights.js
+PASS    103ms  node scripts/verify-bookwormcard-gate.js
+PASS  12537ms  node scripts/verify-teacher-search-20260927.js
+PASS   6996ms  node scripts/verify-teacher-bb-audit-20260927.js
+PASS  10251ms  node scripts/verify-teacher-bb-fixes-20260927.js
+PASS    104ms  node scripts/verify-teacher-metadata-20260928.js
+PASS    601ms  node scripts/verify-ml-shorthand-resolution.js
+PASS   2435ms  node scripts/verify-ml-dialectical-hardening.js
+PASS    885ms  node scripts/verify-ml-execution-gates.js
+PASS    287ms  node scripts/verify-ml-document-continuity.js
+PASS    826ms  node scripts/verify-mephistodata-runtime-gate.js
+PASS    192ms  node scripts/verify-ml-active-form-conflicts.js
+PASS    216ms  node scripts/verify-ml-project-adjudication-v2.js
+PASS   5427ms  node scripts/verify-methodologylist-manifest.js
+PASS    569ms  node scripts/verify-core-coreplus-alignment.js
+PASS    875ms  node scripts/verify-meaninglib-dataset.js
+PASS   6367ms  node scripts/verify-meaninglib-search.js
+PASS   8678ms  node scripts/verify-ai-access-pack.js
+PASS   3295ms  node scripts/verify-audit48-assistive-technology.js
+PASS    135ms  node scripts/verify-audit48-browser-program.js
+PASS  15396ms  node scripts/run-python.js scripts/verify-polymythcal-calendar-clients.py
+PASS    454ms  node scripts/run-python.js -m unittest scripts/test_audit48_live_harvest.py
+PASS    163ms  node scripts/run-python.js scripts/verify_audit48_live_harvest.py
+PASS   1186ms  node scripts/verify-audit48-external-validation.js
+PASS 291494ms  node scripts/verify-build-idempotence.js
+PASS  14832ms  node scripts/verify-teacherresources-state-layout-browser.js
+PASS  38854ms  node scripts/verify-home-map-browser.js
+PASS  72426ms  node scripts/verify-polymythcal-sets13-15-browser.js
+VERIFY ALL FAST FAILED
+
+--- node scripts/verify-polymythcal-destination-browser.js (28310ms) ---
+POLYMYTHCAL DESTINATION BROWSER CHECK FAILED — 10 of 34 assertions failed.
+ - en: first action targets localized internal Details — expected "/polymythseminars/events/research-ca26383d41b1/", received "/full-noon-fest-26/"
+ - en: Full Noon external action uses the exact reviewed URL — expected "https://longgonesongs.com/full-noon-fest-26/", received "http://127.0.0.1:41173/polymythseminars/events/research-ca26383d41b1/?from=%2Fpolymythseminars%2F%3Fq%3DFull%2BNoon%2BFest%26date%3Dall"
+ - en: Full Noon external action retains safe relationship metadata
+ - en: Full Noon action identifies recurring-series scope
+ - en: generic-source card still starts with internal Details
+ - fr: first action targets localized internal Details — expected "/polymythseminars/fr/events/research-ca26383d41b1/", received "/full-noon-fest-26/"
+ - fr: Full Noon external action uses the exact reviewed URL — expected "https://longgonesongs.com/full-noon-fest-26/", received "http://127.0.0.1:41173/polymythseminars/fr/events/research-ca26383d41b1/?from=%2Fpolymythseminars%2Ffr%2F%3Fq%3DFull%2BNoon%2BFest%26date%3Dall"
+ - fr: Full Noon external action retains safe relationship metadata
+ - fr: Full Noon action identifies recurring-series scope
+ - fr: generic-source card still starts with internal Details
+
+
+--- node scripts/verify-visible-geometry-browser.mjs (600325ms) ---
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+browserContext.close: Protocol error (Target.disposeBrowserContext): Failed to find context with id E0F78BB006F6B504DA3F264A98CA8DD4
+    at async inspect (/tmp/seminar-final-v4/SITE_PACKAGE/scripts/verify-visible-geometry-browser.mjs:1258:5)
+    at async consume (/tmp/seminar-final-v4/SITE_PACKAGE/scripts/verify-visible-geometry-browser.mjs:1433:7)
+    at async runBounded (/tmp/seminar-final-v4/SITE_PACKAGE/scripts/verify-visible-geometry-browser.mjs:1436:3)
+    at async file:///tmp/seminar-final-v4/SITE_PACKAGE/scripts/verify-visible-geometry-browser.mjs:1464:3 {
+  log: [],
+  name: 'Error'
+}
+
+Node.js v24.19.0
+
+
+--- node scripts/verify-front-facing-overlap-browser.js (605110ms) ---
+Route-family inventory passed: 7578 HTML routes across 37 declared families.
+home:1, not-found:1, host-verification:1, site-map:1, about:1, project-prose:4, marginalia:1, reviews:1, main-alias:1, program-landing:22, aa:4, aitr:1, bb:4, bookwormcard:6, campaigns:7, leizu-home-locales:5, leizu-auxiliary-locales:45, polymyth-methodology:17, polymyth-coherence:1, polymyth-manuals:29, polymythcal-alias:1, polymythcommons:1, polymythlib-home:1, polymythlib-guides:4, polymythlib-record:346, polymythseminars-home-locales:2, polymythseminars-discovery-secondary:4, polymythseminars-forms:8, polymythseminars-event-en:4236, polymythseminars-event-fr:2118, saul-home-locales:5, saul-tailored-cv:12, saul-portfolio:6, teacher-index:1, teacher-subject:9, teacher-collection:25, teacher-resource:646
+
+
+
+RESUME ATTEMPT AFTER TORONTO MIDNIGHT
+The lock wrapper selected the new calendar day, 2026-09-28. The candidate was built for 2026-09-27. The featured-feed gate correctly rejected that mismatch. The final resume pins SITE_BUILD_DATE to the original canonical build day and reruns all 81 remaining commands. No source or generated site content changes are required.
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> seminar-schools-leizu-pipeline@1.0.7 verify:all:built
+> node scripts/run-python.js scripts/run-with-build-lock.py --delivery-root .. -- node scripts/verify-all-runner.js --reuse-build --concurrency=1 --timeout-ms=1800000
+
+VERIFY ALL FAST — 195 checks, concurrency 1, timeout 1800000ms, mode: reuse verified canonical build
+PASS   1301ms  node scripts/verify-public-deploy-parity.js
+PASS    178ms  node scripts/verify-release-asset-identity.js
+PASS    860ms  node scripts/verify-polymythcal-destination-specificity.js
+PASS  53760ms  node scripts/verify-polymythcal-discovery-v2.js
+PASS   8807ms  node scripts/verify-front-facing-boundary.js
+PASS   5938ms  node scripts/verify-visible-geometry.js
+PASS   3961ms  node scripts/verify-meaningful-geometry.js
+PASS   1728ms  node scripts/verify-geometry.js
+PASS   9492ms  node scripts/verify-geometry-route-variation.js
+PASS   4292ms  node scripts/test-polymythcal-comprehensive-flows.js
+PASS     99ms  node scripts/test-comprehensive-runtime.cjs
+PASS  10896ms  node scripts/run-python.js scripts/verify-polymyth-coherence-workbook.py
+PASS  11142ms  node scripts/verify-polymyth-entry-points.js
+PASS  37075ms  node scripts/run-python.js scripts/verify-audit45-translations.py
+PASS  10442ms  node scripts/verify-audit49-metadata-surface.js
+PASS    720ms  node scripts/verify-audit49-runtime-efficiency.js
+PASS   9237ms  node scripts/verify-audit49-build-packaging-efficiency.js
+PASS    287ms  node scripts/verify-page-size-budget.js
+PASS   1058ms  node scripts/verify-asset-weights.js
+PASS     88ms  node scripts/verify-bookwormcard-gate.js
+PASS  14179ms  node scripts/verify-teacher-search-20260927.js
+PASS   8346ms  node scripts/verify-teacher-bb-audit-20260927.js
+PASS  11014ms  node scripts/verify-teacher-bb-fixes-20260927.js
+PASS     97ms  node scripts/verify-teacher-metadata-20260928.js
+PASS    598ms  node scripts/verify-ml-shorthand-resolution.js
+PASS   3004ms  node scripts/verify-ml-dialectical-hardening.js
+PASS    964ms  node scripts/verify-ml-execution-gates.js
+PASS    281ms  node scripts/verify-ml-document-continuity.js
+PASS    768ms  node scripts/verify-mephistodata-runtime-gate.js
+PASS    171ms  node scripts/verify-ml-active-form-conflicts.js
+PASS    241ms  node scripts/verify-ml-project-adjudication-v2.js
+PASS   5769ms  node scripts/verify-methodologylist-manifest.js
+PASS    560ms  node scripts/verify-core-coreplus-alignment.js
+PASS    941ms  node scripts/verify-meaninglib-dataset.js
+PASS   6218ms  node scripts/verify-meaninglib-search.js
+PASS   8232ms  node scripts/verify-ai-access-pack.js
+PASS   3329ms  node scripts/verify-audit48-assistive-technology.js
+PASS    126ms  node scripts/verify-audit48-browser-program.js
+PASS  16440ms  node scripts/run-python.js scripts/verify-polymythcal-calendar-clients.py
+PASS    575ms  node scripts/run-python.js -m unittest scripts/test_audit48_live_harvest.py
+PASS    138ms  node scripts/run-python.js scripts/verify_audit48_live_harvest.py
+PASS   1154ms  node scripts/verify-audit48-external-validation.js
+PASS 299944ms  node scripts/verify-build-idempotence.js
+PASS 564956ms  node scripts/verify-front-facing-overlap-browser.js
+PASS 613882ms  node scripts/verify-visible-geometry-browser.mjs
+PASS   5555ms  node scripts/verify-teacherresources-state-layout-browser.js
+PASS  11887ms  node scripts/verify-home-map-browser.js
+PASS  23550ms  node scripts/verify-polymythcal-sets13-15-browser.js
+PASS   7913ms  node scripts/verify-polymythcal-destination-browser.js
+PASS    750ms  node scripts/verify-critical.js
+PASS    109ms  node scripts/verify-alwaysalready-page.js
+PASS    680ms  node scripts/verify-assistant-twisting-alwaysalready.js
+PASS    352ms  node scripts/verify-predeploy-automation.js
+PASS     99ms  node scripts/verify-repository-walk-policy.js
+PASS     90ms  node scripts/verify-regen-safety.js
+PASS    404ms  node scripts/verify-data-hygiene.js
+PASS   3252ms  node scripts/verify-csp-enforced.js
+PASS     83ms  node scripts/verify-external-link-workflow.js
+PASS   1650ms  node scripts/verify-external-link-live-shards.js
+PASS     87ms  node scripts/verify-polymythcal-source-health-current.js
+PASS   5885ms  node scripts/verify-release-gates.js
+PASS    169ms  node scripts/verify-audit35-route-ui.mjs
+PASS    156ms  node scripts/verify-audit36-visual-p0.mjs
+PASS     95ms  node scripts/verify-audit36-graph-resilience.mjs
+PASS    240ms  node scripts/verify-audit36-animation-lifecycle.mjs
+PASS    180ms  node scripts/verify-audit36-artifact-atomicity.js
+PASS   8100ms  node scripts/verify-public-build-lock-recovery.js
+PASS    136ms  node scripts/verify-audit49-aa-dialog.mjs
+PASS    107ms  node scripts/verify-audit49-aitr-resilience.mjs
+PASS    193ms  node scripts/verify-aa-saul-runtime-smoothness.mjs
+PASS     88ms  node scripts/verify-frozen-audit38.js
+PASS     77ms  node scripts/current/verify-audit39-cache-coherence.js
+PASS    732ms  node scripts/verify-audit39-font-delivery.js
+PASS    132ms  node scripts/verify-audit39-methodology-runtime.js
+PASS     89ms  node scripts/verify-frozen-audit39.js
+PASS    108ms  node scripts/verify-frozen-audit40.js
+PASS    121ms  node scripts/verify-frozen-audit41.js
+PASS  29747ms  node scripts/verify-current-event-rollover.js
+PASS    136ms  node scripts/verify-frozen-audit42.js
+PASS    100ms  node scripts/verify-frozen-audit43.js
+PASS   2620ms  node scripts/verify-audit46-technical-efficiency.js
+PASS   1893ms  node scripts/verify-audit47-technical-efficiency.js
+PASS    135ms  node scripts/verify-polymythcal-audit47.js
+PASS   1438ms  node scripts/verify-polymythcal-audit14.js
+PASS    219ms  node scripts/verify-cloud-input-runtime.js
+PASS     75ms  node scripts/verify-redirect-policy-coherence.js
+PASS     93ms  node scripts/verify-bb-qr-placement.js
+PASS    450ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_audit43.py
+PASS  17450ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_audit47.py
+PASS  14852ms  node scripts/run-python.js scripts/build-polymythcal-audit13.py --check
+PASS    169ms  node scripts/verify-audit45-browser-evidence.js
+PASS    319ms  node scripts/verify-project-failure-resilience.js
+PASS     84ms  node scripts/verify-autolink-performance.js
+PASS     90ms  node scripts/verify-frozen-audit37.js
+PASS    565ms  node scripts/current/verify-live-content-integrity.js
+PASS   2759ms  node scripts/current/test-live-content-integrity.js
+PASS    444ms  node scripts/test-harvest-status-summary.js
+PASS    263ms  node scripts/test-merge-seminar-occurrences.js
+PASS    458ms  node scripts/test-merge-festival-occurrences.js
+PASS    980ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_adapters.py
+PASS    817ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_protest_harvest.py
+PASS    569ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_lifecycle.py
+PASS    219ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_sharding.py
+PASS    175ms  node scripts/run-python.js -m unittest scripts/test_harvest_source_ledger.py
+PASS    343ms  node scripts/run-python.js -m unittest scripts/test_festival_pipeline.py
+PASS    432ms  node scripts/run-python.js -m unittest scripts/test_deterministic_before_agent.py
+PASS    321ms  node scripts/run-python.js -m unittest scripts/test_package_integrity.py
+PASS    522ms  node scripts/verify-public-artifact-blocks.js
+PASS    141ms  node scripts/verify-final6-deploy-contract.js
+PASS    122ms  node scripts/verify-npm-public-registry.js
+PASS    981ms  node scripts/verify-search-surface.js
+PASS     99ms  node scripts/verify-content-flow-regressions.js
+PASS    146ms  node scripts/verify-calendar-aliases.js
+PASS    294ms  node scripts/verify-calendar-data-parity.js
+RESUME PROVENANCE {"prior_log_sha256":"ab8cc34b711639cca70d4e1b1f2649759dbc3ed1523055c23223db03a0aa7992","prior_log_bytes":7811,"runner_sha256":"70b8e599bacca4af917e27b2f90f04a6ed2a34d369b3730a4849498525137429","bound_file_count":1474,"unexpected_unbound_changes":[],"changed_generated_evidence":[{"path":"hf_export/ai_access_pack/reports/ai_access_pack_verification_report.md","before_sha256":"b2273d88953d70236a015bff26211a7ffeedcb0980457caf13b5c4311485c5af","after_sha256":"6b2b1350f87a4c31a464604a69470ca5e8519761f42573867c5301c057845375"},{"path":"hf_export/reports/meaninglib_search_verify_report.md","before_sha256":"0f3584d120cafc57aee43ac9dade2a40826150334685988ca083e9f9c508cea1","after_sha256":"f1980b126c262404fe13346ee1814f48f812b409971f549c9fd70882f4e54e66"},{"path":"hf_export/reports/verification_report.md","before_sha256":"dfbd80beee7c99440b34d3ce1f7e5df35ed416666e0a772f6da9804e4be340a7","after_sha256":"17aacec9da8055d9fca6532dc18209f4c460904da29093eba66aa6306533f894"},{"path":"scripts/reports/audit49-build-packaging-efficiency.json","before_sha256":"2ef4233db75f13c001ad43d2747d61ea14c7e2060acd0b62ab22ecf2450bbdf0","after_sha256":"142ea9a9313536b413760665fd5430589abdf2bee9732e4adf9d17a0800bcf59"},{"path":"scripts/reports/teacher-search-20260927/desktop.png","before_sha256":"9926f26b15afdf9d2a8238354734e0d4786d84b749778e1c536291241ecc1dc1","after_sha256":"a8d1cfe4302226f53c556863806ddbcaa3955e9a9e426dd67646c1014daeb545"},{"path":"scripts/reports/teacher-search-20260927/mobile.png","before_sha256":"fda53276e3ba58a9b6e55780080c8b559d3ad859a34894a15c83d0b6a35d91e0","after_sha256":"ee04c49a4a94f988d926bf68c7ff12a39a0962e495d254101a4f7588ee1672f5"}],"application_source_and_public_unchanged":true,"scope":"Runtime and source bindings match the candidate tested before interruption. Only the listed generated verification reports and screenshots changed.","prior_passed_checks":114,"remaining_checks":81,"canonical_command_plan":["node scripts/verify-public-deploy-parity.js","node scripts/verify-release-asset-identity.js","node scripts/verify-polymythcal-destination-specificity.js","node scripts/verify-polymythcal-discovery-v2.js","node scripts/verify-front-facing-boundary.js","node scripts/verify-visible-geometry.js","node scripts/verify-meaningful-geometry.js","node scripts/verify-geometry.js","node scripts/verify-geometry-route-variation.js","node scripts/test-polymythcal-comprehensive-flows.js","node scripts/test-comprehensive-runtime.cjs","node scripts/run-python.js scripts/verify-polymyth-coherence-workbook.py","node scripts/verify-polymyth-entry-points.js","node scripts/run-python.js scripts/verify-audit45-translations.py","node scripts/verify-audit49-metadata-surface.js","node scripts/verify-audit49-runtime-efficiency.js","node scripts/verify-audit49-build-packaging-efficiency.js","node scripts/verify-page-size-budget.js","node scripts/verify-asset-weights.js","node scripts/verify-bookwormcard-gate.js","node scripts/verify-teacher-search-20260927.js","node scripts/verify-teacher-bb-audit-20260927.js","node scripts/verify-teacher-bb-fixes-20260927.js","node scripts/verify-teacher-metadata-20260928.js","node scripts/verify-ml-shorthand-resolution.js","node scripts/verify-ml-dialectical-hardening.js","node scripts/verify-ml-execution-gates.js","node scripts/verify-ml-document-continuity.js","node scripts/verify-mephistodata-runtime-gate.js","node scripts/verify-ml-active-form-conflicts.js","node scripts/verify-ml-project-adjudication-v2.js","node scripts/verify-methodologylist-manifest.js","node scripts/verify-core-coreplus-alignment.js","node scripts/verify-meaninglib-dataset.js","node scripts/verify-meaninglib-search.js","node scripts/verify-ai-access-pack.js","node scripts/verify-audit48-assistive-technology.js","node scripts/verify-audit48-browser-program.js","node scripts/run-python.js scripts/verify-polymythcal-calendar-clients.py","node scripts/run-python.js -m unittest scripts/test_audit48_live_harvest.py","node scripts/run-python.js scripts/verify_audit48_live_harvest.py","node scripts/verify-audit48-external-validation.js","node scripts/verify-build-idempotence.js","node scripts/verify-front-facing-overlap-browser.js","node scripts/verify-visible-geometry-browser.mjs","node scripts/verify-teacherresources-state-layout-browser.js","node scripts/verify-home-map-browser.js","node scripts/verify-polymythcal-sets13-15-browser.js","node scripts/verify-polymythcal-destination-browser.js","node scripts/verify-critical.js","node scripts/verify-alwaysalready-page.js","node scripts/verify-assistant-twisting-alwaysalready.js","node scripts/verify-predeploy-automation.js","node scripts/verify-repository-walk-policy.js","node scripts/verify-regen-safety.js","node scripts/verify-data-hygiene.js","node scripts/verify-csp-enforced.js","node scripts/verify-external-link-workflow.js","node scripts/verify-external-link-live-shards.js","node scripts/verify-polymythcal-source-health-current.js","node scripts/verify-release-gates.js","node scripts/verify-audit35-route-ui.mjs","node scripts/verify-audit36-visual-p0.mjs","node scripts/verify-audit36-graph-resilience.mjs","node scripts/verify-audit36-animation-lifecycle.mjs","node scripts/verify-audit36-artifact-atomicity.js","node scripts/verify-public-build-lock-recovery.js","node scripts/verify-audit49-aa-dialog.mjs","node scripts/verify-audit49-aitr-resilience.mjs","node scripts/verify-aa-saul-runtime-smoothness.mjs","node scripts/verify-frozen-audit38.js","node scripts/current/verify-audit39-cache-coherence.js","node scripts/verify-audit39-font-delivery.js","node scripts/verify-audit39-methodology-runtime.js","node scripts/verify-frozen-audit39.js","node scripts/verify-frozen-audit40.js","node scripts/verify-frozen-audit41.js","node scripts/verify-current-event-rollover.js","node scripts/verify-frozen-audit42.js","node scripts/verify-frozen-audit43.js","node scripts/verify-audit46-technical-efficiency.js","node scripts/verify-audit47-technical-efficiency.js","node scripts/verify-polymythcal-audit47.js","node scripts/verify-polymythcal-audit14.js","node scripts/verify-cloud-input-runtime.js","node scripts/verify-redirect-policy-coherence.js","node scripts/verify-bb-qr-placement.js","node scripts/run-python.js -m unittest scripts/test_polymythcal_audit43.py","node scripts/run-python.js -m unittest scripts/test_polymythcal_audit47.py","node scripts/run-python.js scripts/build-polymythcal-audit13.py --check","node scripts/verify-audit45-browser-evidence.js","node scripts/verify-project-failure-resilience.js","node scripts/verify-autolink-performance.js","node scripts/verify-frozen-audit37.js","node scripts/current/verify-live-content-integrity.js","node scripts/current/test-live-content-integrity.js","node scripts/test-harvest-status-summary.js","node scripts/test-merge-seminar-occurrences.js","node scripts/test-merge-festival-occurrences.js","node scripts/run-python.js -m unittest scripts/test_polymythcal_adapters.py","node scripts/run-python.js -m unittest scripts/test_polymythcal_protest_harvest.py","node scripts/run-python.js -m unittest scripts/test_polymythcal_lifecycle.py","node scripts/run-python.js -m unittest scripts/test_polymythcal_sharding.py","node scripts/run-python.js -m unittest scripts/test_harvest_source_ledger.py","node scripts/run-python.js -m unittest scripts/test_festival_pipeline.py","node scripts/run-python.js -m unittest scripts/test_deterministic_before_agent.py","node scripts/run-python.js -m unittest scripts/test_package_integrity.py","node scripts/verify-public-artifact-blocks.js","node scripts/verify-final6-deploy-contract.js","node scripts/verify-npm-public-registry.js","node scripts/verify-search-surface.js","node scripts/verify-content-flow-regressions.js","node scripts/verify-calendar-aliases.js","node scripts/verify-calendar-data-parity.js","node scripts/verify-polymythcal-browser-payload.js","node scripts/verify-polymythcalendar-today-scroll.js","node scripts/verify-polymythcalendar-kid-guide.js","node scripts/verify-polymythcalendar-ux-efficiency.js","node scripts/verify-polymythcal-scraper-layout.js","node scripts/verify-polymythcal-scraper-ui.js","node scripts/verify-python-audit-contract.js","node scripts/verify-core-html-structure.js","node scripts/verify-site-interactivity.js","node scripts/build-writing-shortcuts.js --check","node scripts/verify-writing-shortcuts.js","node scripts/build-academic-shortcuts.js --check","node scripts/verify-academic-shortcuts.js","node scripts/verify-festival-parent-taxonomy.js","node scripts/verify-harvest-pipeline.js","node scripts/verify-polymythcalendar-name.js","node scripts/verify-zoom-resilience.js","node scripts/verify-reviews-zoom-font-release.js","node scripts/verify-register.js","node scripts/verify-route-doctrine.js","node scripts/verify-page-type-contracts.js","node scripts/verify-pathfinder-nav.js","node scripts/verify-heavy-page-resilience.js","node scripts/verify-generated-route-indexing.js","node scripts/verify-sitemap-classification.js","node scripts/verify-keyboard-navigation.js","node scripts/verify-responsive-regression.js","node scripts/verify-saul-ultimate-web-cv.js","node scripts/verify-teacherresources-finder.js","node scripts/verify-polymyth-source-link-reviews.js","node scripts/verify-aa-polymyth-funnel.js","node scripts/verify-polymythcal-freshness-labels.js","node scripts/verify-polymythcal-featured.js","node scripts/verify-polymythcal-build-efficiency.js","node scripts/verify-steady-ui.js","node scripts/verify-shortcut-title-uniqueness.js","node scripts/verify-visible-input-labels.js","node scripts/audit-external-links.js","node scripts/verify-dense-anchors.js","node scripts/verify-runtime-delivery-resilience.js","node scripts/verify-payments.js","node scripts/verify-leizu-pipeline.js","node scripts/current/verify-leizu-experience.js","node scripts/verify-leizu-course-picker.js","node scripts/verify-leizu-simplified-chinese.js","node scripts/verify-leizu-persian.js","node scripts/verify-leizu-localization-funnel.js","node scripts/verify-home-map.js","node scripts/verify-bb-clarification.js","node scripts/verify-bb-final-readiness.js","node scripts/verify-bb-kid-friendly.js","node scripts/verify-bb-why.js","node scripts/verify-bbt-upcoming.js","node scripts/verify-bb-mechanics-synthesis.js","node scripts/verify-main-page.js","node scripts/verify-main-leizu-funnel.js","node scripts/verify-final8-website-polish.js","node scripts/verify-final9-mephistodata-website-hardening.js","node scripts/verify-audit10-remaining-website.js","node scripts/verify-audit11-website-decisions.js","node scripts/verify-audit12-mobile-web-hybrid.js","node scripts/verify-polymyth-editorial-prompts.js","node scripts/verify-linkability-overhaul.js","node scripts/verify-meaninglib-dashboard.js","node scripts/verify-ml-stop-psychologism.js","node scripts/verify-ml-ai-prose-tells.js","node scripts/verify-ml-antibacktracking.js","node scripts/verify-ml-gorgonwars-premise-split.js","node scripts/verify-ml-power-scope.js","npm run verify:baseline-morality-amendment-scope","node scripts/verify-ml-writing-rules.js","node scripts/verify-mephistodata-articles.js","node scripts/verify-ml-geometry-hardening.js","node scripts/verify-site-integrity.js","node scripts/verify-professional-readiness.js","node scripts/verify-seo.js","node scripts/verify-typography-controls.js","node scripts/verify-audit49-build-packaging-efficiency.js","node scripts/verify-audit49-technical-efficiency.js","npm run test:futureproofing","npm run verify:futureproofing"],"plan_sha256":"7ce1e2455c972e031a8c2cff4a541ddb6f03e48354dd8dd4600f915067c9620d","execution_note":"The serial run was interrupted after 114 successful command receipts. The exact remaining 81 commands were resumed under the release lock after source and public-file hash continuity was checked. This is an aggregate of two executions, not an uninterrupted full-run claim."}
+PASS  50677ms  node scripts/verify-polymythcal-browser-payload.js
+PASS    106ms  node scripts/verify-polymythcalendar-today-scroll.js
+PASS     92ms  node scripts/verify-polymythcalendar-kid-guide.js
+PASS    299ms  node scripts/verify-polymythcalendar-ux-efficiency.js
+PASS    207ms  node scripts/verify-polymythcal-scraper-layout.js
+PASS    308ms  node scripts/verify-polymythcal-scraper-ui.js
+PASS     73ms  node scripts/verify-python-audit-contract.js
+PASS    224ms  node scripts/verify-core-html-structure.js
+PASS    741ms  node scripts/verify-site-interactivity.js
+PASS    141ms  node scripts/build-writing-shortcuts.js --check
+PASS    112ms  node scripts/verify-writing-shortcuts.js
+PASS    148ms  node scripts/build-academic-shortcuts.js --check
+PASS    144ms  node scripts/verify-academic-shortcuts.js
+PASS    209ms  node scripts/verify-festival-parent-taxonomy.js
+PASS    304ms  node scripts/verify-harvest-pipeline.js
+PASS    630ms  node scripts/verify-polymythcalendar-name.js
+PASS    748ms  node scripts/verify-zoom-resilience.js
+PASS   1897ms  node scripts/verify-reviews-zoom-font-release.js
+PASS   1418ms  node scripts/verify-register.js
+PASS    236ms  node scripts/verify-route-doctrine.js
+PASS    179ms  node scripts/verify-page-type-contracts.js
+PASS     76ms  node scripts/verify-pathfinder-nav.js
+PASS    136ms  node scripts/verify-heavy-page-resilience.js
+PASS    493ms  node scripts/verify-generated-route-indexing.js
+PASS    733ms  node scripts/verify-sitemap-classification.js
+PASS    998ms  node scripts/verify-keyboard-navigation.js
+PASS    103ms  node scripts/verify-responsive-regression.js
+PASS    121ms  node scripts/verify-saul-ultimate-web-cv.js
+PASS    207ms  node scripts/verify-teacherresources-finder.js
+PASS    372ms  node scripts/verify-polymyth-source-link-reviews.js
+PASS    110ms  node scripts/verify-aa-polymyth-funnel.js
+PASS    123ms  node scripts/verify-polymythcal-freshness-labels.js
+RESUMED RELEASE FAILED at 146/195: node scripts/verify-polymythcal-featured.js
+
+POLYMYTHCAL FEATURED FEED CHECK FAILED
+ - featured events are not the exact next chronology subset
+ - generated_at is not the deterministic noon marker for the site build date
+
+
+
+FINAL AGGREGATE CONTRACT CORRECTION
+The resumed run reached 192/195 before the Audit 49 aggregate rejected inherited August asset/version constants. Verified V3 already contains asset 20260907-audit-v4 and package 1.0.7. Only those two expected constants were corrected to match the unchanged accepted release.
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> seminar-schools-leizu-pipeline@1.0.7 verify:all:built
+> node scripts/run-python.js scripts/run-with-build-lock.py --delivery-root .. -- node scripts/verify-all-runner.js --reuse-build --concurrency=1 --timeout-ms=1800000
+
+VERIFY ALL FAST — 195 checks, concurrency 1, timeout 1800000ms, mode: reuse verified canonical build
+PASS   1301ms  node scripts/verify-public-deploy-parity.js
+PASS    178ms  node scripts/verify-release-asset-identity.js
+PASS    860ms  node scripts/verify-polymythcal-destination-specificity.js
+PASS  53760ms  node scripts/verify-polymythcal-discovery-v2.js
+PASS   8807ms  node scripts/verify-front-facing-boundary.js
+PASS   5938ms  node scripts/verify-visible-geometry.js
+PASS   3961ms  node scripts/verify-meaningful-geometry.js
+PASS   1728ms  node scripts/verify-geometry.js
+PASS   9492ms  node scripts/verify-geometry-route-variation.js
+PASS   4292ms  node scripts/test-polymythcal-comprehensive-flows.js
+PASS     99ms  node scripts/test-comprehensive-runtime.cjs
+PASS  10896ms  node scripts/run-python.js scripts/verify-polymyth-coherence-workbook.py
+PASS  11142ms  node scripts/verify-polymyth-entry-points.js
+PASS  37075ms  node scripts/run-python.js scripts/verify-audit45-translations.py
+PASS  10442ms  node scripts/verify-audit49-metadata-surface.js
+PASS    720ms  node scripts/verify-audit49-runtime-efficiency.js
+PASS   9237ms  node scripts/verify-audit49-build-packaging-efficiency.js
+PASS    287ms  node scripts/verify-page-size-budget.js
+PASS   1058ms  node scripts/verify-asset-weights.js
+PASS     88ms  node scripts/verify-bookwormcard-gate.js
+PASS  14179ms  node scripts/verify-teacher-search-20260927.js
+PASS   8346ms  node scripts/verify-teacher-bb-audit-20260927.js
+PASS  11014ms  node scripts/verify-teacher-bb-fixes-20260927.js
+PASS     97ms  node scripts/verify-teacher-metadata-20260928.js
+PASS    598ms  node scripts/verify-ml-shorthand-resolution.js
+PASS   3004ms  node scripts/verify-ml-dialectical-hardening.js
+PASS    964ms  node scripts/verify-ml-execution-gates.js
+PASS    281ms  node scripts/verify-ml-document-continuity.js
+PASS    768ms  node scripts/verify-mephistodata-runtime-gate.js
+PASS    171ms  node scripts/verify-ml-active-form-conflicts.js
+PASS    241ms  node scripts/verify-ml-project-adjudication-v2.js
+PASS   5769ms  node scripts/verify-methodologylist-manifest.js
+PASS    560ms  node scripts/verify-core-coreplus-alignment.js
+PASS    941ms  node scripts/verify-meaninglib-dataset.js
+PASS   6218ms  node scripts/verify-meaninglib-search.js
+PASS   8232ms  node scripts/verify-ai-access-pack.js
+PASS   3329ms  node scripts/verify-audit48-assistive-technology.js
+PASS    126ms  node scripts/verify-audit48-browser-program.js
+PASS  16440ms  node scripts/run-python.js scripts/verify-polymythcal-calendar-clients.py
+PASS    575ms  node scripts/run-python.js -m unittest scripts/test_audit48_live_harvest.py
+PASS    138ms  node scripts/run-python.js scripts/verify_audit48_live_harvest.py
+PASS   1154ms  node scripts/verify-audit48-external-validation.js
+PASS 299944ms  node scripts/verify-build-idempotence.js
+PASS 564956ms  node scripts/verify-front-facing-overlap-browser.js
+PASS 613882ms  node scripts/verify-visible-geometry-browser.mjs
+PASS   5555ms  node scripts/verify-teacherresources-state-layout-browser.js
+PASS  11887ms  node scripts/verify-home-map-browser.js
+PASS  23550ms  node scripts/verify-polymythcal-sets13-15-browser.js
+PASS   7913ms  node scripts/verify-polymythcal-destination-browser.js
+PASS    750ms  node scripts/verify-critical.js
+PASS    109ms  node scripts/verify-alwaysalready-page.js
+PASS    680ms  node scripts/verify-assistant-twisting-alwaysalready.js
+PASS    352ms  node scripts/verify-predeploy-automation.js
+PASS     99ms  node scripts/verify-repository-walk-policy.js
+PASS     90ms  node scripts/verify-regen-safety.js
+PASS    404ms  node scripts/verify-data-hygiene.js
+PASS   3252ms  node scripts/verify-csp-enforced.js
+PASS     83ms  node scripts/verify-external-link-workflow.js
+PASS   1650ms  node scripts/verify-external-link-live-shards.js
+PASS     87ms  node scripts/verify-polymythcal-source-health-current.js
+PASS   5885ms  node scripts/verify-release-gates.js
+PASS    169ms  node scripts/verify-audit35-route-ui.mjs
+PASS    156ms  node scripts/verify-audit36-visual-p0.mjs
+PASS     95ms  node scripts/verify-audit36-graph-resilience.mjs
+PASS    240ms  node scripts/verify-audit36-animation-lifecycle.mjs
+PASS    180ms  node scripts/verify-audit36-artifact-atomicity.js
+PASS   8100ms  node scripts/verify-public-build-lock-recovery.js
+PASS    136ms  node scripts/verify-audit49-aa-dialog.mjs
+PASS    107ms  node scripts/verify-audit49-aitr-resilience.mjs
+PASS    193ms  node scripts/verify-aa-saul-runtime-smoothness.mjs
+PASS     88ms  node scripts/verify-frozen-audit38.js
+PASS     77ms  node scripts/current/verify-audit39-cache-coherence.js
+PASS    732ms  node scripts/verify-audit39-font-delivery.js
+PASS    132ms  node scripts/verify-audit39-methodology-runtime.js
+PASS     89ms  node scripts/verify-frozen-audit39.js
+PASS    108ms  node scripts/verify-frozen-audit40.js
+PASS    121ms  node scripts/verify-frozen-audit41.js
+PASS  29747ms  node scripts/verify-current-event-rollover.js
+PASS    136ms  node scripts/verify-frozen-audit42.js
+PASS    100ms  node scripts/verify-frozen-audit43.js
+PASS   2620ms  node scripts/verify-audit46-technical-efficiency.js
+PASS   1893ms  node scripts/verify-audit47-technical-efficiency.js
+PASS    135ms  node scripts/verify-polymythcal-audit47.js
+PASS   1438ms  node scripts/verify-polymythcal-audit14.js
+PASS    219ms  node scripts/verify-cloud-input-runtime.js
+PASS     75ms  node scripts/verify-redirect-policy-coherence.js
+PASS     93ms  node scripts/verify-bb-qr-placement.js
+PASS    450ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_audit43.py
+PASS  17450ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_audit47.py
+PASS  14852ms  node scripts/run-python.js scripts/build-polymythcal-audit13.py --check
+PASS    169ms  node scripts/verify-audit45-browser-evidence.js
+PASS    319ms  node scripts/verify-project-failure-resilience.js
+PASS     84ms  node scripts/verify-autolink-performance.js
+PASS     90ms  node scripts/verify-frozen-audit37.js
+PASS    565ms  node scripts/current/verify-live-content-integrity.js
+PASS   2759ms  node scripts/current/test-live-content-integrity.js
+PASS    444ms  node scripts/test-harvest-status-summary.js
+PASS    263ms  node scripts/test-merge-seminar-occurrences.js
+PASS    458ms  node scripts/test-merge-festival-occurrences.js
+PASS    980ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_adapters.py
+PASS    817ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_protest_harvest.py
+PASS    569ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_lifecycle.py
+PASS    219ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_sharding.py
+PASS    175ms  node scripts/run-python.js -m unittest scripts/test_harvest_source_ledger.py
+PASS    343ms  node scripts/run-python.js -m unittest scripts/test_festival_pipeline.py
+PASS    432ms  node scripts/run-python.js -m unittest scripts/test_deterministic_before_agent.py
+PASS    321ms  node scripts/run-python.js -m unittest scripts/test_package_integrity.py
+PASS    522ms  node scripts/verify-public-artifact-blocks.js
+PASS    141ms  node scripts/verify-final6-deploy-contract.js
+PASS    122ms  node scripts/verify-npm-public-registry.js
+PASS    981ms  node scripts/verify-search-surface.js
+PASS     99ms  node scripts/verify-content-flow-regressions.js
+PASS    146ms  node scripts/verify-calendar-aliases.js
+PASS    294ms  node scripts/verify-calendar-data-parity.js
+RESUME PROVENANCE {"prior_log_sha256":"ab8cc34b711639cca70d4e1b1f2649759dbc3ed1523055c23223db03a0aa7992","prior_log_bytes":7811,"runner_sha256":"70b8e599bacca4af917e27b2f90f04a6ed2a34d369b3730a4849498525137429","bound_file_count":1474,"unexpected_unbound_changes":[],"changed_generated_evidence":[{"path":"hf_export/ai_access_pack/reports/ai_access_pack_verification_report.md","before_sha256":"b2273d88953d70236a015bff26211a7ffeedcb0980457caf13b5c4311485c5af","after_sha256":"6b2b1350f87a4c31a464604a69470ca5e8519761f42573867c5301c057845375"},{"path":"hf_export/reports/meaninglib_search_verify_report.md","before_sha256":"0f3584d120cafc57aee43ac9dade2a40826150334685988ca083e9f9c508cea1","after_sha256":"f1980b126c262404fe13346ee1814f48f812b409971f549c9fd70882f4e54e66"},{"path":"hf_export/reports/verification_report.md","before_sha256":"dfbd80beee7c99440b34d3ce1f7e5df35ed416666e0a772f6da9804e4be340a7","after_sha256":"17aacec9da8055d9fca6532dc18209f4c460904da29093eba66aa6306533f894"},{"path":"scripts/reports/audit49-build-packaging-efficiency.json","before_sha256":"2ef4233db75f13c001ad43d2747d61ea14c7e2060acd0b62ab22ecf2450bbdf0","after_sha256":"142ea9a9313536b413760665fd5430589abdf2bee9732e4adf9d17a0800bcf59"},{"path":"scripts/reports/teacher-search-20260927/desktop.png","before_sha256":"9926f26b15afdf9d2a8238354734e0d4786d84b749778e1c536291241ecc1dc1","after_sha256":"a8d1cfe4302226f53c556863806ddbcaa3955e9a9e426dd67646c1014daeb545"},{"path":"scripts/reports/teacher-search-20260927/mobile.png","before_sha256":"fda53276e3ba58a9b6e55780080c8b559d3ad859a34894a15c83d0b6a35d91e0","after_sha256":"ee04c49a4a94f988d926bf68c7ff12a39a0962e495d254101a4f7588ee1672f5"}],"application_source_and_public_unchanged":true,"scope":"Runtime and source bindings match the candidate tested before interruption. Only the listed generated verification reports and screenshots changed.","prior_passed_checks":114,"remaining_checks":81,"canonical_command_plan":["node scripts/verify-public-deploy-parity.js","node scripts/verify-release-asset-identity.js","node scripts/verify-polymythcal-destination-specificity.js","node scripts/verify-polymythcal-discovery-v2.js","node scripts/verify-front-facing-boundary.js","node scripts/verify-visible-geometry.js","node scripts/verify-meaningful-geometry.js","node scripts/verify-geometry.js","node scripts/verify-geometry-route-variation.js","node scripts/test-polymythcal-comprehensive-flows.js","node scripts/test-comprehensive-runtime.cjs","node scripts/run-python.js scripts/verify-polymyth-coherence-workbook.py","node scripts/verify-polymyth-entry-points.js","node scripts/run-python.js scripts/verify-audit45-translations.py","node scripts/verify-audit49-metadata-surface.js","node scripts/verify-audit49-runtime-efficiency.js","node scripts/verify-audit49-build-packaging-efficiency.js","node scripts/verify-page-size-budget.js","node scripts/verify-asset-weights.js","node scripts/verify-bookwormcard-gate.js","node scripts/verify-teacher-search-20260927.js","node scripts/verify-teacher-bb-audit-20260927.js","node scripts/verify-teacher-bb-fixes-20260927.js","node scripts/verify-teacher-metadata-20260928.js","node scripts/verify-ml-shorthand-resolution.js","node scripts/verify-ml-dialectical-hardening.js","node scripts/verify-ml-execution-gates.js","node scripts/verify-ml-document-continuity.js","node scripts/verify-mephistodata-runtime-gate.js","node scripts/verify-ml-active-form-conflicts.js","node scripts/verify-ml-project-adjudication-v2.js","node scripts/verify-methodologylist-manifest.js","node scripts/verify-core-coreplus-alignment.js","node scripts/verify-meaninglib-dataset.js","node scripts/verify-meaninglib-search.js","node scripts/verify-ai-access-pack.js","node scripts/verify-audit48-assistive-technology.js","node scripts/verify-audit48-browser-program.js","node scripts/run-python.js scripts/verify-polymythcal-calendar-clients.py","node scripts/run-python.js -m unittest scripts/test_audit48_live_harvest.py","node scripts/run-python.js scripts/verify_audit48_live_harvest.py","node scripts/verify-audit48-external-validation.js","node scripts/verify-build-idempotence.js","node scripts/verify-front-facing-overlap-browser.js","node scripts/verify-visible-geometry-browser.mjs","node scripts/verify-teacherresources-state-layout-browser.js","node scripts/verify-home-map-browser.js","node scripts/verify-polymythcal-sets13-15-browser.js","node scripts/verify-polymythcal-destination-browser.js","node scripts/verify-critical.js","node scripts/verify-alwaysalready-page.js","node scripts/verify-assistant-twisting-alwaysalready.js","node scripts/verify-predeploy-automation.js","node scripts/verify-repository-walk-policy.js","node scripts/verify-regen-safety.js","node scripts/verify-data-hygiene.js","node scripts/verify-csp-enforced.js","node scripts/verify-external-link-workflow.js","node scripts/verify-external-link-live-shards.js","node scripts/verify-polymythcal-source-health-current.js","node scripts/verify-release-gates.js","node scripts/verify-audit35-route-ui.mjs","node scripts/verify-audit36-visual-p0.mjs","node scripts/verify-audit36-graph-resilience.mjs","node scripts/verify-audit36-animation-lifecycle.mjs","node scripts/verify-audit36-artifact-atomicity.js","node scripts/verify-public-build-lock-recovery.js","node scripts/verify-audit49-aa-dialog.mjs","node scripts/verify-audit49-aitr-resilience.mjs","node scripts/verify-aa-saul-runtime-smoothness.mjs","node scripts/verify-frozen-audit38.js","node scripts/current/verify-audit39-cache-coherence.js","node scripts/verify-audit39-font-delivery.js","node scripts/verify-audit39-methodology-runtime.js","node scripts/verify-frozen-audit39.js","node scripts/verify-frozen-audit40.js","node scripts/verify-frozen-audit41.js","node scripts/verify-current-event-rollover.js","node scripts/verify-frozen-audit42.js","node scripts/verify-frozen-audit43.js","node scripts/verify-audit46-technical-efficiency.js","node scripts/verify-audit47-technical-efficiency.js","node scripts/verify-polymythcal-audit47.js","node scripts/verify-polymythcal-audit14.js","node scripts/verify-cloud-input-runtime.js","node scripts/verify-redirect-policy-coherence.js","node scripts/verify-bb-qr-placement.js","node scripts/run-python.js -m unittest scripts/test_polymythcal_audit43.py","node scripts/run-python.js -m unittest scripts/test_polymythcal_audit47.py","node scripts/run-python.js scripts/build-polymythcal-audit13.py --check","node scripts/verify-audit45-browser-evidence.js","node scripts/verify-project-failure-resilience.js","node scripts/verify-autolink-performance.js","node scripts/verify-frozen-audit37.js","node scripts/current/verify-live-content-integrity.js","node scripts/current/test-live-content-integrity.js","node scripts/test-harvest-status-summary.js","node scripts/test-merge-seminar-occurrences.js","node scripts/test-merge-festival-occurrences.js","node scripts/run-python.js -m unittest scripts/test_polymythcal_adapters.py","node scripts/run-python.js -m unittest scripts/test_polymythcal_protest_harvest.py","node scripts/run-python.js -m unittest scripts/test_polymythcal_lifecycle.py","node scripts/run-python.js -m unittest scripts/test_polymythcal_sharding.py","node scripts/run-python.js -m unittest scripts/test_harvest_source_ledger.py","node scripts/run-python.js -m unittest scripts/test_festival_pipeline.py","node scripts/run-python.js -m unittest scripts/test_deterministic_before_agent.py","node scripts/run-python.js -m unittest scripts/test_package_integrity.py","node scripts/verify-public-artifact-blocks.js","node scripts/verify-final6-deploy-contract.js","node scripts/verify-npm-public-registry.js","node scripts/verify-search-surface.js","node scripts/verify-content-flow-regressions.js","node scripts/verify-calendar-aliases.js","node scripts/verify-calendar-data-parity.js","node scripts/verify-polymythcal-browser-payload.js","node scripts/verify-polymythcalendar-today-scroll.js","node scripts/verify-polymythcalendar-kid-guide.js","node scripts/verify-polymythcalendar-ux-efficiency.js","node scripts/verify-polymythcal-scraper-layout.js","node scripts/verify-polymythcal-scraper-ui.js","node scripts/verify-python-audit-contract.js","node scripts/verify-core-html-structure.js","node scripts/verify-site-interactivity.js","node scripts/build-writing-shortcuts.js --check","node scripts/verify-writing-shortcuts.js","node scripts/build-academic-shortcuts.js --check","node scripts/verify-academic-shortcuts.js","node scripts/verify-festival-parent-taxonomy.js","node scripts/verify-harvest-pipeline.js","node scripts/verify-polymythcalendar-name.js","node scripts/verify-zoom-resilience.js","node scripts/verify-reviews-zoom-font-release.js","node scripts/verify-register.js","node scripts/verify-route-doctrine.js","node scripts/verify-page-type-contracts.js","node scripts/verify-pathfinder-nav.js","node scripts/verify-heavy-page-resilience.js","node scripts/verify-generated-route-indexing.js","node scripts/verify-sitemap-classification.js","node scripts/verify-keyboard-navigation.js","node scripts/verify-responsive-regression.js","node scripts/verify-saul-ultimate-web-cv.js","node scripts/verify-teacherresources-finder.js","node scripts/verify-polymyth-source-link-reviews.js","node scripts/verify-aa-polymyth-funnel.js","node scripts/verify-polymythcal-freshness-labels.js","node scripts/verify-polymythcal-featured.js","node scripts/verify-polymythcal-build-efficiency.js","node scripts/verify-steady-ui.js","node scripts/verify-shortcut-title-uniqueness.js","node scripts/verify-visible-input-labels.js","node scripts/audit-external-links.js","node scripts/verify-dense-anchors.js","node scripts/verify-runtime-delivery-resilience.js","node scripts/verify-payments.js","node scripts/verify-leizu-pipeline.js","node scripts/current/verify-leizu-experience.js","node scripts/verify-leizu-course-picker.js","node scripts/verify-leizu-simplified-chinese.js","node scripts/verify-leizu-persian.js","node scripts/verify-leizu-localization-funnel.js","node scripts/verify-home-map.js","node scripts/verify-bb-clarification.js","node scripts/verify-bb-final-readiness.js","node scripts/verify-bb-kid-friendly.js","node scripts/verify-bb-why.js","node scripts/verify-bbt-upcoming.js","node scripts/verify-bb-mechanics-synthesis.js","node scripts/verify-main-page.js","node scripts/verify-main-leizu-funnel.js","node scripts/verify-final8-website-polish.js","node scripts/verify-final9-mephistodata-website-hardening.js","node scripts/verify-audit10-remaining-website.js","node scripts/verify-audit11-website-decisions.js","node scripts/verify-audit12-mobile-web-hybrid.js","node scripts/verify-polymyth-editorial-prompts.js","node scripts/verify-linkability-overhaul.js","node scripts/verify-meaninglib-dashboard.js","node scripts/verify-ml-stop-psychologism.js","node scripts/verify-ml-ai-prose-tells.js","node scripts/verify-ml-antibacktracking.js","node scripts/verify-ml-gorgonwars-premise-split.js","node scripts/verify-ml-power-scope.js","npm run verify:baseline-morality-amendment-scope","node scripts/verify-ml-writing-rules.js","node scripts/verify-mephistodata-articles.js","node scripts/verify-ml-geometry-hardening.js","node scripts/verify-site-integrity.js","node scripts/verify-professional-readiness.js","node scripts/verify-seo.js","node scripts/verify-typography-controls.js","node scripts/verify-audit49-build-packaging-efficiency.js","node scripts/verify-audit49-technical-efficiency.js","npm run test:futureproofing","npm run verify:futureproofing"],"plan_sha256":"7ce1e2455c972e031a8c2cff4a541ddb6f03e48354dd8dd4600f915067c9620d","execution_note":"The serial run was interrupted after 114 successful command receipts. The exact remaining 81 commands were resumed under the release lock after source and public-file hash continuity was checked. This is an aggregate of two executions, not an uninterrupted full-run claim.","site_build_date":"2026-09-27","prior_resume_attempt":{"passed_checks":32,"failure":"verify-polymythcal-featured.js rejected a build-date mismatch after Toronto midnight","resolution":"Rerun all 81 remaining commands with SITE_BUILD_DATE=2026-09-27, matching the unchanged canonical candidate","evidence_path":"scripts/reports/teacher-bb-final-20260928-initial-runner.txt"}}
+PASS  51324ms  node scripts/verify-polymythcal-browser-payload.js
+PASS    154ms  node scripts/verify-polymythcalendar-today-scroll.js
+PASS    118ms  node scripts/verify-polymythcalendar-kid-guide.js
+PASS    419ms  node scripts/verify-polymythcalendar-ux-efficiency.js
+PASS    284ms  node scripts/verify-polymythcal-scraper-layout.js
+PASS    379ms  node scripts/verify-polymythcal-scraper-ui.js
+PASS    122ms  node scripts/verify-python-audit-contract.js
+PASS    308ms  node scripts/verify-core-html-structure.js
+PASS    780ms  node scripts/verify-site-interactivity.js
+PASS    220ms  node scripts/build-writing-shortcuts.js --check
+PASS    148ms  node scripts/verify-writing-shortcuts.js
+PASS    260ms  node scripts/build-academic-shortcuts.js --check
+PASS    125ms  node scripts/verify-academic-shortcuts.js
+PASS    227ms  node scripts/verify-festival-parent-taxonomy.js
+PASS    307ms  node scripts/verify-harvest-pipeline.js
+PASS    654ms  node scripts/verify-polymythcalendar-name.js
+PASS    763ms  node scripts/verify-zoom-resilience.js
+PASS   1989ms  node scripts/verify-reviews-zoom-font-release.js
+PASS   1494ms  node scripts/verify-register.js
+PASS    211ms  node scripts/verify-route-doctrine.js
+PASS    214ms  node scripts/verify-page-type-contracts.js
+PASS     99ms  node scripts/verify-pathfinder-nav.js
+PASS    131ms  node scripts/verify-heavy-page-resilience.js
+PASS    512ms  node scripts/verify-generated-route-indexing.js
+PASS    769ms  node scripts/verify-sitemap-classification.js
+PASS   1079ms  node scripts/verify-keyboard-navigation.js
+PASS    172ms  node scripts/verify-responsive-regression.js
+PASS    130ms  node scripts/verify-saul-ultimate-web-cv.js
+PASS    191ms  node scripts/verify-teacherresources-finder.js
+PASS    455ms  node scripts/verify-polymyth-source-link-reviews.js
+PASS    146ms  node scripts/verify-aa-polymyth-funnel.js
+PASS    157ms  node scripts/verify-polymythcal-freshness-labels.js
+PASS    302ms  node scripts/verify-polymythcal-featured.js
+PASS    497ms  node scripts/verify-polymythcal-build-efficiency.js
+PASS   2349ms  node scripts/verify-steady-ui.js
+PASS    177ms  node scripts/verify-shortcut-title-uniqueness.js
+PASS    803ms  node scripts/verify-visible-input-labels.js
+PASS    779ms  node scripts/audit-external-links.js
+PASS    192ms  node scripts/verify-dense-anchors.js
+PASS   2433ms  node scripts/verify-runtime-delivery-resilience.js
+PASS     81ms  node scripts/verify-payments.js
+PASS     79ms  node scripts/verify-leizu-pipeline.js
+PASS    206ms  node scripts/current/verify-leizu-experience.js
+PASS    106ms  node scripts/verify-leizu-course-picker.js
+PASS     89ms  node scripts/verify-leizu-simplified-chinese.js
+PASS     81ms  node scripts/verify-leizu-persian.js
+PASS    130ms  node scripts/verify-leizu-localization-funnel.js
+PASS    967ms  node scripts/verify-home-map.js
+PASS    278ms  node scripts/verify-bb-clarification.js
+PASS     99ms  node scripts/verify-bb-final-readiness.js
+PASS    118ms  node scripts/verify-bb-kid-friendly.js
+PASS     83ms  node scripts/verify-bb-why.js
+PASS     96ms  node scripts/verify-bbt-upcoming.js
+PASS    117ms  node scripts/verify-bb-mechanics-synthesis.js
+PASS     74ms  node scripts/verify-main-page.js
+PASS     77ms  node scripts/verify-main-leizu-funnel.js
+PASS    726ms  node scripts/verify-final8-website-polish.js
+PASS    445ms  node scripts/verify-final9-mephistodata-website-hardening.js
+PASS    683ms  node scripts/verify-audit10-remaining-website.js
+PASS    792ms  node scripts/verify-audit11-website-decisions.js
+PASS     88ms  node scripts/verify-audit12-mobile-web-hybrid.js
+PASS    373ms  node scripts/verify-polymyth-editorial-prompts.js
+PASS    362ms  node scripts/verify-linkability-overhaul.js
+PASS    342ms  node scripts/verify-meaninglib-dashboard.js
+PASS    413ms  node scripts/verify-ml-stop-psychologism.js
+PASS    441ms  node scripts/verify-ml-ai-prose-tells.js
+PASS    199ms  node scripts/verify-ml-antibacktracking.js
+PASS    286ms  node scripts/verify-ml-gorgonwars-premise-split.js
+PASS    780ms  node scripts/verify-ml-power-scope.js
+PASS   1560ms  npm run verify:baseline-morality-amendment-scope
+PASS    165ms  node scripts/verify-ml-writing-rules.js
+PASS    158ms  node scripts/verify-mephistodata-articles.js
+PASS    996ms  node scripts/verify-ml-geometry-hardening.js
+PASS   8497ms  node scripts/verify-site-integrity.js
+PASS    149ms  node scripts/verify-professional-readiness.js
+PASS    460ms  node scripts/verify-seo.js
+PASS    847ms  node scripts/verify-typography-controls.js
+PASS   8891ms  node scripts/verify-audit49-build-packaging-efficiency.js
+RESUMED RELEASE FAILED at 192/195: node scripts/verify-audit49-technical-efficiency.js
+
+AUDIT49 TECHNICAL EFFICIENCY / RESILIENCE FAILED (5)
+ - release asset version is 20260907-audit-v4
+ - package version is 1.0.7
+ - Polymythcal build manifest is not rebound to the current release and asset
+ - release/predeploy gate omits the Audit 49 asset version
+ - release/predeploy gate omits package version 1.0.6
+See scripts/reports/audit49-technical-efficiency.json for the aggregate decision.
+
+
+
+HISTORICAL TRANSITION TEST CORRECTION
+The fixture suite incorrectly applied the sealed September 5 transition to the later V4 tree. The historical test now pins its original contract and tamper fixture; a separate current transition test applies the production V3-to-V4 guard.
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> seminar-schools-leizu-pipeline@1.0.7 verify:all:built
+> node scripts/run-python.js scripts/run-with-build-lock.py --delivery-root .. -- node scripts/verify-all-runner.js --reuse-build --concurrency=1 --timeout-ms=1800000
+
+VERIFY ALL FAST — 195 checks, concurrency 1, timeout 1800000ms, mode: reuse verified canonical build
+PASS   1301ms  node scripts/verify-public-deploy-parity.js
+PASS    178ms  node scripts/verify-release-asset-identity.js
+PASS    860ms  node scripts/verify-polymythcal-destination-specificity.js
+PASS  53760ms  node scripts/verify-polymythcal-discovery-v2.js
+PASS   8807ms  node scripts/verify-front-facing-boundary.js
+PASS   5938ms  node scripts/verify-visible-geometry.js
+PASS   3961ms  node scripts/verify-meaningful-geometry.js
+PASS   1728ms  node scripts/verify-geometry.js
+PASS   9492ms  node scripts/verify-geometry-route-variation.js
+PASS   4292ms  node scripts/test-polymythcal-comprehensive-flows.js
+PASS     99ms  node scripts/test-comprehensive-runtime.cjs
+PASS  10896ms  node scripts/run-python.js scripts/verify-polymyth-coherence-workbook.py
+PASS  11142ms  node scripts/verify-polymyth-entry-points.js
+PASS  37075ms  node scripts/run-python.js scripts/verify-audit45-translations.py
+PASS  10442ms  node scripts/verify-audit49-metadata-surface.js
+PASS    720ms  node scripts/verify-audit49-runtime-efficiency.js
+PASS   9237ms  node scripts/verify-audit49-build-packaging-efficiency.js
+PASS    287ms  node scripts/verify-page-size-budget.js
+PASS   1058ms  node scripts/verify-asset-weights.js
+PASS     88ms  node scripts/verify-bookwormcard-gate.js
+PASS  14179ms  node scripts/verify-teacher-search-20260927.js
+PASS   8346ms  node scripts/verify-teacher-bb-audit-20260927.js
+PASS  11014ms  node scripts/verify-teacher-bb-fixes-20260927.js
+PASS     97ms  node scripts/verify-teacher-metadata-20260928.js
+PASS    598ms  node scripts/verify-ml-shorthand-resolution.js
+PASS   3004ms  node scripts/verify-ml-dialectical-hardening.js
+PASS    964ms  node scripts/verify-ml-execution-gates.js
+PASS    281ms  node scripts/verify-ml-document-continuity.js
+PASS    768ms  node scripts/verify-mephistodata-runtime-gate.js
+PASS    171ms  node scripts/verify-ml-active-form-conflicts.js
+PASS    241ms  node scripts/verify-ml-project-adjudication-v2.js
+PASS   5769ms  node scripts/verify-methodologylist-manifest.js
+PASS    560ms  node scripts/verify-core-coreplus-alignment.js
+PASS    941ms  node scripts/verify-meaninglib-dataset.js
+PASS   6218ms  node scripts/verify-meaninglib-search.js
+PASS   8232ms  node scripts/verify-ai-access-pack.js
+PASS   3329ms  node scripts/verify-audit48-assistive-technology.js
+PASS    126ms  node scripts/verify-audit48-browser-program.js
+PASS  16440ms  node scripts/run-python.js scripts/verify-polymythcal-calendar-clients.py
+PASS    575ms  node scripts/run-python.js -m unittest scripts/test_audit48_live_harvest.py
+PASS    138ms  node scripts/run-python.js scripts/verify_audit48_live_harvest.py
+PASS   1154ms  node scripts/verify-audit48-external-validation.js
+PASS 299944ms  node scripts/verify-build-idempotence.js
+PASS 564956ms  node scripts/verify-front-facing-overlap-browser.js
+PASS 613882ms  node scripts/verify-visible-geometry-browser.mjs
+PASS   5555ms  node scripts/verify-teacherresources-state-layout-browser.js
+PASS  11887ms  node scripts/verify-home-map-browser.js
+PASS  23550ms  node scripts/verify-polymythcal-sets13-15-browser.js
+PASS   7913ms  node scripts/verify-polymythcal-destination-browser.js
+PASS    750ms  node scripts/verify-critical.js
+PASS    109ms  node scripts/verify-alwaysalready-page.js
+PASS    680ms  node scripts/verify-assistant-twisting-alwaysalready.js
+PASS    352ms  node scripts/verify-predeploy-automation.js
+PASS     99ms  node scripts/verify-repository-walk-policy.js
+PASS     90ms  node scripts/verify-regen-safety.js
+PASS    404ms  node scripts/verify-data-hygiene.js
+PASS   3252ms  node scripts/verify-csp-enforced.js
+PASS     83ms  node scripts/verify-external-link-workflow.js
+PASS   1650ms  node scripts/verify-external-link-live-shards.js
+PASS     87ms  node scripts/verify-polymythcal-source-health-current.js
+PASS   5885ms  node scripts/verify-release-gates.js
+PASS    169ms  node scripts/verify-audit35-route-ui.mjs
+PASS    156ms  node scripts/verify-audit36-visual-p0.mjs
+PASS     95ms  node scripts/verify-audit36-graph-resilience.mjs
+PASS    240ms  node scripts/verify-audit36-animation-lifecycle.mjs
+PASS    180ms  node scripts/verify-audit36-artifact-atomicity.js
+PASS   8100ms  node scripts/verify-public-build-lock-recovery.js
+PASS    136ms  node scripts/verify-audit49-aa-dialog.mjs
+PASS    107ms  node scripts/verify-audit49-aitr-resilience.mjs
+PASS    193ms  node scripts/verify-aa-saul-runtime-smoothness.mjs
+PASS     88ms  node scripts/verify-frozen-audit38.js
+PASS     77ms  node scripts/current/verify-audit39-cache-coherence.js
+PASS    732ms  node scripts/verify-audit39-font-delivery.js
+PASS    132ms  node scripts/verify-audit39-methodology-runtime.js
+PASS     89ms  node scripts/verify-frozen-audit39.js
+PASS    108ms  node scripts/verify-frozen-audit40.js
+PASS    121ms  node scripts/verify-frozen-audit41.js
+PASS  29747ms  node scripts/verify-current-event-rollover.js
+PASS    136ms  node scripts/verify-frozen-audit42.js
+PASS    100ms  node scripts/verify-frozen-audit43.js
+PASS   2620ms  node scripts/verify-audit46-technical-efficiency.js
+PASS   1893ms  node scripts/verify-audit47-technical-efficiency.js
+PASS    135ms  node scripts/verify-polymythcal-audit47.js
+PASS   1438ms  node scripts/verify-polymythcal-audit14.js
+PASS    219ms  node scripts/verify-cloud-input-runtime.js
+PASS     75ms  node scripts/verify-redirect-policy-coherence.js
+PASS     93ms  node scripts/verify-bb-qr-placement.js
+PASS    450ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_audit43.py
+PASS  17450ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_audit47.py
+PASS  14852ms  node scripts/run-python.js scripts/build-polymythcal-audit13.py --check
+PASS    169ms  node scripts/verify-audit45-browser-evidence.js
+PASS    319ms  node scripts/verify-project-failure-resilience.js
+PASS     84ms  node scripts/verify-autolink-performance.js
+PASS     90ms  node scripts/verify-frozen-audit37.js
+PASS    565ms  node scripts/current/verify-live-content-integrity.js
+PASS   2759ms  node scripts/current/test-live-content-integrity.js
+PASS    444ms  node scripts/test-harvest-status-summary.js
+PASS    263ms  node scripts/test-merge-seminar-occurrences.js
+PASS    458ms  node scripts/test-merge-festival-occurrences.js
+PASS    980ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_adapters.py
+PASS    817ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_protest_harvest.py
+PASS    569ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_lifecycle.py
+PASS    219ms  node scripts/run-python.js -m unittest scripts/test_polymythcal_sharding.py
+PASS    175ms  node scripts/run-python.js -m unittest scripts/test_harvest_source_ledger.py
+PASS    343ms  node scripts/run-python.js -m unittest scripts/test_festival_pipeline.py
+PASS    432ms  node scripts/run-python.js -m unittest scripts/test_deterministic_before_agent.py
+PASS    321ms  node scripts/run-python.js -m unittest scripts/test_package_integrity.py
+PASS    522ms  node scripts/verify-public-artifact-blocks.js
+PASS    141ms  node scripts/verify-final6-deploy-contract.js
+PASS    122ms  node scripts/verify-npm-public-registry.js
+PASS    981ms  node scripts/verify-search-surface.js
+PASS     99ms  node scripts/verify-content-flow-regressions.js
+PASS    146ms  node scripts/verify-calendar-aliases.js
+PASS    294ms  node scripts/verify-calendar-data-parity.js
+RESUME PROVENANCE {"prior_log_sha256":"ab8cc34b711639cca70d4e1b1f2649759dbc3ed1523055c23223db03a0aa7992","prior_log_bytes":7811,"runner_sha256":"70b8e599bacca4af917e27b2f90f04a6ed2a34d369b3730a4849498525137429","bound_file_count":1474,"unexpected_unbound_changes":[],"changed_generated_evidence":[{"path":"hf_export/ai_access_pack/reports/ai_access_pack_verification_report.md","before_sha256":"b2273d88953d70236a015bff26211a7ffeedcb0980457caf13b5c4311485c5af","after_sha256":"6b2b1350f87a4c31a464604a69470ca5e8519761f42573867c5301c057845375"},{"path":"hf_export/reports/meaninglib_search_verify_report.md","before_sha256":"0f3584d120cafc57aee43ac9dade2a40826150334685988ca083e9f9c508cea1","after_sha256":"f1980b126c262404fe13346ee1814f48f812b409971f549c9fd70882f4e54e66"},{"path":"hf_export/reports/verification_report.md","before_sha256":"dfbd80beee7c99440b34d3ce1f7e5df35ed416666e0a772f6da9804e4be340a7","after_sha256":"17aacec9da8055d9fca6532dc18209f4c460904da29093eba66aa6306533f894"},{"path":"scripts/reports/audit49-build-packaging-efficiency.json","before_sha256":"2ef4233db75f13c001ad43d2747d61ea14c7e2060acd0b62ab22ecf2450bbdf0","after_sha256":"142ea9a9313536b413760665fd5430589abdf2bee9732e4adf9d17a0800bcf59"},{"path":"scripts/reports/teacher-search-20260927/desktop.png","before_sha256":"9926f26b15afdf9d2a8238354734e0d4786d84b749778e1c536291241ecc1dc1","after_sha256":"a8d1cfe4302226f53c556863806ddbcaa3955e9a9e426dd67646c1014daeb545"},{"path":"scripts/reports/teacher-search-20260927/mobile.png","before_sha256":"fda53276e3ba58a9b6e55780080c8b559d3ad859a34894a15c83d0b6a35d91e0","after_sha256":"ee04c49a4a94f988d926bf68c7ff12a39a0962e495d254101a4f7588ee1672f5"}],"application_source_and_public_unchanged":true,"scope":"Runtime and source bindings match the candidate tested before interruption. Only the listed generated verification reports and screenshots changed.","prior_passed_checks":114,"remaining_checks":81,"canonical_command_plan":["node scripts/verify-public-deploy-parity.js","node scripts/verify-release-asset-identity.js","node scripts/verify-polymythcal-destination-specificity.js","node scripts/verify-polymythcal-discovery-v2.js","node scripts/verify-front-facing-boundary.js","node scripts/verify-visible-geometry.js","node scripts/verify-meaningful-geometry.js","node scripts/verify-geometry.js","node scripts/verify-geometry-route-variation.js","node scripts/test-polymythcal-comprehensive-flows.js","node scripts/test-comprehensive-runtime.cjs","node scripts/run-python.js scripts/verify-polymyth-coherence-workbook.py","node scripts/verify-polymyth-entry-points.js","node scripts/run-python.js scripts/verify-audit45-translations.py","node scripts/verify-audit49-metadata-surface.js","node scripts/verify-audit49-runtime-efficiency.js","node scripts/verify-audit49-build-packaging-efficiency.js","node scripts/verify-page-size-budget.js","node scripts/verify-asset-weights.js","node scripts/verify-bookwormcard-gate.js","node scripts/verify-teacher-search-20260927.js","node scripts/verify-teacher-bb-audit-20260927.js","node scripts/verify-teacher-bb-fixes-20260927.js","node scripts/verify-teacher-metadata-20260928.js","node scripts/verify-ml-shorthand-resolution.js","node scripts/verify-ml-dialectical-hardening.js","node scripts/verify-ml-execution-gates.js","node scripts/verify-ml-document-continuity.js","node scripts/verify-mephistodata-runtime-gate.js","node scripts/verify-ml-active-form-conflicts.js","node scripts/verify-ml-project-adjudication-v2.js","node scripts/verify-methodologylist-manifest.js","node scripts/verify-core-coreplus-alignment.js","node scripts/verify-meaninglib-dataset.js","node scripts/verify-meaninglib-search.js","node scripts/verify-ai-access-pack.js","node scripts/verify-audit48-assistive-technology.js","node scripts/verify-audit48-browser-program.js","node scripts/run-python.js scripts/verify-polymythcal-calendar-clients.py","node scripts/run-python.js -m unittest scripts/test_audit48_live_harvest.py","node scripts/run-python.js scripts/verify_audit48_live_harvest.py","node scripts/verify-audit48-external-validation.js","node scripts/verify-build-idempotence.js","node scripts/verify-front-facing-overlap-browser.js","node scripts/verify-visible-geometry-browser.mjs","node scripts/verify-teacherresources-state-layout-browser.js","node scripts/verify-home-map-browser.js","node scripts/verify-polymythcal-sets13-15-browser.js","node scripts/verify-polymythcal-destination-browser.js","node scripts/verify-critical.js","node scripts/verify-alwaysalready-page.js","node scripts/verify-assistant-twisting-alwaysalready.js","node scripts/verify-predeploy-automation.js","node scripts/verify-repository-walk-policy.js","node scripts/verify-regen-safety.js","node scripts/verify-data-hygiene.js","node scripts/verify-csp-enforced.js","node scripts/verify-external-link-workflow.js","node scripts/verify-external-link-live-shards.js","node scripts/verify-polymythcal-source-health-current.js","node scripts/verify-release-gates.js","node scripts/verify-audit35-route-ui.mjs","node scripts/verify-audit36-visual-p0.mjs","node scripts/verify-audit36-graph-resilience.mjs","node scripts/verify-audit36-animation-lifecycle.mjs","node scripts/verify-audit36-artifact-atomicity.js","node scripts/verify-public-build-lock-recovery.js","node scripts/verify-audit49-aa-dialog.mjs","node scripts/verify-audit49-aitr-resilience.mjs","node scripts/verify-aa-saul-runtime-smoothness.mjs","node scripts/verify-frozen-audit38.js","node scripts/current/verify-audit39-cache-coherence.js","node scripts/verify-audit39-font-delivery.js","node scripts/verify-audit39-methodology-runtime.js","node scripts/verify-frozen-audit39.js","node scripts/verify-frozen-audit40.js","node scripts/verify-frozen-audit41.js","node scripts/verify-current-event-rollover.js","node scripts/verify-frozen-audit42.js","node scripts/verify-frozen-audit43.js","node scripts/verify-audit46-technical-efficiency.js","node scripts/verify-audit47-technical-efficiency.js","node scripts/verify-polymythcal-audit47.js","node scripts/verify-polymythcal-audit14.js","node scripts/verify-cloud-input-runtime.js","node scripts/verify-redirect-policy-coherence.js","node scripts/verify-bb-qr-placement.js","node scripts/run-python.js -m unittest scripts/test_polymythcal_audit43.py","node scripts/run-python.js -m unittest scripts/test_polymythcal_audit47.py","node scripts/run-python.js scripts/build-polymythcal-audit13.py --check","node scripts/verify-audit45-browser-evidence.js","node scripts/verify-project-failure-resilience.js","node scripts/verify-autolink-performance.js","node scripts/verify-frozen-audit37.js","node scripts/current/verify-live-content-integrity.js","node scripts/current/test-live-content-integrity.js","node scripts/test-harvest-status-summary.js","node scripts/test-merge-seminar-occurrences.js","node scripts/test-merge-festival-occurrences.js","node scripts/run-python.js -m unittest scripts/test_polymythcal_adapters.py","node scripts/run-python.js -m unittest scripts/test_polymythcal_protest_harvest.py","node scripts/run-python.js -m unittest scripts/test_polymythcal_lifecycle.py","node scripts/run-python.js -m unittest scripts/test_polymythcal_sharding.py","node scripts/run-python.js -m unittest scripts/test_harvest_source_ledger.py","node scripts/run-python.js -m unittest scripts/test_festival_pipeline.py","node scripts/run-python.js -m unittest scripts/test_deterministic_before_agent.py","node scripts/run-python.js -m unittest scripts/test_package_integrity.py","node scripts/verify-public-artifact-blocks.js","node scripts/verify-final6-deploy-contract.js","node scripts/verify-npm-public-registry.js","node scripts/verify-search-surface.js","node scripts/verify-content-flow-regressions.js","node scripts/verify-calendar-aliases.js","node scripts/verify-calendar-data-parity.js","node scripts/verify-polymythcal-browser-payload.js","node scripts/verify-polymythcalendar-today-scroll.js","node scripts/verify-polymythcalendar-kid-guide.js","node scripts/verify-polymythcalendar-ux-efficiency.js","node scripts/verify-polymythcal-scraper-layout.js","node scripts/verify-polymythcal-scraper-ui.js","node scripts/verify-python-audit-contract.js","node scripts/verify-core-html-structure.js","node scripts/verify-site-interactivity.js","node scripts/build-writing-shortcuts.js --check","node scripts/verify-writing-shortcuts.js","node scripts/build-academic-shortcuts.js --check","node scripts/verify-academic-shortcuts.js","node scripts/verify-festival-parent-taxonomy.js","node scripts/verify-harvest-pipeline.js","node scripts/verify-polymythcalendar-name.js","node scripts/verify-zoom-resilience.js","node scripts/verify-reviews-zoom-font-release.js","node scripts/verify-register.js","node scripts/verify-route-doctrine.js","node scripts/verify-page-type-contracts.js","node scripts/verify-pathfinder-nav.js","node scripts/verify-heavy-page-resilience.js","node scripts/verify-generated-route-indexing.js","node scripts/verify-sitemap-classification.js","node scripts/verify-keyboard-navigation.js","node scripts/verify-responsive-regression.js","node scripts/verify-saul-ultimate-web-cv.js","node scripts/verify-teacherresources-finder.js","node scripts/verify-polymyth-source-link-reviews.js","node scripts/verify-aa-polymyth-funnel.js","node scripts/verify-polymythcal-freshness-labels.js","node scripts/verify-polymythcal-featured.js","node scripts/verify-polymythcal-build-efficiency.js","node scripts/verify-steady-ui.js","node scripts/verify-shortcut-title-uniqueness.js","node scripts/verify-visible-input-labels.js","node scripts/audit-external-links.js","node scripts/verify-dense-anchors.js","node scripts/verify-runtime-delivery-resilience.js","node scripts/verify-payments.js","node scripts/verify-leizu-pipeline.js","node scripts/current/verify-leizu-experience.js","node scripts/verify-leizu-course-picker.js","node scripts/verify-leizu-simplified-chinese.js","node scripts/verify-leizu-persian.js","node scripts/verify-leizu-localization-funnel.js","node scripts/verify-home-map.js","node scripts/verify-bb-clarification.js","node scripts/verify-bb-final-readiness.js","node scripts/verify-bb-kid-friendly.js","node scripts/verify-bb-why.js","node scripts/verify-bbt-upcoming.js","node scripts/verify-bb-mechanics-synthesis.js","node scripts/verify-main-page.js","node scripts/verify-main-leizu-funnel.js","node scripts/verify-final8-website-polish.js","node scripts/verify-final9-mephistodata-website-hardening.js","node scripts/verify-audit10-remaining-website.js","node scripts/verify-audit11-website-decisions.js","node scripts/verify-audit12-mobile-web-hybrid.js","node scripts/verify-polymyth-editorial-prompts.js","node scripts/verify-linkability-overhaul.js","node scripts/verify-meaninglib-dashboard.js","node scripts/verify-ml-stop-psychologism.js","node scripts/verify-ml-ai-prose-tells.js","node scripts/verify-ml-antibacktracking.js","node scripts/verify-ml-gorgonwars-premise-split.js","node scripts/verify-ml-power-scope.js","npm run verify:baseline-morality-amendment-scope","node scripts/verify-ml-writing-rules.js","node scripts/verify-mephistodata-articles.js","node scripts/verify-ml-geometry-hardening.js","node scripts/verify-site-integrity.js","node scripts/verify-professional-readiness.js","node scripts/verify-seo.js","node scripts/verify-typography-controls.js","node scripts/verify-audit49-build-packaging-efficiency.js","node scripts/verify-audit49-technical-efficiency.js","npm run test:futureproofing","npm run verify:futureproofing"],"plan_sha256":"7ce1e2455c972e031a8c2cff4a541ddb6f03e48354dd8dd4600f915067c9620d","execution_note":"The serial run was interrupted after 114 successful command receipts. The exact remaining 81 commands were resumed under the release lock after source and public-file hash continuity was checked. This is an aggregate of two executions, not an uninterrupted full-run claim.","site_build_date":"2026-09-27","prior_resume_attempt":{"passed_checks":32,"failure":"verify-polymythcal-featured.js rejected a build-date mismatch after Toronto midnight","resolution":"Rerun all 81 remaining commands with SITE_BUILD_DATE=2026-09-27, matching the unchanged canonical candidate","evidence_path":"scripts/reports/teacher-bb-final-20260928-initial-runner.txt"}}
+PASS  51324ms  node scripts/verify-polymythcal-browser-payload.js
+PASS    154ms  node scripts/verify-polymythcalendar-today-scroll.js
+PASS    118ms  node scripts/verify-polymythcalendar-kid-guide.js
+PASS    419ms  node scripts/verify-polymythcalendar-ux-efficiency.js
+PASS    284ms  node scripts/verify-polymythcal-scraper-layout.js
+PASS    379ms  node scripts/verify-polymythcal-scraper-ui.js
+PASS    122ms  node scripts/verify-python-audit-contract.js
+PASS    308ms  node scripts/verify-core-html-structure.js
+PASS    780ms  node scripts/verify-site-interactivity.js
+PASS    220ms  node scripts/build-writing-shortcuts.js --check
+PASS    148ms  node scripts/verify-writing-shortcuts.js
+PASS    260ms  node scripts/build-academic-shortcuts.js --check
+PASS    125ms  node scripts/verify-academic-shortcuts.js
+PASS    227ms  node scripts/verify-festival-parent-taxonomy.js
+PASS    307ms  node scripts/verify-harvest-pipeline.js
+PASS    654ms  node scripts/verify-polymythcalendar-name.js
+PASS    763ms  node scripts/verify-zoom-resilience.js
+PASS   1989ms  node scripts/verify-reviews-zoom-font-release.js
+PASS   1494ms  node scripts/verify-register.js
+PASS    211ms  node scripts/verify-route-doctrine.js
+PASS    214ms  node scripts/verify-page-type-contracts.js
+PASS     99ms  node scripts/verify-pathfinder-nav.js
+PASS    131ms  node scripts/verify-heavy-page-resilience.js
+PASS    512ms  node scripts/verify-generated-route-indexing.js
+PASS    769ms  node scripts/verify-sitemap-classification.js
+PASS   1079ms  node scripts/verify-keyboard-navigation.js
+PASS    172ms  node scripts/verify-responsive-regression.js
+PASS    130ms  node scripts/verify-saul-ultimate-web-cv.js
+PASS    191ms  node scripts/verify-teacherresources-finder.js
+PASS    455ms  node scripts/verify-polymyth-source-link-reviews.js
+PASS    146ms  node scripts/verify-aa-polymyth-funnel.js
+PASS    157ms  node scripts/verify-polymythcal-freshness-labels.js
+PASS    302ms  node scripts/verify-polymythcal-featured.js
+PASS    497ms  node scripts/verify-polymythcal-build-efficiency.js
+PASS   2349ms  node scripts/verify-steady-ui.js
+PASS    177ms  node scripts/verify-shortcut-title-uniqueness.js
+PASS    803ms  node scripts/verify-visible-input-labels.js
+PASS    779ms  node scripts/audit-external-links.js
+PASS    192ms  node scripts/verify-dense-anchors.js
+PASS   2433ms  node scripts/verify-runtime-delivery-resilience.js
+PASS     81ms  node scripts/verify-payments.js
+PASS     79ms  node scripts/verify-leizu-pipeline.js
+PASS    206ms  node scripts/current/verify-leizu-experience.js
+PASS    106ms  node scripts/verify-leizu-course-picker.js
+PASS     89ms  node scripts/verify-leizu-simplified-chinese.js
+PASS     81ms  node scripts/verify-leizu-persian.js
+PASS    130ms  node scripts/verify-leizu-localization-funnel.js
+PASS    967ms  node scripts/verify-home-map.js
+PASS    278ms  node scripts/verify-bb-clarification.js
+PASS     99ms  node scripts/verify-bb-final-readiness.js
+PASS    118ms  node scripts/verify-bb-kid-friendly.js
+PASS     83ms  node scripts/verify-bb-why.js
+PASS     96ms  node scripts/verify-bbt-upcoming.js
+PASS    117ms  node scripts/verify-bb-mechanics-synthesis.js
+PASS     74ms  node scripts/verify-main-page.js
+PASS     77ms  node scripts/verify-main-leizu-funnel.js
+PASS    726ms  node scripts/verify-final8-website-polish.js
+PASS    445ms  node scripts/verify-final9-mephistodata-website-hardening.js
+PASS    683ms  node scripts/verify-audit10-remaining-website.js
+PASS    792ms  node scripts/verify-audit11-website-decisions.js
+PASS     88ms  node scripts/verify-audit12-mobile-web-hybrid.js
+PASS    373ms  node scripts/verify-polymyth-editorial-prompts.js
+PASS    362ms  node scripts/verify-linkability-overhaul.js
+PASS    342ms  node scripts/verify-meaninglib-dashboard.js
+PASS    413ms  node scripts/verify-ml-stop-psychologism.js
+PASS    441ms  node scripts/verify-ml-ai-prose-tells.js
+PASS    199ms  node scripts/verify-ml-antibacktracking.js
+PASS    286ms  node scripts/verify-ml-gorgonwars-premise-split.js
+PASS    780ms  node scripts/verify-ml-power-scope.js
+PASS   1560ms  npm run verify:baseline-morality-amendment-scope
+PASS    165ms  node scripts/verify-ml-writing-rules.js
+PASS    158ms  node scripts/verify-mephistodata-articles.js
+PASS    996ms  node scripts/verify-ml-geometry-hardening.js
+PASS   8497ms  node scripts/verify-site-integrity.js
+PASS    149ms  node scripts/verify-professional-readiness.js
+PASS    460ms  node scripts/verify-seo.js
+PASS    847ms  node scripts/verify-typography-controls.js
+PASS   8891ms  node scripts/verify-audit49-build-packaging-efficiency.js
+FINAL RESUMPTION PROVENANCE {"prior_log_sha256":"ab8cc34b711639cca70d4e1b1f2649759dbc3ed1523055c23223db03a0aa7992","prior_log_bytes":7811,"runner_sha256":"70b8e599bacca4af917e27b2f90f04a6ed2a34d369b3730a4849498525137429","bound_file_count":1474,"unexpected_unbound_changes":[],"changed_generated_evidence":[{"path":"hf_export/ai_access_pack/reports/ai_access_pack_verification_report.md","before_sha256":"b2273d88953d70236a015bff26211a7ffeedcb0980457caf13b5c4311485c5af","after_sha256":"6b2b1350f87a4c31a464604a69470ca5e8519761f42573867c5301c057845375"},{"path":"hf_export/reports/meaninglib_search_verify_report.md","before_sha256":"0f3584d120cafc57aee43ac9dade2a40826150334685988ca083e9f9c508cea1","after_sha256":"f1980b126c262404fe13346ee1814f48f812b409971f549c9fd70882f4e54e66"},{"path":"hf_export/reports/verification_report.md","before_sha256":"dfbd80beee7c99440b34d3ce1f7e5df35ed416666e0a772f6da9804e4be340a7","after_sha256":"17aacec9da8055d9fca6532dc18209f4c460904da29093eba66aa6306533f894"},{"path":"scripts/reports/audit49-build-packaging-efficiency.json","before_sha256":"2ef4233db75f13c001ad43d2747d61ea14c7e2060acd0b62ab22ecf2450bbdf0","after_sha256":"142ea9a9313536b413760665fd5430589abdf2bee9732e4adf9d17a0800bcf59"},{"path":"scripts/reports/teacher-search-20260927/desktop.png","before_sha256":"9926f26b15afdf9d2a8238354734e0d4786d84b749778e1c536291241ecc1dc1","after_sha256":"a8d1cfe4302226f53c556863806ddbcaa3955e9a9e426dd67646c1014daeb545"},{"path":"scripts/reports/teacher-search-20260927/mobile.png","before_sha256":"fda53276e3ba58a9b6e55780080c8b559d3ad859a34894a15c83d0b6a35d91e0","after_sha256":"ee04c49a4a94f988d926bf68c7ff12a39a0962e495d254101a4f7588ee1672f5"}],"application_source_and_public_unchanged":true,"scope":"Runtime and source bindings match the candidate tested before interruption. Only the listed generated verification reports and screenshots changed.","prior_passed_checks":114,"remaining_checks":81,"canonical_command_plan":["node scripts/verify-public-deploy-parity.js","node scripts/verify-release-asset-identity.js","node scripts/verify-polymythcal-destination-specificity.js","node scripts/verify-polymythcal-discovery-v2.js","node scripts/verify-front-facing-boundary.js","node scripts/verify-visible-geometry.js","node scripts/verify-meaningful-geometry.js","node scripts/verify-geometry.js","node scripts/verify-geometry-route-variation.js","node scripts/test-polymythcal-comprehensive-flows.js","node scripts/test-comprehensive-runtime.cjs","node scripts/run-python.js scripts/verify-polymyth-coherence-workbook.py","node scripts/verify-polymyth-entry-points.js","node scripts/run-python.js scripts/verify-audit45-translations.py","node scripts/verify-audit49-metadata-surface.js","node scripts/verify-audit49-runtime-efficiency.js","node scripts/verify-audit49-build-packaging-efficiency.js","node scripts/verify-page-size-budget.js","node scripts/verify-asset-weights.js","node scripts/verify-bookwormcard-gate.js","node scripts/verify-teacher-search-20260927.js","node scripts/verify-teacher-bb-audit-20260927.js","node scripts/verify-teacher-bb-fixes-20260927.js","node scripts/verify-teacher-metadata-20260928.js","node scripts/verify-ml-shorthand-resolution.js","node scripts/verify-ml-dialectical-hardening.js","node scripts/verify-ml-execution-gates.js","node scripts/verify-ml-document-continuity.js","node scripts/verify-mephistodata-runtime-gate.js","node scripts/verify-ml-active-form-conflicts.js","node scripts/verify-ml-project-adjudication-v2.js","node scripts/verify-methodologylist-manifest.js","node scripts/verify-core-coreplus-alignment.js","node scripts/verify-meaninglib-dataset.js","node scripts/verify-meaninglib-search.js","node scripts/verify-ai-access-pack.js","node scripts/verify-audit48-assistive-technology.js","node scripts/verify-audit48-browser-program.js","node scripts/run-python.js scripts/verify-polymythcal-calendar-clients.py","node scripts/run-python.js -m unittest scripts/test_audit48_live_harvest.py","node scripts/run-python.js scripts/verify_audit48_live_harvest.py","node scripts/verify-audit48-external-validation.js","node scripts/verify-build-idempotence.js","node scripts/verify-front-facing-overlap-browser.js","node scripts/verify-visible-geometry-browser.mjs","node scripts/verify-teacherresources-state-layout-browser.js","node scripts/verify-home-map-browser.js","node scripts/verify-polymythcal-sets13-15-browser.js","node scripts/verify-polymythcal-destination-browser.js","node scripts/verify-critical.js","node scripts/verify-alwaysalready-page.js","node scripts/verify-assistant-twisting-alwaysalready.js","node scripts/verify-predeploy-automation.js","node scripts/verify-repository-walk-policy.js","node scripts/verify-regen-safety.js","node scripts/verify-data-hygiene.js","node scripts/verify-csp-enforced.js","node scripts/verify-external-link-workflow.js","node scripts/verify-external-link-live-shards.js","node scripts/verify-polymythcal-source-health-current.js","node scripts/verify-release-gates.js","node scripts/verify-audit35-route-ui.mjs","node scripts/verify-audit36-visual-p0.mjs","node scripts/verify-audit36-graph-resilience.mjs","node scripts/verify-audit36-animation-lifecycle.mjs","node scripts/verify-audit36-artifact-atomicity.js","node scripts/verify-public-build-lock-recovery.js","node scripts/verify-audit49-aa-dialog.mjs","node scripts/verify-audit49-aitr-resilience.mjs","node scripts/verify-aa-saul-runtime-smoothness.mjs","node scripts/verify-frozen-audit38.js","node scripts/current/verify-audit39-cache-coherence.js","node scripts/verify-audit39-font-delivery.js","node scripts/verify-audit39-methodology-runtime.js","node scripts/verify-frozen-audit39.js","node scripts/verify-frozen-audit40.js","node scripts/verify-frozen-audit41.js","node scripts/verify-current-event-rollover.js","node scripts/verify-frozen-audit42.js","node scripts/verify-frozen-audit43.js","node scripts/verify-audit46-technical-efficiency.js","node scripts/verify-audit47-technical-efficiency.js","node scripts/verify-polymythcal-audit47.js","node scripts/verify-polymythcal-audit14.js","node scripts/verify-cloud-input-runtime.js","node scripts/verify-redirect-policy-coherence.js","node scripts/verify-bb-qr-placement.js","node scripts/run-python.js -m unittest scripts/test_polymythcal_audit43.py","node scripts/run-python.js -m unittest scripts/test_polymythcal_audit47.py","node scripts/run-python.js scripts/build-polymythcal-audit13.py --check","node scripts/verify-audit45-browser-evidence.js","node scripts/verify-project-failure-resilience.js","node scripts/verify-autolink-performance.js","node scripts/verify-frozen-audit37.js","node scripts/current/verify-live-content-integrity.js","node scripts/current/test-live-content-integrity.js","node scripts/test-harvest-status-summary.js","node scripts/test-merge-seminar-occurrences.js","node scripts/test-merge-festival-occurrences.js","node scripts/run-python.js -m unittest scripts/test_polymythcal_adapters.py","node scripts/run-python.js -m unittest scripts/test_polymythcal_protest_harvest.py","node scripts/run-python.js -m unittest scripts/test_polymythcal_lifecycle.py","node scripts/run-python.js -m unittest scripts/test_polymythcal_sharding.py","node scripts/run-python.js -m unittest scripts/test_harvest_source_ledger.py","node scripts/run-python.js -m unittest scripts/test_festival_pipeline.py","node scripts/run-python.js -m unittest scripts/test_deterministic_before_agent.py","node scripts/run-python.js -m unittest scripts/test_package_integrity.py","node scripts/verify-public-artifact-blocks.js","node scripts/verify-final6-deploy-contract.js","node scripts/verify-npm-public-registry.js","node scripts/verify-search-surface.js","node scripts/verify-content-flow-regressions.js","node scripts/verify-calendar-aliases.js","node scripts/verify-calendar-data-parity.js","node scripts/verify-polymythcal-browser-payload.js","node scripts/verify-polymythcalendar-today-scroll.js","node scripts/verify-polymythcalendar-kid-guide.js","node scripts/verify-polymythcalendar-ux-efficiency.js","node scripts/verify-polymythcal-scraper-layout.js","node scripts/verify-polymythcal-scraper-ui.js","node scripts/verify-python-audit-contract.js","node scripts/verify-core-html-structure.js","node scripts/verify-site-interactivity.js","node scripts/build-writing-shortcuts.js --check","node scripts/verify-writing-shortcuts.js","node scripts/build-academic-shortcuts.js --check","node scripts/verify-academic-shortcuts.js","node scripts/verify-festival-parent-taxonomy.js","node scripts/verify-harvest-pipeline.js","node scripts/verify-polymythcalendar-name.js","node scripts/verify-zoom-resilience.js","node scripts/verify-reviews-zoom-font-release.js","node scripts/verify-register.js","node scripts/verify-route-doctrine.js","node scripts/verify-page-type-contracts.js","node scripts/verify-pathfinder-nav.js","node scripts/verify-heavy-page-resilience.js","node scripts/verify-generated-route-indexing.js","node scripts/verify-sitemap-classification.js","node scripts/verify-keyboard-navigation.js","node scripts/verify-responsive-regression.js","node scripts/verify-saul-ultimate-web-cv.js","node scripts/verify-teacherresources-finder.js","node scripts/verify-polymyth-source-link-reviews.js","node scripts/verify-aa-polymyth-funnel.js","node scripts/verify-polymythcal-freshness-labels.js","node scripts/verify-polymythcal-featured.js","node scripts/verify-polymythcal-build-efficiency.js","node scripts/verify-steady-ui.js","node scripts/verify-shortcut-title-uniqueness.js","node scripts/verify-visible-input-labels.js","node scripts/audit-external-links.js","node scripts/verify-dense-anchors.js","node scripts/verify-runtime-delivery-resilience.js","node scripts/verify-payments.js","node scripts/verify-leizu-pipeline.js","node scripts/current/verify-leizu-experience.js","node scripts/verify-leizu-course-picker.js","node scripts/verify-leizu-simplified-chinese.js","node scripts/verify-leizu-persian.js","node scripts/verify-leizu-localization-funnel.js","node scripts/verify-home-map.js","node scripts/verify-bb-clarification.js","node scripts/verify-bb-final-readiness.js","node scripts/verify-bb-kid-friendly.js","node scripts/verify-bb-why.js","node scripts/verify-bbt-upcoming.js","node scripts/verify-bb-mechanics-synthesis.js","node scripts/verify-main-page.js","node scripts/verify-main-leizu-funnel.js","node scripts/verify-final8-website-polish.js","node scripts/verify-final9-mephistodata-website-hardening.js","node scripts/verify-audit10-remaining-website.js","node scripts/verify-audit11-website-decisions.js","node scripts/verify-audit12-mobile-web-hybrid.js","node scripts/verify-polymyth-editorial-prompts.js","node scripts/verify-linkability-overhaul.js","node scripts/verify-meaninglib-dashboard.js","node scripts/verify-ml-stop-psychologism.js","node scripts/verify-ml-ai-prose-tells.js","node scripts/verify-ml-antibacktracking.js","node scripts/verify-ml-gorgonwars-premise-split.js","node scripts/verify-ml-power-scope.js","npm run verify:baseline-morality-amendment-scope","node scripts/verify-ml-writing-rules.js","node scripts/verify-mephistodata-articles.js","node scripts/verify-ml-geometry-hardening.js","node scripts/verify-site-integrity.js","node scripts/verify-professional-readiness.js","node scripts/verify-seo.js","node scripts/verify-typography-controls.js","node scripts/verify-audit49-build-packaging-efficiency.js","node scripts/verify-audit49-technical-efficiency.js","npm run test:futureproofing","npm run verify:futureproofing"],"plan_sha256":"7ce1e2455c972e031a8c2cff4a541ddb6f03e48354dd8dd4600f915067c9620d","execution_note":"Successful receipts combine 114 commands before interruption and 81 completed afterward. A build-date mismatch and stale aggregate-version expectations were corrected during resumption. Failed attempts are retained separately. This is a resumed aggregate, not an uninterrupted run.","site_build_date":"2026-09-27","prior_resume_attempt":{"passed_checks":32,"failure":"verify-polymythcal-featured.js rejected a build-date mismatch after Toronto midnight","resolution":"Rerun all 81 remaining commands with SITE_BUILD_DATE=2026-09-27, matching the unchanged canonical candidate","evidence_path":"scripts/reports/teacher-bb-final-20260928-initial-runner.txt"},"final_verifier_correction":{"path":"scripts/verify-audit49-technical-efficiency.js","before_sha256":"0ad11f4542f35d08d23364a544a641734bcc1e8212e392a472e8471c162a926f","after_sha256":"f5e0dc8c7c15c031db74d66956db9b13ae234db39004142d3b42ad9e7480e26f","change":"Two expected constants aligned with verified V3 and the current release/predeploy guards; the diagnostic prints the expected package dynamically. No application, public page or canonical data changed.","rerun_commands":["node scripts/verify-release-gates.js","node scripts/verify-predeploy-automation.js","node scripts/verify-audit49-technical-efficiency.js"]}}
+SUPPLEMENTAL PASS 6760ms  node scripts/verify-release-gates.js
+SUPPLEMENTAL PASS 352ms  node scripts/verify-predeploy-automation.js
+SUPPLEMENTAL PASS 10928ms  node scripts/verify-audit49-build-packaging-efficiency.js
+PASS    507ms  node scripts/verify-audit49-technical-efficiency.js
+EVIDENCE BINDINGS REFRESHED after the aggregate report writer and before the preservation checks.
+RESUMED RELEASE FAILED at 193/195: npm run test:futureproofing
+
+> seminar-schools-leizu-pipeline@1.0.7 test:futureproofing
+> npm run test:futureproofing:core-fixtures && npm run test:futureproofing:article-body && npm run test:futureproofing:gate-defects && npm run test:futureproofing:browser-tiers && npm run test:futureproofing:live-evidence && npm run test:futureproofing:source-anomalies && npm run test:futureproofing:external-destinations && npm run test:futureproofing:route-tombstones && npm run test:futureproofing:data-migrations
+
+
+> seminar-schools-leizu-pipeline@1.0.7 test:futureproofing:core-fixtures
+> node scripts/run-python.js -m unittest scripts.test_futureproofing_contracts scripts.test_build_lock_entrypoints scripts.test_saul_static_build_reuse
+
+CLEAN-ROOM REPRODUCIBILITY PASSED — both archives are 1be89daa67efb142a77f00c1ed35da4d2d55e1d0d711ce8470fc378f7464acd9.
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+.......F......s..............................................
+======================================================================
+FAIL: test_sep5_degorgonified_feminism_transition_is_exact_and_tamper_detecting (scripts.test_futureproofing_contracts.ApprovedDeletionTests.test_sep5_degorgonified_feminism_transition_is_exact_and_tamper_detecting)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/seminar-final-v4/SITE_PACKAGE/scripts/test_futureproofing_contracts.py", line 662, in test_sep5_degorgonified_feminism_transition_is_exact_and_tamper_detecting
+    observed = sep5_degorgonified_feminism_preservation.observed_transition()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/seminar-final-v4/SITE_PACKAGE/scripts/verify-sep5-degorgonified-feminism-base-preservation.py", line 503, in observed_transition
+    assert [row["path"] for row in deleted] == list(AUTHORIZED_PUBLIC_DELETIONS), (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: September 5 degorgonified-feminism transition contains an unauthorized predecessor deletion
+
+----------------------------------------------------------------------
+Ran 61 tests in 27.892s
+
+FAILED (failures=1, skipped=1)
+

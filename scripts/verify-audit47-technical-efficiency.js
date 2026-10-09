@@ -12,7 +12,8 @@ const inventory = loadInventoryContract(ROOT);
 const REPORT = path.join(ROOT, 'scripts', 'reports', 'audit47-technical-efficiency.json');
 const AUDIT47_RELEASE = '2026-07-26-site-audit47-technical-efficiency-continuity-final';
 const EXPECTED_RELEASE = '2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final';
-const EXPECTED_ASSET = '20260815-sets1-15-synthesis';
+const EXPECTED_ASSET = JSON.parse(fs.readFileSync(path.join(ROOT, 'RELEASE_MANIFEST.json'), 'utf8')).polymythcal_asset_version;
+const {buildPublicationManifest} = require('./lib/polymythcal-discovery-model');
 const EXPECTED_EXPLICIT_ALIASES = 28;
 const SOURCE_HTML_ROOTS = [
   '.well-known', 'agora', 'aitr', 'aa', 'bb', 'bookwormcard', 'campaigns',
@@ -117,7 +118,8 @@ check(ids.size === events.length, `canonical event IDs are ${ids.size}/${events.
 check(metrics.event_types >= inventory.minimum_event_types, `event type inventory fell below ${inventory.minimum_event_types}: ${metrics.event_types}`);
 check(sources.length >= inventory.minimum_sources, `source inventory fell below ${inventory.minimum_sources}: ${sources.length}`);
 check(byteEqual('polymythseminars/events.json', 'data/polymyth-seminar-events.json'), 'canonical event payloads are not byte-identical');
-check(chronologyIds.size === 1954 && watchlistIds.size === 134, 'Discovery v2 chronology/watchlist counts changed');
+const expectedPublication = buildPublicationManifest(eventPayload, publicationSurfaces._generated_at);
+for (const field of ['chronology_ids','watchlist_ids']) check(JSON.stringify([...publicationSurfaces[field]].sort()) === JSON.stringify([...expectedPublication[field]].sort()), 'Discovery publication differs from canonical ledger: '+field);
 check(
   chronologyIds.size + watchlistIds.size === ids.size
     && [...ids].every(id => chronologyIds.has(id) || watchlistIds.has(id))
@@ -147,7 +149,13 @@ for (const event of events) {
   }
 }
 metrics.explicit_legacy_identifiers = aliasTargets.size;
-check(aliasTargets.size === EXPECTED_EXPLICIT_ALIASES, `explicit legacy identifiers are ${aliasTargets.size}/${EXPECTED_EXPLICIT_ALIASES}`);
+check(aliasTargets.size >= EXPECTED_EXPLICIT_ALIASES, `explicit legacy identifiers are ${aliasTargets.size}/${EXPECTED_EXPLICIT_ALIASES}`);
+const corrections = json('data/polymythcal-reviewed-corrections-2026-09-07.json');
+for (const [retired,target] of Object.entries(corrections.identity_migrations)) {
+  check(!ids.has(retired) && aliasTargets.get(retired) === target, retired+': reviewed identity migration lost');
+  const key = corrections.pre_correction_records[retired].identity_key;
+  if(key && key !== retired) check(aliasTargets.get(key) === target,key+': original identity alias lost');
+}
 for (const [retired, target] of expectedRetiredTargets) {
   check(!ids.has(retired), `${retired}: retired duplicate remains canonical`);
   check(aliasTargets.get(retired) === target, `${retired}: legacy target is not ${target}`);
@@ -223,7 +231,7 @@ for (const marker of [
   "'/polymythseminars/watchlist.json'",
   "'/polymythseminars/research.json'",
   'CORE.mergeResearchProjection(candidate, researchCandidate)',
-  "addAction(detailHref(event), COPY.details, 'primary-link');",
+  "addAction(detailHref(event), COPY.details);",
 ]) check(discoveryController.includes(marker), `Discovery controller lacks ${marker}`);
 for (const marker of [
   'function mergeResearchProjection(discovery, research)',

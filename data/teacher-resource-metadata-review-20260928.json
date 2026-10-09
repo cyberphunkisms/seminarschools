@@ -1,0 +1,53 @@
+{
+  "schema": "teacher-resource-metadata-review-v1",
+  "checked_on": "2026-09-28",
+  "scope": "Publisher access policies only. Original catalog classifications are retained. No item-level suitability, licensing, answer-key or link-availability certification.",
+  "policies": {
+    "gutenberg.org": {
+      "format": "gutenberg-text",
+      "path_prefix": "/ebooks/",
+      "access": "publisher-free",
+      "source_url": "https://www.gutenberg.org/",
+      "note": "Project Gutenberg provides free reading and downloads without registration. This is the publisher policy. Individual editions and local reuse rights require their own review."
+    },
+    "inquirygroup.org": {
+      "format": "lesson-page",
+      "path_prefix": "/history-lessons/",
+      "access": "publisher-account",
+      "source_url": "https://www.inquirygroup.org/",
+      "note": "Digital Inquiry Group provides free lessons and assessments through a DIG account. The public lesson description may be readable before signing in."
+    },
+    "openstax.org": {
+      "format": "openstax-book",
+      "path_prefix": "/books/",
+      "access": "publisher-free",
+      "source_url": "https://openstax.org/higher-education",
+      "note": "OpenStax digital textbooks are free. Most can be read without an account, while selected titles and extra features require one. Supplemental instructor resources require a verified educator account."
+    },
+    "phet.colorado.edu": {
+      "format": "simulation",
+      "path_prefix": "/sims/",
+      "access": "publisher-free",
+      "source_url": "https://phet.colorado.edu/en/about",
+      "note": "PhET describes its simulations as free to students and teachers, with online and downloadable versions. Individual simulations have not been tested on classroom devices."
+    },
+    "cemc.uwaterloo.ca": {
+      "format": "contest-paper",
+      "path_prefix": "/sites/default/files/",
+      "access": "publisher-download",
+      "source_url": "https://cemc.uwaterloo.ca/resources/past-contests",
+      "note": "CEMC publishes downloadable past contests and separate solutions. Its current listing covers the last ten years. This policy check does not verify this particular PDF or whether a solution accompanies it."
+    },
+    "archive.org": {
+      "formats": [
+        "full-book",
+        "anthology",
+        "mcdougal-littell"
+      ],
+      "path_prefix": "/details/",
+      "access": "publisher-variable",
+      "source_url": "https://help.archive.org/help/borrowing-from-the-lending-library/",
+      "note": "Internet Archive access varies by item. Borrowing requires an account and depends on availability. Some items permit unrestricted reading or downloads. This item has not been checked individually."
+    }
+  }
+}

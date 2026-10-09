@@ -5,14 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:3976e5cddc1a8fbc6c9e@seminarschools.com
-DTSTAMP:20260720T040000Z
+DTSTAMP:20261003T023241Z
 DTSTART;VALUE=DATE:20261024
 DTEND;VALUE=DATE:20270308
 SUMMARY:Saks Afridi: SpaceMosque
-LOCATION:Aga Khan Museum
-DESCRIPTION:
+LOCATION:Temporary Exhibitions Gallery\, Aga Khan Museum\, Toronto
+DESCRIPTION:Exhibition run. Gallery access follows the museum’s opening
+  hours\, with closures and special hours listed on its website.
 URL:https://seminarschools.com/polymythseminars/events/saks-afridi-spacem
  osque-2026-10-24/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

@@ -3,34 +3,19 @@
 from __future__ import annotations
 import subprocess, sys
 from pathlib import Path
+from build_lock import ReleaseBuildLock, inherited_release_build_root
 ROOT=Path(__file__).resolve().parents[1]
+# Harvest publication and ordinary builds share one maintained generator chain.
 COMMANDS=[
  [sys.executable,'scripts/reconcile_polymythcal_lifecycle.py'],
- ['node','scripts/sync-calendar-data.js'],
- ['node','scripts/build-polymythcal-browser-payload.js'],
- [sys.executable,'scripts/build-polymythcal-candidate-surface.py'],
- [sys.executable,'scripts/build-polymythcal-audit13.py'],
- ['node','scripts/build-search-pages.js'],
- ['node','scripts/build-writing-shortcuts.js'],
- ['node','scripts/build-academic-shortcuts.js'],
- [sys.executable,'scripts/build-polymythcal-feeds.py'],
- [sys.executable,'scripts/build-polymythcal-translation-inventory.py'],
- [sys.executable,'scripts/build-audit45-localized-routes.py'],
- ['node','scripts/apply-audit45-translation-ui.js'],
- ['node','scripts/apply-audit49-metadata-hygiene.js'],
- ['node','scripts/build-polymythcal-discovery-site.js'],
- ['node','scripts/apply-visible-geometry.js'],
- ['node','scripts/update-release-asset-identity.js'],
- ['node','scripts/update-polymythcal-build-manifest.js'],
- [sys.executable,'scripts/validate-polymythcal.py'],
+ ['npm','run','build'],
  ['node','scripts/verify-calendar-data-parity.js'],
- ['node','scripts/build-public-deploy.js'],
- ['node','scripts/verify-public-deploy-parity.js'],
- ['node','scripts/verify-release-asset-identity.js'],
- ['node','scripts/verify-polymythcal-build-efficiency.js'],
+ [sys.executable,'scripts/build-polymythcal-source-review-queue.py'],
 ]
-for command in COMMANDS:
- print('===',' '.join(command),flush=True)
- result=subprocess.run(command,cwd=ROOT,check=False)
- if result.returncode: raise SystemExit(result.returncode)
-print('Polymythcal publication finalized: lifecycle, mirrors, unified entry pages, stable routes, ICS, feeds, translations, manifest, public deploy, and validation are current.')
+
+with ReleaseBuildLock(inherited_release_build_root(ROOT)):
+ for command in COMMANDS:
+  print('===',' '.join(command),flush=True)
+  result=subprocess.run(command,cwd=ROOT,check=False)
+  if result.returncode: raise SystemExit(result.returncode)
+ print('Polymythcal publication finalized: lifecycle, mirrors, unified entry pages, stable routes, ICS, feeds, translations, manifest, public deploy, and validation are current.')

@@ -34,6 +34,18 @@ const sourceSite = resolve(
   process.argv[3] ?? (isManagedCheckout ? "source-site-greenpeace-base" : "."),
 );
 
+// Link reviews are independent of the workbook's project/status evidence.
+const sourceLinkReviews = JSON.parse(readFileSync(
+  resolve(checkout, "data/polymyth-commons-source-link-reviews.json"), "utf8",
+)).links;
+function sourceLinkReviewFor(value) {
+  const raw = String(value || "");
+  if (sourceLinkReviews[raw]) return sourceLinkReviews[raw];
+  // Some book links print a bare host/path; preserve that wording and attach
+  // the review for the same recorded HTTP resource without rewriting it.
+  return !/^https?:\/\//i.test(raw) ? sourceLinkReviews[`http://${raw}`] : undefined;
+}
+
 const tableLines = readFileSync(input, "utf8")
   .split(/\r?\n/)
   .filter(Boolean)
@@ -128,6 +140,13 @@ const projects = rowsFor("Project Index").map((row) => ({
   mentions: mentionsByName.get(row["Canonical Name"]) ?? [],
 }));
 
+for (const project of projects) {
+  project.sourceLinkReviews = Object.fromEntries(
+    project.bookPrintedUrls.filter(url => sourceLinkReviewFor(url))
+      .map(url => [url, sourceLinkReviewFor(url)]),
+  );
+}
+
 function normalizedName(value) {
   return String(value ?? "")
     .toLowerCase()
@@ -170,6 +189,11 @@ const bookLinks = rowsFor("Book Links").map((row) => ({
   currentUrl: row["Current URL"],
   editorialNotes: row["Editorial Notes"],
 }));
+
+for (const link of bookLinks) {
+  const review = sourceLinkReviewFor(link.normalized || link.printed);
+  if (review) link.sourceLinkReview = review;
+}
 
 const linkOccurrences = rowsFor("Link Occurrences").map((row) => ({
   id: row["Occurrence ID"],
@@ -556,6 +580,7 @@ const directoryProjects = projects.map((project) => ({
   chapters: project.chapters,
   printedPageReferences: project.printedPageReferences,
   bookPrintedUrls: project.bookPrintedUrls,
+  sourceLinkReviews: project.sourceLinkReviews,
   sourceGroundedRoles: project.sourceGroundedRoles,
   currentStatusGroup: project.currentStatusGroup,
   currentCanonicalUrl: project.currentCanonicalUrl,
@@ -857,6 +882,13 @@ function endpointPresentation(project) {
     `Polymyth Commons project ${project.id}`,
   );
   if (destination.status === "unavailable") return null;
+  if (destination.status === "reviewed-successor") return {
+    action: `${destination.label} ↗`,
+    heading: destination.label,
+    signal: "Reviewed successor link",
+    href: destination.href,
+    reviewNote: `${destination.note} Link checked ${destination.checkedOn}; the project's full current status remains a separate review.`,
+  };
   if (!project.verified || !project.currentCanonicalUrl) {
     return {
           action: "Open website listed in the book ↗",
@@ -947,7 +979,11 @@ function entityPage(project) {
           ? '<span class="destination-note">Historical link from the source book; current status has not been reviewed.</span>'
           : ''
       }`
-    : "";
+    : Object.values(project.sourceLinkReviews || {}).some(review => review.status === "unavailable")
+      ? '<span class="destination-note">Original source unavailable. The recorded URL and book evidence remain below.</span>'
+      : "";
+  const linkReviewNote = endpoint?.reviewNote
+    ? `<p class="source-note">${htmlEscape(endpoint.reviewNote)}</p>` : "";
   const currentState = project.verified
     ? `<p><strong>${htmlEscape(
         statusLabel(project.currentStatusGroup),
@@ -1005,13 +1041,16 @@ function entityPage(project) {
     )} ↗</a><span class="source-note">Book source · ${htmlEscape(
       project.printedPageReferences,
     )}</span></li>`,
-    ...project.bookPrintedUrls.map(
-      (url) =>
-        `<li><a href="${htmlEscape(
-          externalHref(url),
-        )}" rel="noreferrer">${htmlEscape(
-          visibleUrl(url),
-        )} ↗</a><span class="source-note">Link printed in the book.</span></li>`,
+    ...project.bookPrintedUrls.map((url) => {
+      const review = project.sourceLinkReviews?.[url];
+      return review?.status === "unavailable"
+        ? `<li><code>${htmlEscape(url)}</code><span class="source-note">Link printed in the book. Original source unavailable. ${htmlEscape(review.note)}</span></li>`
+        : `<li><a href="${htmlEscape(externalHref(url))}" rel="noreferrer">${htmlEscape(visibleUrl(url))} ↗</a><span class="source-note">Link printed in the book.</span></li>`;
+    }),
+    ...Object.values(project.sourceLinkReviews || {}).flatMap(review =>
+      (review.successor?.evidenceUrls || []).map(url =>
+        `<li><a href="${htmlEscape(url)}" rel="noreferrer">${htmlEscape(visibleUrl(url))} ↗</a><span class="source-note">Evidence for the labeled successor destination · link checked ${htmlEscape(review.checkedOn)}. This is separate from the book citation and overall project status.</span></li>`,
+      ),
     ),
     ...project.verificationSourceUrls.map(
       (url) =>
@@ -1097,7 +1136,7 @@ function entityPage(project) {
             )}</span>`
           : ""
       }</div></div>
-      <div class="entity-actions">${actions}<a class="button" href="/polymythlib/contribute/?record=${encodeURIComponent(
+      <div class="entity-actions">${actions}${linkReviewNote}<a class="button" href="/polymythlib/contribute/?record=${encodeURIComponent(
         project.id,
       )}&amp;kind=correction">Correct this record</a></div>
     </header>
@@ -1172,6 +1211,29 @@ for (const project of projects) {
   );
   mkdirSync(directory, { recursive: true });
   writeFileSync(resolve(directory, "index.html"), entityPage(project));
+}
+
+
+// These two clients cache their compact JSON indexes. Refresh both dependency
+// layers from content so a link-only review cannot leave stale g0-3 actions.
+for (const [script, index, owner] of [
+  ["js/polymythlib.js", "directory-index.json", "polymythlib/index.html"],
+  ["js/polymyth-backbone.js", "backbone-index.json", "polymythlib/book-backbone/index.html"],
+]) {
+  const scriptPath = resolve(sourceSite, script);
+  const beforeScript = readFileSync(scriptPath, "utf8");
+  const indexToken = `sha256-${fileDigest(resolve(sourceDataDirectory, index)).slice(0, 12)}`;
+  const escapedIndex = index.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const fetchReference = new RegExp(`${escapedIndex}\\?v=[^"'\\s]+`, "g");
+  const afterScript = beforeScript.replace(fetchReference, `${index}?v=${indexToken}`);
+  if (afterScript !== beforeScript) writeFileSync(scriptPath, afterScript);
+  const ownerPath = resolve(sourceSite, owner);
+  const beforeOwner = readFileSync(ownerPath, "utf8");
+  const scriptToken = `sha256-${fileDigest(scriptPath).slice(0, 12)}`;
+  const escapedScript = script.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const scriptReference = new RegExp(`/${escapedScript}\\?v=[^"'\\s]+`, "g");
+  const afterOwner = beforeOwner.replace(scriptReference, `/${script}?v=${scriptToken}`);
+  if (afterOwner !== beforeOwner) writeFileSync(ownerPath, afterOwner);
 }
 
 console.log(

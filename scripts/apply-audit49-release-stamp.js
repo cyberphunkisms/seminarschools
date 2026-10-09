@@ -19,6 +19,7 @@ const CHECK = process.argv.includes('--check');
 const FALLBACK_PREVIOUS_ASSETS = Object.freeze([
   '20260726-audit48',
   '20260728-audit53',
+  '20260907-audit-v4',
 ]);
 const SOURCE_HTML_ROOTS = [
   '.well-known', 'agora', 'aitr', 'aa', 'bb', 'bookwormcard', 'campaigns',
@@ -105,9 +106,13 @@ for (const target of [...new Set(files)].sort()) {
     before,
   );
   const temporary = `${target}.audit49-tmp`;
-  fs.writeFileSync(temporary, after, {mode: fs.statSync(target).mode});
+  const priorStat = fs.statSync(target);
+  fs.writeFileSync(temporary, after, {mode: priorStat.mode});
   fs.renameSync(temporary, target);
-  fs.utimesSync(target, outputMtime, outputMtime);
+  // Preserve a strictly newer stamp when an extracted source carries future
+  // mtimes, so an older overlay cannot restore an obsolete asset reference.
+  const stamp = new Date(Math.max(outputMtime.getTime(), priorStat.mtimeMs + 2000));
+  fs.utimesSync(target, stamp, stamp);
   changed += 1;
 }
 

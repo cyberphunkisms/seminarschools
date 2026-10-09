@@ -81,7 +81,9 @@ for (const [token, label] of [
   ['routeScope', 'focused-route Research handoff'],
   ['class="pmd-match-reason"', 'match explanation'],
   ['function eventActions(event)', 'destination action policy'],
-  ["addAction(detailHref(event), COPY.details, 'primary-link')", 'universal stable detail link'],
+  ["addAction(detailHref(event), COPY.details)", 'universal stable secondary detail link'],
+  ["externalCount === 0 ? 'primary-link' : 'pm-source-action'", 'verified destination as the primary action'],
+  ['class="pmd-link-missing"', 'explicit missing external destination message'],
 ]) if (!app.includes(token)) problems.push(`discovery controller missing ${label}`);
 if ((app.match(/function searchMatch\(/g) || []).length !== 1) problems.push('discovery controller must define searchMatch exactly once');
 if ((app.match(/function applyFiltersAndSort\(/g) || []).length !== 1) problems.push('discovery controller must define the result pipeline exactly once');

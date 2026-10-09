@@ -345,8 +345,22 @@ function main() {
   console.log(`Report: ${path.relative(ROOT, path.join(REPORTS, 'latest_export_report.md'))}`);
 }
 
+function refreshGameMirrors(){
+  function refreshTimestamp(dir){for(const item of fs.readdirSync(dir,{withFileTypes:true})){const f=path.join(dir,item.name);if(item.isDirectory())refreshTimestamp(f);else if(item.name.endsWith('.jsonl')){const rows=fs.readFileSync(f,'utf8').trim().split(/\n/).filter(Boolean).map(x=>({...JSON.parse(x),exported_at:now}));fs.writeFileSync(f,rows.map(jsonLine).join(''));}}}
+  refreshTimestamp(DATA);
+  const selected=[['bb','bookwormburrows'],['mc','modulecanon'],['cc','campaigncodex']];
+  const replacements=new Map(selected.map(([star,name])=>[star,parseSeparatorFile({star,sectionFallback:name,rel:`polymyth/${name}.txt`,htmlRel:`polymyth/${name}/index.html`})]));
+  for(const [star,name] of selected)writeJsonl(`data/${star}/${name}.jsonl`,replacements.get(star));
+  const previous=read('hf_export/data/all_meaninglib_rows.jsonl').trim().split(/\n/).map(x=>JSON.parse(x));
+  const seen=new Set(),rows=[];
+  for(const row of previous){if(!replacements.has(row.star_file)){rows.push(row);continue;}if(!seen.has(row.star_file)){rows.push(...replacements.get(row.star_file));seen.add(row.star_file);}}
+  writeJsonl('data/all_meaninglib_rows.jsonl',rows);
+  writeJsonl('data/relations/crossrefs.jsonl',buildCrossrefs(rows));
+  writeText('reports/game_module_refresh_20260927.json',JSON.stringify({generated_at:now,scope:'BB/MC/CC content refreshed; all snapshot timestamps refreshed; other row content preserved',counts:Object.fromEntries([...replacements].map(([k,v])=>[k,v.length]))},null,2)+'\n');
+  console.log('Game mirrors refreshed:',Object.fromEntries([...replacements].map(([k,v])=>[k,v.length])));
+}
 try {
-  main();
+  if(process.argv.includes('--game-only')) refreshGameMirrors(); else main();
 } catch (err) {
   console.error(err && err.stack ? err.stack : err);
   process.exit(1);

@@ -5,13 +5,14 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:f47a36718097ba893978@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20261118
+DTSTAMP:20261003T110658Z
+DTSTART:20261118T220000Z
 SUMMARY:Council Meeting
-LOCATION:Location unconfirmed · Lieu non confirmé
+LOCATION:Town Hall\, 30 King Street East\, 2nd Floor\, Gananoque\, with o
+ nline access
 DESCRIPTION:Council Meeting
 URL:https://seminarschools.com/polymythseminars/events/research-eeeccbedc
  820/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

@@ -38,7 +38,7 @@ const PRE_CURRENT_TURN_CORE_UTF16_UNITS = 4738;
 const PRE_REGISTER_CORE_DOCUMENT_SHA256 = 'c26d13b98ff8a4b731c189b7bef72122742a95d4ff9fb95b7329f61d036bf8d1';
 const PRE_REGISTER_CORE_BODY_SHA256 = '6e63e5f5f1ec3f689bf94ede708a141c128a4795c877c4588441bfd910085d9c';
 const PRE_REGISTER_CORE_UTF16_UNITS = 4996;
-const EXPECTED_CORE_DOCUMENT_SHA256 = 'f34b4de5dbef3526b1ae54dc31941325322e85c3d720efd50e092e6687360bc0';
+const EXPECTED_CORE_DOCUMENT_SHA256 = 'dc7d8b75dd5af43b3272da3d587c33af20ba13bcf402c674146f688814dbdd9e';
 const CORE_MAX_CHARACTERS = 5000;
 const EXPECTED_CORE_UTF16_UNITS = 5000;
 const CORE_ID = 'core-personal-rules-current-2026-08-12';
@@ -209,14 +209,14 @@ for (const [needle, label] of [
   ['Question/deliberation/bare use/review/audit/compare/critique/run-through => analysis only', 'question and bare-use boundary'],
   ['explicit mutation verb + named target controls.', 'explicit mutation authority'],
   ['AI-generated question=>run OA first; received user question/audit alone≠OA.', 'universal question-generation Ouroborosanalyses trigger'],
-  ['Repetition keeps target/scope; adds no authority/presumed defect.', 'repetition scope and no-presumed-defect boundary'],
-  ['File/memory/artifact/publication/deployment/adjacent-object mutation requires explicit target permission.', 'explicit target-specific mutation boundary'],
+  ['Repetition keeps target/scope;adds no authority/presumed defect.', 'repetition scope and no-presumed-defect boundary'],
+  ['File/memory/artifact/publication/deployment/adjacent mutation requires explicit target permission.', 'explicit target-specific mutation boundary'],
   ['No authority radiation.', 'object-bound authority'],
   ['Analysis=>response, never a new file.', 'artifact authority gate'],
   ['Main task stays live through correction/audit/rule/support work.', 'main-task continuity trigger'],
   ['Named method/register=>current owner/form.', 'named-method and ML*-active register owner trigger'],
   ['“degorgonified feminism”=>ML*+complete bundle.', 'degorgonified-feminism complete-bundle trigger'],
-  ['AI decides routine format/IDs/organization/CORE-vs-CORE+ placement; user override.', 'AI-owned CORE / CORE+ routing trigger'],
+  ['AI decides routine format/IDs/organization/CORE-vs-CORE+ filing; user override.', 'AI-owned CORE / CORE+ routing trigger'],
   ["ML* activates only for material/explicit work on Polymyth, Meaninglib, Seminar Schools, Mephistodata, Devil's Diary, named star files, CORE, CORE+;", 'narrow ML activation'],
   ['Canonical ML*: https://seminarschools.com/polymyth/methodologylist/; cold-load CORE+ map: https://seminarschools.com/polymyth/methodologylist-coreplus.txt; full text: https://seminarschools.com/polymyth/methodologylist.txt.', 'stable canonical ML* locators'],
   ['Delivery≠plan/promise.', 'completion gate'],
@@ -225,8 +225,8 @@ for (const [needle, label] of [
   ['CORPORA. Freeze categories/seeds/universe/measures; evidence items; omission-test open searches; never pad; compare/rank/count/graph verified rows only; isolate residue; verify completion.', 'universal corpus-integrity trigger'],
   ['Ledger result; continue=unit; support≠result; disclose shortfall; partial≠final.', 'universal deliverable-accounting trigger'],
   ['Lineage: direct/equivalent/analogue/secondary/lead.', 'universal source-lineage trigger'],
-  ['from checked primary/canonical sources', 'source-review rule'],
-  ['context not automatically publishable.', 'context/publication boundary'],
+  ['verify uncertain/unfamiliar via primary/canonical', 'source-review rule'],
+  ['context≠publishable.', 'context/publication boundary'],
 ]) requireText(charter, needle, `portable CORE ${label}`);
 const portableActivationNeedles = [
   "ML* activates only for material/explicit work on Polymyth, Meaninglib, Seminar Schools, Mephistodata, Devil's Diary, named star files, CORE, CORE+;",
@@ -547,6 +547,9 @@ if (!expandedPortableCore.b.startsWith(expandedPortablePrefix)) {
 }
 for (const needle of [
   "CURRENT ACTIVATION OVERRIDE. Material or explicit work on Mephistodata or Devil's Diary activates ML*.",
+  'CURRENT CITATION OVERRIDE 2026-09-08.',
+  'RULE #1 remains the active cite-everything rule',
+  'each substantive work-specific claim must be grounded in an actual quotation from that work',
   'Canonical ML*: https://seminarschools.com/polymyth/methodologylist/.',
   'Cold-load CORE+ map: https://seminarschools.com/polymyth/methodologylist-coreplus.txt.',
   DIARY_DISPATCH,

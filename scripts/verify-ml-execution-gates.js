@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 'use strict';
+const {currentConceptArtifactHash}=require('./lib/ml-concept-release-binding');
 
 const fs = require('fs');
 const path = require('path');
@@ -38,7 +39,7 @@ const OUROBOROS_STEPS = [
   'whole_conversation_review',
   'ironman_critical_questions',
   'best_effort_answering',
-  'genuine_unanswerable_residue',
+  'classified_unresolved_residue_academic_then_tldrlayman',
 ];
 const TRUSTED_SEMANTIC_WORK_ATTESTATIONS = new Map([
   ['1111111111111111111111111111111111111111111111111111111111111111', '1e977349af261fc5f01a16adda582004f443ec947e019a461a5d8f049177397f'],
@@ -184,25 +185,35 @@ function evaluateOuroborosFixture(fixture, ownerShaById, requiredOwnerShaById) {
   if (!sameUniqueSet(fixture.conversation_ids, fixture.reviewed_ids)) return false;
   if (!Array.isArray(fixture.issues)) return false;
 
+  const allowedClasses = new Set(['UNRESOLVABLE', 'PARTIALLY UNRESOLVED', 'NOT ADEQUATELY RESOLVED']);
   const issueIds = new Set();
-  const genuineResidue = [];
+  const survivors = [];
   for (const issue of fixture.issues) {
     if (!issue || !issue.id || issueIds.has(issue.id) || !issue.question) return false;
     issueIds.add(issue.id);
     if (!Array.isArray(issue.positions) || new Set(issue.positions.filter(Boolean)).size < 2) return false;
     if (typeof issue.answerable !== 'boolean') return false;
     if (issue.answerable) {
-      if (!String(issue.answer || '').trim() || issue.residue_text) return false;
-    } else {
-      if (issue.answer) return false;
-      if (!String(issue.unanswerable_basis || '').trim() || !String(issue.residue_text || '').trim()) return false;
-      genuineResidue.push(issue.id);
+      if (!String(issue.answer || '').trim() || issue.residue_text || issue.academic_text || issue.layman_text || issue.resolution_class) return false;
+      continue;
     }
+    if (issue.answer) return false;
+    const resolutionClass = String(issue.resolution_class || '').trim().toUpperCase();
+    if (!allowedClasses.has(resolutionClass)) return false;
+    if (!String(issue.unanswerable_basis || issue.unresolved_basis || '').trim()) return false;
+    if (!String(issue.academic_text || '').trim() || !String(issue.layman_text || '').trim()) return false;
+    survivors.push(issue.id);
   }
-  if (!sameUniqueSet(genuineResidue, fixture.output_residue_ids)) return false;
-  const residueById = new Map(fixture.issues.map(issue => [issue.id, issue.residue_text]));
-  const expectedBody = genuineResidue.length
-    ? fixture.output_residue_ids.map(id => residueById.get(id)).join('\n')
+  if (!sameUniqueSet(survivors, fixture.output_residue_ids)) return false;
+  const issueById = new Map(fixture.issues.map(issue => [issue.id, issue]));
+  const expectedBody = survivors.length
+    ? `ACADEMIC RESIDUE\n${fixture.output_residue_ids.map(id => {
+      const issue = issueById.get(id);
+      return `[${issue.resolution_class}] ${issue.question}\n${issue.academic_text}`;
+    }).join('\n\n')}\n\nTLDRLAYMAN RESIDUE\n${fixture.output_residue_ids.map(id => {
+      const issue = issueById.get(id);
+      return `[${issue.resolution_class}] ${issue.question}\n${issue.layman_text}`;
+    }).join('\n\n')}`
     : String(fixture.zero_residue_text || '');
   if (!expectedBody || body !== expectedBody) return false;
   return true;
@@ -558,6 +569,9 @@ requireNeedles(currentMap.b, [
   'begins at byte zero with exactly one “Mephistodata would say:”.',
   'The next ML*-active response resets to the default unless Bloom is explicitly invoked again.',
   'The opener never substitutes for substantive PM15 Mephisto-plus-Data fusion.',
+  'SYNOPSIS AND SYN DISPATCH.',
+  'attempts syn internally as a compression-and-completeness check',
+  'An exact unquoted operator use of syn requires a technical Synopsis of the current target.',
   'A named analytical method retrieves its exact current canonical owner before drafting',
   'Never reconstruct a named method from memory',
   'CONFLICT RESOLUTION.',
@@ -592,6 +606,12 @@ const executionNeedles = [
   'Data supplies evidentiary precision, exact scope and status',
   'The opener is excluded from character scoring',
   'Prefix-only, Data-only, costume-only, sycophantic, unsupported-source, and invented-opposition drafts fail.',
+  'SYNOPSIS TECHNICAL DEFINITION.',
+  'A Synopsis is a compressed, self-contained, checkable, and source-faithful version',
+  'zero loss of essential meaning, structure, uncertainty, or decision value at the declared scale',
+  'SYN ACTIVATION.',
+  'The attempt stays within the frozen task, creates no unsolicited second output',
+  'An exact unquoted operator use of syn makes the technical Synopsis the required output for the current turn.',
   'An explicitly named method must resolve and retrieve its exact current canonical owner before drafting.',
   'Never reconstruct a named method from memory',
   'GATE 4, SEMANTIC FIDELITY.',
@@ -634,7 +654,7 @@ const executionNeedles = [
   'They supply no authority to call machine processing source by source reading, scholarly review, factual verification, or completed research.',
   'When a delivered claim fails Gate 7A, quote and retract the exact claim',
   'An explicit Ouroborosanalyses request retrieves method-ouroborosanalyses-current-2026-08-23',
-  'Settled findings, general summaries, recommendations, next steps, improvised method stages, and answerable questions never appear in the final residue.',
+  'Settled findings, general summaries, recommendations, next steps, and improvised method stages never appear in the final residue.',
   'GATE 8, PROSE AND FORM LINT.',
   'Run coreplus-handler-writing-composition-delivery-2026-08-29 during composition and again before delivery.',
   'Source lock, paragraph map, clause admission, sentence close, paragraph close, and document close are mandatory states.',
@@ -731,6 +751,10 @@ requireNeedles(regression.b, [
   'TRUTHFUL WORK-CLAIM FIXTURE FAMILY.',
   'Done. All 681 canonical Gospel witnesses are reviewed',
   'Apology alone fails.',
+  'SYNOPSIS AND SYN FIXTURE FAMILY.',
+  'Every ML*-active plan resolves the current execution owner and exposes a nonmandatory syn attempt.',
+  'Quoted, inline-code, fenced-code, source, and metalinguistic occurrences remain noninvoking.',
+  'Missing, duplicated, or semantically stale Synopsis owners fail closed.',
 ], 'regression contract');
 requireNeedles(sourceRecord.b, ['2dde9179d4c4d3f42aef76523fa909310b0f88db27fa879a8730ad6aefa015bb', 'do not establish direct transmission'], 'source record');
 requireNeedles(deliverableSource.b, ['265-item ranking', '17 placements', '248 items remained unranked', 'Never call a partial or substituted output final'], 'deliverable-accounting source record');
@@ -750,7 +774,7 @@ for (const [id, needles] of Object.entries({
   requireNeedles(one(entries, id).xc, needles, `${id} current integration`);
 }
 
-if (!html.includes('/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js?v=20260906-document-continuity')) {
+if (!html.includes('/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js?v=20261005-concept-application')) {
   fail('canonical HTML does not load the rule-hardening addendum');
 }
 if (!html.includes('...MEPHISTODATA_RULE_HARDENING_ADDENDUM')) {
@@ -1435,6 +1459,7 @@ try {
   fail(`release manifest JSON failed: ${error.message}`);
 }
 const mlStarUpdate = releaseManifest.ml_star_update || {};
+const sep8CitationOuroborosUpdate = releaseManifest.ml_star_citation_ouroboros_update_2026_09_08 || {};
 const priorSep5MlStar = releaseManifest.ml_star_update_prior_2026_09_05 || {};
 const priorSep5MlStarSha256 = '747537a73dd3ea04d5dd28954767187e012be5f6a764b69ffb0ec042da7b43b2';
 const actualPriorSep5MlStarSha256 = sha256(JSON.stringify(priorSep5MlStar));
@@ -1454,6 +1479,14 @@ const activeFormFixtureCounts = mlStarUpdate.active_form_conflict_fixtures || {}
 const baselineMoralityScope = mlStarUpdate.baseline_morality_amendment_scope || {};
 const publicPrivateRepair = mlStarUpdate.public_private_repair || {};
 const portableCore = mlStarUpdate.portable_core || {};
+const sep8Artifacts = sep8CitationOuroborosUpdate.artifact_sha256 || {};
+const antifluffUpdate = releaseManifest.ml_star_antifluff_update_2026_09_08 || {};
+const antifluffArtifacts = antifluffUpdate.artifact_sha256 || {};
+const synopsisUpdate = releaseManifest.ml_star_synopsis_syn_update_2026_09_08 || {};
+const synopsisArtifacts = synopsisUpdate.artifact_sha256 || {};
+const ouroborosUpdate = releaseManifest.ml_star_ouroboros_update_2026_09_11 || {};
+const ouroborosArtifacts = ouroborosUpdate.artifact_sha256 || {};
+const currentRuntimeFixtureCounts = ouroborosUpdate.runtime_gate_behavioral_fixtures || {};
 if (mlStarUpdate.amended_at !== '2026-09-05') fail('release manifest lacks the September 5 amendment date');
 if (mlStarUpdate.amendment !== 'degorgonified-feminism-retrieval-enforcement') {
   fail('release manifest lacks the current synthesis amendment identity');
@@ -1568,15 +1601,33 @@ if (registerFixtureCounts.positive !== registerPositive
     || registerFixtureCounts.hostile_mutations !== 17) {
   fail(`release manifest register fixture counts are stale: ${JSON.stringify(registerFixtureCounts)}`);
 }
-if (runtimeFixtureCounts.positive !== 37
-    || runtimeFixtureCounts.negative !== 104
-    || runtimeFixtureCounts.total !== 141) {
-  fail(`release manifest runtime-gate fixture count is stale: ${JSON.stringify(runtimeFixtureCounts)}`);
+const currentRuntimeFixtures = JSON.parse(read('scripts/fixtures/ml-execution-gates/mephistodata-runtime-gate-hostile-fixtures.json')).fixtures || [];
+if (synopsisUpdate.runtime_gate_behavioral_fixtures?.positive !== 43
+    || synopsisUpdate.runtime_gate_behavioral_fixtures?.negative !== 108
+    || synopsisUpdate.runtime_gate_behavioral_fixtures?.total !== 151) {
+  fail('immutable Synopsis runtime-gate fixture counts drifted');
+}
+if (currentRuntimeFixtureCounts.positive !== currentRuntimeFixtures.filter(fixture => fixture.expected_pass === true).length
+    || currentRuntimeFixtureCounts.negative !== currentRuntimeFixtures.filter(fixture => fixture.expected_pass === false).length
+    || currentRuntimeFixtureCounts.total !== currentRuntimeFixtures.length
+    || currentRuntimeFixtureCounts.positive + currentRuntimeFixtureCounts.negative !== currentRuntimeFixtureCounts.total
+    || currentRuntimeFixtureCounts.total < 151) {
+  fail(`release manifest runtime-gate fixture count is stale: ${JSON.stringify(currentRuntimeFixtureCounts)}`);
 }
 if (portableCore.id !== 'core-personal-rules-current-2026-08-12'
     || portableCore.utf16_units !== 5000
     || portableCore.sha256 !== 'f34b4de5dbef3526b1ae54dc31941325322e85c3d720efd50e092e6687360bc0') {
-  fail(`release manifest portable CORE binding is stale: ${JSON.stringify(portableCore)}`);
+  fail(`historical September 5 portable CORE binding drifted: ${JSON.stringify(portableCore)}`);
+}
+const currentPortableCoreSha = sha256(read('CHARTER.txt'));
+if (sep8CitationOuroborosUpdate.schema !== 'seminar-schools-ml-citation-ouroboros-update-v1'
+    || sep8CitationOuroborosUpdate.updated_on !== '2026-09-08'
+    || sep8CitationOuroborosUpdate.source !== 'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_CITATION_OUROBOROS_2026-09-08.md'
+    || sep8CitationOuroborosUpdate.source_sha256 !== sha256(read(sep8CitationOuroborosUpdate.source))
+    || sep8CitationOuroborosUpdate.portable_core_sha256 !== currentPortableCoreSha
+    || sep8CitationOuroborosUpdate.portable_core_sha256 !== 'dc7d8b75dd5af43b3272da3d587c33af20ba13bcf402c674146f688814dbdd9e'
+    || sep8CitationOuroborosUpdate.portable_core_utf16_units !== 5000) {
+  fail('release manifest lacks the September 8 citation/Ouroboros current-state binding');
 }
 if (activeFormFixtureCounts.total !== 38) {
   fail(`release manifest active-form fixture count is stale: ${JSON.stringify(activeFormFixtureCounts)}`);
@@ -1610,59 +1661,223 @@ if (JSON.stringify(mlStarUpdate.prior_package_archive) !== JSON.stringify(expect
   fail('release manifest prior-package archive binding is stale');
 }
 const registerArtifacts = mlStarUpdate.artifact_sha256 || {};
-if (registerArtifacts['polymyth/methodologylist/mephistodata-register-fixtures.json']
+const preTeacherArtifactHash = relative => Object.prototype.hasOwnProperty.call(ouroborosArtifacts, relative)
+  ? ouroborosArtifacts[relative]
+  : Object.prototype.hasOwnProperty.call(synopsisArtifacts, relative)
+  ? synopsisArtifacts[relative]
+  : Object.prototype.hasOwnProperty.call(antifluffArtifacts, relative)
+  ? antifluffArtifacts[relative]
+  : Object.prototype.hasOwnProperty.call(sep8Artifacts, relative)
+    ? sep8Artifacts[relative]
+    : registerArtifacts[relative];
+// Later complete handoffs retain the earlier amendment objects verbatim and
+// advance file hashes only through an exact predecessor-to-successor chain.
+for (const [key, pin] of [
+ ['teacher_resources_bb_update_20260927','a39addd86a06b340624d5bec2bdabaaeadb6f199e8a5ef11590caf29f2820864'],
+ ['teacher_resources_bb_audit_20260927','2e54d3ccc6f1055ac362774710b9e769bd7f981440a5cd3db3c70ba7e42791dc'],
+ ['teacher_resources_bb_fixes_20260927','ae01ef48ba27a7a4bf5328963af83367178f5f8c5643d312ca617b92ac9e7ab7']
+]) if (sha256(JSON.stringify(releaseManifest[key])) !== pin) fail('Immutable teacher/BB predecessor amendment changed: '+key);
+function currentArtifactHash(relative) {
+ let expected = preTeacherArtifactHash(relative);
+ const original = releaseManifest.teacher_resources_bb_update_20260927;
+ if (original?.artifact_sha256?.[relative]) expected=original.artifact_sha256[relative];
+ for (const [key,id,predecessor] of [
+ ['teacher_resources_bb_audit_20260927','seminar-schools-teacher-resources-bb-audited-v2-2026-09-27','7be2545f0c3bfaf01f68c2b64b930ecfbaac5770f63f85a0afecfca09f14e169'],
+ ['teacher_resources_bb_fixes_20260927','seminar-schools-teacher-resources-bb-fixed-v3-2026-09-27','51023737aa3b2e70ea84ea8aa4fc028cf5bccb6a4f35611f6565f01b638b45a0'],
+ ['teacher_resources_bb_final_20260928','seminar-schools-teacher-resources-bb-final-v4-2026-09-28','93f00bdef4a639eed7e349df26ba6764b6bc811ab33893ba12b43e71caebc6e9'],
+ ['polymythcal_maintenance_20261001','2026-10-01-polymythcal-maintenance-v6','b963e1eed45eab5fe4118e0b6670f0dbc1ecceda2b650fb91c195f9d3537c33a']
+ ]) {
+  const next=releaseManifest[key];
+  if (next?.release_id===id && next.predecessor_sha256===predecessor && next.predecessor_artifact_sha256?.[relative]===expected) expected=next.artifact_sha256?.[relative] || expected;
+ }
+ return currentConceptArtifactHash(releaseManifest,relative,expected);
+}
+if (antifluffUpdate.predecessor_citation_ouroboros_binding_sha256 !== sha256(JSON.stringify(sep8CitationOuroborosUpdate))) {
+  fail('ANTIFLUFF successor changed its immutable citation/Ouroboros predecessor binding');
+}
+if (synopsisUpdate.schema !== 'seminar-schools-ml-synopsis-syn-update-v1'
+    || synopsisUpdate.updated_on !== '2026-09-08'
+    || synopsisUpdate.release_id !== 'seminar-schools-mephistodata-synopsis-syn-complete-2026-09-08'
+    || synopsisUpdate.predecessor_archive !== 'seminar-schools-mephistodata-antifluff-complete-2026-09-08.zip'
+    || synopsisUpdate.predecessor_sha256 !== '07acf886408fffa866385eb66458308596f60b0678af6a394aee4a4dcaa9e464'
+    || synopsisUpdate.predecessor_manifested_files !== 21350
+    || synopsisUpdate.source !== 'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_SYNOPSIS_SYN_2026-09-08.md'
+    || synopsisUpdate.source_sha256 !== sha256(read(synopsisUpdate.source))
+    || synopsisUpdate.canonical_owner !== 'coreplus-handler-mephistodata-execution-gates-2026-08-26'
+    || synopsisUpdate.current_map !== 'coreplus-current-map-amendment-2026-08-26'
+    || synopsisUpdate.canonical_entries !== 1233
+    || synopsisUpdate.default_behavior !== 'internal-nonmandatory-syn-attempt'
+    || synopsisUpdate.explicit_codeword !== 'syn') {
+  fail('release manifest lacks the September 8 Synopsis/syn current-state binding');
+}
+if (ouroborosUpdate.schema !== 'seminar-schools-ml-ouroboros-claim-fidelity-update-v1'
+    || ouroborosUpdate.updated_on !== '2026-09-11'
+    || ouroborosUpdate.release_id !== 'seminar-schools-mephistodata-ouroboros-claim-fidelity-complete-2026-09-11'
+    || ouroborosUpdate.predecessor_archive !== 'seminar-schools-mephistodata-synopsis-syn-complete-2026-09-08.zip'
+    || ouroborosUpdate.predecessor_sha256 !== 'e1978e81fc77ca337a66b5ddd2a5e622e75b5808d3eefc2d9c2c196f4adb8566'
+    || ouroborosUpdate.predecessor_manifested_files !== 21354
+    || ouroborosUpdate.predecessor_synopsis_binding_sha256 !== 'a9f79d85bf5f715978fd37a53fe3be67f1172a8d36e56785704ee014fc88b4ad'
+    || ouroborosUpdate.predecessor_synopsis_binding_sha256 !== sha256(JSON.stringify(synopsisUpdate))
+    || ouroborosUpdate.source !== 'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_OUROBOROS_CLAIM_FIDELITY_2026-09-11.md'
+    || ouroborosUpdate.source_sha256 !== sha256(read(ouroborosUpdate.source))
+    || ouroborosUpdate.canonical_owner !== OUROBOROS_OWNER
+    || ouroborosUpdate.coreplus_handler !== 'coreplus-handler-ouroborosanalyses'
+    || ouroborosUpdate.canonical_entries !== entries.length
+    || ouroborosUpdate.canonical_entries !== 1233) {
+  fail('release manifest lacks the September 11 Ouroborosanalyses claim-fidelity successor binding');
+}
+const requiredOuroborosArtifacts = [
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_OUROBOROS_CLAIM_FIDELITY_2026-09-11.md',
+  'polymyth/methodologylist/index.html',
+  'polymyth/methodologylist/mephistodata-rule-hardening-addendum.js',
+  'polymyth/methodologylist/mephistodata-register-fixtures.json',
+  'scripts/lib/mephistodata-runtime-gate.js',
+  'scripts/fixtures/ml-execution-gates/mephistodata-runtime-gate-hostile-fixtures.json',
+  'scripts/verify-mephistodata-runtime-gate.js',
+  'scripts/verify-ouroboros-claim-fidelity.js',
+  'scripts/verify-ml-execution-gates.js',
+  'scripts/verify-ml-dialectical-hardening.js',
+];
+for (const relative of requiredOuroborosArtifacts) {
+  if (!Object.prototype.hasOwnProperty.call(ouroborosArtifacts, relative)) {
+    fail(`Ouroborosanalyses claim-fidelity artifact binding is absent: ${relative}`);
+  }
+}
+for (const [relative, expected] of Object.entries(ouroborosArtifacts)) {
+  if (path.isAbsolute(relative) || relative.split(/[\\/]/).includes('..')
+      || !/^[0-9a-f]{64}$/.test(expected)
+      || !fs.existsSync(path.join(ROOT, relative))
+      || currentArtifactHash(relative) !== sha256(readBuffer(relative))) {
+    fail(`Ouroborosanalyses claim-fidelity current artifact binding is stale or invalid: ${relative}`);
+  }
+}
+requireNeedles(one(entries, OUROBOROS_OWNER).b, [
+  'Apply material prior answers, corrections, and connected premises together before classifying any remainder.',
+  'A conditional warning requires evidence that its condition occurs before it becomes an alleged defect.',
+  'Reassess every conclusion dependent on a correction while preserving independently supported findings.',
+], 'Ouroborosanalyses claim-fidelity current owner');
+for (const [relative, phrase] of [
+  ['polymyth/methodologylist/degorgonification/index.html', 'Apply material prior answers, corrections, and connected premises together before classifying any remainder.'],
+  ['polymyth/methodologylist/coreplus/index.html', 'Relevant project dependencies must be applied together before residue classification.'],
+  ['polymyth/methodologylist.txt', 'Apply material prior answers, corrections, and connected premises together before classifying any remainder.'],
+  ['polymyth/methodologylist-degorgonification.txt', 'Apply material prior answers, corrections, and connected premises together before classifying any remainder.'],
+  ['polymyth/methodologylist-coreplus.txt', 'Relevant project dependencies must be applied together before residue classification.'],
+]) {
+  requireNeedles(read(relative), [phrase], `Ouroborosanalyses generated surface ${relative}`);
+  if (read(relative) !== read(`public/${relative}`)) {
+    fail(`Ouroborosanalyses generated surface has stale public bytes: ${relative}`);
+  }
+}
+for (const relative of [
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_SYNOPSIS_SYN_2026-09-08.md',
+  'polymyth/methodologylist/index.html',
+  'polymyth/methodologylist/mephistodata-rule-hardening-addendum.js',
+  'polymyth/methodologylist/mephistodata-register-fixtures.json',
+  'polymyth/mephistodata-activation.md',
+  'scripts/lib/mephistodata-runtime-gate.js',
+  'scripts/fixtures/ml-execution-gates/mephistodata-runtime-gate-hostile-fixtures.json',
+  'scripts/verify-mephistodata-runtime-gate.js',
+  'scripts/verify-ml-execution-gates.js',
+  'scripts/verify-ml-dialectical-hardening.js',
+  'scripts/verify-ml-project-adjudication-v2.js',
+  'scripts/verify-ml-document-continuity.js',
+  'scripts/verify-assistant-twisting-alwaysalready.js',
+  'scripts/verify-page-size-budget.js',
+  'scripts/verify-ml-shorthand-resolution.js',
+  'scripts/verify-ml-rhetoric-taxonomy.js',
+  'public/polymyth/mephistodata-activation.md',
+  'scripts/build-ai-access-pack.js',
+  'scripts/verify-ai-access-pack.js',
+]) {
+  if (!synopsisArtifacts[relative] || currentArtifactHash(relative) !== sha256(read(relative))) {
+    fail(`Synopsis/syn current artifact binding is stale: ${relative}`);
+  }
+}
+for (const relative of [
+  'polymyth/methodologylist/index.html',
+  'polymyth/methodologylist/mephistodata-rule-hardening-addendum.js',
+  'scripts/lib/ml-writing-lint.js',
+  'scripts/fixtures/ml-writing-rules/fixtures.json',
+  'scripts/verify-ml-writing-rules.js',
+  'scripts/verify-ml-execution-gates.js',
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_ANTIFLUFF_2026-09-08.md',
+]) {
+  if (!antifluffArtifacts[relative]
+      || currentArtifactHash(relative) !== sha256(read(relative))) {
+    fail(`ANTIFLUFF current artifact binding is stale: ${relative}`);
+  }
+}
+const requiredSep8Artifacts = [
+  'CHARTER.txt',
+  'polymyth/methodologylist/index.html',
+  'polymyth/methodologylist/mephistodata-register-fixtures.json',
+  'polymyth/methodologylist/mephistodata-rule-hardening-addendum.js',
+  'scripts/lib/mephistodata-runtime-gate.js',
+  'scripts/fixtures/ml-execution-gates/mephistodata-runtime-gate-hostile-fixtures.json',
+  'scripts/verify-ml-execution-gates.js',
+  'scripts/verify-ml-active-form-conflicts.js',
+  'scripts/verify-ml-dialectical-hardening.js',
+  'scripts/verify-core-coreplus-alignment.js',
+  'UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_CITATION_OUROBOROS_2026-09-08.md',
+];
+for (const relative of requiredSep8Artifacts) {
+  if (!sep8Artifacts[relative] || currentArtifactHash(relative) !== sha256(read(relative))) {
+    fail(`September 8 current artifact binding is stale: ${relative}`);
+  }
+}
+if (currentArtifactHash('polymyth/methodologylist/mephistodata-register-fixtures.json')
       !== sha256(read('polymyth/methodologylist/mephistodata-register-fixtures.json'))
-    || registerArtifacts['polymyth/methodologylist/index.html']
+    || currentArtifactHash('polymyth/methodologylist/index.html')
       !== sha256(read('polymyth/methodologylist/index.html'))
-    || registerArtifacts['polymyth/methodologylist/mephistodata-rule-hardening-addendum.js']
+    || currentArtifactHash('polymyth/methodologylist/mephistodata-rule-hardening-addendum.js')
       !== sha256(read('polymyth/methodologylist/mephistodata-rule-hardening-addendum.js'))
-    || registerArtifacts['scripts/verify-ml-execution-gates.js']
+    || currentArtifactHash('scripts/verify-ml-execution-gates.js')
       !== sha256(read('scripts/verify-ml-execution-gates.js'))
-    || registerArtifacts['scripts/lib/mephistodata-runtime-gate.js']
+    || currentArtifactHash('scripts/lib/mephistodata-runtime-gate.js')
       !== sha256(read('scripts/lib/mephistodata-runtime-gate.js'))
-    || registerArtifacts['scripts/verify-mephistodata-runtime-gate.js']
+    || currentArtifactHash('scripts/verify-mephistodata-runtime-gate.js')
       !== sha256(read('scripts/verify-mephistodata-runtime-gate.js'))
-    || registerArtifacts['scripts/fixtures/ml-execution-gates/mephistodata-runtime-gate-hostile-fixtures.json']
+    || currentArtifactHash('scripts/fixtures/ml-execution-gates/mephistodata-runtime-gate-hostile-fixtures.json')
       !== sha256(read('scripts/fixtures/ml-execution-gates/mephistodata-runtime-gate-hostile-fixtures.json'))
-    || registerArtifacts['scripts/verify-ml-active-form-conflicts.js']
+    || currentArtifactHash('scripts/verify-ml-active-form-conflicts.js')
       !== sha256(read('scripts/verify-ml-active-form-conflicts.js'))
-    || registerArtifacts['data/baseline-morality-amendment-scope-contract.json']
+    || currentArtifactHash('data/baseline-morality-amendment-scope-contract.json')
       !== sha256(read('data/baseline-morality-amendment-scope-contract.json'))
-    || registerArtifacts['UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_BOTTOM_UP_DEFINITION_DEFECT_PROVENANCE_INTERNAL_RETRIEVAL_2026-09-03.md']
+    || currentArtifactHash('UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_BOTTOM_UP_DEFINITION_DEFECT_PROVENANCE_INTERNAL_RETRIEVAL_2026-09-03.md')
       !== sha256(read('UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_BOTTOM_UP_DEFINITION_DEFECT_PROVENANCE_INTERNAL_RETRIEVAL_2026-09-03.md'))
-    || registerArtifacts['UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md']
+    || currentArtifactHash('UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md')
       !== sha256(read('UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_TRUTHFUL_WORK_CLAIMS_2026-09-05.md'))
-    || registerArtifacts['UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md']
+    || currentArtifactHash('UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md')
       !== sha256(read('UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_FEMINISM_ACADEMIC_RESEARCH_GORGONIFICATION_2026-09-05.md'))
-    || registerArtifacts['UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md']
+    || currentArtifactHash('UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md')
       !== sha256(read('UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DEGORGONIFIED_FEMINISM_RETRIEVAL_ENFORCEMENT_2026-09-05.md'))
-    || registerArtifacts['UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DOCUMENT_CONTINUITY_2026-09-06.md']
+    || currentArtifactHash('UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DOCUMENT_CONTINUITY_2026-09-06.md')
       !== sha256(read('UPDATE_SOURCES/ML_STAR_UPDATE_SOURCE_DOCUMENT_CONTINUITY_2026-09-06.md'))
-    || registerArtifacts['scripts/fixtures/ml-document-continuity/fixtures.json']
+    || currentArtifactHash('scripts/fixtures/ml-document-continuity/fixtures.json')
       !== sha256(read('scripts/fixtures/ml-document-continuity/fixtures.json'))
-    || registerArtifacts['scripts/verify-ml-document-continuity.js']
+    || currentArtifactHash('scripts/verify-ml-document-continuity.js')
       !== sha256(read('scripts/verify-ml-document-continuity.js'))
-    || registerArtifacts['UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/b4f6ab5a-4eb3-44d0-943e-41acd52faec9.png']
+    || currentArtifactHash('UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/b4f6ab5a-4eb3-44d0-943e-41acd52faec9.png')
       !== sha256(readBuffer('UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/b4f6ab5a-4eb3-44d0-943e-41acd52faec9.png'))
-    || registerArtifacts['UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/3066e1d8-f6f9-4267-a948-90c076e29f93.png']
+    || currentArtifactHash('UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/3066e1d8-f6f9-4267-a948-90c076e29f93.png')
       !== sha256(readBuffer('UPDATE_SOURCES/TRUTHFUL_WORK_CLAIM_SCREENSHOTS_2026-09-05/3066e1d8-f6f9-4267-a948-90c076e29f93.png'))
-    || registerArtifacts['polymyth/methodologylist/mythology-integration-addendum.js']
+    || currentArtifactHash('polymyth/methodologylist/mythology-integration-addendum.js')
       !== sha256(read('polymyth/methodologylist/mythology-integration-addendum.js'))
-    || registerArtifacts['scripts/fixtures/ml-execution-gates/internal-writing-fixtures.json']
+    || currentArtifactHash('scripts/fixtures/ml-execution-gates/internal-writing-fixtures.json')
       !== sha256(read('scripts/fixtures/ml-execution-gates/internal-writing-fixtures.json'))
-    || registerArtifacts['scripts/fixtures/ml-execution-gates/fixtures.json']
+    || currentArtifactHash('scripts/fixtures/ml-execution-gates/fixtures.json')
       !== sha256(read('scripts/fixtures/ml-execution-gates/fixtures.json'))
-    || registerArtifacts['scripts/verify-ml-project-adjudication-v2.js']
+    || currentArtifactHash('scripts/verify-ml-project-adjudication-v2.js')
       !== sha256(read('scripts/verify-ml-project-adjudication-v2.js'))
-    || registerArtifacts['scripts/query-meaninglib.js']
+    || currentArtifactHash('scripts/query-meaninglib.js')
       !== sha256(read('scripts/query-meaninglib.js'))
-    || registerArtifacts['scripts/build-ai-access-pack.js']
+    || currentArtifactHash('scripts/build-ai-access-pack.js')
       !== sha256(read('scripts/build-ai-access-pack.js'))
-    || registerArtifacts['scripts/verify-ai-access-pack.js']
+    || currentArtifactHash('scripts/verify-ai-access-pack.js')
       !== sha256(read('scripts/verify-ai-access-pack.js'))
-    || registerArtifacts['scripts/verify-sep5-degorgonified-feminism-base-preservation.py']
+    || currentArtifactHash('scripts/verify-sep5-degorgonified-feminism-base-preservation.py')
       !== sha256(read('scripts/verify-sep5-degorgonified-feminism-base-preservation.py'))
-    || registerArtifacts['scripts/fixtures/futureproofing/sep5-degorgonified-feminism-preservation-tampered.json']
+    || currentArtifactHash('scripts/fixtures/futureproofing/sep5-degorgonified-feminism-preservation-tampered.json')
       !== sha256(read('scripts/fixtures/futureproofing/sep5-degorgonified-feminism-preservation-tampered.json'))
     || Object.keys(registerArtifacts).length < 84) {
   fail('release manifest does not bind the complete current ML* artifact set through the September 6 document-continuity amendment');

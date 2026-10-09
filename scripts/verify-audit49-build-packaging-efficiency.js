@@ -193,7 +193,7 @@ const publicTransientIsClean = publicTransientState.present.length === 0
   : publicTransientState.present.length === publicTransientState.tombstones.length
       && publicTransientState.action === 'reclaim-overlay-tombstones'
     || publicTransientState.present.length === publicTransientState.directory_overlays.length
-      && publicTransientState.action === 'reclaim-directory-overlay'
+      && ['reclaim-directory-overlay', 'reclaim-empty-overlay'].includes(publicTransientState.action)
     || publicTransientState.present.every(label => (
       publicTransientState.tombstones.includes(label)
         || publicTransientState.directory_overlays.includes(label)

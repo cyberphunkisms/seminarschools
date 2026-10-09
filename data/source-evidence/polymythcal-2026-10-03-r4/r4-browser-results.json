@@ -1,0 +1,171 @@
+{
+  "status": "passed",
+  "assertions": 169,
+  "event_detail_renders": 30,
+  "listing_renders": 6,
+  "viewports": [
+    320,
+    390,
+    1280
+  ],
+  "locales": [
+    "en-CA",
+    "fr-CA"
+  ],
+  "browser": "138.0.7204.23",
+  "cases": [
+    {
+      "locale": "en",
+      "width": 320,
+      "id": "13-going-on-30-the-musical-2026-11-24"
+    },
+    {
+      "locale": "en",
+      "width": 320,
+      "id": "amadeus-shaw-festival-2026-2026-05-26"
+    },
+    {
+      "locale": "en",
+      "width": 320,
+      "id": "duende-international-flamenco-festival-flamenco-an-2026-11-19"
+    },
+    {
+      "locale": "en",
+      "width": 320,
+      "id": "dhrupad-vocal-recital-by-pt-uday-bhawalkar-2026-05-30"
+    },
+    {
+      "locale": "en",
+      "width": 320,
+      "id": "2026-summer-camps-2026-07-06"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "id": "13-going-on-30-the-musical-2026-11-24"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "id": "amadeus-shaw-festival-2026-2026-05-26"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "id": "duende-international-flamenco-festival-flamenco-an-2026-11-19"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "id": "dhrupad-vocal-recital-by-pt-uday-bhawalkar-2026-05-30"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "id": "2026-summer-camps-2026-07-06"
+    },
+    {
+      "locale": "en",
+      "width": 1280,
+      "id": "13-going-on-30-the-musical-2026-11-24"
+    },
+    {
+      "locale": "en",
+      "width": 1280,
+      "id": "amadeus-shaw-festival-2026-2026-05-26"
+    },
+    {
+      "locale": "en",
+      "width": 1280,
+      "id": "duende-international-flamenco-festival-flamenco-an-2026-11-19"
+    },
+    {
+      "locale": "en",
+      "width": 1280,
+      "id": "dhrupad-vocal-recital-by-pt-uday-bhawalkar-2026-05-30"
+    },
+    {
+      "locale": "en",
+      "width": 1280,
+      "id": "2026-summer-camps-2026-07-06"
+    },
+    {
+      "locale": "fr",
+      "width": 320,
+      "id": "13-going-on-30-the-musical-2026-11-24"
+    },
+    {
+      "locale": "fr",
+      "width": 320,
+      "id": "amadeus-shaw-festival-2026-2026-05-26"
+    },
+    {
+      "locale": "fr",
+      "width": 320,
+      "id": "duende-international-flamenco-festival-flamenco-an-2026-11-19"
+    },
+    {
+      "locale": "fr",
+      "width": 320,
+      "id": "dhrupad-vocal-recital-by-pt-uday-bhawalkar-2026-05-30"
+    },
+    {
+      "locale": "fr",
+      "width": 320,
+      "id": "2026-summer-camps-2026-07-06"
+    },
+    {
+      "locale": "fr",
+      "width": 390,
+      "id": "13-going-on-30-the-musical-2026-11-24"
+    },
+    {
+      "locale": "fr",
+      "width": 390,
+      "id": "amadeus-shaw-festival-2026-2026-05-26"
+    },
+    {
+      "locale": "fr",
+      "width": 390,
+      "id": "duende-international-flamenco-festival-flamenco-an-2026-11-19"
+    },
+    {
+      "locale": "fr",
+      "width": 390,
+      "id": "dhrupad-vocal-recital-by-pt-uday-bhawalkar-2026-05-30"
+    },
+    {
+      "locale": "fr",
+      "width": 390,
+      "id": "2026-summer-camps-2026-07-06"
+    },
+    {
+      "locale": "fr",
+      "width": 1280,
+      "id": "13-going-on-30-the-musical-2026-11-24"
+    },
+    {
+      "locale": "fr",
+      "width": 1280,
+      "id": "amadeus-shaw-festival-2026-2026-05-26"
+    },
+    {
+      "locale": "fr",
+      "width": 1280,
+      "id": "duende-international-flamenco-festival-flamenco-an-2026-11-19"
+    },
+    {
+      "locale": "fr",
+      "width": 1280,
+      "id": "dhrupad-vocal-recital-by-pt-uday-bhawalkar-2026-05-30"
+    },
+    {
+      "locale": "fr",
+      "width": 1280,
+      "id": "2026-summer-camps-2026-07-06"
+    }
+  ],
+  "limits": [
+    "Headless browser viewports; no physical-device or native assistive-technology claim."
+  ]
+}

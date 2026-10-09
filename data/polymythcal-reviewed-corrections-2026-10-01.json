@@ -1,0 +1,801 @@
+{
+  "reviewed_on": "2026-10-01",
+  "research": {
+    "reviewed_on": "2026-10-01",
+    "scope": "Seven targeted primary-source corrections; not a whole-corpus verification.",
+    "records": [
+      {
+        "ids": [
+          "research-a68fa5b7ffd6"
+        ],
+        "source_url": "https://www.rom.on.ca/whats-on/exhibitions/crawford-lake-layers-time",
+        "source_status": "publisher content verified",
+        "verified_dates": {
+          "start": "2025-09-27",
+          "end": "2027-01-03"
+        },
+        "date_precision": "date",
+        "time_precision": "not-applicable",
+        "notes": "The official exhibition page establishes the full run and gallery; the former July 21 start and January 31 end were unsupported."
+      },
+      {
+        "ids": [
+          "research-4025b4d53bc6"
+        ],
+        "source_url": "https://www.cca.qc.ca/fr/evenements/102158/a-lecoute-des-archives",
+        "source_status": "publisher content verified",
+        "verified_dates": {
+          "start": "2025-12-18",
+          "end": "2026-10-18"
+        },
+        "date_precision": "date",
+        "time_precision": "not-applicable",
+        "notes": "The official exhibition page establishes the run and venue. Its embedded timestamps are not treated as daily exhibition hours."
+      },
+      {
+        "ids": [
+          "research-85a2572dda81"
+        ],
+        "source_url": "https://www.cca.qc.ca/fr/evenements/100227/everlasting-sans-treve",
+        "source_status": "publisher content verified",
+        "verified_dates": {
+          "start": "2025-09-25",
+          "end": "2026-11-08"
+        },
+        "date_precision": "date",
+        "time_precision": "not-applicable",
+        "notes": "The official exhibition page establishes the run and installation venue; creator attendance is not asserted."
+      },
+      {
+        "ids": [
+          "research-d011f85a0571"
+        ],
+        "source_url": "https://www.cca.qc.ca/fr/evenements/102435/latout-de-la-ville-cest-quelle-na-jamais-ete-parfaite",
+        "source_status": "publisher content verified",
+        "verified_dates": {
+          "start": "2026-05-21",
+          "end": "2027-01-10"
+        },
+        "date_precision": "date",
+        "time_precision": "not-applicable",
+        "notes": "The official exhibition page gives the run dates and galleries. July 21 was the research observation date."
+      },
+      {
+        "ids": [
+          "research-fc94dabfcb6d"
+        ],
+        "source_url": "https://www.cca.qc.ca/fr/evenements/102187/transcription-en-ligne-carnets-de-siza",
+        "source_status": "publisher content verified",
+        "verified_dates": {
+          "start": "2026-01-05",
+          "end": "2027-01-10"
+        },
+        "date_precision": "date",
+        "time_precision": "not-applicable",
+        "notes": "The CCA page establishes an online participation window, with a link to its free transcription project. This is not an in-person Montréal session."
+      },
+      {
+        "ids": [
+          "diego-marcon-2026-06-05"
+        ],
+        "source_url": "https://ago.ca/exhibitions/diego-marcon-bubble-boy",
+        "source_status": "publisher content verified",
+        "verified_dates": {
+          "start": "2026-06-06",
+          "end": "2026-10-04"
+        },
+        "date_precision": "date",
+        "time_precision": "not-applicable",
+        "notes": "The current exhibition page confirms the end date. The May 19 official release distinguishes June 3 member access from June 6 public/annual-passholder access; the older June 5 announcement is superseded.",
+        "supporting_source_url": "https://ago.ca/press-release/italian-artist-diego-marcon-make-his-canadian-debut-ago-exhibition-four-films"
+      },
+      {
+        "ids": [
+          "funny-girl-shaw-festival-2026-2026-05-26"
+        ],
+        "source_url": "https://www.shawfest.com/playbill/funny-girl/",
+        "source_status": "publisher content verified",
+        "verified_dates": {
+          "start": "2026-04-24",
+          "end": "2026-10-03"
+        },
+        "date_precision": "date",
+        "time_precision": "not-applicable",
+        "notes": "The official 2026 production page gives the complete April 24–October 3 run. Individual show times must come from its Dates & Tickets schedule; the old single clock time cannot describe the whole run."
+      }
+    ]
+  },
+  "corrections": {
+    "research-a68fa5b7ffd6": {
+      "date": "2025-09-27T00:00-04:00",
+      "end_date": "2027-01-03T00:00-05:00",
+      "date_precision": "date",
+      "end_date_precision": "date",
+      "time_precision": "not-applicable",
+      "venue": "Royal Ontario Museum, Level 3, European Rotating Exhibitions, Toronto",
+      "city": "Toronto",
+      "corridor_zone": "toronto",
+      "source_url": "https://www.rom.on.ca/whats-on/exhibitions/crawford-lake-layers-time",
+      "last_checked_at": "2026-10-01T00:00:00Z",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      }
+    },
+    "research-4025b4d53bc6": {
+      "date": "2025-12-18T00:00-05:00",
+      "end_date": "2026-10-18T00:00-04:00",
+      "date_precision": "date",
+      "end_date_precision": "date",
+      "time_precision": "not-applicable",
+      "venue": "Centre Canadien d’Architecture, Vitrines, 1920 rue Baile, Montréal",
+      "city": "Montréal",
+      "corridor_zone": "montreal",
+      "source_url": "https://www.cca.qc.ca/fr/evenements/102158/a-lecoute-des-archives",
+      "last_checked_at": "2026-10-01T00:00:00Z",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      }
+    },
+    "research-85a2572dda81": {
+      "date": "2025-09-25T00:00-04:00",
+      "end_date": "2026-11-08T00:00-05:00",
+      "date_precision": "date",
+      "end_date_precision": "date",
+      "time_precision": "not-applicable",
+      "venue": "Centre Canadien d’Architecture, Maison Shaughnessy, Montréal",
+      "city": "Montréal",
+      "corridor_zone": "montreal",
+      "source_url": "https://www.cca.qc.ca/fr/evenements/100227/everlasting-sans-treve",
+      "last_checked_at": "2026-10-01T00:00:00Z",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      }
+    },
+    "research-d011f85a0571": {
+      "date": "2026-05-21T00:00-04:00",
+      "end_date": "2027-01-10T00:00-05:00",
+      "date_precision": "date",
+      "end_date_precision": "date",
+      "time_precision": "not-applicable",
+      "venue": "Centre Canadien d’Architecture, Salles principales, Montréal",
+      "city": "Montréal",
+      "corridor_zone": "montreal",
+      "source_url": "https://www.cca.qc.ca/fr/evenements/102435/latout-de-la-ville-cest-quelle-na-jamais-ete-parfaite",
+      "last_checked_at": "2026-10-01T00:00:00Z",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      }
+    },
+    "research-fc94dabfcb6d": {
+      "date": "2026-01-05T00:00-05:00",
+      "end_date": "2027-01-10T00:00-05:00",
+      "date_precision": "date",
+      "end_date_precision": "date",
+      "time_precision": "not-applicable",
+      "venue": "Online via FromThePage",
+      "city": "Online",
+      "corridor_zone": "online-global",
+      "source_url": "https://www.cca.qc.ca/fr/evenements/102187/transcription-en-ligne-carnets-de-siza",
+      "last_checked_at": "2026-10-01T00:00:00Z",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": false
+      },
+      "province": "",
+      "country": "International",
+      "description": "Online public transcription of Álvaro Siza’s notebooks through the CCA’s FromThePage project. Participation window January 5, 2026–January 10, 2027; separate live sessions are announced on the official page."
+    },
+    "diego-marcon-2026-06-05": {
+      "date": "2026-06-06T00:00-04:00",
+      "end_date": "2026-10-04T00:00-04:00",
+      "date_precision": "date",
+      "end_date_precision": "date",
+      "time_precision": "not-applicable",
+      "venue": "Art Gallery of Ontario, Level 1, Philip B. Lind Gallery, Toronto",
+      "city": "Toronto",
+      "corridor_zone": "toronto",
+      "source_url": "https://ago.ca/exhibitions/diego-marcon-bubble-boy",
+      "last_checked_at": "2026-10-01T00:00:00Z",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "title": "Diego Marcon: The Bubble Boy",
+      "description": "Public and annual-passholder access June 6–October 4, 2026. Member access began June 3. Exhibition in the Philip B. Lind Gallery, Level 1."
+    },
+    "funny-girl-shaw-festival-2026-2026-05-26": {
+      "date": "2026-04-24T00:00-04:00",
+      "end_date": "2026-10-03T00:00-04:00",
+      "date_precision": "date",
+      "end_date_precision": "date",
+      "time_precision": "not-applicable",
+      "venue": "Festival Theatre, 10 Queen’s Parade, Niagara-on-the-Lake",
+      "city": "Niagara-on-the-Lake",
+      "corridor_zone": "outside-corridor",
+      "source_url": "https://www.shawfest.com/playbill/funny-girl/",
+      "last_checked_at": "2026-10-01T00:00:00Z",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "description": "2026 production run April 24–October 3. Individual performance dates and times are listed on the official production page. Recommended age 10+."
+    }
+  },
+  "identity_migrations": {},
+  "pre_correction_records": {
+    "research-a68fa5b7ffd6": {
+      "date": "2026-07-21T00:00-04:00",
+      "end_date": "2027-01-31T00:00-05:00",
+      "title": "Crawford Lake: Layers in Time",
+      "speaker_or_director": null,
+      "venue": "Location unconfirmed · Lieu non confirmé",
+      "type": "exhibition",
+      "source_url": "https://www.rom.on.ca/whats-on/events",
+      "source_id": "manual-curated",
+      "secondary_types": [],
+      "parent_id": null,
+      "is_parent_festival": false,
+      "age_band": "public",
+      "id": "research-a68fa5b7ffd6",
+      "attendance_confirmed": false,
+      "confidence": 86,
+      "four_condition_test": {
+        "time_place": false,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Crawford Lake: Layers in Time",
+      "scraped_at": "2026-07-21T12:00:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "_src": "manual-deep-research-2026-07-21",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "not-applicable",
+      "source_quality": "official-or-institutional",
+      "source_language": "und",
+      "platform_adapter": "manual-research-import",
+      "organizer": "Royal Ontario Museum",
+      "first_seen_at": "2026-07-21T12:00:00-04:00",
+      "last_checked_at": "2026-07-21T12:00:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "toronto",
+      "timezone": "America/Toronto",
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "location-unconfirmed"
+      ],
+      "legacy_ids": [],
+      "identity_key": "9617399f10a32a9a81d4",
+      "missing_count": 0,
+      "research_id": "a68fa5b7ffd6",
+      "research_source_ref": "turn197446search3",
+      "research_priority": "P1",
+      "research_registry_status": "registered-exact",
+      "recurrence_note": null,
+      "source_languages": [],
+      "source_language_review": "required",
+      "source_language_method": "not-yet-determined",
+      "_upsert_batches": [
+        "manual-polymythcal-arts-set10-reconstruction-2026-08-14"
+      ],
+      "research_set_cross_tags": [
+        "10-Arts-Performance-Exhibitions-and-Festivals"
+      ],
+      "arts_event_forms": [
+        "exhibition"
+      ],
+      "arts_disciplines": [
+        "visual-arts"
+      ],
+      "arts_occurrence_role": "run",
+      "arts_access_status": "access-unconfirmed",
+      "set10_classified_at": "2026-08-14T22:00:00-04:00",
+      "previous_dates": [],
+      "description": "",
+      "destination_url": "",
+      "destination_status": "unavailable-specific-page",
+      "destination_scope": "unavailable",
+      "destination_kind": "unavailable",
+      "destination_evidence": "fail-closed"
+    },
+    "research-4025b4d53bc6": {
+      "date": "2026-07-21T00:00-04:00",
+      "end_date": "2026-10-18T00:00-04:00",
+      "title": "À l’écoute des archives",
+      "speaker_or_director": null,
+      "venue": "Location unconfirmed · Lieu non confirmé",
+      "type": "exhibition",
+      "source_url": "https://www.cca.qc.ca/fr/calendrier/",
+      "source_id": "manual-curated",
+      "secondary_types": [],
+      "parent_id": null,
+      "is_parent_festival": false,
+      "age_band": "public",
+      "id": "research-4025b4d53bc6",
+      "attendance_confirmed": false,
+      "confidence": 86,
+      "four_condition_test": {
+        "time_place": false,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "À l’écoute des archives",
+      "scraped_at": "2026-07-21T12:00:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "_src": "manual-deep-research-2026-07-21",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "not-applicable",
+      "source_quality": "official-or-institutional",
+      "source_language": "fr-CA",
+      "platform_adapter": "manual-research-import",
+      "organizer": "Canadian Centre for Architecture",
+      "first_seen_at": "2026-07-21T12:00:00-04:00",
+      "last_checked_at": "2026-07-21T12:00:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Montréal",
+      "province": "Quebec",
+      "country": "Canada",
+      "corridor_zone": "montreal",
+      "timezone": "America/Toronto",
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "location-unconfirmed"
+      ],
+      "legacy_ids": [],
+      "identity_key": "f3d494689cabd002c352",
+      "missing_count": 0,
+      "research_id": "4025b4d53bc6",
+      "research_source_ref": "turn819721search3",
+      "research_priority": "P1",
+      "research_registry_status": "registered-domain-only",
+      "recurrence_note": null,
+      "source_languages": [
+        "fr-CA"
+      ],
+      "source_language_method": "source-declared",
+      "_upsert_batches": [
+        "manual-polymythcal-arts-set10-reconstruction-2026-08-14"
+      ],
+      "research_set_cross_tags": [
+        "10-Arts-Performance-Exhibitions-and-Festivals"
+      ],
+      "arts_event_forms": [
+        "exhibition"
+      ],
+      "arts_disciplines": [
+        "visual-arts"
+      ],
+      "arts_occurrence_role": "run",
+      "arts_access_status": "access-unconfirmed",
+      "set10_classified_at": "2026-08-14T22:00:00-04:00",
+      "previous_dates": [],
+      "description": "",
+      "destination_url": "",
+      "destination_status": "unavailable-specific-page",
+      "destination_scope": "unavailable",
+      "destination_kind": "unavailable",
+      "destination_evidence": "fail-closed"
+    },
+    "research-85a2572dda81": {
+      "date": "2026-07-21T00:00-04:00",
+      "end_date": "2026-11-08T00:00-05:00",
+      "title": "Everlasting (Sans trêve)",
+      "speaker_or_director": null,
+      "venue": "Location unconfirmed · Lieu non confirmé",
+      "type": "exhibition",
+      "source_url": "https://www.cca.qc.ca/fr/calendrier/",
+      "source_id": "manual-curated",
+      "secondary_types": [],
+      "parent_id": null,
+      "is_parent_festival": false,
+      "age_band": "public",
+      "id": "research-85a2572dda81",
+      "attendance_confirmed": false,
+      "confidence": 86,
+      "four_condition_test": {
+        "time_place": false,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Everlasting (Sans trêve)",
+      "scraped_at": "2026-07-21T12:00:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "_src": "manual-deep-research-2026-07-21",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "not-applicable",
+      "source_quality": "official-or-institutional",
+      "source_language": "fr-CA",
+      "platform_adapter": "manual-research-import",
+      "organizer": "Canadian Centre for Architecture",
+      "first_seen_at": "2026-07-21T12:00:00-04:00",
+      "last_checked_at": "2026-07-21T12:00:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Montréal",
+      "province": "Quebec",
+      "country": "Canada",
+      "corridor_zone": "montreal",
+      "timezone": "America/Toronto",
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "location-unconfirmed"
+      ],
+      "legacy_ids": [],
+      "identity_key": "9cd255e0ff8d8cb56940",
+      "missing_count": 0,
+      "research_id": "85a2572dda81",
+      "research_source_ref": "turn819721search3",
+      "research_priority": "P1",
+      "research_registry_status": "registered-domain-only",
+      "recurrence_note": null,
+      "source_languages": [
+        "fr-CA"
+      ],
+      "source_language_method": "source-declared",
+      "_upsert_batches": [
+        "manual-polymythcal-arts-set10-reconstruction-2026-08-14"
+      ],
+      "research_set_cross_tags": [
+        "10-Arts-Performance-Exhibitions-and-Festivals"
+      ],
+      "arts_event_forms": [
+        "exhibition"
+      ],
+      "arts_disciplines": [
+        "visual-arts"
+      ],
+      "arts_occurrence_role": "run",
+      "arts_access_status": "access-unconfirmed",
+      "set10_classified_at": "2026-08-14T22:00:00-04:00",
+      "previous_dates": [],
+      "description": "",
+      "destination_url": "",
+      "destination_status": "unavailable-specific-page",
+      "destination_scope": "unavailable",
+      "destination_kind": "unavailable",
+      "destination_evidence": "fail-closed"
+    },
+    "research-d011f85a0571": {
+      "date": "2026-07-21T00:00-04:00",
+      "end_date": "2027-01-10T00:00-05:00",
+      "title": "L’atout de la ville c’est qu’elle n’a jamais été parfaite",
+      "speaker_or_director": null,
+      "venue": "Location unconfirmed · Lieu non confirmé",
+      "type": "exhibition",
+      "source_url": "https://www.cca.qc.ca/fr/calendrier/",
+      "source_id": "manual-curated",
+      "secondary_types": [],
+      "parent_id": null,
+      "is_parent_festival": false,
+      "age_band": "public",
+      "id": "research-d011f85a0571",
+      "attendance_confirmed": false,
+      "confidence": 86,
+      "four_condition_test": {
+        "time_place": false,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "L’atout de la ville c’est qu’elle n’a jamais été parfaite",
+      "scraped_at": "2026-07-21T12:00:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "_src": "manual-deep-research-2026-07-21",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "not-applicable",
+      "source_quality": "official-or-institutional",
+      "source_language": "fr-CA",
+      "platform_adapter": "manual-research-import",
+      "organizer": "Canadian Centre for Architecture",
+      "first_seen_at": "2026-07-21T12:00:00-04:00",
+      "last_checked_at": "2026-07-21T12:00:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Montréal",
+      "province": "Quebec",
+      "country": "Canada",
+      "corridor_zone": "montreal",
+      "timezone": "America/Toronto",
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "location-unconfirmed"
+      ],
+      "legacy_ids": [],
+      "identity_key": "11448b6f2442ce8f825e",
+      "missing_count": 0,
+      "research_id": "d011f85a0571",
+      "research_source_ref": "turn819721search3",
+      "research_priority": "P1",
+      "research_registry_status": "registered-domain-only",
+      "recurrence_note": null,
+      "source_languages": [
+        "fr-CA"
+      ],
+      "source_language_method": "source-declared",
+      "_upsert_batches": [
+        "manual-polymythcal-arts-set10-reconstruction-2026-08-14"
+      ],
+      "research_set_cross_tags": [
+        "10-Arts-Performance-Exhibitions-and-Festivals"
+      ],
+      "arts_event_forms": [
+        "exhibition"
+      ],
+      "arts_disciplines": [
+        "visual-arts"
+      ],
+      "arts_occurrence_role": "run",
+      "arts_access_status": "access-unconfirmed",
+      "set10_classified_at": "2026-08-14T22:00:00-04:00",
+      "previous_dates": [],
+      "description": "",
+      "destination_url": "",
+      "destination_status": "unavailable-specific-page",
+      "destination_scope": "unavailable",
+      "destination_kind": "unavailable",
+      "destination_evidence": "fail-closed"
+    },
+    "research-fc94dabfcb6d": {
+      "date": "2026-07-21T00:00-04:00",
+      "end_date": "2027-01-10T00:00-05:00",
+      "title": "Transcription en ligne : Carnets de Siza",
+      "speaker_or_director": null,
+      "venue": "Location unconfirmed · Lieu non confirmé",
+      "type": "community",
+      "source_url": "https://www.cca.qc.ca/fr/calendrier/",
+      "source_id": "manual-curated",
+      "description": "",
+      "secondary_types": [
+        "online participatory event",
+        "community"
+      ],
+      "parent_id": null,
+      "is_parent_festival": false,
+      "age_band": "public",
+      "id": "research-fc94dabfcb6d",
+      "attendance_confirmed": false,
+      "confidence": 86,
+      "four_condition_test": {
+        "time_place": false,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": false
+      },
+      "raw_excerpt": "Transcription en ligne : Carnets de Siza",
+      "scraped_at": "2026-07-21T12:00:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "_src": "manual-deep-research-2026-07-21",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "not-applicable",
+      "source_quality": "official-or-institutional",
+      "source_language": "fr-CA",
+      "platform_adapter": "manual-research-import",
+      "organizer": "Canadian Centre for Architecture",
+      "first_seen_at": "2026-07-21T12:00:00-04:00",
+      "last_checked_at": "2026-07-21T12:00:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Montréal",
+      "province": "Quebec",
+      "country": "Canada",
+      "corridor_zone": "montreal",
+      "timezone": "America/Toronto",
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "location-unconfirmed"
+      ],
+      "legacy_ids": [],
+      "identity_key": "6ca92c0a1e63473147d1",
+      "missing_count": 0,
+      "research_id": "fc94dabfcb6d",
+      "research_source_ref": "turn819721search3",
+      "research_priority": "P1",
+      "research_registry_status": "registered-domain-only",
+      "recurrence_note": null,
+      "source_languages": [
+        "fr-CA"
+      ],
+      "source_language_method": "source-declared",
+      "previous_dates": [],
+      "destination_url": "",
+      "destination_status": "unavailable-specific-page",
+      "destination_scope": "unavailable",
+      "destination_kind": "unavailable",
+      "destination_evidence": "fail-closed"
+    },
+    "diego-marcon-2026-06-05": {
+      "date": "2026-06-05T00:00-04:00",
+      "end_date": "2026-10-04T00:00-04:00",
+      "title": "Diego Marcon",
+      "speaker_or_director": null,
+      "venue": "Art Gallery of Ontario",
+      "type": "exhibition",
+      "source_url": "https://ago.ca/exhibitions",
+      "source_id": "corpus-2026-06-09",
+      "secondary_types": [],
+      "parent_id": null,
+      "is_parent_festival": false,
+      "age_band": null,
+      "id": "diego-marcon-2026-06-05",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": false,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "",
+      "scraped_at": "2026-08-15T22:00:00.000Z",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "_src": "manual",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "not-applicable",
+      "source_quality": "official-or-institutional",
+      "first_seen_at": "2026-06-28T04:25:37.079Z",
+      "last_checked_at": "2026-08-15T22:00:00.000Z",
+      "lifecycle_status": "active",
+      "city": "Unknown",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [],
+      "identity_key": "9ebeb6f3cea7df14404a",
+      "missing_count": 0,
+      "source_language": "en-CA",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_review": "required",
+      "source_language_method": "not-yet-determined",
+      "platform_adapter": "manual",
+      "_upsert_batches": [
+        "manual-polymythcal-arts-set10-reconstruction-2026-08-14"
+      ],
+      "research_set_cross_tags": [
+        "10-Arts-Performance-Exhibitions-and-Festivals"
+      ],
+      "arts_event_forms": [
+        "exhibition"
+      ],
+      "arts_disciplines": [
+        "visual-arts"
+      ],
+      "arts_occurrence_role": "run",
+      "arts_access_status": "public-or-ticketed",
+      "set10_classified_at": "2026-08-14T22:00:00-04:00",
+      "previous_dates": [],
+      "description": "",
+      "destination_url": "",
+      "destination_status": "unavailable-specific-page",
+      "destination_scope": "unavailable",
+      "destination_kind": "unavailable",
+      "destination_evidence": "fail-closed"
+    },
+    "funny-girl-shaw-festival-2026-2026-05-26": {
+      "date": "2026-05-26T19:30-04:00",
+      "end_date": "2026-10-03T22:30-04:00",
+      "title": "Funny Girl (Shaw Festival 2026)",
+      "venue": "Festival Theatre, 10 Queen's Parade, Niagara-on-the-Lake",
+      "type": "festival-of-form",
+      "speaker_or_director": "Sara Farb, Qasim Khan; dir. Eda Holmes",
+      "source_url": "https://www.shawfest.com/#funny-girl-shaw-festival-2026",
+      "description": "Sara Farb as Fanny Brice; Qasim Khan as Nick Arnstein. Directed by Eda Holmes.",
+      "source_id": "manual-curated",
+      "_src": "manual",
+      "secondary_types": [],
+      "parent_id": null,
+      "is_parent_festival": false,
+      "age_band": null,
+      "id": "funny-girl-shaw-festival-2026-2026-05-26",
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Sara Farb as Fanny Brice; Qasim Khan as Nick Arnstein. Directed by Eda Holmes.",
+      "scraped_at": "2026-08-15T22:00:00.000Z",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "record_kind": "event",
+      "date_precision": "exact",
+      "time_precision": "not-applicable",
+      "source_quality": "official-or-institutional",
+      "first_seen_at": "2026-06-28T04:25:37.079Z",
+      "last_checked_at": "2026-08-15T22:00:00.000Z",
+      "lifecycle_status": "active",
+      "city": "Unknown",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [],
+      "identity_key": "482d19f1f6a4b00e6780",
+      "missing_count": 0,
+      "source_language": "en-CA",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_review": "required",
+      "source_language_method": "not-yet-determined",
+      "platform_adapter": "manual",
+      "_upsert_batches": [
+        "manual-polymythcal-arts-set10-reconstruction-2026-08-14"
+      ],
+      "research_set_cross_tags": [
+        "10-Arts-Performance-Exhibitions-and-Festivals"
+      ],
+      "arts_event_forms": [
+        "theatre-performance",
+        "festival"
+      ],
+      "arts_disciplines": [
+        "theatre",
+        "multidisciplinary-cultural-festival"
+      ],
+      "arts_occurrence_role": "run",
+      "arts_access_status": "public-or-ticketed",
+      "set10_classified_at": "2026-08-14T22:00:00-04:00",
+      "previous_dates": [],
+      "destination_url": "",
+      "destination_status": "unavailable-specific-page",
+      "destination_scope": "unavailable",
+      "destination_kind": "unavailable",
+      "destination_evidence": "fail-closed"
+    }
+  }
+}

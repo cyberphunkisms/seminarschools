@@ -1,0 +1,170 @@
+{
+  "schema": "seminar-schools-teacher-bb-fixes-v3",
+  "status": "passed",
+  "browser": "138.0.7204.23",
+  "checks": [
+    {
+      "name": "Combined query: telltale heart Poe",
+      "passed": true
+    },
+    {
+      "name": "Combined query: telltale haert pdf",
+      "passed": true
+    },
+    {
+      "name": "Combined query: telltale haert Poe",
+      "passed": true
+    },
+    {
+      "name": "Combined query: telltlae heart Poe PDF",
+      "passed": true
+    },
+    {
+      "name": "Combined query: tell tale heart Edgar Allan Poe PDF",
+      "passed": true
+    },
+    {
+      "name": "Alias combination retains the story: Thank You Maam PDF",
+      "passed": true
+    },
+    {
+      "name": "Alias combination retains the story: Thank You Maam Hughes",
+      "passed": true
+    },
+    {
+      "name": "Alias combination retains the story: Thank You Mam PDF",
+      "passed": true
+    },
+    {
+      "name": "Unrelated title and author stay excluded",
+      "passed": true
+    },
+    {
+      "name": "Initial navigation is reachable at 320",
+      "passed": true,
+      "detail": {
+        "searchBottom": 701.1875,
+        "browseTop": 1226.59375,
+        "resultsHidden": true,
+        "overflow": -15
+      }
+    },
+    {
+      "name": "Initial navigation is reachable at 375",
+      "passed": true,
+      "detail": {
+        "searchBottom": 629.328125,
+        "browseTop": 1105.21875,
+        "resultsHidden": true,
+        "overflow": -15
+      }
+    },
+    {
+      "name": "Initial navigation is reachable at 768",
+      "passed": true,
+      "detail": {
+        "searchBottom": 721.015625,
+        "browseTop": 1253.0625,
+        "resultsHidden": true,
+        "overflow": -15
+      }
+    },
+    {
+      "name": "Initial navigation is reachable at 1280",
+      "passed": true,
+      "detail": {
+        "searchBottom": 746.640625,
+        "browseTop": 1208.640625,
+        "resultsHidden": true,
+        "overflow": -15
+      }
+    },
+    {
+      "name": "Legacy task fragment lands on visible results",
+      "passed": true,
+      "detail": {
+        "hash": "#search-results",
+        "hidden": false,
+        "focus": "search-results",
+        "top": 118.625
+      }
+    },
+    {
+      "name": "Skip link targets the visible results",
+      "passed": true
+    },
+    {
+      "name": "Pagination focuses the first added result",
+      "passed": true
+    },
+    {
+      "name": "Pagination retains existing and added results",
+      "passed": true
+    },
+    {
+      "name": "Filter removal keeps focus on a remaining control",
+      "passed": true
+    },
+    {
+      "name": "Last filter removal returns focus to search",
+      "passed": true
+    },
+    {
+      "name": "Unfiltered printing includes the complete catalog",
+      "passed": true
+    },
+    {
+      "name": "Printing restores the browsing view",
+      "passed": true
+    },
+    {
+      "name": "Fallback hides inactive controls when scripts are disabled",
+      "passed": true
+    },
+    {
+      "name": "Fallback preserves all sources when scripts are disabled",
+      "passed": true
+    },
+    {
+      "name": "Fallback hides inactive controls when scripts are blocked",
+      "passed": true
+    },
+    {
+      "name": "Fallback preserves all sources when scripts are blocked",
+      "passed": true
+    },
+    {
+      "name": "Module retains 185 source records",
+      "passed": true
+    },
+    {
+      "name": "Module starts with an actionable five-step guide",
+      "passed": true
+    },
+    {
+      "name": "Module contents start collapsed",
+      "passed": true
+    },
+    {
+      "name": "Module introduction has no conversation-dependent authorization claim",
+      "passed": true
+    },
+    {
+      "name": "Preparation link opens its source record",
+      "passed": true
+    },
+    {
+      "name": "Module source fragment survives reload",
+      "passed": true
+    },
+    {
+      "name": "Module has no phone overflow",
+      "passed": true
+    },
+    {
+      "name": "No runtime errors",
+      "passed": true,
+      "detail": []
+    }
+  ]
+}

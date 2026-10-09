@@ -15,6 +15,8 @@ const RELEASE_ASSET_PATHS = Object.freeze([
   'index.html',
   'teacherresources/finder.css',
   'teacherresources/finder.js',
+  'teacherresources/search-engine.js',
+  'teacherresources/return-to-search.js',
   'teacherresources/index.html',
   'data/polymyth-seminar-events.json',
   'data/polymythcal-event-schema-v2.json',
@@ -44,6 +46,8 @@ const PUBLIC_RELEASE_ASSET_PATHS = Object.freeze({
   'index.html': 'index.html',
   'teacherresources/finder.css': 'teacherresources/finder.css',
   'teacherresources/finder.js': 'teacherresources/finder.js',
+  'teacherresources/search-engine.js': 'teacherresources/search-engine.js',
+  'teacherresources/return-to-search.js': 'teacherresources/return-to-search.js',
   'teacherresources/index.html': 'teacherresources/index.html',
   'data/polymyth-seminar-events.json': null,
   'data/polymythcal-event-schema-v2.json': null,
@@ -66,6 +70,8 @@ const PUBLIC_RELEASE_ASSET_PATHS = Object.freeze({
 const TEACHERRESOURCES_ASSETS = Object.freeze({
   finder_css: 'teacherresources/finder.css',
   finder_js: 'teacherresources/finder.js',
+  search_engine_js: 'teacherresources/search-engine.js',
+  return_to_search_js: 'teacherresources/return-to-search.js',
 });
 
 const RELEASE_IDENTITY_FIELDS = Object.freeze([

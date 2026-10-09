@@ -1,0 +1,57 @@
+POLYMYTHCAL WEBSITE FIXES — REVISION 5, 3 OCTOBER 2026
+
+One complete editable website ZIP, including built public/. No deployment.
+
+THIS PASS
+63 existing records corrected: 45 official-source field reviews and 18 narrow
+geography normalizations. All 2,086 IDs remain: 1,871 chronology, 215 watchlist.
+
+- Corrected TIFA event times and exact destinations, including Maggie O’Farrell’s
+  7 pm start, East West Street’s November 1 interval, and the updated PEN talk.
+  Barbara Kingsolver’s October 30 event is explicitly cancelled.
+- Corrected Wine in the Wilderness’s extension through October 11 and three
+  other Canadian Stage production runs. The November 19 Rogers v. Rogers
+  talkback remains date-only: 7:30 pm is the performance’s start, not the talkback.
+- Corrected ROM’s Wildlife Photographer run to November 7–February 28,
+  Psychedelics to June 6–December 6, and Shokkan to April 4–September 7.
+  Reviewed Raptors and clinic dates. Future clinic clocks remain unconfirmed.
+- Replaced festival-length intervals on three Music Garden concerts with their
+  individual dates and one-hour intervals. The June 25 Nagata Shachu concert
+  is cancelled. Corrected Harbourfront series spans and four concert venues.
+- Corrected the August 19 dance venue to Concert Stage and dance event intervals
+  to 7–10 pm; the live-band segment ends at 9:45 pm. September 2 is cancelled.
+- Removed continuous-hour implications from festival and production ranges.
+- Fixed cancellation visibility: cancelled events remain available in all-date
+  history, with status and calendar cancellation intact, and are excluded from
+  upcoming attendance windows and the compact upcoming featured feed.
+- Geography-only repairs retain prior event-verification timestamps and all
+  unresolved qualifications.
+
+MEASURED CHANGE FROM REVISION 4
+Specific event/series destinations: 943 -> 980 (+37).
+Unresolved specific destinations: 1143 -> 1106.
+Unknown city: 200 -> 175.
+Qualified/unconfirmed records: 848 -> 834.
+1348 records retain at least one unresolved destination,
+confirmation or city flag. Counts overlap. This release does not claim all
+source details are verified. The full remaining machine census is included.
+
+VALIDATION
+All required canonical build gates passed after the code fix.
+3727 focused static assertions passed. Responsive checks passed
+289 assertions across 48 detail renders and
+English/French listing checks at 320px, 390px and 1280px. Existing destination,
+JavaScript-free and monitoring regressions passed. The geometry gate passed
+its focused renders, reduced-motion, natural-input, Reader View and star-page
+checks. Mobile screenshots were visually inspected. A real featured-generator
+fixture verifies cancellation exclusion before the 64-record cap. An isolated
+full rebuild proved durable-byte idempotence without mutating the source tree.
+Every packaged member is read back against its recorded size and SHA-256.
+No physical-device, native assistive-technology or cross-engine claim is made.
+
+HISTORY AND EVIDENCE
+The same-day correction ledger is extended while its complete revision 4 bytes
+remain private. The revision 5 delta records each predecessor event and field
+change. Earlier releases and accepted fixes remain included. Evidence, receipts,
+screenshots and complete validation transcripts are outside public/ under
+data/source-evidence/polymythcal-2026-10-03-r5/.

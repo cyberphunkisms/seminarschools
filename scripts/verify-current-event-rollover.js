@@ -22,7 +22,7 @@ const failures = [];
 const fail = message => failures.push(message);
 const read = rel => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 const json = rel => JSON.parse(read(rel));
-const EXPECTED_COUNTS = Object.freeze({canonical: 2088, chronology: 1954, watchlist: 134});
+const EXPECTED_COUNTS = require('./lib/polymythcal-inventory-contract').currentInventoryCounts(ROOT);
 const WATCHLIST_REASON = Object.freeze({
   code: 'monitoring-marker',
   detail: 'Displayed date is a monitoring marker, not a confirmed event or deadline date.',
@@ -352,11 +352,8 @@ function main() {
   ) {
     fail('ordinary production build does not run the canonical event builder before the static search/sitemap builder');
   }
-  if (
-    finalizeSource.indexOf("[sys.executable,'scripts/build-polymythcal-audit13.py']")
-      > finalizeSource.indexOf("['node','scripts/build-search-pages.js']")
-  ) {
-    fail('Polymythcal publication pipeline runs the search/sitemap builder before canonical event pages');
+  if (!finalizeSource.includes("['npm','run','build']") || !finalizeSource.includes('ReleaseBuildLock')) {
+    fail('harvest publication must share the locked canonical event/search build');
   }
   for (const marker of [
     '&& !eventExpired(event)',

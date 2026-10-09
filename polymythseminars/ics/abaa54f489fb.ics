@@ -5,14 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:6903b90c63b50f04ee6a@seminarschools.com
-DTSTAMP:20260608T120000Z
-DTSTART;VALUE=DATE:20260603
-DTEND;VALUE=DATE:20260629
+DTSTAMP:20261003T110658Z
+DTSTART:20260621T000000Z
 SUMMARY:The Philip Glass Ensemble (Luminato 2026)
-LOCATION:Luminato Festival venues\, Toronto
-DESCRIPTION:The Philip Glass Ensemble. Music & Opera at Luminato Festival
-  JUNE 3-28\, 2026.
+LOCATION:Koerner Hall at the TELUS Centre for Performance and Learning\, 
+ Toronto
+DESCRIPTION:The Philip Glass Ensemble performs The Early Works on June 20
+  at 8 pm. Published runtime is approximately 120 minutes\, including a 1
+ 5-minute intermission.
 URL:https://seminarschools.com/polymythseminars/events/abaa54f489fb/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

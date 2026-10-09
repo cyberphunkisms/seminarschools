@@ -5,13 +5,14 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:0a2ac984d7240f21af34@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20261014
+DTSTAMP:20261003T110658Z
+DTSTART:20261014T210000Z
 SUMMARY:Special Open Council Meeting
-LOCATION:Location unconfirmed · Lieu non confirmé
+LOCATION:Online council meeting\; access through the town’s meeting pag
+ e
 DESCRIPTION:Special Open Council Meeting
 URL:https://seminarschools.com/polymythseminars/events/research-8ceb17e16
  054/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

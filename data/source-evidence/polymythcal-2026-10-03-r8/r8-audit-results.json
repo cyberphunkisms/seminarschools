@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "assertions": 2099,
+  "revision": 8,
+  "canonical_records": 2086,
+  "canonical_records_changed": 0,
+  "stable_ids_retained": 2086,
+  "destination_status": {
+    "unavailable-specific-page": 893,
+    "official-event-page": 565,
+    "official-series-page": 627,
+    "source-event-page": 1
+  },
+  "confirmation_status": {
+    "confirmed": 1307,
+    "unconfirmed": 779
+  },
+  "scope": "Existing search, presentation and saved-state repairs only. No event facts or taxonomy changes.",
+  "limits": [
+    "No fresh source-by-source verification of the 2086 listings.",
+    "Browser behaviour and performance measured in headless Chromium only."
+  ]
+}

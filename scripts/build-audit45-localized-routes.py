@@ -1057,6 +1057,8 @@ def polymythcal_temporal_presentation(
             )
     start = str(public_record.get("date") or "")[:10]
     end = str(public_record.get("end_date") or "")[:10]
+    if event.get("end_date_precision") == "month":
+        end = end[:7] + " (closing day unpublished · jour de clôture non publié)"
     if temporal_type == "date-range" and end and end != start:
         return (f"{start} – {end}", start, start)
     if temporal_type == "estimated":
@@ -1163,7 +1165,7 @@ def event_page(
         location_schema["address"] = city
     schema = {
         "@context": "https://schema.org", "@type": "Event", "name": title_source,
-        "startDate": date_machine, "endDate": end_machine or None,
+        "startDate": date_machine, "endDate": (end_machine if event.get("end_date_precision") != "month" else None) or None,
         "description": description_source or title_source, "url": canonical,
         "sameAs": destination_url or None, "inLanguage": content_language,
         "location": location_schema,
@@ -1214,7 +1216,7 @@ def event_page(
 <body {geometry_attrs} data-event-id="{meta_escape(event_id)}" data-confirmation-status="{meta_escape(confirmation)}" data-lifecycle-status="{meta_escape(event.get('lifecycle_status') or 'active')}" data-publication-surface="{'watchlist' if is_watchlist else 'chronology'}">
 <a class="skip-link" href="#main-content">{labels["skip"]}</a>
 <main id="main-content" class="pm-event-page">
-<nav class="pm-event-nav" aria-label="{'Navigation de la fiche' if french else 'Event navigation'}"><a href="/polymythseminars/{'fr/' if french else ''}">{labels["all"]}</a><a href="/polymythcommons/">Polymyth Commons</a><a href="{alternate_path}" hreflang="{'en-CA' if french else 'fr-CA'}">{labels["language"]}</a></nav>
+<nav class="pm-event-nav" aria-label="{'Navigation de la fiche' if french else 'Event navigation'}"><a data-calendar-return href="/polymythseminars/{'fr/' if french else ''}">{labels["all"]}</a><a href="/polymythcommons/">Polymyth Commons</a><a href="{alternate_path}" hreflang="{'en-CA' if french else 'fr-CA'}">{labels["language"]}</a></nav>
 <article class="pm-event-detail">
 <header class="pm-event-hero"><p class="pm-event-kicker">Polymythcal</p><div class="truth-row"><span class="truth-chip {meta_escape(confirmation)}">{status}</span></div>
 <h1 lang="{meta_escape(content_language)}">{htmllib.escape(title_source)}</h1></header>
@@ -1224,6 +1226,7 @@ def event_page(
 <div><dt>{labels["status"]}</dt><dd>{status}</dd></div>
 {f'<div><dt>{labels["source_language"]}</dt><dd>{htmllib.escape(source_label)}</dd></div>' if source_languages else ''}</dl>
 <section class="pm-event-primary-path" aria-label="{labels["continue"]}"><p>{labels["continue"]}</p>
+{f'<p class="pm-link-missing">{"Aucun lien public vérifié n’est disponible." if french else "No verified public link is available."}</p>' if not destination_url else ''}
 <div class="pm-event-actions">{f'<a class="pm-event-action primary" href="{meta_escape(destination_url)}" rel="noopener noreferrer">{destination_label} ↗</a>' if destination_url else ''}
 {'' if is_watchlist else f'<a class="pm-event-action" type="text/calendar" href="/polymythseminars/ics/{meta_escape(event_id)}.ics">{labels["calendar"]}</a>'}
 <a class="pm-event-action" href="/polymythseminars/{'fr/' if french else ''}correct/?event={meta_escape(canonical)}">{labels["correct"]}</a></div></section>
@@ -1275,9 +1278,9 @@ def french_event_alias_page(alias_id: str, target_id: str, source_sha: str) -> s
 PM_FORM_COPY = {
     "submit": {
         "en": ("Submit an event", "Submit public events, exhibitions, festivals, civic actions, or opportunities with an official source.",
-               [("Event title", "event_title", "text", True), ("Official source URL", "official_source_url", "url", True), ("Start date and time", "start_datetime", "datetime-local", True), ("End date and time", "end_datetime", "datetime-local", False), ("Venue and full location", "venue_location", "text", True), ("City", "city", "text", True), ("Primary language", "language", "text", False), ("Public details and accessibility information", "details", "textarea", False), ("Contact email for verification", "contact_email", "email", True)], "Send for review"),
+               [("Event title", "event_title", "text", True), ("Official source URL", "official_source_url", "url", True), ("Start date and time", "start_datetime", "datetime-local", True), ("End date and time", "end_datetime", "datetime-local", False), ("Time zone (for example, America/Toronto)", "timezone", "text", True), ("Venue and full location", "venue_location", "text", True), ("City", "city", "text", True), ("Primary language", "language", "text", False), ("Public details and accessibility information", "details", "textarea", False), ("Contact email for verification", "contact_email", "email", True)], "Send for review"),
         "fr": ("Proposer un événement", "Proposez un événement public, une exposition, un festival, une action civique ou une possibilité avec une source officielle.",
-               [("Titre", "event_title", "text", True), ("Adresse de la source officielle", "official_source_url", "url", True), ("Date et heure de début", "start_datetime", "datetime-local", True), ("Date et heure de fin", "end_datetime", "datetime-local", False), ("Lieu et adresse complète", "venue_location", "text", True), ("Ville", "city", "text", True), ("Langue principale", "language", "text", False), ("Détails publics et renseignements sur l’accessibilité", "details", "textarea", False), ("Courriel de vérification", "contact_email", "email", True)], "Envoyer pour examen"),
+               [("Titre", "event_title", "text", True), ("Adresse de la source officielle", "official_source_url", "url", True), ("Date et heure de début", "start_datetime", "datetime-local", True), ("Date et heure de fin", "end_datetime", "datetime-local", False), ("Fuseau horaire (par exemple, America/Toronto)", "timezone", "text", True), ("Lieu et adresse complète", "venue_location", "text", True), ("Ville", "city", "text", True), ("Langue principale", "language", "text", False), ("Détails publics et renseignements sur l’accessibilité", "details", "textarea", False), ("Courriel de vérification", "contact_email", "email", True)], "Envoyer pour examen"),
     },
     "correct": {
         "en": ("Correct a listing", "Report a cancellation, changed date, missing listing, incorrect detail, or official-source update.",

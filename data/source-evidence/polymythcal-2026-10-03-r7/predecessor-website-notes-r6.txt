@@ -1,0 +1,72 @@
+POLYMYTHCAL WEBSITE FIXES — REVISION 6, 3 OCTOBER 2026
+
+Complete editable website, including built public/.
+
+THIS PASS
+284 existing records reviewed: 163 direct source-field
+reviews, 16 geography-only normalizations, and 105 destination-only
+reviews. Destination scope is explicit; a series link does not establish an
+unpublished occurrence. 179 records receive canonical field corrections.
+All 2,086 stable IDs remain. No additions, deletions or merges.
+
+CORRECTIONS
+- Repaired specific event and named programme destinations, including municipal
+  events, court cases, performances, conferences and application programmes.
+- Corrected Taiwan lunar-calendar days, the local Dongzhi civil day, and NASA
+  eclipse greatest-phase UTC minutes. Civil observances and physical instants
+  remain distinct; no ritual clock is invented.
+- Repaired Cambridge, Gananoque, Luminato, Doors Open and other event dates,
+  venues, intervals and cancellation information. Production and programme
+  ranges do not imply continuous attendance or opening hours.
+- Reviewed 31 Supreme Court cases: eight published 9:30 am starts and 23
+  later hearings whose clocks remain unconfirmed.
+- Corrected source-year errors and opportunity deadlines. Two newly published
+  2027 application dates leave the watchlist. Unannounced 2027 conference calls
+  remain there; an exact link to the wrong year's conference is suppressed.
+- Repaired Québec's provincial-election source links, August 27 call date and
+  October 5 polling hours. The external-registration deadline day is verified;
+  its clock remains qualified. The call leaves the watchlist.
+- The paused Polar Expressions contest moves to monitoring and loses its
+  speculative calendar export. The Grease closing-date conflict remains
+  explicitly qualified rather than silently choosing a disputed extension.
+- Fixed public-build cleanup so stale watchlist calendar exports cannot reappear
+  after the final committed-tree write. The reproducibility checker also uses
+  lease-authorized recovery for empty transient locks after isolated builds.
+- Geography-only and destination-only reviews do not advance event source
+  freshness or clear unrelated qualifications.
+
+MEASURED CHANGE
+Usable event/series destinations: 980 -> 1192 (+212).
+Unresolved specific destinations: 1106 -> 894.
+Unknown city: 175 -> 152.
+Qualified/unconfirmed records: 834 -> 767.
+Publication: 1873 chronology and 213 monitoring records.
+
+REMAINING SOURCE GAPS
+1182 records retain at least one destination, confirmation or city
+flag; categories overlap. This is not a claim that every remaining source was
+factually reviewed. Every one of the 637 original URLs in the frozen 1,348-record
+backlog has a recorded machine retrieval attempt. The per-record coverage ledger
+distinguishes direct field reviews, destination-only and geography-only work,
+machine-only retrievals, blocked retrievals and unresolved source details.
+No qualification is cleared merely to reduce a count.
+
+VALIDATION
+The complete canonical build and all required gates passed.
+8884 focused static assertions and 325 responsive-browser assertions
+passed, across 72 English/French event-detail renders at 320, 390 and
+1280 pixels. Calendar date-only ranges and exact timezone offsets, cancellation
+status, watchlist exclusion from calendars and Event JSON-LD, canonical mirrors,
+public/source parity and prior-ledger preservation were checked. Existing
+destination and geometry browser gates passed. Lifecycle checks passed. An
+isolated full rebuild proved durable-byte idempotence without mutating the
+canonical source. Package entries are read back against SHA-256 and size.
+No deployment or repository push was performed.
+
+HISTORY AND EVIDENCE
+Current delta, source evidence, before/after census, per-record coverage,
+screenshots and validation transcripts:
+data/source-evidence/polymythcal-2026-10-03-r6/
+The earlier same-day correction ledger and release receipts are preserved there.
+Research evidence stays outside public/. The same-day canonical correction
+ledger is extended so future builds retain the reviewed repairs.

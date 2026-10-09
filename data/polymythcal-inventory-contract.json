@@ -1,8 +1,18 @@
 {
   "schema": "polymythcal-inventory-floor-v1",
   "baseline_release": "2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final",
-  "minimum_canonical_events": 2088,
+  "minimum_canonical_events": 2086,
   "minimum_sources": 779,
   "minimum_event_types": 40,
-  "rule": "Future releases may add records, sources, or types. They must not fall below this verified floor without an explicit migration and provenance note. All derived surfaces must equal the current canonical inventory."
+  "rule": "Future releases may add records, sources, or types. They must not fall below this verified floor without an explicit migration and provenance note. All derived surfaces must equal the current canonical inventory.",
+  "identity_correction_2026_09_07": {
+    "previous_floor": 2088,
+    "merged_duplicate_records": 2,
+    "ledger": "data/polymythcal-reviewed-corrections-2026-09-07.json",
+    "preserved_aliases": [
+      "b62fe9ac2e56",
+      "research-54ecc2f1065b"
+    ],
+    "reason": "AGO and ROM exhibition duplicates merged into existing canonical records; original records and links retained."
+  }
 }

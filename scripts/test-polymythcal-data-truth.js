@@ -14,6 +14,8 @@ const {
   TAXONOMY,
   TEMPORAL_TYPES,
   buildDiscoveryPayloads,
+  isMonitoringMarker,
+  classifyWhat,
   classifyTopics,
   matchSearch,
   normalizeSearchText,
@@ -23,11 +25,45 @@ const {
 const ROOT = path.resolve(__dirname, '..');
 const readJson = relative => JSON.parse(fs.readFileSync(path.join(ROOT, relative), 'utf8'));
 const canonical = readJson('data/polymyth-seminar-events.json');
+const legacyWatch = {
+  date: '2026-10-15T23:59-04:00', date_precision: 'exact', time_precision: 'exact',
+  confirmation_status: 'unconfirmed', description: 'Projected source watch for a fellowship.',
+};
+assert.strictEqual(isMonitoringMarker(legacyWatch), true, 'Exact inherited dates must not publish a source watch as an occurrence');
+assert.strictEqual(isMonitoringMarker({...legacyWatch, description: 'Announced lecture; time awaiting confirmation.'}), false,
+  'Unconfirmed real events must remain eligible for chronology');
+assert.strictEqual(isMonitoringMarker({...legacyWatch, confirmation_status: 'confirmed'}), false,
+  'A subsequently source-confirmed date must not remain a source watch');
+assert.strictEqual(isMonitoringMarker({...legacyWatch, description: '', raw_excerpt: legacyWatch.description}), true,
+  'Original explicit watch evidence must survive description cleanup');
+for (const description of [
+  'Submission deadline projected from the annual January window.',
+  'Opening date placeholder for the next spring cycle.',
+  'Local branch deadlines vary, so this placeholder marks the annual contest window.',
+  'Section calls vary, projected; confirm with the organizer.',
+]) {
+  assert(isMonitoringMarker({...legacyWatch, description}), description);
+  assert(!isMonitoringMarker({...legacyWatch, description, confirmation_status: 'confirmed'}),
+    'A subsequent source-confirmed date must supersede an earlier projection');
+}
+for (const description of ['An outdoor film projected on a screen.', 'Lecture about projected economic growth.']) {
+  assert(!isMonitoringMarker({...legacyWatch, description}), 'Non-date projection language must retain a real event');
+}
+assert(isMonitoringMarker({...legacyWatch, date_precision: 'unknown', description: 'Regional deadlines vary.'}));
+assert.strictEqual(classifyWhat({record_kind: 'opportunity', type: 'cfp', academic_bands: ['fellowships']}), 'opportunity:funding');
+assert.strictEqual(classifyWhat({record_kind: 'opportunity', type: 'cfp', academic_bands: ['fellowships'], opportunity_kind: 'call for papers'}), 'opportunity:cfp',
+  'A specific opportunity kind must outrank a broad academic band');
 const browse = readJson('polymythseminars/browse.json');
 const watchlist = readJson('polymythseminars/watchlist.json');
 const research = readJson('polymythseminars/research.json');
 const surfaces = readJson('data/polymythcal-publication-surfaces.json');
 const payloadReport = readJson('scripts/reports/polymythcal-browser-payload-report.json');
+for (const event of canonical.events) {
+  if (event.date_change_reason === 'projection-correction') {
+    assert(!(event.previous_dates || []).includes(event.date),
+      `${event.id}: the current corrected date is incorrectly recorded as previous`);
+  }
+}
 
 function ids(records) {
   return new Set(records.map(record => record.id));
@@ -76,9 +112,9 @@ function ics(id) {
   return fs.readFileSync(path.join(ROOT, 'polymythseminars', 'ics', `${id}.ics`), 'utf8');
 }
 
-assert.strictEqual(canonical.events.length, 2088);
-assert.strictEqual(browse.count, 1954);
-assert.strictEqual(watchlist.count, EXPECTED_MONITORING_MARKER_COUNT);
+const expectedInventory = require('./lib/polymythcal-inventory-contract').currentInventoryCounts(ROOT, canonical);
+assert.strictEqual(browse.count, expectedInventory.chronology);
+assert.strictEqual(watchlist.count, expectedInventory.watchlist);
 assert.strictEqual(research.count, browse.count);
 assert.strictEqual(browse.count + watchlist.count, canonical.events.length);
 
@@ -106,6 +142,12 @@ for (const item of watchlist.items) {
   }
   assert.deepStrictEqual(item.temporal, { type: 'undated' });
   assert.strictEqual(item.date_status, 'awaiting-confirmed-date');
+  assert(!fs.existsSync(path.join(ROOT, 'polymythseminars', 'ics', `${item.id}.ics`)),
+    `${item.id}: undated source watches must not have calendar downloads`);
+  if (process.env.VERIFY_PUBLIC_DEPLOY === '1') {
+    assert(!fs.existsSync(path.join(ROOT, 'public', 'polymythseminars', 'ics', `${item.id}.ics`)),
+      `${item.id}: an obsolete calendar download survived in the public build`);
+  }
 }
 for (const record of research.records) {
   assertAllowedKeys(record, PUBLIC_RESEARCH_KEYS, record.id);
@@ -170,7 +212,8 @@ const fixtureTypes = {
   'full-moon-2026-08-28': 'global-instant',
   'new-moon-2026-09-11': 'global-instant',
   'taiwan-zhongyuan-2026': 'all-day-local-date',
-  'dongzhi-winter-solstice-2026': 'local-date-time',
+  'dongzhi-winter-solstice-2026': 'all-day-local-date',
+  'dongzhi-winter-solstice-2027': 'all-day-local-date',
   'scms-2027-cfp-deadline': 'deadline',
   'epiphanies-of-repair-memory-art-and-practice-2026-04-22': 'local-date-time',
   'river-run-grassy-narrows-2026': 'local-date-time',
@@ -185,14 +228,19 @@ assert.strictEqual(canonicalById.get('scms-2027-cfp-deadline').date_precision, '
 assert(detail('full-moon-2026-08-28').includes('<time datetime="2026-08-28T00:18-04:00">2026-08-28 00:18 EDT</time>'));
 assert(detail('new-moon-2026-09-11').includes('<time datetime="2026-09-10T23:27-04:00">2026-09-10 23:27 EDT</time>'));
 assert(detail('taiwan-zhongyuan-2026').includes('<time datetime="2026-08-27">2026-08-27</time>'));
-assert(detail('dongzhi-winter-solstice-2026').includes('<time datetime="2026-12-21T15:50-05:00">2026-12-21 15:50 EST</time>'));
+assert(detail('dongzhi-winter-solstice-2026').includes('<time datetime="2026-12-22">2026-12-22</time>'));
+assert(detail('dongzhi-winter-solstice-2027').includes('<time datetime="2027-12-22">2027-12-22</time>'));
+assert.strictEqual(canonicalById.get('dongzhi-winter-solstice-2026').timezone, 'Asia/Taipei');
+assert.strictEqual(temporalType(canonicalById.get('december-solstice-2026')), 'global-instant');
 assert(detail('scms-2027-cfp-deadline').includes('<time datetime="2026-08-28T17:00-05:00">2026-08-28 17:00 CDT</time>'));
 assert(detail('epiphanies-of-repair-memory-art-and-practice-2026-04-22').includes('<time datetime="2026-04-22T22:00-04:00">2026-04-22 22:00 EDT – 2026-04-23 23:59 EDT</time>'));
 assert(detail('river-run-grassy-narrows-2026').includes('<time datetime="2026-09-23T12:00-04:00">2026-09-23 12:00 EDT</time>'));
 assert(ics('full-moon-2026-08-28').includes('DTSTART:20260828T041800Z'));
 assert(ics('new-moon-2026-09-11').includes('DTSTART:20260911T032700Z'));
 assert(ics('taiwan-zhongyuan-2026').includes('DTSTART;VALUE=DATE:20260827'));
-assert(ics('dongzhi-winter-solstice-2026').includes('DTSTART:20261221T205000Z'));
+assert(ics('dongzhi-winter-solstice-2026').includes('DTSTART;VALUE=DATE:20261222'));
+assert(ics('dongzhi-winter-solstice-2027').includes('DTSTART;VALUE=DATE:20271222'));
+assert(!ics('dongzhi-winter-solstice-2026').includes('DTSTART:20261221T205000Z'));
 assert(ics('scms-2027-cfp-deadline').includes('DTSTART:20260828T220000Z'));
 assert(ics('epiphanies-of-repair-memory-art-and-practice-2026-04-22').includes('DTSTART:20260423T020000Z'));
 assert(ics('epiphanies-of-repair-memory-art-and-practice-2026-04-22').includes('DTEND:20260424T035900Z'));
@@ -209,6 +257,21 @@ if (process.env.VERIFY_PUBLIC_DEPLOY === '1') assert(!fs.existsSync(deployedWatc
 const publicById = new Map(
   [...browse.events, ...watchlist.items].map(record => [record.id, record]),
 );
+for (const id of ['national-humanities-center-fellowship-deadline-projected-2026-10-02-5980fd79', 'getty-scholar-grants-projected-2026-10-01-409d574a']) {
+  assert(publicById.get(id).facets.what.includes('opportunity:funding'), `${id}: fellowship must be discoverable under funding`);
+}
+assert(watchIds.has('scholastic-art-and-writing-awards-2026'), 'Regional deadlines must not inherit a single invented date');
+for (const id of ['scholastic-art-and-writing-awards-2026', 'scholastic-art-writing-awards-2027-open']) {
+  assert(publicById.get(id).description.includes('$15') && publicById.get(id).description.includes('$40'), `${id}: current fees must propagate to related records`);
+}
+for (const review of readJson('data/polymythcal-reviewed-corrections-2026-10-02.json').followup_reviews || []) {
+  for (const id of review.audited_projected_date_ids || []) {
+    const canonicalRecord = canonicalById.get(id);
+    if (canonicalRecord.confirmation_status !== 'confirmed') {
+      assert(watchIds.has(id), `${id}: audited projected date leaked back into chronology`);
+    }
+  }
+}
 let exactExternalCount = 0;
 let unresolvedCount = 0;
 for (const event of canonical.events) {
@@ -242,7 +305,7 @@ assert.strictEqual(payloadReport.destination_policy, 'materialized-exact-destina
 assert.strictEqual(payloadReport.exact_external_destination_count, exactExternalCount);
 assert.strictEqual(payloadReport.public_external_action_count, exactExternalCount);
 assert.strictEqual(payloadReport.unresolved_destination_count, unresolvedCount);
-assert.strictEqual(payloadReport.suppressed_broad_destination_count, unresolvedCount);
+assert.strictEqual(payloadReport.unresolved_specific_destination_count, unresolvedCount);
 assert.strictEqual(payloadReport.missing_exact_external_action_count, 0);
 assert.strictEqual(payloadReport.mismatched_external_action_count, 0);
 assert.strictEqual(payloadReport.broad_source_projection_count, 0);

@@ -84,43 +84,43 @@
       "name": "Canonical event inventory meets the verified floor",
       "passed": true,
       "details": {
-        "events": 2088,
-        "floor": 2088
+        "events": 2086,
+        "floor": 2086
       }
     },
     {
       "name": "Canonical event data is internally complete",
       "passed": true,
       "details": {
-        "events": 2088,
-        "declared": 2088,
-        "count": 2088
+        "events": 2086,
+        "declared": 2086,
+        "count": 2086
       }
     },
     {
       "name": "Every event has stable identity and lifecycle fields",
       "passed": true,
       "details": {
-        "events": 2088
+        "events": 2086
       }
     },
     {
       "name": "Event IDs and identity keys are unique",
       "passed": true,
       "details": {
-        "events": 2088
+        "events": 2086
       }
     },
     {
       "name": "Discovery v2 exactly partitions the private canonical corpus into chronology and quarantined monitoring records",
       "passed": true,
       "details": {
-        "canonical": 2088,
-        "chronology": 1954,
-        "watchlist": 134,
-        "partitionUnion": 2088,
-        "reasons": 134,
-        "markerRecords": 134
+        "canonical": 2086,
+        "chronology": 1950,
+        "watchlist": 136,
+        "partitionUnion": 2086,
+        "reasons": 136,
+        "markerRecords": 136
       }
     },
     {
@@ -204,7 +204,7 @@
       "name": "Monitoring-marker records retain stable noindex undated details while remaining absent from ICS and sitemap",
       "passed": true,
       "details": {
-        "records": 134,
+        "records": 136,
         "failures": []
       }
     },
@@ -212,13 +212,13 @@
       "name": "Canonical manifest owns stable HTML details and aliases while chronology alone owns ICS",
       "passed": true,
       "details": {
-        "canonicalPages": 2088,
-        "aliasPages": 2144,
-        "expectedAliases": 2144,
-        "explicitLegacyAliases": 28,
+        "canonicalPages": 2086,
+        "aliasPages": 2150,
+        "expectedAliases": 2150,
+        "explicitLegacyAliases": 32,
         "icsCount": 1982,
-        "canonicalEvents": 2088,
-        "chronologyEvents": 1954,
+        "canonicalEvents": 2086,
+        "chronologyEvents": 1950,
         "exactIcsSet": true,
         "englishRouteSet": {
           "exact": true,
@@ -252,10 +252,10 @@
       "name": "Audit 45 English/French event routes preserve organizer text and source-language boundaries",
       "passed": true,
       "details": {
-        "events": 2088,
+        "events": 2086,
         "interfaceLocales": 2,
-        "eventRoutesPerLocale": 2088,
-        "frenchLegacyAliases": 28,
+        "eventRoutesPerLocale": 2086,
+        "frenchLegacyAliases": 32,
         "exactFrenchRouteTree": true,
         "frenchRouteSet": {
           "exact": true,
@@ -337,11 +337,11 @@
       "french-language": 1,
       "civic-action": 13
     },
-    "canonical_events": 2088,
-    "chronology_events": 1954,
-    "quarantined_monitoring_records": 134,
-    "canonical_event_pages": 2088,
-    "legacy_redirect_aliases": 2144,
+    "canonical_events": 2086,
+    "chronology_events": 1950,
+    "quarantined_monitoring_records": 136,
+    "canonical_event_pages": 2086,
+    "legacy_redirect_aliases": 2150,
     "event_ics_files": 1982,
     "focused_feed_pairs": 11,
     "browser_wcag_checks_passed": 42,

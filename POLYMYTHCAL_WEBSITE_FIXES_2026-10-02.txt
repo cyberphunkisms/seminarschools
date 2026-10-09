@@ -1,0 +1,42 @@
+Polymythcal website v9
+2026-10-04
+
+Ordinary punctuation in existing names now searches correctly. Quoted phrases and field restrictions retain their existing meaning.
+Monitoring series cards now support the existing save and remove workflow, including return to the saved view.
+
+Validation passed 400 literal title-term cases across 346 records and 531 browser assertions in English and French at 320, 390 and 1280 pixels. The canonical build, geometry, immediate rebuild and source/public parity checks passed.
+All 2086 canonical records are unchanged. This release retains the complete editable website and built public/ tree.
+
+Earlier release notes follow.
+
+POLYMYTHCAL WEBSITE FIXES — REVISION 8, 3 OCTOBER 2026
+
+Complete editable website, including built public/.
+
+THIS UPDATE
+The audit found excessive content before results, unnecessary date formatting
+on every search, hidden ongoing search matches, misleading mixed-series
+chronology, and saved-state problems. The existing interface now groups its
+shortcuts into one expandable section, removes repeated navigation and copy,
+formats only needed metadata, and shows searched ongoing listings directly.
+Mixed series use their forthcoming matching sessions for current-date sorting.
+Re-saving updates an old generic search label. Saved events keep their return
+view, including saves from detail pages. Mobile filter counts have spacing.
+
+PRESERVATION
+All 2,086 canonical records and stable IDs are unchanged, including every
+previous correction. The 1,873 chronology / 213 monitoring partition and
+existing taxonomy remain unchanged. This pass adds no features, filters,
+controls, routes, subscriptions, source records or event records.
+
+VERIFICATION
+The complete canonical build, browser regression checks, source/public parity,
+rendered geometry gate and isolated rebuild idempotence gate passed. The root
+change receipt records exact results, measurements, evidence paths and limits.
+The ZIP is read back against its member SHA-256 hashes and byte sizes.
+
+REMAINING SOURCE LIMITS
+779 listings are marked unconfirmed. 893 lack a specific public destination
+page. 481 records appear in both groups. This audit did not freshly verify
+every external listing. Their existing uncertainty remains visible.
+No production deployment or repository push occurred.

@@ -5,12 +5,14 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:55b95e0e2fb08dbf71f0@seminarschools.com
-DTSTAMP:20260815T033000Z
-DTSTART:20261006T140000Z
-DTEND:20261011T230000Z
+DTSTAMP:20261002T185749Z
+DTSTART;VALUE=DATE:20261006
+DTEND;VALUE=DATE:20261012
 SUMMARY:Toronto municipal election — advance voting period
 LOCATION:Advance voting places across Toronto
-DESCRIPTION:Toronto municipal election — advance voting period
+DESCRIPTION:Advance voting runs October 6–11\, 2026\, from 10 a.m. to 7
+  p.m. each day. The date range covers separate daily sessions\; voting i
+ s not open overnight.
 URL:https://seminarschools.com/polymythseminars/events/toronto-election-a
  dvance-voting-2026/
 STATUS:CONFIRMED

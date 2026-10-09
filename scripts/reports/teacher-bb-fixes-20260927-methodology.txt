@@ -1,0 +1,48 @@
+PASS  manifest exists
+PASS  canonical cold total — 1233/1233
+PASS  canonical cold section counts — {"analysis":30,"citation":343,"corehistory":30,"coreplus":55,"degorgonification":54,"framework-core":1,"gorgonification":134,"idiomary":44,"learnings":28,"methodology":394,"pending":18,"pending-user-authorship":2,"polycognate":24,"rainbowsol":3,"sabachtan":35,"studylist":38}
+PASS  Polycognate control owner exists exactly once
+PASS  exact G01..G16 genealogy-control membership — G01, G02, G03, G04, G05, G06, G07, G08, G09, G10, G11, G12, G13, G14, G15, G16
+PASS  exact P01..P24 Polycognate-control membership — P01, P02, P03, P04, P05, P06, P07, P08, P09, P10, P11, P12, P13, P14, P15, P16, P17, P18, P19, P20, P21, P22, P23, P24
+PASS  final Polycognate control-owner body hash — b0082520faeef6585facd013debbd1c441d16c375ec59d24ecbc4cae4d4e125c
+PASS  visible tab counter coreplus — 55
+PASS  visible tab counter corehistory — 30
+PASS  visible tab counter framework-core — 1
+PASS  manifest exact total line
+PASS  manifest exact section record set — analysis, citation, corehistory, coreplus, degorgonification, framework-core, gorgonification, idiomary, learnings, methodology, pending, pending-user-authorship, polycognate, rainbowsol, sabachtan, studylist
+PASS  section manifest row analysis
+PASS  section manifest row citation
+PASS  section manifest row corehistory
+PASS  section manifest row coreplus
+PASS  section manifest row degorgonification
+PASS  section manifest row framework-core
+PASS  section manifest row gorgonification
+PASS  section manifest row idiomary
+PASS  section manifest row learnings
+PASS  section manifest row methodology
+PASS  section manifest row pending
+PASS  section manifest row pending-user-authorship
+PASS  section manifest row polycognate
+PASS  section manifest row rainbowsol
+PASS  section manifest row sabachtan
+PASS  section manifest row studylist
+PASS  framework CORE is full-file-only
+PASS  release gate states verify-all blocks shipping
+PASS  concordance generation honors the release timestamp contract
+PASS  concordance exact full term-to-{src,id} membership — 842 terms; 18040 references; 5729 ms; 0 failures
+PASS  concordance exact reference payloads — 0 failures
+PASS  concordance exact four source fields — ["t","b","x","tg"]
+PASS  every concordance snippet contains its term within 250 characters — 0 failures
+PASS  every concordance reference binds its current-status hash and preserves CURRENT lead — 0 failures
+PASS  concordance per-ID current-status map is exact — 2010 identities
+PASS  manifest generation honors the release timestamp contract
+PASS  section mirror generation honors the release timestamp contract
+
+METHODOLOGYLIST MANIFEST CHECK PASSED
+
+PACKAGE TESTS
+................
+----------------------------------------------------------------------
+Ran 16 tests in 0.052s
+
+OK

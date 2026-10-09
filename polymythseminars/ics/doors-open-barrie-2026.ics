@@ -5,14 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:fc92e925a0019d1c7a0b@seminarschools.com
-DTSTAMP:20260815T160000Z
-DTSTART;VALUE=DATE:20260926
+DTSTAMP:20261003T110658Z
+DTSTART:20260926T140000Z
+DTEND:20260926T200000Z
 SUMMARY:Doors Open Barrie
 LOCATION:Participating sites
 DESCRIPTION:A 2026 Doors Open Ontario event offering public access to par
  ticipating heritage\, civic\, and architectural sites.
 URL:https://seminarschools.com/polymythseminars/events/doors-open-barrie-
  2026/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

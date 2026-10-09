@@ -106,7 +106,19 @@
 
   function endpointPresentation(project) {
     if (!project.verified || !project.currentCanonicalUrl) {
-      const historicalHref = (project.bookPrintedUrls || []).find(Boolean);
+      const reviews = project.sourceLinkReviews || {};
+      const reviewedSuccessor = (project.bookPrintedUrls || []).map(url => reviews[url]).find(review =>
+        review && review.status === "unavailable" && review.successor && /^https?:\/\//i.test(review.successor.url),
+      );
+      if (reviewedSuccessor) return {
+        action: reviewedSuccessor.successor.label + " ↗",
+        heading: reviewedSuccessor.successor.label,
+        href: reviewedSuccessor.successor.url,
+        reviewNote: reviewedSuccessor.successor.note + " Link checked " + reviewedSuccessor.checkedOn + "; the project's full current status remains a separate review.",
+      };
+      const historicalHref = (project.bookPrintedUrls || []).find(url =>
+        Boolean(url) && (!reviews[url] || reviews[url].status !== "unavailable"),
+      );
       return historicalHref
         ? {
             action: "Open website listed in the book ↗",
@@ -424,10 +436,15 @@
                 esc(sourceHref) +
                 '">' +
                 esc(endpoint.action) +
-                '</a><a class="button small research-link" href="/polymythlib/projects/' +
+                '</a>' +
+                (endpoint.reviewNote ? '<span class="destination-note">' + esc(endpoint.reviewNote) + '</span>' : '') +
+                '<a class="button small research-link" href="/polymythlib/projects/' +
                 esc(project.id) +
                 '/">Research details</a></div>'
-              : '<div class="result-actions"><a class="button small research-link" href="/polymythlib/projects/' +
+              : '<div class="result-actions">' +
+                (Object.values(project.sourceLinkReviews || {}).some(review => review.status === "unavailable")
+                  ? '<span class="destination-note">Original source unavailable</span>' : '') +
+                '<a class="button small research-link" href="/polymythlib/projects/' +
                 esc(project.id) +
                 '/">Research details</a></div>') +
             "</article>"
@@ -461,7 +478,11 @@
             titleAttrs +
             '">' +
             esc(project.canonicalName) +
-            '</a></td><td><a class="research-link" href="/polymythlib/projects/' +
+            '</a>' +
+            (endpoint?.reviewNote ? '<small class="destination-note">' + esc(endpoint.heading) + '</small>' : '') +
+            (!endpoint && Object.values(project.sourceLinkReviews || {}).some(review => review.status === "unavailable")
+              ? '<small class="destination-note">Original source unavailable</small>' : '') +
+            '</td><td><a class="research-link" href="/polymythlib/projects/' +
             esc(project.id) +
             '/">Research details</a></td><td>' +
             esc(project.bookCategories.join(", ")) +
@@ -636,7 +657,7 @@
     readUrl();
     try {
       const response = await fetch(
-        "/polymythlib/data/directory-index.json?v=20260728-g0-3",
+        "/polymythlib/data/directory-index.json?v=sha256-58a516f20244",
         { cache: "force-cache" },
       );
       if (!response.ok) throw new Error("Data request failed");

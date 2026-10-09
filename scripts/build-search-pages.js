@@ -40,6 +40,7 @@ const {
 
 const ROOT = path.resolve(__dirname, '..');
 const SITE = 'https://seminarschools.com';
+const MODULE_ROUTES = [SITE+'/polymyth/modulecanon/thank-you-maam/'];
 // These connected discovery shells are emitted later in the canonical build,
 // but they are stable, indexable routes owned by Polymythcal. Register them in
 // the canonical sitemap set here so build order cannot leave a real surface
@@ -73,6 +74,7 @@ const TEACHER_INTERNAL_ORIGINALS = EXTERNAL_DESTINATION_CONTRACTS
 const TODAY = resolveSiteBuildDate({ root: ROOT });
 const CHECK = process.argv.includes('--check');
 const TEACHER_ONLY = process.argv.includes('--teacher-only');
+const METHODOLOGY_ONLY = process.argv.includes('--methodology-only');
 const OUTPUT_MTIME = process.env.SS_BUILD_OUTPUT_MTIME
   ? new Date(process.env.SS_BUILD_OUTPUT_MTIME)
   : null;
@@ -154,9 +156,12 @@ function esc(value) {
 function attr(value) { return esc(value); }
 function linkExternalUrls(value) {
   return esc(value).replace(/https?:\/\/[^\s<]+/g, function(url) {
-    const m = url.match(/[.,;:!?]+$/);
-    const tail = m ? m[0] : '';
-    const clean = tail ? url.slice(0, -tail.length) : url;
+    let clean = url;
+    // Strip prose punctuation only; balanced parentheses remain part of URLs.
+    while (/[.,;:!?]$/.test(clean) ||
+      (clean.endsWith(')') && (clean.match(/\)/g)||[]).length > (clean.match(/\(/g)||[]).length) ||
+      (clean.endsWith(']') && (clean.match(/\]/g)||[]).length > (clean.match(/\[/g)||[]).length)) clean = clean.slice(0, -1);
+    const tail = url.slice(clean.length);
     return `<a href="${clean}" target="_blank" rel="noopener noreferrer">${clean}</a>${tail}`;
   });
 }
@@ -219,6 +224,7 @@ ${cards}
 ${schemas}
 <link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
+${canonical.includes('/teacherresources/') ? '<style>@view-transition{navigation:none}</style>' : ''}
 </head>`;
 }
 function breadcrumb(items) {
@@ -360,6 +366,37 @@ function resourceTaxonomyLabel(data, kind, value, fallback = '') {
   return declared || RESOURCE_LABEL_ALIASES[kind]?.[value] || fallback;
 }
 
+const RESOURCE_ACCESS_REVIEW = require('../data/teacher-resource-metadata-review-20260928.json');
+const RESOURCE_ACCESS_LABELS = {
+  direct: 'Direct access', unavailable: 'Source unavailable — see source notes',
+  'publisher-free': 'Free materials per publisher',
+  'publisher-account': 'Free account per publisher',
+  'publisher-download': 'Downloads listed by publisher',
+  'publisher-variable': 'Access varies by archive item',
+  unknown: 'Access requirements not recorded'
+};
+function resourceAccess(entry) {
+  if (entry.access) return {value:entry.access, label:RESOURCE_ACCESS_LABELS[entry.access] || entry.access};
+  let url;
+  try { url = new URL(entry.url, SITE); } catch (_) { return {value:'unknown',label:RESOURCE_ACCESS_LABELS.unknown}; }
+  if (url.origin === SITE && url.pathname.startsWith('/')) {
+    const relative = url.pathname.replace(/^\//,'') + (url.pathname.endsWith('/') ? 'index.html' : '');
+    if (fs.existsSync(path.join(ROOT,relative))) return {value:'direct',label:RESOURCE_ACCESS_LABELS.direct,note:'The linked page or file is included in this website build. External availability has not been checked.'};
+  }
+  const policy = RESOURCE_ACCESS_REVIEW.policies[url.hostname.replace(/^www\./,'')];
+  if (policy && url.pathname.startsWith(policy.path_prefix) && (policy.formats || [policy.format]).includes(entry.format)) {
+    return {value:policy.access,label:RESOURCE_ACCESS_LABELS[policy.access],...policy};
+  }
+  return {value:'unknown',label:RESOURCE_ACCESS_LABELS.unknown};
+}
+function resourceEvidence(entry) {
+  const access = resourceAccess(entry);
+  const policy = access.source_url ? `<p>${esc(access.note)} <a href="${attr(access.source_url)}" target="_blank" rel="noopener noreferrer">Publisher access policy</a>, reviewed ${RESOURCE_ACCESS_REVIEW.checked_on}.</p>` : access.note ? `<p>${esc(access.note)}</p>` : '';
+  const missing = [['audience','Audience'],['coverage','contents'],['proficiency','language proficiency'],['page_count','length'],['answer_key','answer-key availability']].filter(([key])=>!entry[key]).map(([,label])=>label);
+  const missingNote = missing.length ? `<p>Not yet recorded: ${esc(missing.join(', '))}.</p>` : '';
+  return `<section class="metadata-evidence"><h2>Metadata and source checks</h2>${policy}${missingNote}<p>Grade and curriculum labels are catalog classifications. Their alignment has not been independently verified. Missing labels indicate information to check with the source.</p></section>`;
+}
+
 function resourceMeta(entry, data) {
   const labels = [];
   const subject = resourceTaxonomyLabel(data, 'subject', entry.subject);
@@ -378,7 +415,7 @@ function resourceAccessibleName(entry, data) {
   const gradeValue = String(entry.grade || '');
   const grade = gradeValue && gradeValue !== 'all'
     ? `${/^(?:K|\d+)$/.test(gradeValue) ? 'Grade' : 'Grades'} ${gradeValue}`
-    : 'All grades';
+    : 'Grade range not specified';
   return [
     String(entry.title || 'Teaching resource').trim(),
     entry.author ? `by ${String(entry.author).trim()}` : '',
@@ -391,7 +428,7 @@ function resourceDescription(entry, category, group, data) {
   const note = cleanSentence(entry.notes || entry.blurb || '', 300);
   if (note) return note;
   const fields = resourceMeta(entry, data).filter(Boolean);
-  const audience = entry.grade && entry.grade !== 'all' ? `Grades ${entry.grade}` : 'Multi-grade classroom use';
+  const audience = entry.grade && entry.grade !== 'all' ? `Grades ${entry.grade}` : 'Grade range not specified';
   const format = resourceTaxonomyLabel(data, 'format', entry.format, entry.format || 'Teaching resource');
   const parts = [format, audience, ...fields.filter(x => x !== format && x !== audience)].slice(0, 4);
   return `${parts.join(' · ')}.`;
@@ -435,7 +472,7 @@ function compactCatalogLanguageBadge(entry) {
 }
 function resourceReviewSection(entry) {
   const review = [entry.notes, entry.blurb].map(value => String(value || '').trim()).find(Boolean) || '';
-  return review ? `<h2>Classroom fit</h2><p>${esc(review)}</p>` : '';
+  return review ? `<h2>Catalog notes</h2><p>${esc(review)}</p>` : '';
 }
 function resourceRoute(group, category, entry, i) {
   // `route_key` freezes the Audit 52 URL suffix. The positional hash remains a
@@ -469,6 +506,8 @@ function relatedResourceLinks(entry, entryOffset, category, group, data, categor
   }).join('');
   return `<section aria-labelledby="related-resources-title"><h2 id="related-resources-title">Related resources in this collection</h2><div class="resource-list">${links}</div></section>`;
 }
+function resourceSourceHref(entry, route) { return entry.source_availability === 'unavailable' ? route : entry.url; }
+function resourceSourceLabel(entry) { return entry.source_availability === 'unavailable' ? 'Source unavailable · Details and source notes' : `Open original resource${entry.host ? ` on ${entry.host}` : ''}`; }
 function staticResourceCard(entry, category, group, data, index) {
   const route = resourceRoute(group, category, entry, index);
   const meta = resourceMeta(entry, data);
@@ -477,13 +516,16 @@ function staticResourceCard(entry, category, group, data, index) {
   // annotation is excluded, and all-grade cards so their grade context is
   // explicit even though the compact visible metadata omits it.
   const accessibleName = entry.notes || entry.grade === 'all'
-    ? ` aria-label="${attr(`${resourceAccessibleName(entry, data)}; opens original resource${entry.host ? ` on ${entry.host}` : ''}`)}"`
+    ? ` aria-label="${attr(`${resourceAccessibleName(entry, data)}; ${entry.source_availability === 'unavailable' ? 'source unavailable; opens details and source notes' : `opens original resource${entry.host ? ` on ${entry.host}` : ''}`}`)}"`
     : '';
   const stripe = ({'holt-worktext':'apparatus','pearson-notebook':'apparatus','mcdougal-littell':'apparatus','contest-paper':'apparatus','ib-paper':'apparatus','released-test':'apparatus','full-book':'archive','anthology':'archive','aggregator':'archive','gutenberg-text':'archive','openstax-book':'archive','ck12-book':'archive','khan-course':'archive','french-text':'archive','clean-text':'clean'})[entry.format] || 'clean';
   const languageValues = resourceLanguages(entry);
   const partLang = compactCatalogLanguagePartAttribute(entry);
   const languageBadge = compactCatalogLanguageBadge(entry);
-  return `<div class="entry-shell"><a${accessibleName} class="entry stripe-${stripe}" href="${attr(entry.url)}" target="_blank" rel="noopener noreferrer" data-detail-route="${route}" data-format="${attr(entry.format||'')}" data-grade="${attr(entry.grade||'')}" data-subject="${attr(entry.subject||'')}" data-curriculum="${attr(entry.curriculum||'')}" data-l="${attr(languageValues.join(','))}"><div class="entry-main"><div class="entry-title"${partLang}>${esc(entry.title)}</div>${entry.author ? `<div class="entry-byline">${esc(entry.author)}</div>` : ''}</div><div class="entry-meta">${meta.map((m,j)=>`<span class="${j===0?'subj':'host'}">${esc(m)}</span>`).join('')}${languageBadge}</div>${entry.notes ? `<div class="entry-notes">${esc(entry.notes)}</div>` : ''}<span class="entry-source-cta">Open original resource${entry.host ? ` on ${esc(entry.host)}` : ''} ↗</span></a><a class="entry-detail" href="${route}">Details &amp; source notes</a></div>`.replace(' data-curriculum=""', '');
+  return `<div class="entry-shell"><a${accessibleName} class="entry stripe-${stripe}" href="${attr(resourceSourceHref(entry,route))}" target="_blank" rel="noopener noreferrer" data-resource-id="${attr(entry.id)}" data-keywords="${attr((entry.keywords||[]).join(' '))}" data-work="${attr(entry.work_id||'')}"${entry.aliases ? ` data-aliases="${attr(entry.aliases.join('|'))}"` : ''} data-audience="${attr(entry.audience||'unrecorded')}" data-access="${attr(resourceAccess(entry).value)}" data-file="${attr(entry.file_type || (/\.pdf(?:$|[?#])/i.test(entry.url||'') ? 'PDF' : /\.docx?(?:$|[?#])/i.test(entry.url||'') ? 'Word' : 'Webpage / unrecorded'))}" data-format="${attr(entry.format||'')}" data-grade="${attr(entry.grade||'')}" data-subject="${attr(entry.subject||'')}" data-curriculum="${attr(entry.curriculum||'')}" data-l="${attr(languageValues.join(','))}"><div class="entry-main"><div class="entry-title"${partLang}>${esc(entry.title)}</div>${entry.author ? `<div class="entry-byline">${esc(entry.author)}</div>` : ''}</div><div class="entry-meta">${meta.map((m,j)=>`<span class="${j===0?'subj':'host'}">${esc(m)}</span>`).join('')}${languageBadge}</div>${entry.notes ? `<div class="entry-notes">${esc(entry.notes)}</div>` : ''}<span class="entry-source-cta">${esc(resourceSourceLabel(entry))}</span></a><a class="entry-detail" aria-label="Details and source notes for ${attr(entry.title)}" href="${route}">Details &amp; source notes</a></div>`.replace(/ data-(?:keywords|work|curriculum)=""/g, '')
+    .replace(' data-audience="unrecorded"', '')
+    .replace(' data-access="unknown"', '')
+    .replace(' data-file="Webpage / unrecorded"', '');
 }
 
 function renderTeacherAreaIndex(data) {
@@ -608,8 +650,8 @@ function generateResourcePages(data) {
       const cards = category.entries.map(entry => {
         const route = resourceRoute(group, category, entry, globalIndex++);
         const d = resourceDescription(entry, category, group, data);
-        const sourceLabel = `Open original resource${entry.host ? ` on ${entry.host}` : ''}`;
-        return `<article class="resource-row"><h2${languagePartAttribute(entry)}><a aria-label="${attr(`${resourceAccessibleName(entry, data)}; opens original resource${entry.host ? ` on ${entry.host}` : ''}`)}" class="resource-source-link" href="${attr(entry.url)}" target="_blank" rel="noopener noreferrer">${esc(entry.title)}</a></h2>${entry.author ? `<p>${esc(entry.author)}</p>` : ''}<div class="resource-meta">${esc(resourceMeta(entry,data).join(' · '))} · ${esc(resourceLanguageLabel(entry))}</div><p>${esc(cleanSentence(d, 260))}</p><div class="resource-actions"><a class="button" href="${attr(entry.url)}" target="_blank" rel="noopener noreferrer">${esc(sourceLabel)} ↗</a><a class="button secondary" href="${route}">Details &amp; source notes</a></div></article>`;
+        const sourceLabel = resourceSourceLabel(entry);
+        return `<article class="resource-row"><h2${languagePartAttribute(entry)}><a aria-label="${attr(`${resourceAccessibleName(entry, data)}; ${entry.source_availability === 'unavailable' ? 'source unavailable; opens details and source notes' : `opens original resource${entry.host ? ` on ${entry.host}` : ''}`}`)}" class="resource-source-link" href="${attr(resourceSourceHref(entry,route))}" target="_blank" rel="noopener noreferrer">${esc(entry.title)}</a></h2>${entry.author ? `<p>${esc(entry.author)}</p>` : ''}<div class="resource-meta">${esc(resourceMeta(entry,data).join(' · '))} · ${esc(resourceLanguageLabel(entry))}</div><p>${esc(cleanSentence(d, 260))}</p><div class="resource-actions"><a class="button" href="${attr(resourceSourceHref(entry,route))}" target="_blank" rel="noopener noreferrer">${esc(sourceLabel)} ↗</a><a class="button secondary" href="${route}">Details &amp; source notes</a></div></article>`;
       }).join('\n');
       const categoryCrumbs = [...topCrumbs,{name:group.title,url:groupUrl},{name:category.title,url:catUrl}];
       const body = `${visibleBreadcrumb(categoryCrumbs)}<p class="eyebrow">${esc(group.title)}</p><h1>${esc(category.title)}</h1><p class="lede">${esc(category.blurb || category.kicker || catDesc)}</p><div class="resource-list">${cards}</div><p><a class="button secondary" href="${groupRoute}">Back to ${esc(group.title)}</a></p>`;
@@ -631,22 +673,29 @@ function generateResourcePages(data) {
         const meta = resourceMeta(entry, data);
         const desc = resourceDescription(entry, category, group, data);
         const sourceHost = entry.host || (entry.url ? (()=>{try{return new URL(entry.url, SITE).hostname.replace(/^www\./,'')}catch(e){return ''}})() : '');
-        const sourceLabel = `Open original resource${sourceHost ? ` on ${sourceHost}` : ''}`;
-        const sourceBanner = `<div class="source-banner"><a class="button" href="${attr(entry.url)}" target="_blank" rel="noopener noreferrer">${esc(sourceLabel)} ↗</a><p>This catalog page keeps the classroom description, source notes, and related resources separate from the original website.</p></div>`;
+        const sourceLabel = resourceSourceLabel(entry);
+        const sourceBanner = entry.source_availability === 'unavailable' ? `<div class="source-banner"><p><strong>Original source unavailable</strong></p><p>${esc(entry.source_availability_note)}</p><p>Recorded source: <code>${esc(entry.url)}</code></p></div>` : `<div class="source-banner"><a class="button" href="${attr(resourceSourceHref(entry,route))}" target="_blank" rel="noopener noreferrer">${esc(sourceLabel)} ↗</a><p>This catalog page keeps the classroom description, source notes, and related resources separate from the original website.</p></div>`;
         const seoDescription = cleanSentence(`${entry.title} for ${category.title}. ${desc}${sourceHost ? ` Source: ${sourceHost}.` : ''}`, 300);
         const details = [
           ['Collection', `<a href="${catRoute}">${esc(category.title)}</a>`],
           ['Subject', resourceTaxonomyLabel(data, 'subject', entry.subject, entry.subject || 'General')],
-          ['Grades', entry.grade && entry.grade !== 'all' ? `Grades ${esc(entry.grade)}` : 'General / multi-grade'],
-          ['Format', resourceTaxonomyLabel(data, 'format', entry.format, entry.format || 'Teaching resource')],
+          ['Grades', entry.grade && entry.grade !== 'all' ? `Grades ${esc(entry.grade)}` : 'Grade range not specified'],
+          ['File format', esc(entry.file_type || (/\.pdf(?:$|[?#])/i.test(entry.url||'') ? 'PDF' : 'Webpage / file format not recorded'))],
+          ['Access', esc(resourceAccess(entry).label)],
+          ['Audience', esc(entry.audience || 'Not recorded')],
+          ['Contents', esc(entry.coverage || 'Contents have not been verified at file level')],
+          ['Language proficiency', esc(entry.proficiency || 'Not recorded')],
+          ['Length', esc(entry.page_count ? entry.page_count + ' pages' : 'Not recorded')],
+          ['Answer key', esc(entry.answer_key || 'Availability not recorded')],
+          ['Edition / material', resourceTaxonomyLabel(data, 'format', entry.format, entry.format || 'Teaching resource')],
           ['Curriculum', resourceTaxonomyLabel(data, 'curriculum', entry.curriculum, entry.curriculum || 'Curriculum alignment not recorded')],
           ['Publisher or host', sourceHost || 'Source link supplied'],
           ['Source language', resourceLanguageLabel(entry)]
-        ].map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join('');
+        ].filter(([label]) => ({Audience:entry.audience,Contents:entry.coverage,'Language proficiency':entry.proficiency,Length:entry.page_count,'Answer key':entry.answer_key})[label] || !['Audience','Contents','Language proficiency','Length','Answer key'].includes(label)).map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join('');
         const detailCrumbs = [...topCrumbs,{name:group.title,url:routeUrl(groupRoute)},{name:category.title,url:routeUrl(catRoute)},{name:entry.title,url}];
         const related = relatedResourceLinks(entry, entryOffset, category, group, data, categoryStartIndex);
-        const body = `${visibleBreadcrumb(detailCrumbs)}<p class="eyebrow">Teaching resource</p><h1${languagePartAttribute(entry)}>${esc(entry.title)}</h1>${entry.author ? `<p class="lede">By ${esc(entry.author)}</p>` : ''}${sourceBanner}<div class="definition"><dl>${details}</dl></div>${resourceReviewSection(entry)}${related}<p><a class="button secondary" href="${catRoute}">Back to ${esc(category.title)}</a></p>`;
-        const schema = [{ '@context':'https://schema.org','@type':'LearningResource','@id':url+'#resource',url,name:entry.title,description:desc,author:entry.author || undefined,educationalLevel:entry.grade || undefined,learningResourceType:resourceTaxonomyLabel(data, 'format', entry.format, entry.format || undefined),about:resourceTaxonomyLabel(data, 'subject', entry.subject, entry.subject || undefined),inLanguage:resourceLanguages(entry),isPartOf:{'@id':routeUrl(catRoute)+'#collection'},sameAs:entry.url ? new URL(entry.url, SITE).href : undefined }];
+        const body = `${visibleBreadcrumb(detailCrumbs)}<p class="eyebrow">Teaching resource</p><h1${languagePartAttribute(entry)}>${esc(entry.title)}</h1>${entry.author ? `<p class="lede">By ${esc(entry.author)}</p>` : ''}<p><a class="button secondary search-return" href="/teacherresources/">Back to search results</a></p>${sourceBanner}<div class="definition"><dl>${details}</dl></div>${resourceReviewSection(entry)}${resourceEvidence(entry)}${related}<script defer src="/teacherresources/return-to-search.js?v=${require('./lib/release-asset-identity').sha256Version(path.join(ROOT,'teacherresources/return-to-search.js'))}"></script><p><a class="button secondary" href="${catRoute}">Back to ${esc(category.title)}</a></p>`;
+        const schema = [{ '@context':'https://schema.org','@type':'LearningResource','@id':url+'#resource',url,name:entry.title,description:desc,author:entry.author || undefined,educationalLevel:entry.grade && entry.grade !== 'all' ? entry.grade : undefined,learningResourceType:resourceTaxonomyLabel(data, 'format', entry.format, entry.format || undefined),about:resourceTaxonomyLabel(data, 'subject', entry.subject, entry.subject || undefined),inLanguage:resourceLanguages(entry),isPartOf:{'@id':routeUrl(catRoute)+'#collection'},sameAs:entry.url ? new URL(entry.url, SITE).href : undefined }];
         // Avoid serializing undefined properties.
         const normalized = schema.map(o=>Object.fromEntries(Object.entries(o).filter(([,v])=>v !== undefined && v !== '')));
         const titleKey = `${entry.title}\0${category.title}`;
@@ -968,7 +1017,7 @@ function generateSitemap(generated, previousManifest = {}) {
     item.url,
     item.url.replace('/polymythseminars/events/','/polymythseminars/fr/events/'),
   ]);
-  const all=[...new Set([...keep, SITE+'/teacherresources/', SITE+'/polymythseminars/subscribe/', ...POLYMYTHCAL_DISCOVERY_ROUTES, ...generated.resources.map(x=>x.url), ...bilingualEvents, ...generated.methodology.map(x=>x.url)])].sort((a,b)=>a.localeCompare(b));
+  const all=[...new Set([...keep, SITE+'/teacherresources/', SITE+'/polymythseminars/subscribe/', ...POLYMYTHCAL_DISCOVERY_ROUTES, ...MODULE_ROUTES, ...generated.resources.map(x=>x.url), ...bilingualEvents, ...generated.methodology.map(x=>x.url)])].sort((a,b)=>a.localeCompare(b));
   const xml=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'];
   for(const url of all) xml.push(`  <url><loc>${escapeXml(url)}</loc><lastmod>${TODAY}</lastmod></url>`);
   xml.push('</urlset>','');
@@ -979,6 +1028,24 @@ function generateSitemap(generated, previousManifest = {}) {
 function main(){
   try{
     const previousManifest=readPreviousSearchSurfaceManifest();
+    // A rule-only update must not roll calendar state or regenerate other
+    // catalogs. Use the same canonical Methodologylist render functions.
+    if (METHODOLOGY_ONLY) {
+      if (TEACHER_ONLY) throw new Error('Choose one scoped search-surface mode');
+      const seed=parseSeedWithAddenda(read('polymyth/methodologylist/index.html'));
+      injectMethodologyRoot(seed);
+      const methodology=generateMethodologyPages(seed);
+      const prefixes=[...new Set(methodology.map(item=>item.url))];
+      archiveStaleGeneratedRoutes(
+        methodology,
+        [...new Set([...(previousManifest.methodologyPrefixes || []), ...prefixes])],
+        '/polymyth/methodologylist/',
+        'Browse the current Methodologylist'
+      );
+      console.log(`METHODOLOGY SEARCH SURFACE ${CHECK?'CHECK':'BUILD'} — ${seed.length} entries, ${methodology.length} sections${CHECK?'':`, ${writes} files updated`}.`);
+      if(errors.length){errors.forEach(e=>console.error('FAIL '+e));process.exit(1);}
+      return;
+    }
     write('teacherresources/catalog.css', RESOURCE_CSS);
     const resourceData=JSON.parse(read('teacherresources/resources-data.json'));
     assertCurrentDatasetVersion('teacher-resources', resourceData);
@@ -994,6 +1061,8 @@ function main(){
     }
     injectResourceRoot(resourceData);
     const resources=generateResourcePages(resourceData);
+    require('./build-thank-you-maam-module')(ROOT, CHECK);
+    require('./update-teacher-asset-references')(ROOT, CHECK);
     const resourceGroupPrefixes=[...new Set(resources.filter(item=>item.kind==='group').map(item=>item.url))];
     archiveStaleGeneratedRoutes(
       resources,
@@ -1005,6 +1074,12 @@ function main(){
     if (TEACHER_ONLY) {
       const resourceDetails = resources.filter(item => item.kind === 'resource').length;
       const resourceCollections = resources.length - resourceDetails;
+      let scopedSitemap=read('sitemap.xml');
+      const known=new Set([...scopedSitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]));
+      const missing=resources.concat(MODULE_ROUTES.map(url=>({url}))).filter(r=>!known.has(r.url));
+      if(missing.length) scopedSitemap=scopedSitemap.replace('</urlset>',missing.map(r=>`  <url><loc>${escapeXml(r.url)}</loc><lastmod>${TODAY}</lastmod></url>`).join('\n')+'\n</urlset>');
+      write('sitemap.xml',scopedSitemap);
+      write('scripts/search-surface-manifest.json',JSON.stringify({...previousManifest,resourceRoutes:resources.length,resourceDetailPages:resourceDetails,resourceCollectionPages:resourceCollections,resourceGroupPrefixes,sitemapUrls:known.size+missing.length},null,2)+'\n');
       console.log(
         `TEACHER SEARCH SURFACE ${CHECK ? 'CHECK' : 'BUILD'} — ${resources.length} pages, `
         + `${resourceDetails} resources, ${resourceCollections} teaching-area and collection pages`
@@ -1057,4 +1132,4 @@ function main(){
   if(errors.length){errors.forEach(e=>console.error('FAIL '+e));process.exit(1);}
 }
 if(require.main===module) main();
-module.exports={RESOURCE_LABEL_ALIASES,resourceTaxonomyLabel,resourceMeta,resourceAccessibleName,resourceDescription,resourceReviewSection,resourceRoute,relatedResourceLinks,visibleBreadcrumb,slug};
+module.exports={resourceAccess,resourceEvidence,RESOURCE_LABEL_ALIASES,resourceTaxonomyLabel,resourceMeta,resourceAccessibleName,resourceDescription,resourceReviewSection,resourceRoute,relatedResourceLinks,visibleBreadcrumb,slug};

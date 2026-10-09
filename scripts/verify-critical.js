@@ -55,9 +55,9 @@ function projectedDestinationsFailClosed() {
 check('release manifest preserves the frozen site asset version', /^[0-9]{8}-[a-z0-9-]+$/.test(siteAssetVersion));
 check(
   'release manifest owns a coherent Discovery v2 identity',
-  release?.polymythcal_discovery_release_id === '2026-08-26-polymythcal-discovery-v2'
-    && release?.polymythcal_discovery_built_at === '2026-08-26T12:30:00-04:00'
-    && discoveryAssetVersion === '20260826-discovery-v2',
+  release?.polymythcal_discovery_release_id === '2026-10-01-polymythcal-maintenance-v6'
+    && Date.parse(release?.polymythcal_discovery_built_at) >= Date.parse('2026-10-01T00:00:00Z')
+    && discoveryAssetVersion === '20261004-discovery-v9',
 );
 check(
   'calendar uses the lightweight Discovery v2 core and shell',
@@ -94,7 +94,7 @@ check(
     && destinationContracts.includes("if (rawHref || scope !== 'unavailable' || kind !== 'unavailable')")
     && projectedDestinationsFailClosed()
     && app.includes('return CORE.safeHttpUrl(rawUrl, window.location.origin)')
-    && app.includes('for (const action of asArray(event.actions))')
+    && app.includes("for (const action of asArray(event.actions).filter(action => action?.kind !== 'details'))")
     && !app.includes('safeUrl(event.destination_url)')
     && !app.includes('safeUrl(event.source_url)')
     && app.includes('COPY.noVerifiedLink'),

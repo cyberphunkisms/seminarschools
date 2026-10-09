@@ -19,6 +19,9 @@ import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from polymythcal_manual_observations import record_manual_observation
+from atomic_json import write_text_atomic
+from build_lock import ReleaseBuildLock, inherited_release_build_root
 
 try:
     from jsonschema import Draft7Validator
@@ -345,6 +348,9 @@ def _fold(into, order, rec):
         if t and t != base.get("type") and t not in sec:
             sec.append(t)
     base["secondary_types"] = sec
+    if base.get("review_status") == "manual" and rec.get("review_status") != "manual":
+        record_manual_observation(base, rec)
+        return
     if _is_midnight(base.get("date", "")) and not _is_midnight(rec.get("date", "")):
         base["date"] = rec["date"]
     if not base.get("end_date") and rec.get("end_date"):
@@ -460,7 +466,7 @@ def write_rss(records, out_path=None, channel_title=None, channel_link=None, cha
         + "".join(rss_items)
         + '</channel></rss>'
     )
-    out_path.write_text(feed, encoding="utf-8")
+    write_text_atomic(out_path, feed)
 
 
 def write_watchlist(harvest_data, final_records=None):
@@ -503,7 +509,7 @@ def write_watchlist(harvest_data, final_records=None):
         "rule": "internal recheck state for leads without a real event date; dated announcements belong in the public chronology with exact qualification reasons",
         "items": out_items,
     }
-    WATCHLIST_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    write_text_atomic(WATCHLIST_PATH, json.dumps(payload, indent=2))
 
 
 def write_log(harvest_data, final_records):
@@ -546,14 +552,11 @@ def write_log(harvest_data, final_records):
               f"harvest source_yields accounting: {unaccounted[:10]}...")
     if zero_yield:
         print(f"Zero-yield sources this run ({len(zero_yield)}): {zero_yield[:15]}")
-    LOG_PATH.write_text(json.dumps(log, indent=2), encoding="utf-8")
+    write_text_atomic(LOG_PATH, json.dumps(log, indent=2))
 
     HISTORY_DIR.mkdir(parents=True, exist_ok=True)
     snapshot = HISTORY_DIR / f"seminars-{datetime.now(timezone.utc).strftime('%Y-%m-%d')}.json"
-    snapshot.write_text(
-        json.dumps({"generated_at": now_iso(), "count": len(final_records), "events": final_records}, indent=2),
-        encoding="utf-8",
-    )
+    write_text_atomic(snapshot, json.dumps({"generated_at": now_iso(), "count": len(final_records), "events": final_records}, indent=2))
 
 
 def main():
@@ -587,7 +590,7 @@ def main():
         "count": len(merged),
         "events": merged,
     }
-    OUT_PATH.write_text(json.dumps(output, indent=2), encoding="utf-8")
+    write_text_atomic(OUT_PATH, json.dumps(output, indent=2))
     print(f"wrote {OUT_PATH}")
 
     # Festivals consolidated into the single polymythcalendar (June 2026).
@@ -621,4 +624,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    with ReleaseBuildLock(inherited_release_build_root(ROOT)):
+        main()

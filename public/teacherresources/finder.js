@@ -39,6 +39,11 @@
     cs: 'Computer Science'
   };
 
+  var ACCESS_LABELS = {direct:'Direct access',unavailable:'Source unavailable — see source notes',
+    'publisher-free':'Free materials per publisher','publisher-account':'Free account per publisher',
+    'publisher-download':'Downloads listed by publisher','publisher-variable':'Access varies by archive item',
+    unknown:'Access requirements not recorded'};
+
   var CURRICULA = {
     ontario: 'Ontario',
     bc: 'British Columbia',
@@ -87,12 +92,13 @@
     },
     assessment: {
       label: 'Assessment',
-      members: ['contest-paper', 'ib-paper', 'released-test']
+      members: ['contest-paper', 'ib-paper', 'released-test', 'assessment-guide']
     },
     interactive: {
       label: 'Interactive',
       members: ['interactive', 'simulation', 'khan-course', 'course-archive', 'ai-game', 'video-series']
     },
+    practice: {label: 'Practice / worktexts', members: ['worksheet']},
     reference: {
       label: 'Reference',
       members: ['aggregator', 'gov-resource', 'reference']
@@ -106,56 +112,7 @@
     });
   });
 
-  function normalize(value) {
-    var text = String(value || '').toLowerCase();
-    if (text.normalize) text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    return text.replace(/[’']/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
-  }
-
-  function editDistanceWithin(a, b, maximum) {
-    if (Math.abs(a.length - b.length) > maximum) return false;
-    if (maximum >= 1 && a.length === b.length) {
-      var differences = [];
-      for (var position = 0; position < a.length; position += 1) {
-        if (a[position] !== b[position]) differences.push(position);
-      }
-      if (
-        differences.length === 2 &&
-        differences[1] === differences[0] + 1 &&
-        a[differences[0]] === b[differences[1]] &&
-        a[differences[1]] === b[differences[0]]
-      ) return true;
-    }
-    var previous = Array.from({ length: b.length + 1 }, function (_, index) { return index; });
-    for (var row = 1; row <= a.length; row += 1) {
-      var current = [row];
-      var rowMinimum = current[0];
-      for (var column = 1; column <= b.length; column += 1) {
-        var value = Math.min(
-          current[column - 1] + 1,
-          previous[column] + 1,
-          previous[column - 1] + (a[row - 1] === b[column - 1] ? 0 : 1)
-        );
-        current.push(value);
-        rowMinimum = Math.min(rowMinimum, value);
-      }
-      if (rowMinimum > maximum) return false;
-      previous = current;
-    }
-    return previous[b.length] <= maximum;
-  }
-
-  function searchTokenMatches(entry, token) {
-    if (entry.searchText.indexOf(token) !== -1) return true;
-    if (token.length < 5) return false;
-    var maximum = token.length >= 9 ? 2 : 1;
-    return entry.searchWords.some(function (word) {
-      if (word.indexOf(token) === 0 || token.indexOf(word) === 0) {
-        return Math.abs(word.length - token.length) <= maximum;
-      }
-      return editDistanceWithin(token, word, maximum);
-    });
-  }
+  function normalize(value) { return TeacherSearch.normalize(value); }
 
   function directText(root, selectors) {
     return selectors.map(function (selector) {
@@ -179,26 +136,20 @@
   }
 
   var groups = Array.from(catalog.querySelectorAll('details.group')).map(function (groupElement) {
-    var groupText = directText(groupElement, ['.grp-title', '.grp-kicker']);
+    
     var categories = Array.from(groupElement.querySelectorAll('details.category')).map(function (categoryElement) {
-      var categoryText = directText(categoryElement, ['.cat-title', '.cat-kicker', '.cat-blurb']);
+      
       var entries = Array.from(categoryElement.querySelectorAll('.entry')).map(function (entryElement) {
         var sourceLanguage = entryElement.dataset.l || entryElement.dataset.language || 'und';
         entryElement.dataset.language = sourceLanguage;
-        var searchText = normalize([
-          entryElement.textContent,
-          groupText,
-          categoryText,
-          entryElement.dataset.format,
-          FORMAT_LABELS[entryElement.dataset.format],
-          entryElement.dataset.grade,
-          entryElement.dataset.subject,
-          SUBJECTS[entryElement.dataset.subject],
-          entryElement.dataset.curriculum,
-          CURRICULA[entryElement.dataset.curriculum],
-          sourceLanguage
-        ].join(' '));
+        var title = directText(entryElement, ['.entry-title']);
+        var author = directText(entryElement, ['.entry-byline']);
+        var notes = directText(entryElement, ['.entry-notes']);
+        var keywords = entryElement.dataset.keywords || '';
+        var searchText = normalize([title, author, notes, keywords].join(' '));
         return {
+          title: title, author: author, notes: notes, keywords: keywords, workId: entryElement.dataset.work, aliases: (entryElement.dataset.aliases||'').split('|').filter(Boolean), audience: entryElement.dataset.audience,
+          file: entryElement.dataset.file || "Webpage / unrecorded", access: entryElement.dataset.access || "unknown",
           element: entryElement,
           shell: entryElement.closest('.entry-shell'),
           format: entryElement.dataset.format || '',
@@ -238,7 +189,7 @@
     grades: new Set(),
     subjects: new Set(),
     curricula: new Set(),
-    languages: new Set()
+    languages: new Set(), files: new Set(), accesses: new Set(), includeUnknown: false
   };
   var announceTimer = null;
   var expandLabelFrame = null;
@@ -249,10 +200,12 @@
     grades: {},
     formats: {},
     curricula: {},
-    languages: {}
+    languages: {}, files: {}, accesses: {}
   };
 
   entries.forEach(function (entry) {
+    TeacherSearch.fileTypes(entry.file).forEach(function(file){counts.files[file] = (counts.files[file] || 0) + 1;});
+    counts.accesses[entry.access] = (counts.accesses[entry.access] || 0) + 1;
     if (entry.subject) counts.subjects[entry.subject] = (counts.subjects[entry.subject] || 0) + 1;
     if (entry.curriculum) counts.curricula[entry.curriculum] = (counts.curricula[entry.curriculum] || 0) + 1;
     entry.languages.forEach(function (language) {
@@ -287,6 +240,10 @@
     parent.appendChild(chip);
   }
 
+  counts.formats.anthology = entries.filter(function(e){return TeacherSearch.materialMatches(e.format, 'anthology');}).length;
+  counts.formats.practice = entries.filter(function(e){return TeacherSearch.materialMatches(e.format, 'practice');}).length;
+  Object.keys(counts.files).forEach(function(v){appendChip('file-chips','file',v,v);});
+  Object.keys(counts.accesses).forEach(function(v){appendChip('access-chips','access',v,ACCESS_LABELS[v] || 'Access not recorded');});
   Object.keys(SUBJECTS).forEach(function (subject) {
     if (counts.subjects[subject]) appendChip('subject-chips', 'subject', subject, SUBJECTS[subject]);
   });
@@ -313,13 +270,13 @@
       state.grades.size ||
       state.subjects.size ||
       state.curricula.size ||
-      state.languages.size
+      state.languages.size || state.files.size || state.accesses.size
     );
   }
 
   function gradeMatches(value) {
     if (!state.grades.size) return true;
-    if (!value || value === 'all') return true;
+    if (!value || value === 'all') return state.includeUnknown;
     return expandGrade(value).some(function (grade) { return state.grades.has(grade); });
   }
 
@@ -327,12 +284,14 @@
     if (queryTokens.length) {
       var searchMatches = searchMatchCache
         ? searchMatchCache.get(entry)
-        : queryTokens.every(function (token) { return searchTokenMatches(entry, token); });
+        : TeacherSearch.match(entry, state.search).score > 0;
       if (!searchMatches) return false;
     }
-    if (ignoreType !== 'format' && state.formats.size && !state.formats.has(formatToGroup[entry.format])) return false;
+    if (ignoreType !== 'format' && state.formats.size && !Array.from(state.formats).some(function(f){ return TeacherSearch.materialMatches(entry.format,f) || formatToGroup[entry.format] === f; })) return false;
     if (ignoreType !== 'subject' && state.subjects.size && !state.subjects.has(entry.subject)) return false;
-    if (ignoreType !== 'curriculum' && state.curricula.size && !state.curricula.has(entry.curriculum)) return false;
+    if (ignoreType !== 'curriculum' && state.curricula.size && !state.curricula.has(entry.curriculum) && !(state.includeUnknown && !entry.curriculum)) return false;
+    if (ignoreType !== 'file' && state.files.size && !Array.from(state.files).some(function(file){return TeacherSearch.fileMatches(entry.file,file);})) return false;
+    if (ignoreType !== 'access' && state.accesses.size && !state.accesses.has(entry.access)) return false;
     if (ignoreType !== 'language' && state.languages.size && !entry.languages.some(function (language) {
       return state.languages.has(language);
     })) return false;
@@ -340,27 +299,28 @@
   }
 
   function entryHasFilterValue(entry, type, value) {
-    if (type === 'format') return formatToGroup[entry.format] === value;
+    if (type === 'format') return TeacherSearch.materialMatches(entry.format,value) || formatToGroup[entry.format] === value;
+    if (type === 'file') return TeacherSearch.fileMatches(entry.file,value);
+    if (type === 'access') return entry.access === value;
     if (type === 'subject') return entry.subject === value;
-    if (type === 'curriculum') return entry.curriculum === value;
+    if (type === 'curriculum') return entry.curriculum === value || (state.includeUnknown && !entry.curriculum);
     if (type === 'language') return entry.languages.indexOf(value) !== -1;
-    if (type === 'grade') return entry.grade === 'all' || expandGrade(entry.grade).indexOf(value) !== -1;
+    if (type === 'grade') return ((!entry.grade || entry.grade === 'all') && state.includeUnknown) || expandGrade(entry.grade === 'all' ? '' : entry.grade).indexOf(value) !== -1;
     return false;
   }
 
   function buildSearchMatchCache(queryTokens) {
     var cache = new Map();
-    entries.forEach(function (entry) {
-      cache.set(entry, !queryTokens.length || queryTokens.every(function (token) {
-        return searchTokenMatches(entry, token);
-      }));
+    entries.forEach(function(entry) {
+      entry.match = TeacherSearch.match(entry, state.search);
+      cache.set(entry, entry.match.score > 0);
     });
     return cache;
   }
 
   function updateFacetCounts(queryTokens, searchMatchCache) {
     var contexts = {};
-    ['subject', 'grade', 'format', 'curriculum', 'language'].forEach(function (type) {
+    ['subject', 'grade', 'format', 'curriculum', 'language', 'file', 'access'].forEach(function (type) {
       contexts[type] = entries.filter(function (entry) {
         return entryMatches(entry, queryTokens, type, searchMatchCache);
       });
@@ -391,7 +351,8 @@
         chip.dataset.filterType === 'grade' ? state.grades :
         chip.dataset.filterType === 'subject' ? state.subjects :
         chip.dataset.filterType === 'curriculum' ? state.curricula :
-        chip.dataset.filterType === 'language' ? state.languages : null;
+        chip.dataset.filterType === 'language' ? state.languages :
+        chip.dataset.filterType === 'file' ? state.files : chip.dataset.filterType === 'access' ? state.accesses : null;
       var active = Boolean(set && set.has(chip.dataset.filterValue));
       chip.classList.toggle('active', active);
       chip.setAttribute('aria-pressed', active ? 'true' : 'false');
@@ -428,6 +389,9 @@
     if (state.formats.size) params.set('format', Array.from(state.formats).sort().join(','));
     if (state.curricula.size) params.set('curriculum', Array.from(state.curricula).sort().join(','));
     if (state.languages.size) params.set('language', Array.from(state.languages).sort().join(','));
+    if (state.files.size) params.set('file',Array.from(state.files).sort().join(','));
+    if (state.accesses.size) params.set('access',Array.from(state.accesses).sort().join(','));
+    if (state.includeUnknown) params.set('unclassified','1');
     var query = params.toString();
     return location.pathname + (query ? '?' + query : '') + location.hash;
   }
@@ -513,6 +477,7 @@
     updateFacetCounts(queryTokens, searchMatchCache);
     setExpandLabel();
     if (!options.skipSave) saveState();
+    shownLimit = 30; renderRankedResults();
   }
 
   function visibleGroups() {
@@ -554,7 +519,8 @@
     state.grades.clear();
     state.subjects.clear();
     state.curricula.clear();
-    state.languages.clear();
+    state.languages.clear(); state.files.clear(); state.accesses.clear(); state.includeUnknown = false;
+    document.getElementById('include-unclassified').checked = false;
     searchInput.value = '';
   }
 
@@ -573,6 +539,8 @@
     if (key === 'format') return Boolean(counts.formats[value]);
     if (key === 'curriculum') return Boolean(counts.curricula[value]);
     if (key === 'language') return Boolean(counts.languages[value]);
+    if (key === 'file') return Boolean(counts.files[value]) || entries.some(function(entry){return entry.file===value;});
+    if (key === 'access') return Boolean(counts.accesses[value]);
     return false;
   }
 
@@ -581,13 +549,15 @@
     try {
       var params = new URLSearchParams(location.search);
       state.search = params.get('q') || '';
-      ['subject', 'grade', 'format', 'curriculum', 'language'].forEach(function (key) {
+      state.includeUnknown = params.get('unclassified') === '1';
+      document.getElementById('include-unclassified').checked = state.includeUnknown;
+      ['subject', 'grade', 'format', 'curriculum', 'language', 'file', 'access'].forEach(function (key) {
         var value = params.get(key);
         if (!value) return;
         var set = key === 'subject' ? state.subjects :
           key === 'grade' ? state.grades :
           key === 'format' ? state.formats :
-          key === 'curriculum' ? state.curricula : state.languages;
+          key === 'curriculum' ? state.curricula : key === 'file' ? state.files : key === 'access' ? state.accesses : state.languages;
         value.split(',').filter(function (item) {
           return validFilterValue(key, item);
         }).forEach(function (item) { set.add(item); });
@@ -615,6 +585,8 @@
 
   controls.addEventListener('submit', function (event) {
     event.preventDefault();
+    flushSearchAndApply();
+    resultPanel.focus();
   });
 
   controls.addEventListener('click', function (event) {
@@ -627,7 +599,7 @@
         type === 'grade' ? state.grades :
         type === 'subject' ? state.subjects :
         type === 'curriculum' ? state.curricula :
-        type === 'language' ? state.languages : null;
+        type === 'language' ? state.languages : type === 'file' ? state.files : type === 'access' ? state.accesses : null;
       if (set) toggleSet(set, button.dataset.filterValue);
       applyFilters();
       return;
@@ -715,24 +687,16 @@
     });
   }
 
-  function openFirstResult() {
-    flushSearchAndApply();
-    var first = entries.find(function (entry) { return !entry.element.hidden; });
-    if (!isFiltering() || !first) {
-      announce('Choose a search or filter first.');
-      return;
-    }
-    window.location.assign(first.element.href);
-  }
-
   if (openFirstButton) {
-    openFirstButton.addEventListener('click', openFirstResult);
+    openFirstButton.addEventListener('click', function(){ flushSearchAndApply(); document.getElementById('search-results').focus(); document.getElementById('search-results').scrollIntoView({block:'start'}); });
   }
 
   searchInput.addEventListener('keydown', function (event) {
     if (event.key !== 'Enter' || event.isComposing) return;
     event.preventDefault();
-    openFirstResult();
+    flushSearchAndApply();
+    document.getElementById('search-results').focus();
+    document.getElementById('search-results').scrollIntoView({block:'start'});
   });
 
   var emptyResetButton = emptyState.querySelector('button');
@@ -782,9 +746,96 @@
     applyFilters({ skipSave: true });
   });
 
+
+  var quickFilters=document.querySelector('.quick-finder');
+  var quickToggle=document.createElement('button');quickToggle.type='button';quickToggle.className='ctrl-btn quick-toggle';quickToggle.textContent='Quick filters';quickToggle.setAttribute('aria-controls','quick-filter-panel');quickFilters.id='quick-filter-panel';quickFilters.before(quickToggle);
+  var smallScreen=window.matchMedia('(max-width:650px)');
+  function sizeQuickFilters(){quickFilters.hidden=smallScreen.matches;quickToggle.hidden=!smallScreen.matches;quickToggle.setAttribute('aria-expanded',String(!quickFilters.hidden));}
+  sizeQuickFilters();smallScreen.addEventListener('change',sizeQuickFilters);
+  quickToggle.addEventListener('click',function(){quickFilters.hidden=!quickFilters.hidden;quickToggle.setAttribute('aria-expanded',String(!quickFilters.hidden));});
+
+  var resultPanel = document.getElementById('search-results');
+  var resultList = document.getElementById('result-list');
+  var moreResults = document.getElementById('more-results');
+  var activeFilters = document.getElementById('active-filters');
+  var shownLimit = 30;
+  var printingResults = false;
+  var ranked = [];
+  var unclassified = document.getElementById('include-unclassified');
+  resultPanel.insertBefore(emptyState, resultList);
+  unclassified.addEventListener('change',function(){state.includeUnknown=this.checked;applyFilters();});
+  function element(tag,cls,text) { var el=document.createElement(tag); if(cls)el.className=cls; if(text)el.textContent=text; return el; }
+  function renderRankedResults() {
+    var filtering=isFiltering();
+    resultPanel.hidden=!filtering && !printingResults;
+    var skipCatalog=document.querySelector('.skip-catalog');
+    if(skipCatalog){skipCatalog.href=filtering?'#search-results':'#catalog';skipCatalog.textContent=filtering?'Skip to results':'Skip to catalog';}
+    document.body.classList.toggle('finder-active',filtering);
+    document.querySelectorAll('.teacher-orientation,.teacher-areas,.browse-heading').forEach(function(el){el.hidden=filtering;});
+    catalog.hidden=filtering;
+    if(expandButton) expandButton.hidden=filtering;
+    ranked=entries.filter(function(e){return !e.element.hidden;}).sort(function(a,b){return b.match.score-a.match.score || a.title.localeCompare(b.title) || a.author.localeCompare(b.author);});
+    var works=new Map();
+    ranked.forEach(function(e){var k=TeacherSearch.workKey(e);if(!works.has(k))works.set(k,[]);works.get(k).push(e);});
+    resultList.replaceChildren();
+    Array.from(works.values()).slice(0,shownLimit).forEach(function(versions){
+      var box=element('article','work-result');
+      if(versions.length>1) box.appendChild(element('h3','work-heading',versions.length>1 ? versions[0].title.replace(/\s*\([^)]*\)\s*/g,' ').trim() : versions[0].title));
+      if(versions.length>1) box.appendChild(element('p','work-count',versions.length+' versions / sources — compare the editions below'));
+      versions.forEach(function(e,index){
+        var shell=e.shell.cloneNode(true);shell.hidden=false;
+        if(versions.length===1){var oldTitle=shell.querySelector('.entry-title');var titleHeading=element('h3','entry-title',oldTitle.textContent);oldTitle.replaceWith(titleHeading);}shell.querySelectorAll('[hidden]').forEach(function(n){n.hidden=false;});
+        if(e.match.reason) shell.prepend(element('p','match-reason',e.match.reason));
+        shell.appendChild(element('p','resource-facts',e.file+' · '+(ACCESS_LABELS[e.access] || ACCESS_LABELS.unknown)));
+        if(e.audience==='teacher') shell.prepend(element('strong','teacher-only-label','Teacher material — title indicates an answer key or teacher edition'));
+        if(state.includeUnknown && ((state.grades.size && (!e.grade || e.grade==='all')) || (state.curricula.size && !e.curriculum))) shell.prepend(element('p','metadata-note','Included with unclassified metadata; suitability has not been established.'));
+        if(index===0) box.appendChild(shell);
+        else { var details=element('details','resource-version');details.appendChild(element('summary','',e.title+' — '+e.file));details.appendChild(shell);box.appendChild(details); }
+      });
+      resultList.appendChild(box);
+    });
+    moreResults.hidden=works.size<=shownLimit;
+    moreResults.textContent='Show more results ('+Math.max(0,works.size-shownLimit)+' remaining)';
+    resultCount.textContent=ranked.length+' resource'+(ranked.length===1?'':'s')+' in '+works.size+' work'+(works.size===1?'':'s')+(filtering&&works.size>shownLimit?' · showing first '+shownLimit:'');
+    activeFilters.replaceChildren();
+    var sets={subject:state.subjects,grade:state.grades,format:state.formats,curriculum:state.curricula,language:state.languages,file:state.files,access:state.accesses};
+    Object.keys(sets).forEach(function(k){sets[k].forEach(function(v){var label=(SUBJECTS[v]||CURRICULA[v]||LANGUAGES[v]||(FORMAT_GROUPS[v]&&FORMAT_GROUPS[v].label)||v);var b=element('button','ctrl-btn','Remove '+k+': '+label);b.type='button';b.addEventListener('click',function(){var position=Array.from(activeFilters.children).indexOf(b);sets[k].delete(v);applyFilters();var remaining=activeFilters.querySelectorAll('button');(remaining[Math.min(position,remaining.length-1)]||searchInput).focus();});activeFilters.appendChild(b);});});
+    emptyState.replaceChildren();emptyState.hidden=ranked.length>0;
+    if(!ranked.length){
+      emptyState.appendChild(element('p','', 'No resources match this search and its filters.'));
+      var hidden=entries.filter(function(e){return e.match.score>0;});
+      if(state.search && hidden.length){
+        emptyState.appendChild(element('p','',hidden.length+' matching resources are excluded by the active filters shown above. Remove a filter, or keep your search and clear filters.'));
+        var clear=element('button','ctrl-btn','Clear filters, keep search');clear.type='button';clear.addEventListener('click',function(){Object.values(sets).forEach(function(set){set.clear();});applyFilters();});emptyState.appendChild(clear);
+      } else {
+        var cq=TeacherSearch.normalize(state.search).replace(/^the /,'');
+        var suggestions=entries.map(function(e){return {e:e,d:TeacherSearch.distance(cq,TeacherSearch.normalize(e.title).replace(/^the /,''))};}).filter(function(x){return x.d<=2;}).sort(function(a,b){return a.d-b.d;}).slice(0,3);
+        suggestions.forEach(function(x){var b=element('button','ctrl-btn','Try '+x.e.title);b.type='button';b.addEventListener('click',function(){searchInput.value=x.e.title;flushSearchAndApply();});emptyState.appendChild(b);});
+        emptyState.appendChild(element('p','', 'Try a title, author, or fewer keywords. A zero result does not establish that no suitable material exists.'));
+      }
+      var reset=element('button','ctrl-btn','Clear search and filters');reset.type='button';reset.addEventListener('click',function(){resetState();applyFilters();searchInput.focus();});emptyState.appendChild(reset);
+    }
+  }
+  moreResults.addEventListener('click',function(){var nextIndex=shownLimit;shownLimit+=30;renderRankedResults();var next=resultList.children[nextIndex];if(next){var link=next.querySelector('a');if(link)link.focus();}announce('More results loaded. '+resultCount.textContent+'.');});
+  document.addEventListener('click',function(event){if(event.target.closest('.entry-detail')){try{sessionStorage.setItem('teacher-search-return',JSON.stringify({path:buildStatePath(),scroll:window.scrollY,limit:shownLimit}));}catch(e){}}});
+  var beforePrintLimit=30;
+  window.addEventListener('beforeprint',function(){printingResults=true;beforePrintLimit=shownLimit;shownLimit=entries.length;renderRankedResults();document.querySelectorAll('#result-list details').forEach(function(d){d.open=true;});});
+  window.addEventListener('afterprint',function(){printingResults=false;shownLimit=beforePrintLimit;renderRankedResults();});
+
   clearLegacyLocalState();
   restoreState();
   // Initial navigation is read-only: explicit query state is authoritative and
   // a clean /teacherresources/ URL always opens the complete catalog.
   applyFilters({ skipSave: true });
+  document.body.classList.add('finder-enhanced');
+  function revealLinkedResults(){
+    if(isFiltering() && (location.hash==='#catalog'||location.hash==='#search-results')){
+      if(location.hash==='#catalog'){try{history.replaceState(null,'',location.pathname+location.search+'#search-results');}catch(e){}}
+      resultPanel.focus({preventScroll:true});resultPanel.scrollIntoView({block:'start'});
+    }
+  }
+  window.addEventListener('hashchange',revealLinkedResults);
+  revealLinkedResults();
+  if(document.readyState!=='complete')window.addEventListener('load',revealLinkedResults,{once:true});
+  try { var saved=JSON.parse(sessionStorage.getItem('teacher-search-return')); if(saved && saved.path===buildStatePath()){shownLimit=Math.max(30,Math.min(entries.length,Number(saved.limit)||30));renderRankedResults();requestAnimationFrame(function(){window.scrollTo(0,Number(saved.scroll)||0);});}}catch(e){}
 })();

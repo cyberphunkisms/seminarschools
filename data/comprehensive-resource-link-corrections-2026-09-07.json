@@ -1,0 +1,40 @@
+{
+  "checked_on": "2026-09-07",
+  "corrections": [
+    {
+      "id": "TR-0057",
+      "title": "A Temporary Matter",
+      "old_url": "https://jerrywbrown.com/wp-content/uploads/2020/02/A-Temporary-Matter-Lahiri-Jhumpa.pdf",
+      "new_url": "https://jerrywbrown.com/wp-content/uploads/2020/02/A-Temporary-Matter-Lihiri-Jhumpa.pdf",
+      "evidence": "Clicked A Temporary Matter from the original resource curator’s current Short Stories index. Destination PDF opened successfully, 11 pages, title A Temporary Matter and author Jhumpa Lahiri. The actual file URL misspells Lihiri, while title/author text is correct; preserve the actual published URL."
+    },
+    {
+      "id": "TR-0058",
+      "title": "A Very Old Man with Enormous Wings",
+      "old_url": "https://jerrywbrown.com/wp-content/uploads/2020/02/A-Very-Old-Man-with-Enormous-Wings-Garcia-Marquez-Gabriel.pdf",
+      "new_url": "https://jerrywbrown.com/wp-content/uploads/2020/02/A-Very-Old-Man-with-Enormous-Wings-Marquez-Gabriel-Garcia.pdf",
+      "evidence": "Clicked A Very Old Man with Enormous Wings, Marquez Gabriel Garcia, from the original resource curator’s current Short Stories index. Destination PDF opened successfully, 5 pages, exact title and author. The old URL had the surname/given-name order incorrectly assembled."
+    },
+    {
+      "id": "TR-0291",
+      "title": "Plate Tectonics: Plate Motion",
+      "old_url": "https://phet.colorado.edu/sims/html/plate-tectonics/latest/plate-tectonics_en.html",
+      "new_url": "https://phet.colorado.edu/en/simulations/plate-tectonics",
+      "evidence": "Official simulation landing page is reachable. PhET help explicitly says Plate Tectonics is Java/Flash using LWJGL, has MacOS incompatibility, and would require HTML5 redevelopment. The old href invents a nonexistent HTML5 sim path. Restore landing page and identify legacy compatibility honestly; it is not a verified working modern HTML5 app."
+    },
+    {
+      "id": "TR-0474",
+      "title": "Abraham Lincoln's Rise to National Prominence",
+      "old_url": "https://www.loc.gov/classroom-materials/abraham-lincoln-rise-to-national-prominence/",
+      "new_url": "https://www.loc.gov/classroom-materials/abraham-lincoln/",
+      "evidence": "Official LOC search results identify exactly Abraham Lincoln: Rise to National Prominence, Primary Source Set, at the replacement URL. Current LOC related-resources and source-set pages also name it. Direct web open returns 403; this is a verified publisher locator, not a verified successful live GET."
+    },
+    {
+      "id": "TR-0475",
+      "title": "American Authors in the 19th Century (Whitman, Dickinson, Longfellow, Stowe, Poe)",
+      "old_url": "https://www.loc.gov/classroom-materials/american-authors-in-the-nineteenth-century-whitman-dickinson-longfellow-stowe-poe/",
+      "new_url": "https://www.loc.gov/classroom-materials/american-authors-in-the-nineteenth-century-whitman-dickinson-longfellow-stowe-and-poe/",
+      "evidence": "Official LOC search results and current Primary Source Sets page identify the exact Whitman, Dickinson, Longfellow, Stowe, and Poe set at this URL. Existing URL omitted and-. Direct web open returns 403; this is a verified publisher locator, not a verified successful live GET."
+    }
+  ]
+}

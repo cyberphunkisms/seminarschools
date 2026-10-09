@@ -5,6 +5,8 @@ const path = require('path');
 const crypto = require('crypto');
 const {isGeneratedDependencyDirectory} = require('./repository-walk-policy');
 const ROOT = path.resolve(__dirname, '..');
+const {ensureLock, writeJsonAtomic} = require('./lib/harvest-publication');
+ensureLock(ROOT, __filename);
 const PUBLIC = path.join(ROOT, 'public');
 const OUT = path.join(ROOT, 'scripts', 'reports', 'asset-weight-report.json');
 
@@ -56,7 +58,7 @@ const report = {
 };
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
 const text = JSON.stringify(report, null, 2) + '\n';
-if (!fs.existsSync(OUT) || fs.readFileSync(OUT, 'utf8') !== text) fs.writeFileSync(OUT, text);
+if (!fs.existsSync(OUT) || fs.readFileSync(OUT, 'utf8') !== text) writeJsonAtomic(OUT, report);
 if (process.env.SS_BUILD_OUTPUT_MTIME) {
   const outputMtime = new Date(process.env.SS_BUILD_OUTPUT_MTIME);
   if (Number.isNaN(outputMtime.getTime())) {
@@ -64,5 +66,28 @@ if (process.env.SS_BUILD_OUTPUT_MTIME) {
     process.exit(1);
   }
   fs.utimesSync(OUT, outputMtime, outputMtime);
+}
+// This generator owns the measured asset report, never code or historical
+// amendment hashes. Refresh only its current-release binding after measuring
+// the real public tree so legitimate new records can pass later release gates.
+const maintenance = release.polymythcal_maintenance_20261001;
+if (release.ml_star_concept_application_update_2026_10_05) {
+  const update=release.ml_star_concept_application_update_2026_10_05;
+  const relative='scripts/reports/asset-weight-report.json';
+  const digest=crypto.createHash('sha256').update(text).digest('hex');
+  if(update.artifact_sha256[relative]!==digest){update.artifact_sha256[relative]=digest;writeJsonAtomic(path.join(ROOT,'RELEASE_MANIFEST.json'),release);}
+} else if (maintenance) {
+  const relative = 'scripts/reports/asset-weight-report.json';
+  if (maintenance.release_id !== '2026-10-01-polymythcal-maintenance-v6'
+    || maintenance.predecessor_sha256 !== 'b963e1eed45eab5fe4118e0b6670f0dbc1ecceda2b650fb91c195f9d3537c33a'
+    || !/^[0-9a-f]{64}$/.test(maintenance.predecessor_artifact_sha256?.[relative] || '')
+    || !/^[0-9a-f]{64}$/.test(maintenance.artifact_sha256?.[relative] || '')) {
+    throw new Error('Asset report maintenance binding is incomplete or has the wrong predecessor');
+  }
+  const digest = crypto.createHash('sha256').update(text).digest('hex');
+  if (maintenance.artifact_sha256[relative] !== digest) {
+    maintenance.artifact_sha256[relative] = digest;
+    writeJsonAtomic(path.join(ROOT, 'RELEASE_MANIFEST.json'), release);
+  }
 }
 console.log(`ASSET REPORT BUILT — ${report.totalFiles} public files, ${report.totalBytes} bytes.`);

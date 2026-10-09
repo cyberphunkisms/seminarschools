@@ -7,6 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 const crypto = require('crypto');
+const {isGeneratedDependencyDirectory} = require('./repository-walk-policy');
 const {
   GEOMETRY_VERSION,
   applyGeometryToHtml,
@@ -216,7 +217,10 @@ function execute(options = {}) {
     hidden: false,
     selectionActive: false,
     querySelector() { return this.selectionActive ? body : null; },
-    querySelectorAll() { return (options.sectionTops || []).map(top => ({ getBoundingClientRect: () => ({ top: top - window.scrollY }) })); },
+    querySelectorAll() { return (options.sectionTops || []).map(top => ({
+      getClientRects: () => top === null ? [] : [{ top: top - window.scrollY }],
+      getBoundingClientRect: () => ({ top: top === null ? 0 : top - window.scrollY }),
+    })); },
     createElement: tag => makeNode(tag, byId),
     getElementById: id => byId[id] || null,
     addEventListener(type, handler) { (documentHandlers[type] ||= []).push(handler); }
@@ -578,7 +582,7 @@ check(unknownFailed, 'finalizer: unclassified future route did not fail closed')
    seed, and actual top/middle/bottom transforms must remain route-distinct. */
 function sourceHtmlRoutes(dir, base = dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (['.git', 'node_modules', '.netlify', 'public', 'fixtures', '.public-build-staging', '.public-build-previous'].includes(entry.name)) continue;
+    if (['.git', 'node_modules', '.netlify', 'public', 'fixtures', '.public-build-staging', '.public-build-previous'].includes(entry.name) || isGeneratedDependencyDirectory(entry.name)) continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) sourceHtmlRoutes(full, base, out);
     else if (entry.isFile() && entry.name.endsWith('.html') && entry.name !== 'google20234ae70106ee9d.html') {
@@ -660,6 +664,16 @@ check(progressOf(fixedPhone) > 0.32, 'motion: cached height disabled native fixe
 const outlineMotion = execute({ motionPreset: 'study', sectionTops: [400, 800, 2400] });
 outlineMotion.scrollTo(800);
 check(progressOf(outlineMotion) > 0.25 && progressOf(outlineMotion) < 0.4, 'motion: actual study headings did not influence bounded pacing');
+const hiddenOutline = execute({ motionPreset: 'study', sectionTops: [400, 800, 2400, null] });
+hiddenOutline.scrollTo(800); hiddenOutline.fireDocument('change');
+check(progressOf(hiddenOutline) === progressOf(outlineMotion), 'motion: a hidden panel invented a scroll-dependent outline stop');
+const asynchronousSections = [1200, 1600, 2800];
+const asynchronousOutline = execute({ motionPreset: 'study', sectionTops: asynchronousSections });
+asynchronousOutline.scrollTo(800);
+asynchronousOutline.document.addEventListener('polymythcal:results', () => asynchronousSections.splice(0, 3, 400, 800, 2400, null));
+asynchronousOutline.fireDocument('polymythcal:results');
+check(progressOf(asynchronousOutline) === progressOf(outlineMotion) && asynchronousOutline.pending() === 0,
+  'motion: calendar results were measured before later card listeners finished, or left an idle loop');
 const selectionMotion = execute({ motionPreset: 'overview' });
 const unselectedSignature = selectionMotion.signatures().join('|');
 selectionMotion.document.selectionActive = true; selectionMotion.fireDocument('click');

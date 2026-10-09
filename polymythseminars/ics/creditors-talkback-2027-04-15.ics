@@ -5,14 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:a13498752e49332294d2@seminarschools.com
-DTSTAMP:20260814T000800Z
-DTSTART:20270415T233000Z
+DTSTAMP:20260907T000000Z
+DTSTART;VALUE=DATE:20270415
 SUMMARY:Creditors — post-show talkback
 LOCATION:Bluma Appel Theatre
 DESCRIPTION:Performance of Creditors followed by a confirmed talkback. Th
- e official page does not name the talkback participants.
+ e official page does not name the talkback participants. The talkback fo
+ llows the 7:30 PM performance\; its own start time is not published.
 URL:https://seminarschools.com/polymythseminars/events/creditors-talkback
  -2027-04-15/
-STATUS:CONFIRMED
+STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

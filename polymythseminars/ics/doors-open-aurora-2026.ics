@@ -5,14 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:7f1b317eeeb7abb83e13@seminarschools.com
-DTSTAMP:20260815T160000Z
-DTSTART;VALUE=DATE:20260920
+DTSTAMP:20261003T110658Z
+DTSTART:20260920T140000Z
+DTEND:20260920T200000Z
 SUMMARY:Doors Open Aurora
 LOCATION:Participating sites
 DESCRIPTION:A 2026 Doors Open Ontario event offering public access to par
  ticipating heritage\, civic\, and architectural sites.
 URL:https://seminarschools.com/polymythseminars/events/doors-open-aurora-
  2026/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

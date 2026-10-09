@@ -46,7 +46,9 @@
       ],
       "expect": {
         "pass": false,
-        "codes": ["W51_PUNCT_COLON"]
+        "codes": [
+          "W51_PUNCT_COLON"
+        ]
       }
     },
     {
@@ -82,7 +84,9 @@
       "text": "The programme includes English and includes Social Science.",
       "expect": {
         "pass": false,
-        "codes": ["W24_LEXICAL_REPETITION"]
+        "codes": [
+          "W24_LEXICAL_REPETITION"
+        ]
       }
     },
     {
@@ -92,7 +96,9 @@
       "text": "The programme Includes English and includes Social Science.",
       "expect": {
         "pass": false,
-        "codes": ["W24_LEXICAL_REPETITION"]
+        "codes": [
+          "W24_LEXICAL_REPETITION"
+        ]
       }
     },
     {
@@ -146,7 +152,9 @@
       "text": "The discussion continues - the evidence remains central.",
       "expect": {
         "pass": false,
-        "codes": ["W53_PUNCT_DASH_ATTACH"]
+        "codes": [
+          "W53_PUNCT_DASH_ATTACH"
+        ]
       }
     },
     {
@@ -166,7 +174,9 @@
       "text": "The course is not only literary but also historical.",
       "expect": {
         "pass": false,
-        "codes": ["W56_CONTRAST_ESCALATION"]
+        "codes": [
+          "W56_CONTRAST_ESCALATION"
+        ]
       }
     },
     {
@@ -176,7 +186,9 @@
       "text": "I do not summarize the source but examine its structure.",
       "expect": {
         "pass": false,
-        "codes": ["W55_CONTRAST_NOT_BUT"]
+        "codes": [
+          "W55_CONTRAST_NOT_BUT"
+        ]
       }
     },
     {
@@ -186,7 +198,9 @@
       "text": "It is not a code. It is a conversation.",
       "expect": {
         "pass": false,
-        "codes": ["W56_CONTRAST_PARALLEL_REVEAL"]
+        "codes": [
+          "W56_CONTRAST_PARALLEL_REVEAL"
+        ]
       }
     },
     {
@@ -206,7 +220,9 @@
       "text": "I use a method to teach interpretation.",
       "expect": {
         "pass": false,
-        "codes": ["W29_EMPTY_METHOD_LABEL"]
+        "codes": [
+          "W29_EMPTY_METHOD_LABEL"
+        ]
       }
     },
     {
@@ -216,7 +232,9 @@
       "text": "I use structured annotation.",
       "expect": {
         "pass": false,
-        "codes": ["W29_EMPTY_METHOD_LABEL"]
+        "codes": [
+          "W29_EMPTY_METHOD_LABEL"
+        ]
       }
     },
     {
@@ -226,7 +244,9 @@
       "text": "This approach helps me assess progress.",
       "expect": {
         "pass": false,
-        "codes": ["W29_VAGUE_METANOUN"]
+        "codes": [
+          "W29_VAGUE_METANOUN"
+        ]
       }
     },
     {
@@ -246,7 +266,9 @@
       "text": "The deeper point is student writing.",
       "expect": {
         "pass": false,
-        "codes": ["W65_META_ANNOUNCEMENT"]
+        "codes": [
+          "W65_META_ANNOUNCEMENT"
+        ]
       }
     },
     {
@@ -256,7 +278,9 @@
       "text": "I will first explain the evidence.",
       "expect": {
         "pass": false,
-        "codes": ["W67_PROCESS_NARRATION"]
+        "codes": [
+          "W67_PROCESS_NARRATION"
+        ]
       }
     },
     {
@@ -286,7 +310,9 @@
       "text": "Students read. Teachers respond. Writers revise.",
       "expect": {
         "pass": false,
-        "codes": ["W42_STACCATO_CLUSTER"]
+        "codes": [
+          "W42_STACCATO_CLUSTER"
+        ]
       }
     },
     {
@@ -296,7 +322,9 @@
       "text": "Students examine competing interpretations during the opening discussion. Teachers trace textual evidence during the second exchange. Writers develop grounded claims during the independent response. Peers test causal links during the final review.",
       "expect": {
         "pass": false,
-        "codes": ["W47_METRONOMIC_RHYTHM"]
+        "codes": [
+          "W47_METRONOMIC_RHYTHM"
+        ]
       }
     },
     {
@@ -316,7 +344,9 @@
       "text": "Catherine Malabou, a philosopher whose work informed my thesis, supervised the project.",
       "expect": {
         "pass": false,
-        "codes": ["W40_APPOSITIVE_CANDIDATE"]
+        "codes": [
+          "W40_APPOSITIVE_CANDIDATE"
+        ]
       }
     },
     {
@@ -326,16 +356,50 @@
       "text": "I have taught multilingual classes across six countries. I adapt assessment for neurodiverse learners.",
       "plan": {
         "sources": [
-          {"id": "cv", "kind": "cv"},
-          {"id": "teaching_record", "kind": "verified_record"}
+          {
+            "id": "cv",
+            "kind": "cv"
+          },
+          {
+            "id": "teaching_record",
+            "kind": "verified_record"
+          }
         ],
         "claims": [
-          {"id": "multilingual", "sentenceIndex": 0, "type": "first_person", "topics": ["multilingual"], "sourceIds": ["cv"]},
-          {"id": "neurodiverse", "sentenceIndex": 1, "type": "first_person", "topics": ["neurodiverse"], "sourceIds": ["teaching_record"]}
+          {
+            "id": "multilingual",
+            "sentenceIndex": 0,
+            "type": "first_person",
+            "topics": [
+              "multilingual"
+            ],
+            "sourceIds": [
+              "cv"
+            ]
+          },
+          {
+            "id": "neurodiverse",
+            "sentenceIndex": 1,
+            "type": "first_person",
+            "topics": [
+              "neurodiverse"
+            ],
+            "sourceIds": [
+              "teaching_record"
+            ]
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0]},
-          {"sentenceIndexes": [1]}
+          {
+            "sentenceIndexes": [
+              0
+            ]
+          },
+          {
+            "sentenceIndexes": [
+              1
+            ]
+          }
         ],
         "transitions": []
       },
@@ -351,21 +415,54 @@
       "text": "I have taught multilingual classes across six countries. I adapt assessment for neurodiverse learners.",
       "plan": {
         "sources": [
-          {"id": "cv", "kind": "cv"},
-          {"id": "teaching_record", "kind": "verified_record"}
+          {
+            "id": "cv",
+            "kind": "cv"
+          },
+          {
+            "id": "teaching_record",
+            "kind": "verified_record"
+          }
         ],
         "claims": [
-          {"id": "multilingual", "sentenceIndex": 0, "type": "first_person", "topics": ["multilingual"], "sourceIds": ["cv"]},
-          {"id": "neurodiverse", "sentenceIndex": 1, "type": "first_person", "topics": ["neurodiverse"], "sourceIds": ["teaching_record"]}
+          {
+            "id": "multilingual",
+            "sentenceIndex": 0,
+            "type": "first_person",
+            "topics": [
+              "multilingual"
+            ],
+            "sourceIds": [
+              "cv"
+            ]
+          },
+          {
+            "id": "neurodiverse",
+            "sentenceIndex": 1,
+            "type": "first_person",
+            "topics": [
+              "neurodiverse"
+            ],
+            "sourceIds": [
+              "teaching_record"
+            ]
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0, 1]}
+          {
+            "sentenceIndexes": [
+              0,
+              1
+            ]
+          }
         ],
         "transitions": []
       },
       "expect": {
         "pass": false,
-        "codes": ["W33_TOPIC_CONTINUITY"]
+        "codes": [
+          "W33_TOPIC_CONTINUITY"
+        ]
       }
     },
     {
@@ -375,13 +472,30 @@
       "text": "I passed instructional inspections in Ontario and British Columbia.",
       "plan": {
         "sources": [
-          {"id": "cv", "kind": "cv"}
+          {
+            "id": "cv",
+            "kind": "cv"
+          }
         ],
         "claims": [
-          {"id": "inspection", "sentenceIndex": 0, "type": "first_person", "topics": ["inspection"], "sourceIds": ["cv"]}
+          {
+            "id": "inspection",
+            "sentenceIndex": 0,
+            "type": "first_person",
+            "topics": [
+              "inspection"
+            ],
+            "sourceIds": [
+              "cv"
+            ]
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0]}
+          {
+            "sentenceIndexes": [
+              0
+            ]
+          }
         ],
         "transitions": []
       },
@@ -397,19 +511,36 @@
       "text": "I passed instructional inspections in Ontario and British Columbia.",
       "plan": {
         "sources": [
-          {"id": "cv", "kind": "cv"}
+          {
+            "id": "cv",
+            "kind": "cv"
+          }
         ],
         "claims": [
-          {"id": "inspection", "sentenceIndex": 0, "type": "first_person", "topics": ["inspection"], "sourceIds": []}
+          {
+            "id": "inspection",
+            "sentenceIndex": 0,
+            "type": "first_person",
+            "topics": [
+              "inspection"
+            ],
+            "sourceIds": []
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0]}
+          {
+            "sentenceIndexes": [
+              0
+            ]
+          }
         ],
         "transitions": []
       },
       "expect": {
         "pass": false,
-        "codes": ["W11_SOURCE_GROUNDING"]
+        "codes": [
+          "W11_SOURCE_GROUNDING"
+        ]
       }
     },
     {
@@ -428,7 +559,9 @@
             "I use a method.",
             "My OSSD courses span grades 10 through 12."
           ],
-          "editableSentenceIndexes": [1]
+          "editableSentenceIndexes": [
+            1
+          ]
         }
       },
       "expect": {
@@ -452,12 +585,16 @@
             "I use a method.",
             "My OSSD courses span grades 10 through 12."
           ],
-          "editableSentenceIndexes": [1]
+          "editableSentenceIndexes": [
+            1
+          ]
         }
       },
       "expect": {
         "pass": false,
-        "codes": ["W05_REVISION_LOCALITY"]
+        "codes": [
+          "W05_REVISION_LOCALITY"
+        ]
       }
     },
     {
@@ -467,24 +604,91 @@
       "text": "The role calls for English and Social Science teaching in grades 10 through 12. I have taught OSSD English and senior social science courses across that range.",
       "plan": {
         "sources": [
-          {"id": "job_post", "kind": "job_post", "evidenceIds": ["role_requirement"]},
-          {"id": "cv", "kind": "cv", "evidenceIds": ["ossd_course_record"]}
+          {
+            "id": "job_post",
+            "kind": "job_post",
+            "evidenceIds": [
+              "role_requirement"
+            ]
+          },
+          {
+            "id": "cv",
+            "kind": "cv",
+            "evidenceIds": [
+              "ossd_course_record"
+            ]
+          }
         ],
         "claims": [
-          {"id": "requirement", "sentenceIndex": 0, "type": "employer_fact", "topics": ["senior_ossd", "english", "social_science"], "relationIds": ["curriculum_match"], "sourceIds": ["job_post"], "evidenceIds": ["role_requirement"]},
-          {"id": "evidence", "sentenceIndex": 1, "type": "candidate_fact", "topics": ["senior_ossd", "english", "social_science"], "relationIds": ["curriculum_match"], "sourceIds": ["cv"], "evidenceIds": ["ossd_course_record"]}
+          {
+            "id": "requirement",
+            "sentenceIndex": 0,
+            "type": "employer_fact",
+            "topics": [
+              "senior_ossd",
+              "english",
+              "social_science"
+            ],
+            "relationIds": [
+              "curriculum_match"
+            ],
+            "sourceIds": [
+              "job_post"
+            ],
+            "evidenceIds": [
+              "role_requirement"
+            ]
+          },
+          {
+            "id": "evidence",
+            "sentenceIndex": 1,
+            "type": "candidate_fact",
+            "topics": [
+              "senior_ossd",
+              "english",
+              "social_science"
+            ],
+            "relationIds": [
+              "curriculum_match"
+            ],
+            "sourceIds": [
+              "cv"
+            ],
+            "evidenceIds": [
+              "ossd_course_record"
+            ]
+          }
         ],
         "relations": [
-          {"id": "curriculum_match", "sourceIds": ["job_post", "cv"], "evidenceIds": ["role_requirement", "ossd_course_record"]}
+          {
+            "id": "curriculum_match",
+            "sourceIds": [
+              "job_post",
+              "cv"
+            ],
+            "evidenceIds": [
+              "role_requirement",
+              "ossd_course_record"
+            ]
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0, 1]}
+          {
+            "sentenceIndexes": [
+              0,
+              1
+            ]
+          }
         ],
         "transitions": [],
         "application": {
           "minimumFitLinks": 1,
           "fitLinks": [
-            {"requirementClaimId": "requirement", "candidateClaimId": "evidence", "relation": "direct curriculum match"}
+            {
+              "requirementClaimId": "requirement",
+              "candidateClaimId": "evidence",
+              "relation": "direct curriculum match"
+            }
           ]
         }
       },
@@ -500,18 +704,81 @@
       "text": "The role calls for English and Social Science teaching in grades 10 through 12. I have taught OSSD English and senior social science courses across that range.",
       "plan": {
         "sources": [
-          {"id": "job_post", "kind": "job_post", "evidenceIds": ["role_requirement"]},
-          {"id": "cv", "kind": "cv", "evidenceIds": ["ossd_course_record"]}
+          {
+            "id": "job_post",
+            "kind": "job_post",
+            "evidenceIds": [
+              "role_requirement"
+            ]
+          },
+          {
+            "id": "cv",
+            "kind": "cv",
+            "evidenceIds": [
+              "ossd_course_record"
+            ]
+          }
         ],
         "claims": [
-          {"id": "requirement", "sentenceIndex": 0, "type": "employer_fact", "topics": ["senior_ossd", "english", "social_science"], "relationIds": ["curriculum_match"], "sourceIds": ["job_post"], "evidenceIds": ["role_requirement"]},
-          {"id": "evidence", "sentenceIndex": 1, "type": "candidate_fact", "topics": ["senior_ossd", "english", "social_science"], "relationIds": ["curriculum_match"], "sourceIds": ["cv"], "evidenceIds": ["ossd_course_record"]}
+          {
+            "id": "requirement",
+            "sentenceIndex": 0,
+            "type": "employer_fact",
+            "topics": [
+              "senior_ossd",
+              "english",
+              "social_science"
+            ],
+            "relationIds": [
+              "curriculum_match"
+            ],
+            "sourceIds": [
+              "job_post"
+            ],
+            "evidenceIds": [
+              "role_requirement"
+            ]
+          },
+          {
+            "id": "evidence",
+            "sentenceIndex": 1,
+            "type": "candidate_fact",
+            "topics": [
+              "senior_ossd",
+              "english",
+              "social_science"
+            ],
+            "relationIds": [
+              "curriculum_match"
+            ],
+            "sourceIds": [
+              "cv"
+            ],
+            "evidenceIds": [
+              "ossd_course_record"
+            ]
+          }
         ],
         "relations": [
-          {"id": "curriculum_match", "sourceIds": ["job_post", "cv"], "evidenceIds": ["role_requirement", "ossd_course_record"]}
+          {
+            "id": "curriculum_match",
+            "sourceIds": [
+              "job_post",
+              "cv"
+            ],
+            "evidenceIds": [
+              "role_requirement",
+              "ossd_course_record"
+            ]
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0, 1]}
+          {
+            "sentenceIndexes": [
+              0,
+              1
+            ]
+          }
         ],
         "transitions": [],
         "application": {
@@ -521,7 +788,9 @@
       },
       "expect": {
         "pass": false,
-        "codes": ["W77_APPLICATION_SPECIFICITY"]
+        "codes": [
+          "W77_APPLICATION_SPECIFICITY"
+        ]
       }
     },
     {
@@ -531,7 +800,9 @@
       "text": "My OSSD teaching covers grades 10-12.",
       "expect": {
         "pass": false,
-        "codes": ["W53_PUNCT_NUMERIC_RANGE"]
+        "codes": [
+          "W53_PUNCT_NUMERIC_RANGE"
+        ]
       }
     },
     {
@@ -557,14 +828,49 @@
       "text": "I return feedback so students can test a revised claim against the source.",
       "plan": {
         "sources": [
-          {"id": "teaching_record", "kind": "verified_record"}
+          {
+            "id": "teaching_record",
+            "kind": "verified_record"
+          }
         ],
         "claims": [
-          {"id": "feedback", "sentenceIndex": 0, "clauseIndex": 0, "type": "first_person", "topics": ["revision"], "sourceIds": ["teaching_record"], "informationUnits": ["feedback_returned"]},
-          {"id": "source_test", "sentenceIndex": 0, "clauseIndex": 1, "type": "interpretive", "topics": ["revision"], "informationUnits": ["claim_tested_against_source"], "relationUnits": ["purpose"]}
+          {
+            "id": "feedback",
+            "sentenceIndex": 0,
+            "clauseIndex": 0,
+            "type": "first_person",
+            "topics": [
+              "revision"
+            ],
+            "sourceIds": [
+              "teaching_record"
+            ],
+            "informationUnits": [
+              "feedback_returned"
+            ]
+          },
+          {
+            "id": "source_test",
+            "sentenceIndex": 0,
+            "clauseIndex": 1,
+            "type": "interpretive",
+            "topics": [
+              "revision"
+            ],
+            "informationUnits": [
+              "claim_tested_against_source"
+            ],
+            "relationUnits": [
+              "purpose"
+            ]
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0]}
+          {
+            "sentenceIndexes": [
+              0
+            ]
+          }
         ],
         "transitions": [],
         "enforceClauseNovelty": true
@@ -581,21 +887,54 @@
       "text": "I return feedback and continue.",
       "plan": {
         "sources": [
-          {"id": "teaching_record", "kind": "verified_record"}
+          {
+            "id": "teaching_record",
+            "kind": "verified_record"
+          }
         ],
         "claims": [
-          {"id": "feedback", "sentenceIndex": 0, "clauseIndex": 0, "type": "first_person", "topics": ["revision"], "sourceIds": ["teaching_record"], "informationUnits": ["feedback_returned"]},
-          {"id": "continue", "sentenceIndex": 0, "clauseIndex": 1, "type": "interpretive", "topics": ["revision"], "informationUnits": [], "relationUnits": []}
+          {
+            "id": "feedback",
+            "sentenceIndex": 0,
+            "clauseIndex": 0,
+            "type": "first_person",
+            "topics": [
+              "revision"
+            ],
+            "sourceIds": [
+              "teaching_record"
+            ],
+            "informationUnits": [
+              "feedback_returned"
+            ]
+          },
+          {
+            "id": "continue",
+            "sentenceIndex": 0,
+            "clauseIndex": 1,
+            "type": "interpretive",
+            "topics": [
+              "revision"
+            ],
+            "informationUnits": [],
+            "relationUnits": []
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0]}
+          {
+            "sentenceIndexes": [
+              0
+            ]
+          }
         ],
         "transitions": [],
         "enforceClauseNovelty": true
       },
       "expect": {
         "pass": false,
-        "codes": ["W18_CLAUSE_NOVELTY"]
+        "codes": [
+          "W18_CLAUSE_NOVELTY"
+        ]
       }
     },
     {
@@ -605,21 +944,56 @@
       "text": "I return feedback so students receive my comments.",
       "plan": {
         "sources": [
-          {"id": "teaching_record", "kind": "verified_record"}
+          {
+            "id": "teaching_record",
+            "kind": "verified_record"
+          }
         ],
         "claims": [
-          {"id": "feedback", "sentenceIndex": 0, "clauseIndex": 0, "type": "first_person", "topics": ["revision"], "sourceIds": ["teaching_record"], "informationUnits": ["feedback_returned"]},
-          {"id": "comments", "sentenceIndex": 0, "clauseIndex": 1, "type": "interpretive", "topics": ["revision"], "informationUnits": ["feedback_returned"], "relationUnits": []}
+          {
+            "id": "feedback",
+            "sentenceIndex": 0,
+            "clauseIndex": 0,
+            "type": "first_person",
+            "topics": [
+              "revision"
+            ],
+            "sourceIds": [
+              "teaching_record"
+            ],
+            "informationUnits": [
+              "feedback_returned"
+            ]
+          },
+          {
+            "id": "comments",
+            "sentenceIndex": 0,
+            "clauseIndex": 1,
+            "type": "interpretive",
+            "topics": [
+              "revision"
+            ],
+            "informationUnits": [
+              "feedback_returned"
+            ],
+            "relationUnits": []
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0]}
+          {
+            "sentenceIndexes": [
+              0
+            ]
+          }
         ],
         "transitions": [],
         "enforceClauseNovelty": true
       },
       "expect": {
         "pass": false,
-        "codes": ["W21_TAUTOLOGICAL_CONSEQUENCE"]
+        "codes": [
+          "W21_TAUTOLOGICAL_CONSEQUENCE"
+        ]
       }
     },
     {
@@ -629,13 +1003,40 @@
       "text": "I have taught ENG4U and HSB4U within OSSD programmes.",
       "plan": {
         "sources": [
-          {"id": "cv", "kind": "cv", "evidenceIds": ["course_codes"]}
+          {
+            "id": "cv",
+            "kind": "cv",
+            "evidenceIds": [
+              "course_codes"
+            ]
+          }
         ],
         "claims": [
-          {"id": "courses", "sentenceIndex": 0, "type": "candidate_fact", "topics": ["ossd"], "sourceIds": ["cv"], "evidenceIds": ["course_codes"], "specificityUnits": ["ENG4U", "HSB4U"]}
+          {
+            "id": "courses",
+            "sentenceIndex": 0,
+            "type": "candidate_fact",
+            "topics": [
+              "ossd"
+            ],
+            "sourceIds": [
+              "cv"
+            ],
+            "evidenceIds": [
+              "course_codes"
+            ],
+            "specificityUnits": [
+              "ENG4U",
+              "HSB4U"
+            ]
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0]}
+          {
+            "sentenceIndexes": [
+              0
+            ]
+          }
         ],
         "transitions": [],
         "enforceDistinctiveness": true
@@ -652,20 +1053,43 @@
       "text": "I bring strong teaching skills to the classroom.",
       "plan": {
         "sources": [
-          {"id": "cv", "kind": "cv", "evidenceIds": ["course_codes"]}
+          {
+            "id": "cv",
+            "kind": "cv",
+            "evidenceIds": [
+              "course_codes"
+            ]
+          }
         ],
         "claims": [
-          {"id": "generic_skill", "sentenceIndex": 0, "type": "candidate_fact", "topics": ["teaching"], "sourceIds": ["cv"], "specificityUnits": []}
+          {
+            "id": "generic_skill",
+            "sentenceIndex": 0,
+            "type": "candidate_fact",
+            "topics": [
+              "teaching"
+            ],
+            "sourceIds": [
+              "cv"
+            ],
+            "specificityUnits": []
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0]}
+          {
+            "sentenceIndexes": [
+              0
+            ]
+          }
         ],
         "transitions": [],
         "enforceDistinctiveness": true
       },
       "expect": {
         "pass": false,
-        "codes": ["W26_DISTINCTIVENESS"]
+        "codes": [
+          "W26_DISTINCTIVENESS"
+        ]
       }
     },
     {
@@ -675,13 +1099,36 @@
       "text": "Several students initially submitted answers without textual evidence.",
       "plan": {
         "sources": [
-          {"id": "class_record", "kind": "verified_record", "evidenceIds": ["submitted_answers"]}
+          {
+            "id": "class_record",
+            "kind": "verified_record",
+            "evidenceIds": [
+              "submitted_answers"
+            ]
+          }
         ],
         "claims": [
-          {"id": "observable_submission", "sentenceIndex": 0, "type": "factual", "topics": ["student_work"], "sourceIds": ["class_record"], "evidenceIds": ["submitted_answers"]}
+          {
+            "id": "observable_submission",
+            "sentenceIndex": 0,
+            "type": "factual",
+            "topics": [
+              "student_work"
+            ],
+            "sourceIds": [
+              "class_record"
+            ],
+            "evidenceIds": [
+              "submitted_answers"
+            ]
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0]}
+          {
+            "sentenceIndexes": [
+              0
+            ]
+          }
         ],
         "transitions": []
       },
@@ -697,19 +1144,44 @@
       "text": "My students see interpretation as a code they must guess.",
       "plan": {
         "sources": [
-          {"id": "assistant_inference", "kind": "assistant_inference", "evidenceIds": ["inferred_attitude"]}
+          {
+            "id": "assistant_inference",
+            "kind": "assistant_inference",
+            "evidenceIds": [
+              "inferred_attitude"
+            ]
+          }
         ],
         "claims": [
-          {"id": "student_attitude", "sentenceIndex": 0, "type": "student_interiority", "topics": ["student_psychology"], "sourceIds": ["assistant_inference"], "evidenceIds": ["inferred_attitude"]}
+          {
+            "id": "student_attitude",
+            "sentenceIndex": 0,
+            "type": "student_interiority",
+            "topics": [
+              "student_psychology"
+            ],
+            "sourceIds": [
+              "assistant_inference"
+            ],
+            "evidenceIds": [
+              "inferred_attitude"
+            ]
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0]}
+          {
+            "sentenceIndexes": [
+              0
+            ]
+          }
         ],
         "transitions": []
       },
       "expect": {
         "pass": false,
-        "codes": ["W13_STUDENT_INTERIORITY"]
+        "codes": [
+          "W13_STUDENT_INTERIORITY"
+        ]
       }
     },
     {
@@ -719,18 +1191,77 @@
       "text": "I teach OSSD English in grades 10 through 12. Those courses directly match the posting's senior language requirement.",
       "plan": {
         "sources": [
-          {"id": "cv", "kind": "cv", "evidenceIds": ["senior_courses"]},
-          {"id": "job_post", "kind": "job_post", "evidenceIds": ["senior_requirement"]}
+          {
+            "id": "cv",
+            "kind": "cv",
+            "evidenceIds": [
+              "senior_courses"
+            ]
+          },
+          {
+            "id": "job_post",
+            "kind": "job_post",
+            "evidenceIds": [
+              "senior_requirement"
+            ]
+          }
         ],
         "claims": [
-          {"id": "candidate_courses", "sentenceIndex": 0, "type": "candidate_fact", "topics": ["senior_english"], "relationIds": ["curriculum_match"], "sourceIds": ["cv"], "evidenceIds": ["senior_courses"]},
-          {"id": "posting_match", "sentenceIndex": 1, "type": "employer_fact", "topics": ["senior_english"], "relationIds": ["curriculum_match"], "sourceIds": ["job_post"], "evidenceIds": ["senior_requirement"]}
+          {
+            "id": "candidate_courses",
+            "sentenceIndex": 0,
+            "type": "candidate_fact",
+            "topics": [
+              "senior_english"
+            ],
+            "relationIds": [
+              "curriculum_match"
+            ],
+            "sourceIds": [
+              "cv"
+            ],
+            "evidenceIds": [
+              "senior_courses"
+            ]
+          },
+          {
+            "id": "posting_match",
+            "sentenceIndex": 1,
+            "type": "employer_fact",
+            "topics": [
+              "senior_english"
+            ],
+            "relationIds": [
+              "curriculum_match"
+            ],
+            "sourceIds": [
+              "job_post"
+            ],
+            "evidenceIds": [
+              "senior_requirement"
+            ]
+          }
         ],
         "relations": [
-          {"id": "curriculum_match", "sourceIds": ["cv", "job_post"], "evidenceIds": ["senior_courses", "senior_requirement"]}
+          {
+            "id": "curriculum_match",
+            "sourceIds": [
+              "cv",
+              "job_post"
+            ],
+            "evidenceIds": [
+              "senior_courses",
+              "senior_requirement"
+            ]
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0, 1]}
+          {
+            "sentenceIndexes": [
+              0,
+              1
+            ]
+          }
         ],
         "transitions": []
       },
@@ -746,20 +1277,60 @@
       "text": "I teach academic English. Catherine Malabou supervised my thesis on ritual studies.",
       "plan": {
         "sources": [
-          {"id": "cv", "kind": "cv", "evidenceIds": ["english_teaching", "thesis_supervision"]}
+          {
+            "id": "cv",
+            "kind": "cv",
+            "evidenceIds": [
+              "english_teaching",
+              "thesis_supervision"
+            ]
+          }
         ],
         "claims": [
-          {"id": "language", "sentenceIndex": 0, "type": "first_person", "topics": ["academic_work"], "sourceIds": ["cv"], "evidenceIds": ["english_teaching"]},
-          {"id": "research", "sentenceIndex": 1, "type": "first_person", "topics": ["academic_work"], "sourceIds": ["cv"], "evidenceIds": ["thesis_supervision"]}
+          {
+            "id": "language",
+            "sentenceIndex": 0,
+            "type": "first_person",
+            "topics": [
+              "academic_work"
+            ],
+            "sourceIds": [
+              "cv"
+            ],
+            "evidenceIds": [
+              "english_teaching"
+            ]
+          },
+          {
+            "id": "research",
+            "sentenceIndex": 1,
+            "type": "first_person",
+            "topics": [
+              "academic_work"
+            ],
+            "sourceIds": [
+              "cv"
+            ],
+            "evidenceIds": [
+              "thesis_supervision"
+            ]
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0, 1]}
+          {
+            "sentenceIndexes": [
+              0,
+              1
+            ]
+          }
         ],
         "transitions": []
       },
       "expect": {
         "pass": false,
-        "codes": ["W37_INVENTED_BRIDGE"]
+        "codes": [
+          "W37_INVENTED_BRIDGE"
+        ]
       }
     },
     {
@@ -769,16 +1340,38 @@
       "text": "I have taught OSSD English in grades 10 through 12.",
       "plan": {
         "sources": [
-          {"id": "cv", "kind": "cv"}
+          {
+            "id": "cv",
+            "kind": "cv"
+          }
         ],
         "claims": [
-          {"id": "ossd_teaching", "sentenceIndex": 0, "type": "first_person", "topics": ["ossd"], "sourceIds": ["cv"], "informationUnits": ["ossd_english_record"]}
+          {
+            "id": "ossd_teaching",
+            "sentenceIndex": 0,
+            "type": "first_person",
+            "topics": [
+              "ossd"
+            ],
+            "sourceIds": [
+              "cv"
+            ],
+            "informationUnits": [
+              "ossd_english_record"
+            ]
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0]}
+          {
+            "sentenceIndexes": [
+              0
+            ]
+          }
         ],
         "transitions": [],
-        "visibleInformationUnits": ["toronto_location"]
+        "visibleInformationUnits": [
+          "toronto_location"
+        ]
       },
       "expect": {
         "pass": true,
@@ -792,20 +1385,44 @@
       "text": "I am in Toronto.",
       "plan": {
         "sources": [
-          {"id": "application_form", "kind": "user_supplied"}
+          {
+            "id": "application_form",
+            "kind": "user_supplied"
+          }
         ],
         "claims": [
-          {"id": "toronto", "sentenceIndex": 0, "type": "first_person", "topics": ["location"], "sourceIds": ["application_form"], "informationUnits": ["toronto_location"]}
+          {
+            "id": "toronto",
+            "sentenceIndex": 0,
+            "type": "first_person",
+            "topics": [
+              "location"
+            ],
+            "sourceIds": [
+              "application_form"
+            ],
+            "informationUnits": [
+              "toronto_location"
+            ]
+          }
         ],
         "paragraphs": [
-          {"sentenceIndexes": [0]}
+          {
+            "sentenceIndexes": [
+              0
+            ]
+          }
         ],
         "transitions": [],
-        "visibleInformationUnits": ["toronto_location"]
+        "visibleInformationUnits": [
+          "toronto_location"
+        ]
       },
       "expect": {
         "pass": false,
-        "codes": ["W32_OBVIOUSNESS"]
+        "codes": [
+          "W32_OBVIOUSNESS"
+        ]
       }
     },
     {
@@ -815,7 +1432,9 @@
       "text": "I have taught grades 10–12.",
       "expect": {
         "pass": false,
-        "codes": ["W53_PUNCT_EN_DASH"]
+        "codes": [
+          "W53_PUNCT_EN_DASH"
+        ]
       }
     },
     {
@@ -825,7 +1444,9 @@
       "text": "I teach discussion, not memorization.",
       "expect": {
         "pass": false,
-        "codes": ["W56_CONTRAST_X_NOT_Y"]
+        "codes": [
+          "W56_CONTRAST_X_NOT_Y"
+        ]
       }
     },
     {
@@ -835,7 +1456,9 @@
       "text": "The course is less lecture than seminar.",
       "expect": {
         "pass": false,
-        "codes": ["W56_CONTRAST_LESS_THAN"]
+        "codes": [
+          "W56_CONTRAST_LESS_THAN"
+        ]
       }
     },
     {
@@ -845,7 +1468,9 @@
       "text": "Far from routine, the work requires judgment.",
       "expect": {
         "pass": false,
-        "codes": ["W56_CONTRAST_FAR_FROM"]
+        "codes": [
+          "W56_CONTRAST_FAR_FROM"
+        ]
       }
     },
     {
@@ -855,7 +1480,9 @@
       "text": "Compliance is not the point because it is student judgment.",
       "expect": {
         "pass": false,
-        "codes": ["W56_CONTRAST_POINT_REVEAL"]
+        "codes": [
+          "W56_CONTRAST_POINT_REVEAL"
+        ]
       }
     },
     {
@@ -865,7 +1492,9 @@
       "text": "That matters.",
       "expect": {
         "pass": false,
-        "codes": ["W61_MIC_DROP_FRAGMENT"]
+        "codes": [
+          "W61_MIC_DROP_FRAGMENT"
+        ]
       }
     },
     {
@@ -875,8 +1504,14 @@
       "text": "I teach English.",
       "plan": {
         "sources": [
-          {"id": "cv", "kind": "cv"},
-          {"id": "cv", "kind": "cv"}
+          {
+            "id": "cv",
+            "kind": "cv"
+          },
+          {
+            "id": "cv",
+            "kind": "cv"
+          }
         ],
         "claims": [],
         "paragraphs": [],
@@ -884,7 +1519,176 @@
       },
       "expect": {
         "pass": false,
-        "codes": ["W01_PLAN_SCHEMA"]
+        "codes": [
+          "W01_PLAN_SCHEMA"
+        ]
+      }
+    },
+    {
+      "id": "antifluff_reverse_pair_source_fail",
+      "kind": "mechanical",
+      "family": "contrast_forms",
+      "text": "So the snakes are genuine separate presences. They are not merely decorative hair.",
+      "expect": {
+        "pass": false,
+        "codes": [
+          "W56_CONTRAST_REVERSE_PAIR"
+        ]
+      }
+    },
+    {
+      "id": "antifluff_reverse_pair_plain_fail",
+      "kind": "mechanical",
+      "family": "contrast_forms",
+      "text": "The figures are independent speakers. They are not decorative details.",
+      "expect": {
+        "pass": false,
+        "codes": [
+          "W56_CONTRAST_REVERSE_PAIR"
+        ]
+      }
+    },
+    {
+      "id": "antifluff_reverse_pair_pronoun_fail",
+      "kind": "mechanical",
+      "family": "contrast_forms",
+      "text": "The image is a living speaker. It is not simply an ornament.",
+      "expect": {
+        "pass": false,
+        "codes": [
+          "W56_CONTRAST_REVERSE_PAIR"
+        ]
+      }
+    },
+    {
+      "id": "antifluff_exact_quote_protected_pass",
+      "kind": "mechanical",
+      "family": "contrast_forms",
+      "text": "So the snakes are genuine separate presences. They are not merely decorative hair.",
+      "expect": {
+        "pass": true,
+        "codes": []
+      },
+      "protectedSpans": [
+        {
+          "match": "So the snakes are genuine separate presences. They are not merely decorative hair.",
+          "kind": "quotation",
+          "sourceId": "user_correction"
+        }
+      ]
+    },
+    {
+      "id": "antifluff_ordinary_negation_pass",
+      "kind": "mechanical",
+      "family": "contrast_forms",
+      "text": "The document does not contain that passage.",
+      "expect": {
+        "pass": true,
+        "codes": []
+      }
+    },
+    {
+      "id": "antifluff_source_evidence_pass",
+      "kind": "mechanical",
+      "family": "contrast_forms",
+      "text": "The quoted passage attributes the warning to a second speaker.",
+      "expect": {
+        "pass": true,
+        "codes": []
+      }
+    },
+    {
+      "id": "antifluff_affirmative_substantive_relation_pass",
+      "kind": "mechanical",
+      "family": "contrast_forms",
+      "text": "Milla hears the warning and evaluates its advice.",
+      "expect": {
+        "pass": true,
+        "codes": []
+      }
+    },
+    {
+      "id": "antifluff_positive_surface_rewrite_still_empty_fail",
+      "kind": "semantic",
+      "family": "clause_novelty",
+      "text": "The snakes are genuine separate presences.",
+      "plan": {
+        "sources": [
+          {
+            "id": "user_correction",
+            "kind": "user_supplied"
+          }
+        ],
+        "claims": [
+          {
+            "id": "redundant_context",
+            "sentenceIndex": 0,
+            "clauseIndex": 0,
+            "type": "interpretive",
+            "topics": [
+              "snake_speech"
+            ],
+            "informationUnits": [],
+            "relationUnits": []
+          }
+        ],
+        "paragraphs": [
+          {
+            "sentenceIndexes": [
+              0
+            ]
+          }
+        ],
+        "transitions": [],
+        "enforceClauseNovelty": true
+      },
+      "expect": {
+        "pass": false,
+        "codes": [
+          "W18_CLAUSE_NOVELTY"
+        ]
+      }
+    },
+    {
+      "id": "antifluff_synonym_rewrite_still_empty_fail",
+      "kind": "semantic",
+      "family": "clause_novelty",
+      "text": "Each serpent has its own distinct presence.",
+      "plan": {
+        "sources": [
+          {
+            "id": "user_correction",
+            "kind": "user_supplied"
+          }
+        ],
+        "claims": [
+          {
+            "id": "redundant_context",
+            "sentenceIndex": 0,
+            "clauseIndex": 0,
+            "type": "interpretive",
+            "topics": [
+              "snake_speech"
+            ],
+            "informationUnits": [],
+            "relationUnits": []
+          }
+        ],
+        "paragraphs": [
+          {
+            "sentenceIndexes": [
+              0
+            ]
+          }
+        ],
+        "transitions": [],
+        "enforceClauseNovelty": true
+      },
+      "expect": {
+        "pass": false,
+        "codes": [
+          "W18_CLAUSE_NOVELTY"
+        ]
       }
     }
   ],
@@ -898,7 +1702,9 @@
       },
       "expect": {
         "pass": false,
-        "codes": ["W51_PUNCT_COLON"]
+        "codes": [
+          "W51_PUNCT_COLON"
+        ]
       }
     },
     {
@@ -907,7 +1713,9 @@
       "protectedSpans": [],
       "expect": {
         "pass": false,
-        "codes": ["W56_CONTRAST_ESCALATION"]
+        "codes": [
+          "W56_CONTRAST_ESCALATION"
+        ]
       }
     },
     {
@@ -919,7 +1727,9 @@
       },
       "expect": {
         "pass": false,
-        "codes": ["W24_LEXICAL_REPETITION"]
+        "codes": [
+          "W24_LEXICAL_REPETITION"
+        ]
       }
     },
     {
@@ -928,7 +1738,9 @@
       "text": "The programme Includes English and includes Social Science.",
       "expect": {
         "pass": false,
-        "codes": ["W24_LEXICAL_REPETITION"]
+        "codes": [
+          "W24_LEXICAL_REPETITION"
+        ]
       }
     },
     {
@@ -938,13 +1750,20 @@
         {
           "path": "paragraphs",
           "value": [
-            {"sentenceIndexes": [0, 1]}
+            {
+              "sentenceIndexes": [
+                0,
+                1
+              ]
+            }
           ]
         }
       ],
       "expect": {
         "pass": false,
-        "codes": ["W33_TOPIC_CONTINUITY"]
+        "codes": [
+          "W33_TOPIC_CONTINUITY"
+        ]
       }
     },
     {
@@ -958,7 +1777,9 @@
       ],
       "expect": {
         "pass": false,
-        "codes": ["W11_SOURCE_GROUNDING"]
+        "codes": [
+          "W11_SOURCE_GROUNDING"
+        ]
       }
     },
     {
@@ -970,7 +1791,9 @@
       },
       "expect": {
         "pass": false,
-        "codes": ["W05_REVISION_LOCALITY"]
+        "codes": [
+          "W05_REVISION_LOCALITY"
+        ]
       }
     },
     {
@@ -984,8 +1807,21 @@
       ],
       "expect": {
         "pass": false,
-        "codes": ["W77_APPLICATION_SPECIFICITY"]
+        "codes": [
+          "W77_APPLICATION_SPECIFICITY"
+        ]
       }
+    },
+    {
+      "id": "antifluff_unprotect_source_pair_fail",
+      "baseFixtureId": "antifluff_exact_quote_protected_pass",
+      "expect": {
+        "pass": false,
+        "codes": [
+          "W56_CONTRAST_REVERSE_PAIR"
+        ]
+      },
+      "protectedSpans": []
     }
   ]
 }

@@ -29,7 +29,7 @@ const areaCards = (html.match(/class="teacher-area-card"/g) || []).length;
 const categories = (html.match(/<details class="category"/g) || []).length;
 const groups = (html.match(/<details class="group"/g) || []).length;
 const bytes = Buffer.byteLength(html);
-const initialGzipBytes = [html, css, js].reduce(
+const initialGzipBytes = [html, css, js, read('teacherresources/search-engine.js')].reduce(
   (total, source) => total + zlib.gzipSync(Buffer.from(source), {level: 9}).length,
   0
 );
@@ -81,12 +81,12 @@ requireIn(html, '<span class="quick-label" id="quick-starts-label">Quick filters
 for (const needle of [
   'id="teacher-start-title"',
   'What are you trying to prepare?',
-  'href="?format=lesson#catalog"',
-  'href="?format=anthology,textbook#catalog"',
-  'href="?format=assessment#catalog"',
-  'href="?format=interactive#catalog"',
-  'href="?curriculum=ontario#catalog"',
-  'href="?curriculum=ib-dp,ib-myp#catalog"',
+  'href="?format=lesson#search-results"',
+  'href="?format=anthology#search-results"',
+  'href="?format=assessment#search-results"',
+  'href="?format=interactive#search-results"',
+  'href="?curriculum=ontario#search-results"',
+  'href="?curriculum=ib-dp,ib-myp#search-results"',
   'id="teacher-search-title"',
   'id="teacher-browse-title"',
   'id="teacher-areas"',
@@ -146,11 +146,9 @@ for (const needle of [
 
 for (const needle of [
   "document.querySelectorAll('[data-preset-subject],[data-preset-grade],[data-preset-format],[data-preset-grades]')",
-  "normalize('NFD')",
-  'queryTokens.every',
+  'TeacherSearch.normalize',
   "state.curricula.has(entry.curriculum)",
-  'editDistanceWithin',
-  'searchTokenMatches',
+  'TeacherSearch.match',
   'updateFacetCounts',
   'entryHasFilterValue',
   "chip.classList.toggle('unavailable'",
@@ -247,7 +245,7 @@ if (shells !== entries.length) failures.push(`expected ${entries.length} source/
 if (sourceCtas !== entries.length) failures.push(`expected ${entries.length} visible original-resource actions, found ${sourceCtas}`);
 if (detailLinks !== entries.length) failures.push(`expected ${entries.length} secondary detail actions, found ${detailLinks}`);
 if (areaCards !== 7) failures.push(`expected 7 plain-language teaching-area cards, found ${areaCards}`);
-if (entries.length !== 645) failures.push(`resource inventory changed: expected 645, found ${entries.length}`);
+if (entries.length !== 646) failures.push(`resource inventory changed: expected 646, found ${entries.length}`);
 if (groups !== 7) failures.push(`group inventory changed: expected 7, found ${groups}`);
 if (categories !== 25) failures.push(`collection inventory changed: expected 25, found ${categories}`);
 const reportedCurricula = new Set(['alberta', 'bc', 'common-core']);
@@ -284,19 +282,54 @@ const feedGuids = feedItems
   .map(item => (item.match(/<guid\b[^>]*>([^<]+)<\/guid>/) || [])[1])
   .filter(Boolean);
 if (
-  feedItems.length !== 645 ||
-  feedGuids.length !== 645 ||
-  new Set(feedGuids).size !== 645
+  feedItems.length !== 646 ||
+  feedGuids.length !== 646 ||
+  new Set(feedGuids).size !== 646
 ) {
-  failures.push('Teacher Resources feed must expose all 645 stable records');
+  failures.push('Teacher Resources feed must expose all 646 stable records');
 }
 
+// These source URLs are intentionally retained as provenance after confirmed 404s.
+// Unavailability changes the action, not the identity of the catalog record.
+const unavailableOriginals = new Map([
+  ['TR-0032', 'https://www.amphi.com/cms/lib010/AZ01901095/Centricity/Domain/3348/na_arn_gr06.pdf'],
+  ['TR-0033', 'https://www.amphi.com/cms/lib010/AZ01901095/Centricity/Domain/3348/na_arn_gr08.pdf'],
+  ['TR-0076', 'https://archive.org/details/completecanadian0000m6c1'],
+  ['TR-0236', 'https://www.sausd.us/cms/lib/CA01000471/Centricity/Domain/3050/7th%20Grade%20Science%20Interactive%20Reader.pdf'],
+]);
+const unavailableEntries = entries.filter(entry => entry.source_availability === 'unavailable');
+if (unavailableEntries.length !== unavailableOriginals.size) {
+  failures.push(`expected ${unavailableOriginals.size} recorded unavailable sources, found ${unavailableEntries.length}`);
+}
+for (const [id, originalUrl] of unavailableOriginals) {
+  const entry = entries.find(candidate => candidate.id === id);
+  if (!entry || entry.url !== originalUrl || entry.source_availability !== 'unavailable') {
+    failures.push(`${id} must retain its original URL and unavailable status`);
+  }
+  if (!entry || !String(entry.source_availability_note || '').trim() || !/^\d{4}-\d{2}-\d{2}$/.test(entry.source_checked_on || '')) {
+    failures.push(`${id} is missing its source-availability note or check date`);
+  }
+}
+const isUnavailable = entry => entry && entry.source_availability === 'unavailable';
+const sourceActionName = entry => isUnavailable(entry)
+  ? 'source unavailable; opens details and source notes'
+  : `opens original resource${entry.host ? ` on ${entry.host}` : ''}`;
+function sourceHrefs(source, url) {
+  return (source.match(/\bhref=(?:"[^"]*"|'[^']*')/g) || []).filter(attribute =>
+    attribute.slice(6, -1) === escapeAttribute(url)
+  );
+}
+const rootEntryLinks = html.match(/<a\b[^>]*\bclass="entry(?:\s[^"]*)?"[^>]*>[\s\S]*?<\/a>/g) || [];
+
 const rootEntryTags = html.match(/<a\b[^>]*\bclass="entry(?:\s[^"]*)?"[^>]*>/g) || [];
+const rootDetailLinks = [...html.matchAll(/<a class="entry-detail"[^>]*href="([^"]+)"[^>]*>/g)].map(match => match[1]);
+if (rootDetailLinks.length !== entries.length) failures.push('every source card requires one secondary details link');
 const rootSourcePairs = rootEntryTags.map((tag, index) => ({
+  unavailable: isUnavailable(entries[index]),
   primaryHref: ((tag.match(/\bhref="([^"]+)"/) || [])[1] || ''),
-  detailHref: ((tag.match(/\bdata-detail-route="([^"]+)"/) || [])[1] || ''),
+  detailHref: (rootDetailLinks[index] || ''),
   allowInternalPrimary: String(entries[index] && entries[index].url || '').startsWith('/'),
-}));
+})).filter(pair => !pair.unavailable);
 for (const defect of sourceFirstPairDefects(rootSourcePairs)) {
   failures.push(`shared source-first contract: ${defect}`);
 }
@@ -304,7 +337,7 @@ if (rootEntryTags.length !== entries.length) {
   failures.push(`expected ${entries.length} labelled root resource links, found ${rootEntryTags.length}`);
 } else {
   entries.forEach((entry, index) => {
-    const expected = `aria-label="${escapeAttribute(`${resourceAccessibleName(entry, data)}; opens original resource${entry.host ? ` on ${entry.host}` : ''}`)}"`;
+    const expected = `aria-label="${escapeAttribute(`${resourceAccessibleName(entry, data)}; ${sourceActionName(entry)}`)}"`;
     const requiresOverride = Boolean(entry.notes || entry.grade === 'all');
     if (requiresOverride && !rootEntryTags[index].includes(expected)) {
       failures.push(`root resource link ${index + 1} is missing its concise complete accessible name`);
@@ -312,13 +345,19 @@ if (rootEntryTags.length !== entries.length) {
     if (!requiresOverride && rootEntryTags[index].includes('aria-label=')) {
       failures.push(`root resource link ${index + 1} redundantly overrides its already-concise visible name`);
     }
-    if (!rootEntryTags[index].includes(`href="${escapeAttribute(entry.url)}"`)) {
-      failures.push(`root resource link ${index + 1} does not open its original source`);
+    const route = rootDetailLinks[index] || '';
+    const primaryHref = isUnavailable(entry) ? route : entry.url;
+    if (!rootEntryTags[index].includes(`href="${escapeAttribute(primaryHref)}"`)) {
+      failures.push(`root resource link ${index + 1} does not open its ${isUnavailable(entry) ? 'details for an unavailable source' : 'original source'}`);
+    }
+    if (isUnavailable(entry)) {
+      requireIn(rootEntryLinks[index] || '', 'Source unavailable · Details and source notes', `${entry.id} root unavailable-source action`);
+      if (sourceHrefs(html, entry.url).length) failures.push(`${entry.id} root catalog still links to its unavailable source`);
     }
     if (!/\btarget="_blank"/.test(rootEntryTags[index]) || !/\brel="noopener noreferrer"/.test(rootEntryTags[index])) {
       failures.push(`root resource link ${index + 1} is missing safe external-link semantics`);
     }
-    if (!/\bdata-detail-route="\/teacherresources\/.+\/"/.test(rootEntryTags[index])) {
+    if (!/^\/teacherresources\/.+\/$/.test(rootDetailLinks[index] || '')) {
       failures.push(`root resource link ${index + 1} is missing its stable secondary detail route`);
     }
   });
@@ -330,12 +369,22 @@ if (rootNameOverrides !== expectedRootNameOverrides) {
 }
 
 let detailSourceCount = 0;
+let unavailableDetailCount = 0;
 rootEntryTags.forEach((tag, index) => {
-  const route = (tag.match(/\bdata-detail-route="([^"]+)"/) || [])[1] || '';
+  const route = rootDetailLinks[index] || '';
   if (!/^\/teacherresources\/.+\/$/.test(route)) return;
   const detailHtml = read(`${route.slice(1)}index.html`);
   const entry = entries[index];
-  if (
+  if (isUnavailable(entry)) {
+    const banner = (detailHtml.match(/<div class="source-banner">[\s\S]*?<\/div>/) || [])[0] || '';
+    requireIn(banner, 'Original source unavailable', `${entry.id} detail unavailable-source heading`);
+    requireIn(banner, escapeAttribute(entry.source_availability_note), `${entry.id} detail source-availability note`);
+    requireIn(banner, `<code>${escapeAttribute(entry.url)}</code>`, `${entry.id} preserved original source URL`);
+    if (sourceHrefs(detailHtml, entry.url).length || /<a\b/.test(banner)) {
+      failures.push(`${entry.id} unavailable detail banner still presents a working source action`);
+    }
+    unavailableDetailCount += 1;
+  } else if (
     detailHtml.includes('class="source-banner"') &&
     detailHtml.includes(`href="${escapeAttribute(entry.url)}" target="_blank" rel="noopener noreferrer"`) &&
     detailHtml.includes('Open original resource')
@@ -345,8 +394,11 @@ rootEntryTags.forEach((tag, index) => {
     failures.push(`Teacher Resources detail page ${route} incorrectly opts into technical-token word breaks`);
   }
 });
-if (detailSourceCount !== entries.length) {
-  failures.push(`expected ${entries.length} source-first detail pages, found ${detailSourceCount}`);
+if (detailSourceCount !== entries.length - unavailableEntries.length) {
+  failures.push(`expected ${entries.length - unavailableEntries.length} source-first detail pages, found ${detailSourceCount}`);
+}
+if (unavailableDetailCount !== unavailableEntries.length) {
+  failures.push(`expected ${unavailableEntries.length} detail pages with unavailable-source notes, found ${unavailableDetailCount}`);
 }
 
 let collectionRowCount = 0;
@@ -359,13 +411,19 @@ for (const group of data.groups || []) {
       continue;
     }
     category.entries.forEach((entry, index) => {
-      const expected = `aria-label="${escapeAttribute(`${resourceAccessibleName(entry, data)}; opens original resource${entry.host ? ` on ${entry.host}` : ''}`)}"`;
+      const expected = `aria-label="${escapeAttribute(`${resourceAccessibleName(entry, data)}; ${sourceActionName(entry)}`)}"`;
       const row = rows[index];
       if (!row.includes(expected)) {
         failures.push(`${group.id}/${category.id} resource row ${index + 1} is missing its source-first accessible name`);
       }
-      const sourceHref = `href="${escapeAttribute(entry.url)}"`;
-      if ((row.match(new RegExp(sourceHref.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length !== 2) {
+      if (isUnavailable(entry)) {
+        const detailRoute = (row.match(/class="button secondary" href="([^"]+)"/) || [])[1] || '';
+        if (!/^\/teacherresources\/.+\/$/.test(detailRoute) || sourceHrefs(row, detailRoute).length !== 3) {
+          failures.push(`${entry.id} collection title, primary action, and details action must all lead to its detail record`);
+        }
+        requireIn(row, 'Source unavailable · Details and source notes', `${entry.id} collection unavailable-source action`);
+        if (sourceHrefs(categoryHtml, entry.url).length) failures.push(`${entry.id} collection still links to its unavailable source`);
+      } else if (sourceHrefs(row, entry.url).length !== 2) {
         failures.push(`${group.id}/${category.id} resource row ${index + 1} must expose its original source in both title and primary button`);
       }
       if (!row.includes('class="resource-source-link"') || !row.includes('target="_blank" rel="noopener noreferrer"')) {
@@ -388,13 +446,14 @@ const singularCollectionCounts = (html.match(/>1 collection<\/span>/g) || []).le
 if (singularCollectionCounts !== expectedSingularCollectionCounts) {
   failures.push(`expected ${expectedSingularCollectionCounts} singular collection labels, found ${singularCollectionCounts}`);
 }
+// September 27 adds ranked result data and explicit metadata (100 KB gzip cap).
 // Audit 53 adds task-first orientation, semantic shelf headings, and Commons
-// provenance while retaining the complete 645-card no-script catalog.
+// provenance while retaining the complete 646-card no-script catalog.
 // The source-first model adds one explicit original-resource action and one
 // stable catalog-detail action per record. These caps retain headroom without
 // pretending the necessary 1,288 visible actions are free.
-if (bytes > 730000) failures.push(`teacherresources/index.html exceeds 730 KB source-first budget: ${bytes} bytes`);
-if (initialGzipBytes > 90000) failures.push(`teacher resources route assets exceed 90 KB source-first gzip budget: ${initialGzipBytes} bytes`);
+if (bytes > 870000) failures.push(`teacherresources/index.html exceeds 870 KB source-first budget: ${bytes} bytes`);
+if (initialGzipBytes > 100000) failures.push(`teacher resources route assets exceed 100 KB source-first gzip budget: ${initialGzipBytes} bytes`);
 if ((html.match(/<h2 class="grp-title">/g) || []).length !== 7) {
   failures.push('Teacher Resources must expose seven navigable subject headings');
 }
@@ -413,10 +472,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-const reduction = Math.round((1 - bytes / 787139) * 1000) / 10;
-const gzipReduction = Math.round((1 - initialGzipBytes / 113509) * 1000) / 10;
-console.log(
-  `TEACHER RESOURCES INTERACTIVITY CHECK PASSED — ${entries.length} resources, ` +
-  `${categories} collections, ${bytes} HTML bytes (${reduction}% below prior baseline), ` +
-  `${initialGzipBytes} gzip bytes across route HTML/CSS/JS (${gzipReduction}% below prior baseline).`
-);
+console.log(`TEACHER RESOURCES INTERACTIVITY CHECK PASSED — ${entries.length} resources, ${categories} collections, ${bytes} HTML bytes, ${initialGzipBytes} gzip bytes across HTML/CSS/JS (100 KB budget).`);

@@ -61,7 +61,7 @@ const steadyUiVerifier = read('scripts/verify-steady-ui.js');
 
 check(releaseId === EXPECTED_RELEASE, `release ID is not ${EXPECTED_RELEASE}`);
 check(release.release_id === releaseId, 'release manifest and RELEASE_ID.txt disagree');
-check(assetVersion === '20260815-sets1-15-synthesis', `asset version is ${assetVersion}`);
+check(assetVersion === '20261004-repair-v9', `asset version is ${assetVersion}`);
 check(
   buildManifest.release_id === releaseId
     && buildManifest.interface_release === releaseId
@@ -94,15 +94,15 @@ check(
   'public deploy must omit the canonical event corpus and mirror only the safe discovery projections',
 );
 check(
-  teacherResources.length === 645,
-  `Teacher Resources does not retain 645 records (${teacherResources.length})`,
+  teacherResources.length === 646,
+  `Teacher Resources does not retain 646 records (${teacherResources.length})`,
 );
 
 check(pkg.engines?.node === '24.14.0', 'package Node engine is not pinned to 24.14.0');
 check(pkg.engines?.npm === '11.9.0', 'package npm engine is not pinned to 11.9.0');
 check(pkg.packageManager === 'npm@11.9.0', 'package manager is not pinned to npm 11.9.0');
-check(pkg.version === '1.0.6', `package version is ${pkg.version}`);
-check(lock.version === '1.0.6' && lock.packages?.['']?.version === '1.0.6', 'package-lock version is not 1.0.6');
+check(pkg.version === '1.0.7', `package version is ${pkg.version}`);
+check(lock.version === '1.0.7' && lock.packages?.['']?.version === '1.0.7', 'package-lock version is not 1.0.7');
 check(read('.nvmrc').trim() === '24.14.0', '.nvmrc is not pinned to Node 24.14.0');
 check(pkg.scripts?.dev === 'node scripts/dev-server.js', 'npm run dev is not repository-local');
 check(

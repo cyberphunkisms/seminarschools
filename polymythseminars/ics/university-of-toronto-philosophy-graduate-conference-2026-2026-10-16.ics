@@ -5,15 +5,17 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:bdc7b9081245818ba7b8@seminarschools.com
-DTSTAMP:20260814T000800Z
-DTSTART:20261016T130000Z
-DTEND:20261017T220000Z
+DTSTAMP:20260907T000000Z
+DTSTART;VALUE=DATE:20261016
+DTEND;VALUE=DATE:20261018
 SUMMARY:University of Toronto Philosophy Graduate Conference 2026
-LOCATION:Jackman Humanities Building
+LOCATION:Department of Philosophy\, University of Toronto\, 170 St George
+  St\, Toronto M5R 2M8
 DESCRIPTION:Graduate philosophy conference featuring historical and conte
- mporary work and keynote speakers Don Garrett and Alva Noë.
+ mporary work and keynote speakers Don Garrett and Alva Noë. No registra
+ tion required. The organizer has not published session times.
 URL:https://seminarschools.com/polymythseminars/events/university-of-toro
  nto-philosophy-graduate-conferen-2026-10-16/
-STATUS:CONFIRMED
+STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

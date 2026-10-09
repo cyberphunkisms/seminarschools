@@ -6,15 +6,51 @@ METHOD:PUBLISH
 X-WR-CALNAME:Polymythcal — Toronto listings · Fiches de Toronto
 X-WR-TIMEZONE:America/Toronto
 BEGIN:VEVENT
+UID:9617399f10a32a9a81d4@seminarschools.com
+DTSTAMP:20261001T000000Z
+DTSTART;VALUE=DATE:20250927
+DTEND;VALUE=DATE:20270104
+SUMMARY:Crawford Lake: Layers in Time
+LOCATION:Royal Ontario Museum\, Level 3\, European Rotating Exhibitions\, T
+ oronto\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/research-a68fa5b7ffd
+ 6/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:e1bbf62a664cd2ea0122@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260130
+DTEND;VALUE=DATE:20260131
+SUMMARY:Clarkson Laureateships High Table
+LOCATION:Massey College\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/clarkson-laureateshi
+ ps-high-table-2026-01-30/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:1dfc44cee69d2e52746b@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260206
+DTEND;VALUE=DATE:20260207
+SUMMARY:U of T Literary Symposium (with Trinity Reads)
+LOCATION:Hart House\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/u-of-t-literary-symp
+ osium-with-trinity-reads-2026-02-06/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:87f05827a5315ecee5e5@seminarschools.com
-DTSTAMP:20260813T040000Z
-DTSTART:20260217T121300Z
+DTSTAMP:20261003T110658Z
+DTSTART:20260217T121200Z
 SUMMARY:Annular solar eclipse
 LOCATION:Sky event\; visibility region in description\, Toronto
 DESCRIPTION:Annular eclipse\; central path outside Toronto. NASA gives grea
  test eclipse at 12:13:06 TD (12:12 UT). Historical political\, ritual\, an
  d mythic interpretations remain distinct from the physical eclipse and its
-  visibility.
+  visibility. The listed time is NASA’s global greatest-eclipse predictio
+ n in UT\, rounded to the minute\; local visibility and observing times dep
+ end on location.
 URL:https://seminarschools.com/polymythseminars/events/annular-solar-eclips
  e-2026-02-17/
 STATUS:CONFIRMED
@@ -32,15 +68,31 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:6f7a2cc3a38c159d3f30@seminarschools.com
-DTSTAMP:20260813T040000Z
+DTSTAMP:20261003T110658Z
 DTSTART:20260303T113400Z
 SUMMARY:Total lunar eclipse
 LOCATION:Sky event\; visibility region in description\, Toronto
 DESCRIPTION:Total lunar eclipse. NASA gives greatest eclipse at 11:34:52 TD
   (11:34 UT). Historical political\, ritual\, and mythic interpretations re
- main distinct from the physical eclipse and its visibility.
+ main distinct from the physical eclipse and its visibility. The listed tim
+ e is NASA’s global greatest-eclipse prediction in UT\, rounded to the mi
+ nute\; local visibility and observing times depend on location.
 URL:https://seminarschools.com/polymythseminars/events/total-lunar-eclipse-
  2026-03-03/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:6511d38f20f41026f20b@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20260310
+SUMMARY:Hayv Kahraman: Nabog
+LOCATION:Aga Khan Museum\, Museum Collections Gallery\, 77 Wynford Drive\, 
+ Toronto\, Toronto
+DESCRIPTION:Hayv Kahraman’s Nabog installation runs March 10\, 2026 throu
+ gh February 2027. The museum has not published an exact closing day. Inclu
+ ded with museum admission.
+URL:https://seminarschools.com/polymythseminars/events/hayv-kahraman-nabog-
+ 2026-03-10/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -57,6 +109,138 @@ URL:https://seminarschools.com/polymythseminars/events/tifa-cbc-ideas-knowl
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:07276fe4ff70dfae3247@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20260403
+DTEND;VALUE=DATE:20260908
+SUMMARY:Game On! Exhibition
+LOCATION:Temporary Exhibitions Gallery\, Aga Khan Museum\, Toronto\, Toront
+ o
+DESCRIPTION:Exhibition run. Gallery access follows the museum’s opening h
+ ours\, with closures and special hours listed on its website.
+URL:https://seminarschools.com/polymythseminars/events/game-on-exhibition-2
+ 026-04-03/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:2e1006b4891b016abb84@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20260404
+DTEND;VALUE=DATE:20260908
+SUMMARY:Shokkan: Material Encounters in Japanese Art
+LOCATION:Centre Block\, Level 3\, Royal Ontario Museum\, 100 Queen’s Park
+ \, Toronto\, Toronto
+DESCRIPTION:Exhibition run. Admission follows the museum’s opening hours\
+ , including closures and special hours published by ROM.
+URL:https://seminarschools.com/polymythseminars/events/research-75a23643882
+ d/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:55990a3910ae1f8380ad@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260412
+DTEND;VALUE=DATE:20260413
+SUMMARY:Junction Reads
+LOCATION:Type Books Junction\, 2887 Dundas W\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/junction-reads-2026-
+ 04-12/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:d819f6a09023ebf170cd@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260414
+DTEND;VALUE=DATE:20260415
+SUMMARY:Death Café Riverdale
+LOCATION:TPL Riverdale\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/death-caf-riverdale-
+ 2026-04-14/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:073f64c6a09ee2adaac6@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260415
+DTEND;VALUE=DATE:20260416
+SUMMARY:Afro/Black/Indigenous Futures Panel
+LOCATION:OCAD University\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/afro-black-indigenou
+ s-futures-panel-2026-04-15/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:e5a837bf8252906fb7df@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260415
+DTEND;VALUE=DATE:20260416
+SUMMARY:Karina Vernon Lecture
+LOCATION:U of T English\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/karina-vernon-lectur
+ e-2026-04-15/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:afd6cf5e47d56932fc18@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260415
+DTEND;VALUE=DATE:20260416
+SUMMARY:Miles Away: Film Screening and Director's Panel
+LOCATION:Jackman Humanities Institute\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/miles-away-film-scre
+ ening-and-director-s-panel-2026-04-15/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:036f79dfd5def8b0732c@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260415
+DTEND;VALUE=DATE:20260416
+SUMMARY:Morley Gunderson Lecture: Do the Immigration and Minimum Wage Liter
+ atures Contradict Each Other?
+LOCATION:Woodsworth College / U of T A&S\; Hart House Debates Room\, Toront
+ o
+DESCRIPTION:Hybrid.
+URL:https://seminarschools.com/polymythseminars/events/morley-gunderson-lec
+ ture-do-the-immigration-and-mi-2026-04-15/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:15afecfa8b4d268125e9@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260415
+DTEND;VALUE=DATE:20260418
+SUMMARY:New Approaches to Slaving and Slave-Trading in the Ancient and Medi
+ eval Mediterranean
+LOCATION:Jackman Humanities Institute\, Toronto
+DESCRIPTION:Three-day conference.
+URL:https://seminarschools.com/polymythseminars/events/new-approaches-to-sl
+ aving-and-slave-trading-in-the-2026-04-15/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:315e6a7eebe63bafcbd0@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260415
+DTEND;VALUE=DATE:20260416
+SUMMARY:OCAD Research Talks: Arts & Science
+LOCATION:OCAD University\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/ocad-research-talks-
+ arts-science-2026-04-15/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:3d08fb330756b06d9bc0@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260415
+DTEND;VALUE=DATE:20260416
+SUMMARY:Promoting Your Scholarly Book (CRIS-JHI Book Publishing Series)
+LOCATION:Jackman Humanities Institute\, 170 St. George St\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/promoting-your-schol
+ arly-book-cris-jhi-book-publis-2026-04-15/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:50a4fd7e3afa147f3617@seminarschools.com
 DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260415
@@ -68,6 +252,44 @@ URL:https://seminarschools.com/polymythseminars/events/vincent-a-de-luca-le
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:4f9df267eead5a6fb4fa@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART:20260415T230000Z
+SUMMARY:'On Canada' Salon Series
+LOCATION:TPL North York Central\, 5120 Yonge St\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/on-canada-salon-seri
+ es-2026-04-15/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:a3776b2257449a26d5e2@seminarschools.com
+DTSTAMP:20261003T110658Z
+DTSTART;VALUE=DATE:20260416
+DTEND;VALUE=DATE:20260419
+SUMMARY:DemocracyXChange Summit 2026 (DXC26) — Side by Side: Building an 
+ Economy That Serves Democracy
+LOCATION:OCAD University and Université de l’Ontario français\, Toronto
+ \, with online main-stage access\, Toronto
+DESCRIPTION:DemocracyXChange summit on April 16–18. Sessions have individ
+ ual times\; the first-to-last date range is not continuous opening. Regist
+ ration has closed.
+URL:https://seminarschools.com/polymythseminars/events/democracyxchange-sum
+ mit-2026-dxc26-side-by-side-bu-2026-04-16/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:ac38679d901e05a5cca0@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART:20260416T190000Z
+SUMMARY:2026 Roseman Lecture in Practical Ethics
+LOCATION:U of T Philosophy\, Jackman Humanities Building Rm 100\, Toronto
+DESCRIPTION:Social/political philosophy\, feminist theory\, critical race t
+ heory.
+URL:https://seminarschools.com/polymythseminars/events/2026-roseman-lecture
+ -in-practical-ethics-2026-04-16/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:ca1b87da4f5074d54cb8@seminarschools.com
 DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260417
@@ -76,6 +298,116 @@ SUMMARY:Toronto Theory Workshop: How Collectives Absorb their Members
 LOCATION:U of T Sociology\, Toronto
 URL:https://seminarschools.com/polymythseminars/events/toronto-theory-works
  hop-how-collectives-absorb-the-2026-04-17/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:d3c9966a7f7d85fd10f5@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART:20260417T170000Z
+SUMMARY:Philosophy Dept Talk (Kant & Post-Kantian Group)
+LOCATION:U of T Philosophy\, JHB\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/philosophy-dept-talk
+ -kant-post-kantian-group-2026-04-17/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:fcb4784e4d2f70415778@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART:20260417T190000Z
+SUMMARY:Philosophy Department Talk
+LOCATION:U of T Philosophy\, JHB\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/philosophy-departmen
+ t-talk-2026-04-17/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:a5738e2bda2123a36a33@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260418
+DTEND;VALUE=DATE:20260419
+SUMMARY:AGO Talk: What Art Can Ask of Us — Why Seeing Is Not Enough
+LOCATION:Art Gallery of Ontario\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/ago-talk-what-art-ca
+ n-ask-of-us-why-seeing-is-not--2026-04-18/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:208277e523ca0eb0f5cf@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260419
+DTEND;VALUE=DATE:20260420
+SUMMARY:AGO Talk: The Beatles Never Went Out of Fashion
+LOCATION:Art Gallery of Ontario\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/ago-talk-the-beatles
+ -never-went-out-of-fashion-2026-04-19/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:ba7b4b420a9462b39481@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART:20260421T010000Z
+SUMMARY:TPN / POP Speaker Series: Student Symposium
+LOCATION:U of T Sociology\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/tpn-pop-speaker-seri
+ es-student-symposium-2026-04-20/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:214e9163e6b2b10b8485@seminarschools.com
+DTSTAMP:20261003T110658Z
+DTSTART;VALUE=DATE:20260421
+DTEND;VALUE=DATE:20260422
+SUMMARY:Palestine in Focus: Interdisciplinary Research Symposium
+LOCATION:York University\, Toronto\; room not published\, Toronto
+DESCRIPTION:All-day symposium with pre-circulated paper model.
+URL:https://seminarschools.com/polymythseminars/events/palestine-in-focus-i
+ nterdisciplinary-research-symp-2026-04-21/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:b53cc0ddaa291bdcf873@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260421
+DTEND;VALUE=DATE:20260422
+SUMMARY:Death Café Palmerston
+LOCATION:TPL Palmerston\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/death-caf-palmerston
+ -2026-04-21/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:d3121deca7a27585c118@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260421
+DTEND;VALUE=DATE:20260422
+SUMMARY:TPN/POP Speaker Series: Student Symposium
+LOCATION:U of T Sociology\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/tpn-pop-speaker-seri
+ es-student-symposium-2026-04-21/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:c93abf1a9c655e5311d2@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260422T220000Z
+SUMMARY:TPL Salon Series at Appel Salon
+LOCATION:Toronto Reference Library\, Appel Salon\, 789 Yonge Street\, Toron
+ to
+DESCRIPTION:Toronto Public Library Salon Series.
+URL:https://seminarschools.com/polymythseminars/events/tpl-salon-series-at-
+ appel-salon-2026-04-22/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:f59e62ba05f4290a161c@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260423
+DTEND;VALUE=DATE:20260424
+SUMMARY:Alumni & Donors Lecture: Leadership Lessons from Rome? An Experimen
+ t in the Applied Humanities
+LOCATION:U of T Classics\, Lillian Massey Bldg\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/alumni-donors-lectur
+ e-leadership-lessons-from-rome-2026-04-23/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
@@ -90,6 +422,66 @@ DESCRIPTION:Six sessions across two days.
 URL:https://seminarschools.com/polymythseminars/events/annual-toronto-works
  hop-in-ancient-philosophy-2026-2026-04-24/
 STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:a9e17e72e8ca88c44d98@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260425
+DTEND;VALUE=DATE:20260426
+SUMMARY:AGO Teacher Workshop: Art and Indigenous Studies
+LOCATION:Art Gallery of Ontario\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/ago-teacher-workshop
+ -art-and-indigenous-studies-2026-04-25/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:a61a7554fdeccc5e050a@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260425
+DTEND;VALUE=DATE:20260426
+SUMMARY:Death Café Runnymede
+LOCATION:TPL Runnymede\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/death-caf-runnymede-
+ 2026-04-25/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:6fd993d20a4699de92cf@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260425
+DTEND;VALUE=DATE:20260908
+SUMMARY:Power Plant Spring/Summer 2026 Exhibition Program
+LOCATION:The Power Plant Contemporary Art Gallery\, 231 Queens Quay West\, 
+ Toronto
+URL:https://seminarschools.com/polymythseminars/events/power-plant-spring-s
+ ummer-2026-exhibition-program-2026-04-25/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:f98f91dbd829d471bbed@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260425T220000Z
+SUMMARY:Massey Dialogues
+LOCATION:Massey College\, 4 Devonshire Place\, Toronto\, Toronto
+DESCRIPTION:Massey College Dialogues series.
+URL:https://seminarschools.com/polymythseminars/events/massey-dialogues-202
+ 6-04-25/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:2f61d93d363c46fd1578@seminarschools.com
+DTSTAMP:20261003T110658Z
+DTSTART;VALUE=DATE:20260427
+DTEND;VALUE=DATE:20260429
+SUMMARY:Inquiry Network Workshop
+LOCATION:Department of Philosophy\, Toronto Metropolitan University\, Toron
+ to\, Toronto
+DESCRIPTION:Organizer-posted conference dates and university venue confirme
+ d. Individual session clocks are not supplied by this listing\; this is a 
+ date-only conference range.
+URL:https://seminarschools.com/polymythseminars/events/inquiry-network-work
+ shop-2026-04-27/
+STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:87a04fbeb8b9c5a5c5dd@seminarschools.com
@@ -113,15 +505,254 @@ URL:https://seminarschools.com/polymythseminars/events/tpl-writer-in-reside
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:9c8016191422e3d3c71b@seminarschools.com
+UID:7c491db349b6c0b0214d@seminarschools.com
+DTSTAMP:20260907T000000Z
+DTSTART;VALUE=DATE:20260501
+DTEND;VALUE=DATE:20260829
+SUMMARY:April Hickox: Vantage Point – Passing
+LOCATION:199 Richmond Street West\, Toronto\, Toronto
+DESCRIPTION:April Hickox’s Vantage Point – Passing mural runs May 1–A
+ ugust 28\, 2026\, at 199 Richmond Street West. The official OCAD exhibitio
+ n page confirms this date range.
+URL:https://seminarschools.com/polymythseminars/events/april-hickox-vantage
+ -point-passing-2026-05-26/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:4a82a5e303dc4ab031cc@seminarschools.com
 DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260502
+DTEND;VALUE=DATE:20260503
+SUMMARY:AGO Talk: Reliving Beatlemania with Paul McCartney's Eyes of the St
+ orm
+LOCATION:Art Gallery of Ontario\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/ago-talk-reliving-be
+ atlemania-with-paul-mccartney--2026-05-02/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:6a829659b08e8cc95b0a@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260503
+DTEND;VALUE=DATE:20260504
+SUMMARY:Junction Reads
+LOCATION:Type Books Junction\, 2887 Dundas W\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/junction-reads-2026-
+ 05-03/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:0a987896fd27a2fcc5d3@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART:20260504T120000Z
+SUMMARY:Conversations Across Borders: Black Theatre in the US and Canada (B
+ lack Theatre Lab launch symposium)
+LOCATION:JHI\, Jackman Humanities Bldg Rm 100\, 170 St. George St\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/conversations-across
+ -borders-black-theatre-in-the--2026-05-04/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:e7d72fd5adaa02521502@seminarschools.com
+DTSTAMP:20261003T110658Z
+DTSTART:20260504T193000Z
+DTEND:20260504T210000Z
+SUMMARY:The Japanese Left Today and the Return to Marx's Capital
+LOCATION:South Ross Building\, Room 802\, York University Keele Campus\, To
+ ronto\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/the-japanese-left-to
+ day-and-the-return-to-marx-s-c-2026-05-04/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:3563fce516344aac119c@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260505
+DTEND;VALUE=DATE:20260506
+SUMMARY:TPN/POP Speaker Series: Jenna Nobles
+LOCATION:U of T Sociology\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/tpn-pop-speaker-seri
+ es-jenna-nobles-2026-05-05/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:e15d49fb0338e5954d19@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260506
+DTEND;VALUE=DATE:20260507
+SUMMARY:IHEP Interdisciplinary Symposium
+LOCATION:Hart House\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/ihep-interdisciplina
+ ry-symposium-2026-05-06/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:e1477ab726b64252531f@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260506
+DTEND;VALUE=DATE:20260511
+SUMMARY:OCAD U GradEx 111
+LOCATION:OCAD University\, Toronto
+DESCRIPTION:111th Annual Graduate Exhibition.
+URL:https://seminarschools.com/polymythseminars/events/ocad-u-gradex-111-20
+ 26-05-06/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:722e30cec1cfe7541027@seminarschools.com
+DTSTAMP:20261003T110658Z
+DTSTART;VALUE=DATE:20260507
+DTEND;VALUE=DATE:20260509
+SUMMARY:York University Graduate Philosophy Conference: Trust\, Distrust\, 
+ and Technology
+LOCATION:South Ross 421\, York University\, 4700 Keele Street\, Toronto\, T
+ oronto
+DESCRIPTION:Organizer-posted conference dates and university venue confirme
+ d. Individual session clocks are not supplied by this listing\; this is a 
+ date-only conference range.
+URL:https://seminarschools.com/polymythseminars/events/york-university-grad
+ uate-philosophy-conference-tru-2026-05-07/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:9c8016191422e3d3c71b@seminarschools.com
+DTSTAMP:20261003T110658Z
 DTSTART;VALUE=DATE:20260508
 DTEND;VALUE=DATE:20260510
 SUMMARY:Canada Milton Seminar XIX
-LOCATION:Toronto\, Toronto
+LOCATION:Alumni Hall\, Victoria College\, University of Toronto\, Toronto
+DESCRIPTION:Canada Milton Seminar XIX\, May 8–9 at Alumni Hall. Individua
+ l talk times are not specified in this academic association’s conference
+  announcement.
 URL:https://seminarschools.com/polymythseminars/events/canada-milton-semina
  r-xix-2026-05-08/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:47a814c26ed58109b8cb@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260508
+DTEND;VALUE=DATE:20260509
+SUMMARY:Entangled Oligarchies: US-China Power Relations in Offshore Financi
+ al Centers
+LOCATION:U of T Sociology\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/entangled-oligarchie
+ s-us-china-power-relations-in--2026-05-08/
 STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:a05107240abae7f829f7@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART:20260508T130000Z
+DTEND:20260508T220000Z
+SUMMARY:Conversations Across Borders: Black Theatre in the US and Canada
+LOCATION:JHI\, JHB Rm 100\, Toronto
+DESCRIPTION:Black Theatre Lab launch symposium.
+URL:https://seminarschools.com/polymythseminars/events/conversations-across
+ -borders-black-theatre-in-the--2026-05-08/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:85d9066432bf3a406221@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260514T220000Z
+SUMMARY:ROM Speaks on archaeology and memory
+LOCATION:Royal Ontario Museum\, 100 Queens Park\, Toronto\, Toronto
+DESCRIPTION:ROM Speaks public lecture series\, theme: archaeology and memor
+ y.
+URL:https://seminarschools.com/polymythseminars/events/rom-speaks-on-archae
+ ology-and-memory-2026-05-14/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:91aadb5557eb1b0d2ead@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20260516
+DTEND;VALUE=DATE:20260517
+SUMMARY:Aga Khan Museum: Crossing Traditions — Cimbalom and Santoor in Di
+ alogue
+LOCATION:Nanji Family Foundation Auditorium\, Aga Khan Museum\, Toronto\, T
+ oronto
+DESCRIPTION:The museum lists this concert on May 16\, 2026. Its exact start
+  time could not be reverified from the current archive.
+URL:https://seminarschools.com/polymythseminars/events/aga-khan-museum-cros
+ sing-traditions-cimbalom-and-s-2026-05-12/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:6ac972eed8e34ec6fbc7@seminarschools.com
+DTSTAMP:20260907T000000Z
+DTSTART;VALUE=DATE:20260516
+DTEND;VALUE=DATE:20261019
+SUMMARY:Bees: A Story of Survival
+LOCATION:Royal Ontario Museum\, Level 1\, Special Exhibition Gallery\, Toro
+ nto\, Toronto
+DESCRIPTION:BEES: A Story of Survival runs May 16–October 18\, 2026. Exhi
+ bition admission is a $9 surcharge and free for members.
+URL:https://seminarschools.com/polymythseminars/events/bees-a-story-of-surv
+ ival-2026-05-16/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:5dfd0196c70e5c2fca01@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20260516
+DTEND;VALUE=DATE:20260517
+SUMMARY:Crossing Traditions: Cimbalom and Santoor in Dialogue
+LOCATION:Nanji Family Foundation Auditorium\, Aga Khan Museum\, Toronto\, T
+ oronto
+DESCRIPTION:The museum lists this concert on May 16\, 2026. Its exact start
+  time could not be reverified from the current archive.
+URL:https://seminarschools.com/polymythseminars/events/crossing-traditions-
+ cimbalom-and-santoor-in-dialog-2026-05-16/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:953617885f1099f814d7@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART:20260516T180000Z
+SUMMARY:Artist Talk and Demonstration: Alexandru Sura and Vinay Desai
+LOCATION:Nanji Family Foundation Auditorium\, Aga Khan Museum\, Toronto\, T
+ oronto
+DESCRIPTION:HAMMERED Festival.
+URL:https://seminarschools.com/polymythseminars/events/aga-khan-museum-arti
+ st-talk-and-demonstration-2026-05-16/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:913969f9cf389d0680ac@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART:20260517T180000Z
+SUMMARY:Artist Talk and Demonstration: Amir Amiri and Di Zhang
+LOCATION:Nanji Family Foundation Auditorium\, Aga Khan Museum\, Toronto\, T
+ oronto
+DESCRIPTION:HAMMERED Festival.
+URL:https://seminarschools.com/polymythseminars/events/aga-khan-museum-arti
+ st-talk-and-demonstration-2026-05-17/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:f4a2d4db639f31eb91ea@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260519
+DTEND;VALUE=DATE:20260529
+SUMMARY:JHI Writing Retreat
+LOCATION:Jackman Humanities Institute\, 10th Floor\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/jhi-writing-retreat-
+ 2026-05-19/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:54127fca8a5b391305e3@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART:20260519T230000Z
+DTEND:20260523T035900Z
+SUMMARY:JHI Writing Retreat (application deadline Apr 28)
+LOCATION:Jackman Humanities Institute\, 10th Floor\, 170 St. George St\, To
+ ronto
+URL:https://seminarschools.com/polymythseminars/events/jhi-writing-retreat-
+ application-deadline-apr-28-2026-05-19/
+STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:6364d7131d3606d31316@seminarschools.com
@@ -131,6 +762,21 @@ SUMMARY:Judy Blume\, A Life
 LOCATION:TPL\, Toronto Reference Library\, Toronto
 URL:https://seminarschools.com/polymythseminars/events/judy-blume-a-life-20
  26-05-19/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:43dd8dcd11d535b23c8b@seminarschools.com
+DTSTAMP:20261003T110658Z
+DTSTART;VALUE=DATE:20260521
+DTEND;VALUE=DATE:20260524
+SUMMARY:Business Ethics in the 6ix
+LOCATION:Ted Rogers School of Management\, 55 Dundas Street West\, Toronto\
+ , Toronto
+DESCRIPTION:Organizer-posted conference dates and university venue confirme
+ d. Individual session clocks are not supplied by this listing\; this is a 
+ date-only conference range.
+URL:https://seminarschools.com/polymythseminars/events/business-ethics-in-t
+ he-6ix-2026-05-21/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -147,6 +793,20 @@ URL:https://seminarschools.com/polymythseminars/events/doors-open-toronto-2
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:b2eebaa0252930ca5de2@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20260523
+DTEND;VALUE=DATE:20260525
+SUMMARY:Doors Open Toronto (Aga Khan Museum and Ismaili Centre included)
+LOCATION:Aga Khan Museum\, Aga Khan Park and Ismaili Centre Toronto\, Toron
+ to
+DESCRIPTION:Doors Open programming runs 10 am to 5:30 pm each day on May 23
+  and 24\, 2026. This date range does not indicate overnight opening.
+URL:https://seminarschools.com/polymythseminars/events/doors-open-toronto-a
+ ga-khan-museum-and-ismaili-cen-2026-05-24/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:085da9b529dcfe43cf02@seminarschools.com
 DTSTAMP:20260720T040000Z
 DTSTART;VALUE=DATE:20260524
@@ -158,15 +818,39 @@ URL:https://seminarschools.com/polymythseminars/events/doors-open-toronto-2
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:b2eebaa0252930ca5de2@seminarschools.com
-DTSTAMP:20260720T040000Z
-DTSTART:20260524T160000Z
-DTEND:20260526T035900Z
-SUMMARY:Doors Open Toronto (Aga Khan Museum and Ismaili Centre included)
-LOCATION:City-wide\, Toronto
-URL:https://seminarschools.com/polymythseminars/events/doors-open-toronto-a
- ga-khan-museum-and-ismaili-cen-2026-05-24/
+UID:27f00ca6ea24ed112074@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260526
+DTEND;VALUE=DATE:20260616
+SUMMARY:Sin Wai Kin: ESSENCE (CONTACT exhibition)
+LOCATION:CONTACT Gallery\, 80 Spadina Ave Suite 205\, Toronto\, Toronto
+DESCRIPTION:Solo exhibition by Sin Wai Kin (Turner Prize 2022 shortlist). T
+ hrough mid-June via CONTACT Photography Festival.
+URL:https://seminarschools.com/polymythseminars/events/sin-wai-kin-essence-
+ contact-exhibition-2026-05-26/
 STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:d6579597f352b9ccf7e9@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260527T230000Z
+SUMMARY:Tracey Lindberg: The Cree Word for Love
+LOCATION:North York Central Library Concourse Event Space\, 5120 Yonge Stre
+ et\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/tracey-lindberg-the-
+ cree-word-for-love-2026-05-27/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:9d575b3a2670bcd743f9@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260528T230000Z
+SUMMARY:Anakana Schofield: Library of Brothel
+LOCATION:Bram and Bluma Appel Salon\, Toronto Reference Library\, 789 Yonge
+  Street\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/anakana-schofield-li
+ brary-of-brothel-2026-05-28/
+STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:510c3154aa6057974b1d@seminarschools.com
@@ -195,23 +879,65 @@ URL:https://seminarschools.com/polymythseminars/events/nbs-block-party-2026
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:39330f6dcb83643c5d59@seminarschools.com
-DTSTAMP:20260608T120000Z
-DTSTART;VALUE=DATE:20260603
-DTEND;VALUE=DATE:20260629
-SUMMARY:Katma by Divine Brown (Luminato 2026)
-LOCATION:Luminato Festival venues\, Toronto\, Toronto
-URL:https://seminarschools.com/polymythseminars/events/dee27d9f5a83/
+UID:3ab262afb49455702d76@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20260530
+DTEND;VALUE=DATE:20260531
+SUMMARY:Dhrupad Vocal Recital by Pt. Uday Bhawalkar
+LOCATION:Ismaili Centre Toronto\, Toronto
+DESCRIPTION:The official archive confirms the day and venue. The event’s 
+ start time could not be reverified from the current page.
+URL:https://seminarschools.com/polymythseminars/events/dhrupad-vocal-recita
+ l-by-pt-uday-bhawalkar-2026-05-30/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:e706ff6952e363b8df53@seminarschools.com
-DTSTAMP:20260608T120000Z
-DTSTART;VALUE=DATE:20260603
-DTEND;VALUE=DATE:20260629
-SUMMARY:Lovin' You: The Minnie Riperton Story (Luminato 2026)
-LOCATION:Luminato Festival venues\, Toronto\, Toronto
-URL:https://seminarschools.com/polymythseminars/events/5fd96f93aff6/
+UID:cc07010ef41da14f14e4@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260601
+DTEND;VALUE=DATE:20260711
+SUMMARY:Toronto–Rome Programme in Manuscript Studies
+LOCATION:Pontifical Institute of Mediaeval Studies\, Toronto\, Toronto
+DESCRIPTION:Latin Palaeography and Codicology\; with Prof. Alixe Bovey (Cou
+ rtauld).
+URL:https://seminarschools.com/polymythseminars/events/toronto-rome-program
+ me-in-manuscript-studies-2026-06-01/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:a5a73b51e8f36b4f382f@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260602
+DTEND;VALUE=DATE:20260603
+SUMMARY:Power Kids — June 2
+LOCATION:The Power Plant\, 231 Queens Quay W\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/power-kids-june-2-20
+ 26-06-02/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:c5e648cd6bc47bb26a82@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260602
+DTEND;VALUE=DATE:20260608
+SUMMARY:imagineNATIVE Film + Media Arts Festival 2026 (in-person)
+LOCATION:TIFF Bell Lightbox\, 350 King St W\, Toronto\, Toronto
+DESCRIPTION:26th edition. Indigenous film and media arts from 56 Nations ac
+ ross 20 countries. In-person June 2-7\; online June 8-14.
+URL:https://seminarschools.com/polymythseminars/events/imaginenative-film-m
+ edia-arts-festival-2026-in-per-2026-06-02/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:70f1a25686dcb02ba1d7@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260602T230000Z
+SUMMARY:imagineNATIVE Opening Night: AKI
+LOCATION:TIFF Bell Lightbox\, 350 King St W\, Toronto\, Toronto
+DESCRIPTION:Opening night screening of AKI by Darlene Naponse (Anishinaabe)
+ . Director-attended Q&A. Welcome Gathering at Spadina Museum.
+URL:https://seminarschools.com/polymythseminars/events/imaginenative-openin
+ g-night-aki-2026-06-02/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
@@ -239,23 +965,143 @@ URL:https://seminarschools.com/polymythseminars/events/luminato-festival-20
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:2d51b70ed49a8c1031db@seminarschools.com
-DTSTAMP:20260608T120000Z
+UID:7a89058722690590540f@seminarschools.com
+DTSTAMP:20260815T220000Z
 DTSTART;VALUE=DATE:20260603
 DTEND;VALUE=DATE:20260629
-SUMMARY:Penn & Teller: 50 Years of Magic (Luminato 2026)
-LOCATION:Luminato Festival venues\, Toronto\, Toronto
-URL:https://seminarschools.com/polymythseminars/events/a0a5a2cffba5/
+SUMMARY:Luminato Festival 2026 (20th anniversary)
+LOCATION:Harbourfront Centre and 25+ venues citywide\, Toronto\, Toronto
+DESCRIPTION:20th anniversary edition. Theme: PLAY. 50+ events\, 140+ perfor
+ mances\, 1000+ artists. Longest Luminato in history.
+URL:https://seminarschools.com/polymythseminars/events/dc714fd2df1c/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:42487339bdc59e1b46b9@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260604T160000Z
+SUMMARY:imagineNATIVE Art Crawl
+LOCATION:Gallery TPW\, A Space Gallery\, Gallery 44\, Market Gallery\, YYZ\
+ , Vtape\, Toronto\, Toronto
+DESCRIPTION:12th-year Art Crawl across 7 galleries. Features Kent Monkman\,
+  Darlene Naponse\, Zachery Cameron Longboy\, Kay Nadjiwon.
+URL:https://seminarschools.com/polymythseminars/events/imaginenative-art-cr
+ awl-2026-06-04/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:6903b90c63b50f04ee6a@seminarschools.com
-DTSTAMP:20260608T120000Z
-DTSTART;VALUE=DATE:20260603
-DTEND;VALUE=DATE:20260629
-SUMMARY:The Philip Glass Ensemble (Luminato 2026)
-LOCATION:Luminato Festival venues\, Toronto\, Toronto
-URL:https://seminarschools.com/polymythseminars/events/abaa54f489fb/
+UID:ed31d379ac0ad3b19600@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART:20260604T223000Z
+DTEND:20260604T233000Z
+SUMMARY:Playing With the World: How Games Have Shaped Modern Science and Te
+ chnology
+LOCATION:Aga Khan Museum\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/playing-with-the-wor
+ ld-how-games-have-shaped-moder-2026-06-04/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:2d51b70ed49a8c1031db@seminarschools.com
+DTSTAMP:20261003T110658Z
+DTSTART;VALUE=DATE:20260605
+DTEND;VALUE=DATE:20260607
+SUMMARY:Penn & Teller: 50 Years of Magic (Luminato 2026)
+LOCATION:Meridian Hall\, Toronto\, Toronto
+DESCRIPTION:Three performances: June 5 at 8 pm\; June 6 at 2 pm and 8 pm. E
+ ach runs approximately 90 minutes. This date range does not imply continuo
+ us performances.
+URL:https://seminarschools.com/polymythseminars/events/a0a5a2cffba5/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:aa54eae4a106baa76e28@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260605
+DTEND;VALUE=DATE:20260606
+SUMMARY:JHI Annual Lecture (Dystopia and Trust theme closure)
+LOCATION:Jackman Humanities Building\, 170 St George St\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/jhi-annual-lecture-d
+ ystopia-and-trust-theme-closur-2026-06-05/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:4b7cdf2331e625f8575e@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260605
+DTEND;VALUE=DATE:20260607
+SUMMARY:MOTIVE Crime & Mystery Festival 2026 (TIFA)
+LOCATION:Victoria University at the University of Toronto\, Toronto
+DESCRIPTION:Toronto International Festival of Authors crime-and-mystery wee
+ kend. Readings\, panels\, masterclasses.
+URL:https://seminarschools.com/polymythseminars/events/motive-crime-mystery
+ -festival-2026-tifa-2026-06-05/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:c87ab9a145928abbdf9e@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260605T220000Z
+SUMMARY:Jackman Humanities Annual Lecture
+LOCATION:Jackman Humanities Institute\, 170 St. George Street\, Toronto\, T
+ oronto
+DESCRIPTION:Annual lecture of the Jackman Humanities Institute.
+URL:https://seminarschools.com/polymythseminars/events/jackman-humanities-a
+ nnual-lecture-2026-06-05/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:9ebeb6f3cea7df14404a@seminarschools.com
+DTSTAMP:20261001T000000Z
+DTSTART;VALUE=DATE:20260606
+DTEND;VALUE=DATE:20261005
+SUMMARY:Diego Marcon: The Bubble Boy
+LOCATION:Art Gallery of Ontario\, Level 1\, Philip B. Lind Gallery\, Toront
+ o\, Toronto
+DESCRIPTION:Public and annual-passholder access June 6–October 4\, 2026. 
+ Member access began June 3. Exhibition in the Philip B. Lind Gallery\, Lev
+ el 1.
+URL:https://seminarschools.com/polymythseminars/events/diego-marcon-2026-06
+ -05/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:6fec0db258572f384607@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20260606
+DTEND;VALUE=DATE:20261207
+SUMMARY:Psychedelics: Art. Culture. Science.
+LOCATION:Roloff Beny Gallery\, Level 4\, Royal Ontario Museum\, 100 Queen
+ ’s Park\, Toronto\, Toronto
+DESCRIPTION:Exhibition run. Admission follows the museum’s opening hours\
+ , including closures and special hours published by ROM.
+URL:https://seminarschools.com/polymythseminars/events/research-a9b4973d6e7
+ 8/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:300b18c541795f61d87e@seminarschools.com
+DTSTAMP:20261003T110658Z
+DTSTART:20260606T150000Z
+SUMMARY:The Power of Land — Luminato Indigenous Programming Day
+LOCATION:Ireland Park and Harbourfront Centre\, Toronto\, Toronto
+DESCRIPTION:Daylong Indigenous programming on June 6. Opening procession be
+ gins at Ireland Park at 11 am\; a sacred fire begins concurrently at Harbo
+ urfront’s Green Lawn Stage. Later events continue across Harbourfront ve
+ nues\; no exact closing clock is published.
+URL:https://seminarschools.com/polymythseminars/events/the-power-of-land-lu
+ minato-indigenous-programming--2026-06-06/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:f3bb11ba057e338f58b1@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART;VALUE=DATE:20260607
+DTEND;VALUE=DATE:20260608
+SUMMARY:Junction Reads season finale
+LOCATION:Type Books Junction\, 2887 Dundas W\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/junction-reads-seaso
+ n-finale-2026-06-07/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
@@ -272,6 +1118,17 @@ DESCRIPTION:Parent record for the Grade 10–12 Ontario Model Parliament cy
 URL:https://seminarschools.com/polymythseminars/events/ontario-model-parlia
  ment-2027-series/
 STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:e06167ac91ea0a41cb8b@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260608T230000Z
+SUMMARY:Dana A. Williams: Toni at Random
+LOCATION:Bram and Bluma Appel Salon\, Toronto Reference Library\, 789 Yonge
+  Street\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/dana-a-williams-toni
+ -at-random-2026-06-08/
+STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:e3d15c1d677771b11c27@seminarschools.com
@@ -295,6 +1152,19 @@ URL:https://seminarschools.com/polymythseminars/events/59fefe289eed/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:9289781ff32a73640f68@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260610
+DTEND;VALUE=DATE:20260615
+SUMMARY:NXNE Music Festival 2026 (31st edition)
+LOCATION:30+ venues across downtown Toronto\, Toronto
+DESCRIPTION:300+ artists across 30+ venues. Free FIFA viewing at Nathan Phi
+ llips Square.
+URL:https://seminarschools.com/polymythseminars/events/nxne-music-festival-
+ 2026-31st-edition-2026-06-10/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:d47a0c39827e360e7580@seminarschools.com
 DTSTAMP:20260608T120000Z
 DTSTART:20260610T233000Z
@@ -314,6 +1184,29 @@ URL:https://seminarschools.com/polymythseminars/events/a28d66f9e65f/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:996996eb2fa1ddbeefa8@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260611T230000Z
+SUMMARY:Canadian Sync Awards / NXNE 2026
+LOCATION:The Concert Hall\, 888 Yonge St\, Toronto\, Toronto
+DESCRIPTION:Canadian Sync Awards within NXNE. Serena Ryder receives the GMS
+ C Impact Award.
+URL:https://seminarschools.com/polymythseminars/events/canadian-sync-awards
+ -nxne-2026-2026-06-11/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:8673820c8e6f5f4fd933@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260611T230000Z
+SUMMARY:Pete Crighton: The Vinyl Diaries
+LOCATION:Jack Rabinovitch Reading Room\, Toronto Reference Library\, 789 Yo
+ nge Street\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/pete-crighton-the-vi
+ nyl-diaries-2026-06-11/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:075290d4c6e31eb9abfb@seminarschools.com
 DTSTAMP:20260608T120000Z
 DTSTART:20260611T230000Z
@@ -321,6 +1214,66 @@ SUMMARY:NXNE — Canadian Sync Awards
 LOCATION:The Concert Hall\, Toronto\, Toronto
 URL:https://seminarschools.com/polymythseminars/events/e5cfb7d36c16/
 STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:7d7b08686543a9c36f32@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260612
+DTEND;VALUE=DATE:20260614
+SUMMARY:Third Annual Toronto Bioethics Workshop
+LOCATION:Jackman Humanities Building\, JHB 100\, 170 Saint George Street\, 
+ Toronto
+URL:https://seminarschools.com/polymythseminars/events/third-annual-toronto
+ -bioethics-workshop-2026-06-12/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:d1723a9d4c5a7df87279@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260613T180000Z
+SUMMARY:Caribana Official Launch 2026
+LOCATION:Scarborough Town Centre\, Toronto\, Toronto
+DESCRIPTION:Toronto Caribbean Carnival official 2026 kickoff with live perf
+ ormances. 2-8 PM.
+URL:https://seminarschools.com/polymythseminars/events/edb124435d99/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:e706ff6952e363b8df53@seminarschools.com
+DTSTAMP:20261003T110658Z
+DTSTART:20260614T003000Z
+DTEND:20260614T020000Z
+SUMMARY:Lovin' You: The Minnie Riperton Story (Luminato 2026)
+LOCATION:Harbourfront Concert Stage\, Toronto\, Toronto
+DESCRIPTION:Divine Brown’s Luminato concert celebrating Minnie Riperton\,
+  with DJ Starting from Scratch and guest vocalist Glenn Lewis. Individual 
+ performance on June 13\; the former festival-wide span was not this concer
+ t.
+URL:https://seminarschools.com/polymythseminars/events/5fd96f93aff6/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:39330f6dcb83643c5d59@seminarschools.com
+DTSTAMP:20261003T110658Z
+DTSTART;VALUE=DATE:20260617
+DTEND;VALUE=DATE:20260621
+SUMMARY:Katma — Azzam Mohamed and team (Luminato 2026)
+LOCATION:Ada Slaight Hall\, Daniels Spectrum\, Toronto\, Toronto
+DESCRIPTION:Performances June 17–20 at 8 pm\, each approximately 50 minut
+ es. The June 20 after-party is a separate activity.
+URL:https://seminarschools.com/polymythseminars/events/dee27d9f5a83/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:1eff3d9b498d59ae28d9@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260617T230000Z
+SUMMARY:Terry Tempest Williams: The Glorians
+LOCATION:Bram and Bluma Appel Salon\, Toronto Reference Library\, 789 Yonge
+  Street\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/terry-tempest-willia
+ ms-the-glorians-2026-06-17/
+STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:1d884a57b4a44fcbc368@seminarschools.com
@@ -333,6 +1286,33 @@ URL:https://seminarschools.com/polymythseminars/events/a5bb1b8ad073/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:54813c83b37cf9f980b7@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260618T233000Z
+SUMMARY:Ideas & Ideals: The Ethics of Civic Responsibility
+LOCATION:Massey College\, 4 Devonshire Place\, Toronto\, Toronto
+DESCRIPTION:Massey College Ethics Series. What does it mean for a synagogue
+  or a community institution to be a good citizen?
+URL:https://seminarschools.com/polymythseminars/events/massey-ideas-ideals-
+ civic-responsibility-2026-06-18/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:bf8b67856c965b8c75dc@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20260619
+DTEND;VALUE=DATE:20260713
+SUMMARY:Medusa — Soulpepper / Outside the March
+LOCATION:Baillie Theatre\, Young Centre for the Performing Arts\, 50 Tank H
+ ouse Lane\, Toronto\, Toronto
+DESCRIPTION:Erin Shields’s Medusa\, directed by Mitchell Cushman. The co-
+ producer lists the run from June 19 through July 12\, 2026. Performances t
+ ake place on selected dates.
+URL:https://seminarschools.com/polymythseminars/events/soulpepper-medusa-20
+ 26/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:7ca4ecafc5aeae257159@seminarschools.com
 DTSTAMP:20260608T120000Z
 DTSTART:20260619T210000Z
@@ -343,19 +1323,18 @@ URL:https://seminarschools.com/polymythseminars/events/218479b40aa4/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
-UID:bf8b67856c965b8c75dc@seminarschools.com
-DTSTAMP:20260813T040000Z
-DTSTART;VALUE=DATE:20260619
-DTEND;VALUE=DATE:20260713
-SUMMARY:Medusa — Soulpepper / Outside the March
-LOCATION:Young Centre for the Performing Arts\, Toronto\, Toronto
-DESCRIPTION:Erin Shields's Medusa\, directed by Mitchell Cushman. The princ
- ipal public run is preserved as June 19–July 12\, 2026\, while an altern
- ate published June 16–July 19 schedule remains recorded rather than sile
- ntly erased.
-URL:https://seminarschools.com/polymythseminars/events/soulpepper-medusa-20
- 26/
-STATUS:CONFIRMED
+UID:9998d7986da446e42b70@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20260620
+DTEND;VALUE=DATE:20260621
+SUMMARY:Red Revue Concert — Summer Solstice Celebration
+LOCATION:Nanji Family Foundation Auditorium\, Aga Khan Museum\, Toronto\, T
+ oronto
+DESCRIPTION:The official archive confirms the day and venue. The event’s 
+ start time could not be reverified from the current page.
+URL:https://seminarschools.com/polymythseminars/events/red-revue-concert-su
+ mmer-solstice-celebration-2026-06-20/
+STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:7767bc4ce3c8e2e0b7d4@seminarschools.com
@@ -378,44 +1357,77 @@ URL:https://seminarschools.com/polymythseminars/events/11dda066354e/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:6903b90c63b50f04ee6a@seminarschools.com
+DTSTAMP:20261003T110658Z
+DTSTART:20260621T000000Z
+SUMMARY:The Philip Glass Ensemble (Luminato 2026)
+LOCATION:Koerner Hall at the TELUS Centre for Performance and Learning\, To
+ ronto\, Toronto
+DESCRIPTION:The Philip Glass Ensemble performs The Early Works on June 20 a
+ t 8 pm. Published runtime is approximately 120 minutes\, including a 15-mi
+ nute intermission.
+URL:https://seminarschools.com/polymythseminars/events/abaa54f489fb/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:2a733cf7217f55a8acfc@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20260621
+DTEND;VALUE=DATE:20260828
+SUMMARY:Summer Music in the Garden
+LOCATION:Toronto Music Garden\, 479 Queens Quay West\, Toronto\, Toronto
+DESCRIPTION:Concert series on selected Thursdays and Sundays. Check the ind
+ ividual concert pages for times and weather-related cancellations.
+URL:https://seminarschools.com/polymythseminars/events/research-5caa1ebb58e
+ 2/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:a385f695da287c6e7c1f@seminarschools.com
-DTSTAMP:20260608T120000Z
+DTSTAMP:20261003T042124Z
 DTSTART;VALUE=DATE:20260621
 DTEND;VALUE=DATE:20260828
 SUMMARY:Summer Music in the Garden 2026 (25th Season)
-LOCATION:Toronto Music Garden\, 479 Queens Quay W\, Toronto\, Toronto
+LOCATION:Toronto Music Garden\, 479 Queens Quay West\, Toronto\, Toronto
+DESCRIPTION:Concert series on selected Thursdays and Sundays. Check the ind
+ ividual concert pages for times and weather-related cancellations.
 URL:https://seminarschools.com/polymythseminars/events/48a8baf2050f/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:82315e4334fed4c22c77@seminarschools.com
-DTSTAMP:20260608T120000Z
+DTSTAMP:20261003T042124Z
 DTSTART:20260621T200000Z
-DTEND:20260828T035900Z
-SUMMARY:Julie Lumsden (Metis soprano) — Summer Music in the Garden 2026
-LOCATION:Toronto Music Garden\, 479 Queens Quay W\, Toronto\, Toronto
+DTEND:20260621T210000Z
+SUMMARY:The Sovereignty of Song — Julie Lumsden
+LOCATION:Toronto Music Garden\, 479 Queens Quay West\, Toronto\, Toronto
+DESCRIPTION:A one-hour concert in the 2026 Summer Music in the Garden progr
+ amme.
 URL:https://seminarschools.com/polymythseminars/events/a49ab7357b76/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
-UID:3f0babffcff515507be3@seminarschools.com
-DTSTAMP:20260608T120000Z
-DTSTART:20260621T200000Z
-DTEND:20260828T035900Z
-SUMMARY:Nagata Shachu — Summer Music in the Garden 2026
-LOCATION:Toronto Music Garden\, 479 Queens Quay W\, Toronto\, Toronto
-URL:https://seminarschools.com/polymythseminars/events/472ca2aa930b/
-STATUS:CONFIRMED
+UID:d647b80523c74da93189@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260622T003000Z
+SUMMARY:Laila Biali at Jazz Bistro (Toronto Jazz Festival)
+LOCATION:Jazz Bistro\, 251 Victoria St\, Toronto\, Toronto
+DESCRIPTION:JUNO-winning vocalist Laila Biali with two-night stand at Jazz 
+ Bistro.
+URL:https://seminarschools.com/polymythseminars/events/laila-biali-at-jazz-
+ bistro-toronto-jazz-festival-2026-06-21/
+STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:cbcb1463acaae2d8e650@seminarschools.com
-DTSTAMP:20260608T120000Z
-DTSTART:20260621T200000Z
-DTEND:20260828T035900Z
-SUMMARY:The Nathaniel Dett Chorale — Summer Music in the Garden 2026
-LOCATION:Toronto Music Garden\, 479 Queens Quay W\, Toronto\, Toronto
-URL:https://seminarschools.com/polymythseminars/events/55a6ad318e19/
-STATUS:CONFIRMED
+UID:e551d0e90caafd5ab0c2@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260622T230000Z
+SUMMARY:Julia Hotz: The Connection Cure
+LOCATION:Bram and Bluma Appel Salon\, Toronto Reference Library\, 789 Yonge
+  Street\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/julia-hotz-the-conne
+ ction-cure-2026-06-22/
+STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:92247bf0fd6afe78b222@seminarschools.com
@@ -436,6 +1448,41 @@ URL:https://seminarschools.com/polymythseminars/events/bb286cf1491f/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:8869b559f976cfb7325d@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260623T233000Z
+SUMMARY:Emilie-Claire Barlow at Koerner Hall (Toronto Jazz Festival)
+LOCATION:Koerner Hall\, Royal Conservatory of Music\, 273 Bloor St W\, Toro
+ nto\, Toronto
+DESCRIPTION:La plus belle saison with pianist François Richard.
+URL:https://seminarschools.com/polymythseminars/events/emilie-claire-barlow
+ -at-koerner-hall-toronto-jazz--2026-06-23/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:417be573c1813251133b@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260624
+DTEND;VALUE=DATE:20260625
+SUMMARY:AGO Annual General Meeting
+LOCATION:Art Gallery of Ontario\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/ago-annual-general-m
+ eeting-2026-06-24/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:ac3a094d76b293483e20@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART:20260624T230000Z
+DTEND:20260625T000000Z
+SUMMARY:Beyond Earth: A Conversation on Artemis\, Leadership\, and Public E
+ ngagement
+LOCATION:Aga Khan Museum\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/beyond-earth-a-conve
+ rsation-on-artemis-leadership--2026-06-24/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:c13578451a2e8c04c717@seminarschools.com
 DTSTAMP:20260608T120000Z
 DTSTART:20260624T230000Z
@@ -447,13 +1494,41 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:7d96ff7aab48600225a7@seminarschools.com
-DTSTAMP:20260608T120000Z
+DTSTAMP:20261003T110658Z
 DTSTART;VALUE=DATE:20260625
 DTEND;VALUE=DATE:20260629
 SUMMARY:Play Dead by People Watching Collective (Luminato 2026)
-LOCATION:Luminato Festival venues\, Toronto\, Toronto
+LOCATION:Lyric Theatre\, Meridian Arts Centre\, Toronto\, Toronto
+DESCRIPTION:Performances June 25–26 at 8 pm\; June 27 at 4 pm and 8 pm\; 
+ June 28 at 4 pm. Runtime approximately 70 minutes.
 URL:https://seminarschools.com/polymythseminars/events/2736bd47af82/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:66add45651b0fecc9f81@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260625
+DTEND;VALUE=DATE:20260629
+SUMMARY:Pride Toronto 2026 (45th anniversary\, 'We Won't Stop')
+LOCATION:Church-Wellesley Village + Yonge Street parade route\, Toronto\, T
+ oronto
+DESCRIPTION:45th-anniversary edition. 8 stages\, 300+ performers. Theme: We
+  Won't Stop.
+URL:https://seminarschools.com/polymythseminars/events/pride-toronto-2026-4
+ 5th-anniversary-we-won-t-stop-2026-06-25/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:3f0babffcff515507be3@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART:20260625T230000Z
+DTEND:20260626T000000Z
+SUMMARY:Garden Rhythms: Taiko Among the Trees — Nagata Shachu
+LOCATION:Toronto Music Garden\, 479 Queens Quay West\, Toronto\, Toronto
+DESCRIPTION:Cancelled by the organizer because of inclement weather. The sc
+ heduled June 25 concert date and time remain for reference.
+URL:https://seminarschools.com/polymythseminars/events/472ca2aa930b/
+STATUS:CANCELLED
 END:VEVENT
 BEGIN:VEVENT
 UID:8043828c7b2ecb41fef8@seminarschools.com
@@ -484,6 +1559,38 @@ URL:https://seminarschools.com/polymythseminars/events/e62cee235455/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:071aad22e51e4e936388@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260626T230000Z
+SUMMARY:Toronto Trans March (Pride Toronto 2026)
+LOCATION:Church-Wellesley Village\, Toronto\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/toronto-trans-march-
+ pride-toronto-2026-2026-06-26/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:10d5294b72ca18a16cbf@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260626
+DTEND;VALUE=DATE:20260628
+SUMMARY:Norma Winstone with Atlantic Jazz Collective (Toronto Jazz Festival
+ )
+LOCATION:Jazz Bistro\, 251 Victoria St\, Toronto\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/norma-winstone-with-
+ atlantic-jazz-collective-toron-2026-06-26/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:947dfec975a24151ba2e@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260627T180000Z
+SUMMARY:Toronto Dyke March (Pride Toronto 2026)
+LOCATION:Church-Wellesley Village\, Toronto\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/toronto-dyke-march-p
+ ride-toronto-2026-2026-06-27/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:a7772f83c04d3656720b@seminarschools.com
 DTSTAMP:20260608T120000Z
 DTSTART:20260627T220000Z
@@ -511,6 +1618,52 @@ URL:https://seminarschools.com/polymythseminars/events/8b8423aafbf6/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:25ca304f97338b2da828@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260627T233000Z
+SUMMARY:Hiromi's Sonicwonder at Koerner Hall (Toronto Jazz Festival)
+LOCATION:Koerner Hall\, 273 Bloor St W\, Toronto\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/hiromi-s-sonicwonder
+ -at-koerner-hall-toronto-jazz--2026-06-27/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:f9e2a4d1c3da0f87a47c@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260628T000000Z
+SUMMARY:Ibrahim Maalouf T.O.M.A. at Danforth Music Hall (Toronto Jazz Festi
+ val)
+LOCATION:Danforth Music Hall\, 147 Danforth Ave\, Toronto\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/ibrahim-maalouf-t-o-
+ m-a-at-danforth-music-hall-tor-2026-06-27/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:24ed30854a6cb81a4729@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260628T180000Z
+SUMMARY:Pride Toronto Parade 2026
+LOCATION:Yonge Street (Bloor & Church to Yonge & Dundas)\, Toronto\, Toront
+ o
+DESCRIPTION:Annual Pride Parade. 2:00 PM start\, 45th-anniversary edition.
+URL:https://seminarschools.com/polymythseminars/events/pride-toronto-parade
+ -2026-2026-06-28/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:cbcb1463acaae2d8e650@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART:20260628T200000Z
+DTEND:20260628T210000Z
+SUMMARY:And Still We Sing… Walk Together\, Children — The Nathaniel Det
+ t Chorale
+LOCATION:Toronto Music Garden\, 479 Queens Quay West\, Toronto\, Toronto
+DESCRIPTION:A one-hour concert in the 2026 Summer Music in the Garden progr
+ amme.
+URL:https://seminarschools.com/polymythseminars/events/55a6ad318e19/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:d30b1ac67a923e4fca00@seminarschools.com
 DTSTAMP:20260608T120000Z
 DTSTART:20260628T220000Z
@@ -521,11 +1674,73 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:f7d0bdc4b2d2d4de0aac@seminarschools.com
-DTSTAMP:20260608T120000Z
-DTSTART:20260628T233000Z
+DTSTAMP:20261003T042124Z
+DTSTART:20260628T230000Z
+DTEND:20260629T000000Z
 SUMMARY:TIFA: In Conversation with Maggie O'Farrell
 LOCATION:TIFF Lightbox\, Toronto\, Toronto
 URL:https://seminarschools.com/polymythseminars/events/d13a12bba177/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:d0dc00e9aef7b051ace3@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260629T130000Z
+SUMMARY:Energy-Aware Agents 2026
+LOCATION:Toronto Metropolitan University\, Toronto\, Toronto
+DESCRIPTION:Official TMU research-events listing identifies Energy-Aware Ag
+ ents 2026 as a one-day workshop hosted by the Department of Computer Scien
+ ce at Toronto Metropolitan University.
+URL:https://seminarschools.com/polymythseminars/events/97222228bc8e/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:9e9b096d84746999f648@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260630
+DTEND;VALUE=DATE:20260713
+SUMMARY:Toronto Fringe Festival 2026
+LOCATION:27 stages across Toronto\, Toronto
+DESCRIPTION:Toronto Fringe lists 123 shows on 27 stages across Toronto from
+  June 30 to July 12\, 2026.
+URL:https://seminarschools.com/polymythseminars/events/ad7b80663935/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:4be0d363f4eda27bd783@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART:20260701T140000Z
+DTEND:20260702T020000Z
+SUMMARY:Rhythms of Canada
+LOCATION:Aga Khan Museum\, Toronto
+DESCRIPTION:Canada Day programming.
+URL:https://seminarschools.com/polymythseminars/events/rhythms-of-canada-20
+ 26-07-01/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:8820925d2b27895b0e41@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260702T035900Z
+SUMMARY:CFP: Toronto Workshop on Moral Psychology and Moral Theory
+LOCATION:Department of Philosophy\, University of Toronto\, JHB\, 170 St Ge
+ orge St\, Toronto
+DESCRIPTION:Submission deadline. Workshop Nov 7-8\, 2026. Topics: Philosoph
+ y of Cognitive Science\, Value Theory.
+URL:https://seminarschools.com/polymythseminars/events/cfp-toronto-workshop
+ -on-moral-psychology-and-moral-2026-07-01/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:56e1e56a732f6acd2dc2@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260702
+DTEND;VALUE=DATE:20260713
+SUMMARY:Aliya Kanani: A Comedian’s Guide To Enlightenment
+LOCATION:Tarragon Theatre Mainspace\, 30 Bridgman Ave\, Toronto\, Toronto
+DESCRIPTION:Toronto Fringe performance by Aliya Kanani\, with performances 
+ July 2–12\, 2026.
+URL:https://seminarschools.com/polymythseminars/events/c9b230134d30/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -549,6 +1764,76 @@ URL:https://seminarschools.com/polymythseminars/events/7a63d8fd5e8c/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:2fafa4642bfe3813ddf7@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260703
+DTEND;VALUE=DATE:20260713
+SUMMARY:Danse Macabre
+LOCATION:Tarragon Theatre Mainspace\, 30 Bridgman Ave\, Toronto\, Toronto
+DESCRIPTION:Toronto Fringe production by Canadian-Caribbean Arts Network\, 
+ with performances July 3–12\, 2026.
+URL:https://seminarschools.com/polymythseminars/events/2fe410f5efc7/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:76d262e519184019c14c@seminarschools.com
+DTSTAMP:20260907T000000Z
+DTSTART;VALUE=DATE:20260704
+DTEND;VALUE=DATE:20260705
+SUMMARY:CFP: University of Toronto Philosophy Graduate Conference 2026
+LOCATION:Department of Philosophy\, University of Toronto\, JHB\, 170 St Ge
+ orge St\, Toronto
+DESCRIPTION:Submission deadline 11:59pm EST. Conference Oct 16-17\, 2026. K
+ eynotes Don Garrett (NYU)\, Alva Noe (UC Berkeley). The source states EST 
+ in July\; its UTC offset needs clarification. Applications have closed.
+URL:https://seminarschools.com/polymythseminars/events/cfp-university-of-to
+ ronto-philosophy-graduate-conf-2026-07-04/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:908f5f3feef0f68e886d@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20260706
+DTEND;VALUE=DATE:20260815
+SUMMARY:2026 Summer Camps
+LOCATION:Aga Khan Museum\, Toronto
+DESCRIPTION:Weekly camp sessions for ages 6 to 12. The heading lists July 6
+  to August 14\, 2026\, while the page body says sessions start July 7. The
+  start-day conflict remains unresolved. Camp days run 9 am to 4 pm\, with 
+ drop-off from 8:45 am.
+URL:https://seminarschools.com/polymythseminars/events/2026-summer-camps-20
+ 26-07-06/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:9fe19936a292507e42f9@seminarschools.com
+DTSTAMP:20260907T000000Z
+DTSTART;VALUE=DATE:20260707
+DTEND;VALUE=DATE:20261019
+SUMMARY:The Impressionist Revolution: Monet to Matisse
+LOCATION:Art Gallery of Ontario\, Level 4\, 317 Dundas Street West\, Toront
+ o\, Toronto
+DESCRIPTION:Public access July 7–October 18\, 2026. Members from June 24 
+ and annual passholders from July 1. 50 works organized by the Dallas Museu
+ m of Art\; Canadian debut.
+URL:https://seminarschools.com/polymythseminars/events/the-impressionist-re
+ volution-monet-to-matisse-2026-07-07/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:1c879437b9c8ee91566f@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20260708
+DTEND;VALUE=DATE:20260817
+SUMMARY:The Secret Chord: A Leonard Cohen Experience
+LOCATION:CAA Theatre\, 651 Yonge Street\, Toronto\, Toronto
+DESCRIPTION:Mirvish production run. Performances take place on selected dat
+ es. See the official show page for individual showtimes.
+URL:https://seminarschools.com/polymythseminars/events/the-secret-chord-a-l
+ eonard-cohen-experience-2026-07-08/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:fb68664cde5c68849ca6@seminarschools.com
 DTSTAMP:20260813T040000Z
 DTSTART;VALUE=DATE:20260708
@@ -563,6 +1848,56 @@ DESCRIPTION:July 8 performance followed by a confirmed post-show talkback i
 URL:https://seminarschools.com/polymythseminars/events/soulpepper-medusa-ta
  lkback-2026-07-08/
 STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:8ab86514ba8a3cf4c9fd@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260711
+DTEND;VALUE=DATE:20260713
+SUMMARY:TD Festival of South Asia 2026 (24th edition)
+LOCATION:Gerrard India Bazaar\, Gerrard St E between Coxwell & Glenside\, T
+ oronto\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/td-festival-of-south
+ -asia-2026-24th-edition-2026-07-11/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:bcbf42ea90aa5d35adcc@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260711
+DTEND;VALUE=DATE:20260713
+SUMMARY:TD Salsa on St. Clair 2026
+LOCATION:St. Clair Ave W between Winona Dr & Christie St\, Toronto\, Toront
+ o
+DESCRIPTION:Toronto Latin Street Festival. Sat 11am-9:30pm\, Sun 11am-8:30p
+ m.
+URL:https://seminarschools.com/polymythseminars/events/td-salsa-on-st-clair
+ -2026-2026-07-11/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:009ab1274a528bfb5f85@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260711T180000Z
+SUMMARY:Caribana Junior King & Queen Showcase
+LOCATION:Scarborough Town Centre\, Toronto\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/caribana-junior-king
+ -queen-showcase-2026-07-11/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:4b61288dc35ef38a7de9@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20260712
+DTEND;VALUE=DATE:20260907
+SUMMARY:Twelfth Night (Dream in High Park)
+LOCATION:High Park Amphitheatre\, 1873 Bloor Street West\, Toronto\, Toront
+ o
+DESCRIPTION:Canadian Stage production run on selected performance dates. Se
+ e the official production page for individual showtimes.
+URL:https://seminarschools.com/polymythseminars/events/twelfth-night-dream-
+ in-high-park-2026-07-12/
+STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:97e6f160a5c0cea656d2@seminarschools.com
@@ -630,14 +1965,41 @@ URL:https://seminarschools.com/polymythseminars/events/cfc-njfp-writers-lab
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:6e9eaeddc05db57b00b7@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20260714
+DTEND;VALUE=DATE:20260902
+SUMMARY:Free Flicks
+LOCATION:Harbourfront Centre\, 235 Queens Quay West\, Toronto\, Toronto
+DESCRIPTION:Tuesday outdoor film series. Check each screening for time and 
+ status. The July 21 School of Rock screening was cancelled\; this does not
+  cancel the whole series.
+URL:https://seminarschools.com/polymythseminars/events/research-293f230f129
+ 2/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:dbb45255a1edd481a7ec@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20260715
+DTEND;VALUE=DATE:20260903
+SUMMARY:Dancing on the Square
+LOCATION:Harbourfront Centre\, 235 Queens Quay West\, Toronto\, Toronto
+DESCRIPTION:Wednesday dance series with instruction and social dancing. Ven
+ ues and cancellations are listed on each dated event page.
+URL:https://seminarschools.com/polymythseminars/events/research-c84ae443517
+ 3/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:b1b268c390983516c16a@seminarschools.com
-DTSTAMP:20260815T020000Z
-DTSTART:20260715T230000Z
-DTEND:20260903T010000Z
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20260715
+DTEND;VALUE=DATE:20260903
 SUMMARY:Dancing on the Square 2026
-LOCATION:Harbourfront Centre Public Square\, Toronto
-DESCRIPTION:A free Wednesday social-dance series combining instruction with
-  communal dancing\; all experience levels are welcomed.
+LOCATION:Harbourfront Centre\, 235 Queens Quay West\, Toronto\, Toronto
+DESCRIPTION:Wednesday dance series with instruction and social dancing. Ven
+ ues and cancellations are listed on each dated event page.
 URL:https://seminarschools.com/polymythseminars/events/harbourfront-dancing
  -on-square-2026/
 STATUS:CONFIRMED
@@ -651,40 +2013,6 @@ SUMMARY:Palestinian Football Exhibit
 LOCATION:Toronto\, Ontario\, Canada\, Toronto
 URL:https://seminarschools.com/polymythseminars/events/watch-findaprotest-p
  alestinian-football-exhibit-2026-07-18/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:fb6901af262e552fff4a@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260721
-DTEND;VALUE=DATE:20261019
-SUMMARY:BEES: A Story of Survival
-LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
-URL:https://seminarschools.com/polymythseminars/events/research-54ecc2f1065
- b/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:9617399f10a32a9a81d4@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260721
-DTEND;VALUE=DATE:20270201
-SUMMARY:Crawford Lake: Layers in Time
-LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
-URL:https://seminarschools.com/polymythseminars/events/research-a68fa5b7ffd
- 6/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:6e9eaeddc05db57b00b7@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260721
-DTEND;VALUE=DATE:20260902
-SUMMARY:Free Flicks
-LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
-DESCRIPTION:Schedule note: Tuesdays.
-URL:https://seminarschools.com/polymythseminars/events/research-293f230f129
- 2/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
@@ -721,17 +2049,6 @@ URL:https://seminarschools.com/polymythseminars/events/research-d3a558c2f44
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:6fec0db258572f384607@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260721
-DTEND;VALUE=DATE:20270101
-SUMMARY:Psychedelics: Art. Culture. Science.
-LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
-URL:https://seminarschools.com/polymythseminars/events/research-a9b4973d6e7
- 8/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:624d1f378798d36f53b4@seminarschools.com
 DTSTAMP:20260721T160000Z
 DTSTART;VALUE=DATE:20260721
@@ -740,17 +2057,6 @@ SUMMARY:Sara Cwynar: Baby Blue Benzo Beta
 LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
 URL:https://seminarschools.com/polymythseminars/events/research-f922432311a
  c/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:2e1006b4891b016abb84@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260721
-DTEND;VALUE=DATE:20260908
-SUMMARY:Shokkan: Material Encounters in Japanese Art
-LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
-URL:https://seminarschools.com/polymythseminars/events/research-75a23643882
- d/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
@@ -786,18 +2092,6 @@ URL:https://seminarschools.com/polymythseminars/events/b66a9c340055/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
-UID:dbb45255a1edd481a7ec@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260722
-DTEND;VALUE=DATE:20260903
-SUMMARY:Dancing on the Square
-LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
-DESCRIPTION:Schedule note: Wednesdays.
-URL:https://seminarschools.com/polymythseminars/events/research-c84ae443517
- 3/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:ec429cd38fd0eb483249@seminarschools.com
 DTSTAMP:20260721T160000Z
 DTSTART:20260722T220000Z
@@ -807,18 +2101,6 @@ LOCATION:Scarborough Civic Centre\, Toronto
 URL:https://seminarschools.com/polymythseminars/events/research-700f5cf46d8
  0/
 STATUS:CONFIRMED
-END:VEVENT
-BEGIN:VEVENT
-UID:2a733cf7217f55a8acfc@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260723
-DTEND;VALUE=DATE:20260828
-SUMMARY:Summer Music in the Garden
-LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
-DESCRIPTION:Schedule note: Multiple dates.
-URL:https://seminarschools.com/polymythseminars/events/research-5caa1ebb58e
- 2/
-STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:e715a14d00095a4bfe1b@seminarschools.com
@@ -864,13 +2146,30 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:b08780c448fb089d7870@seminarschools.com
-DTSTAMP:20260721T160000Z
+DTSTAMP:20261003T042124Z
 DTSTART:20260724T233000Z
 DTEND:20260725T033000Z
 SUMMARY:ROM After Dark: Island Fête
-LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
+LOCATION:Royal Ontario Museum\, 100 Queen’s Park\, Toronto\, Toronto
+DESCRIPTION:Ages 19 and over. This Island Fête edition celebrates Caribbea
+ n music\, dance\, fashion and food. Advance online tickets and government-
+ issued photo identification are required.
 URL:https://seminarschools.com/polymythseminars/events/research-6337ba55484
  3/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:c1d7de8bc96037093feb@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260725
+DTEND;VALUE=DATE:20260726
+SUMMARY:Massey College Alumni Association AGM & Summer BBQ
+LOCATION:Massey College\, 4 Devonshire Place\, Toronto\, Toronto
+DESCRIPTION:Alumni Association annual general meeting followed by a summer 
+ BBQ. An afternoon and evening of friendship\, conversation\, and community
+ .
+URL:https://seminarschools.com/polymythseminars/events/massey-alumni-agm-su
+ mmer-bbq-2026-07-25/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
@@ -906,15 +2205,39 @@ URL:https://seminarschools.com/polymythseminars/events/ocpa-calypso-showcas
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:b96d1eff40e923207882@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260730
+DTEND;VALUE=DATE:20260804
+SUMMARY:Toronto Caribbean Carnival 2026 (Caribana\, 59th year)
+LOCATION:Exhibition Place + Lakeshore Boulevard\, Toronto\, Toronto
+DESCRIPTION:North America's largest Caribbean carnival. 59th year. Grand Pa
+ rade Aug 1.
+URL:https://seminarschools.com/polymythseminars/events/275a3d6c2cb5/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:662ac29c3153369968cb@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART:20260730T210000Z
+SUMMARY:King & Queen Showcase (Caribana)
+LOCATION:Lamport Stadium\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/king-queen-showcase-
+ caribana-2026-07-30/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:d8d327eed138c0dc1686@seminarschools.com
-DTSTAMP:20260721T160000Z
+DTSTAMP:20261003T042124Z
 DTSTART;VALUE=DATE:20260731
 DTEND;VALUE=DATE:20260804
 SUMMARY:Island Soul
-LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
+LOCATION:Harbourfront Centre\, 235 Queens Quay West\, Toronto\, Toronto
+DESCRIPTION:Island Soul festival. Individual concerts\, workshops and scree
+ nings have their own times and on-site venues.
 URL:https://seminarschools.com/polymythseminars/events/research-ea615193ec5
  d/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:b23d203325b7f170f831@seminarschools.com
@@ -924,6 +2247,16 @@ DTEND;VALUE=DATE:20260803
 SUMMARY:VELD Music Festival 2026
 LOCATION:Downsview Park\, Toronto\, Toronto
 URL:https://seminarschools.com/polymythseminars/events/049ffd7fa6b9/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:bde718db96b5903ebc2b@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260731T230000Z
+SUMMARY:Caribana King & Queen Showcase
+LOCATION:Lamport Stadium\, 1155 King St W\, Toronto\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/caribana-king-queen-
+ showcase-2026-07-31/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
@@ -937,14 +2270,26 @@ URL:https://seminarschools.com/polymythseminars/events/osa-toronto-panorama
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:688a58821ce88f370360@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260801T120000Z
+SUMMARY:Caribana Grand Parade
+LOCATION:Exhibition Place to Lakeshore Boulevard\, Toronto\, Toronto
+DESCRIPTION:Grand Parade 8 AM to 8 PM along Lakeshore.
+URL:https://seminarschools.com/polymythseminars/events/119d86af47de/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:40ab731fb4c7dc499aa0@seminarschools.com
-DTSTAMP:20260721T160000Z
+DTSTAMP:20261003T042124Z
 DTSTART:20260801T200000Z
+DTEND:20260801T230000Z
 SUMMARY:Riddim Track Live by the Water
-LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
+LOCATION:Concert Stage\, Harbourfront Centre\, 235 Queens Quay West\, Toron
+ to\, Toronto
 URL:https://seminarschools.com/polymythseminars/events/research-77fb7e6be9d
  7/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:1f2d08ffc81ba1745b2f@seminarschools.com
@@ -958,33 +2303,59 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:ffc2681a14afd08824dd@seminarschools.com
-DTSTAMP:20260721T160000Z
+DTSTAMP:20261003T042124Z
 DTSTART:20260801T230000Z
+DTEND:20260802T010000Z
 SUMMARY:Blues & Reggae Night Concert
-LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
+LOCATION:The Fleck at Harbourfront Centre Theatre\, 231 Queens Quay West\, 
+ Toronto\, Toronto
 URL:https://seminarschools.com/polymythseminars/events/research-35382df2a22
  8/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:9f53f6f084d65d3b174e@seminarschools.com
-DTSTAMP:20260721T160000Z
+DTSTAMP:20261003T042124Z
 DTSTART:20260801T233000Z
+DTEND:20260802T010000Z
 SUMMARY:Hardcore Band featuring Steele
-LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
+LOCATION:Stage in the Park\, Harbourfront Centre\, 235 Queens Quay West\, T
+ oronto\, Toronto
 URL:https://seminarschools.com/polymythseminars/events/research-6cf5978fa17
  d/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:fdae9cbd1796f231977f@seminarschools.com
-DTSTAMP:20260721T160000Z
+DTSTAMP:20261003T042124Z
 DTSTART:20260802T000000Z
+DTEND:20260802T030000Z
 SUMMARY:The Clash! Band vs DJ
-LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
+LOCATION:Concert Stage\, Harbourfront Centre\, 235 Queens Quay West\, Toron
+ to\, Toronto
 URL:https://seminarschools.com/polymythseminars/events/research-802761a2e1f
  a/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:da2fce8f33d401b7f5be@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260802T150000Z
+SUMMARY:Caribana Pan Alive / Closing Day
+LOCATION:Neilson Park\, Scarborough\, Toronto\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/caribana-pan-alive-c
+ losing-day-2026-08-02/
 STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:0473c7616251c4586477@seminarschools.com
+DTSTAMP:20260720T040000Z
+DTSTART:20260802T150000Z
+SUMMARY:Pan in D' Park
+LOCATION:Neilson Park\, Scarborough\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/pan-in-d-park-2026-0
+ 8-02/
+STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:c88e24a5e04e103278a9@seminarschools.com
@@ -996,6 +2367,30 @@ LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
 URL:https://seminarschools.com/polymythseminars/events/research-f04d92240e7
  b/
 STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:4e3bf770bac48b29db0b@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20260805T230000Z
+SUMMARY:Colson Whitehead: Cool Machine
+LOCATION:Toronto Public Library Salon Series\, Toronto\, Toronto
+DESCRIPTION:Toronto Public Library Salon Series lists Colson Whitehead: Coo
+ l Machine as a literary and cultural conversation in the Salon Series.
+URL:https://seminarschools.com/polymythseminars/events/1c1cf2c43f4a/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:2aadc6d43bea4550b033@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260806
+DTEND;VALUE=DATE:20260817
+SUMMARY:SummerWorks Performance Festival 2026
+LOCATION:Multiple venues\, Toronto\, Toronto
+DESCRIPTION:SummerWorks presents 11 days of contemporary performance\, prod
+ uction\, workshops\, site-engaged\, and community-centred programming from
+  August 6 to 16\, 2026.
+URL:https://seminarschools.com/polymythseminars/events/4630f11e087b/
+STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:305871021e310d475ca2@seminarschools.com
@@ -1029,14 +2424,16 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:e8b65c7cae8b2ce346e2@seminarschools.com
-DTSTAMP:20260721T160000Z
+DTSTAMP:20261003T042124Z
 DTSTART;VALUE=DATE:20260807
 DTEND;VALUE=DATE:20260810
 SUMMARY:Habari Africa
-LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
+LOCATION:Harbourfront Centre\, 235 Queens Quay West\, Toronto\, Toronto
+DESCRIPTION:Batuki Music Society’s festival of African arts and culture\,
+  with concerts\, dance and workshops at individual times.
 URL:https://seminarschools.com/polymythseminars/events/research-cdc7c6ab6d7
  c/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:ec3630fabb1d22ce0173@seminarschools.com
@@ -1063,6 +2460,43 @@ URL:https://seminarschools.com/polymythseminars/events/rcm-summer-piano-fes
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:9acc753afa0c78a443d3@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260811
+DTEND;VALUE=DATE:20260812
+SUMMARY:Devising Immersive & Site Specific Performance
+LOCATION:SummerWorks Performance Festival\, Toronto\, Toronto
+DESCRIPTION:Official SummerWorks workshop page for Devising Immersive & Sit
+ e Specific Performance.
+URL:https://seminarschools.com/polymythseminars/events/229c166bbbe6/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:e10fd5db18a45d65b973@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260811
+DTEND;VALUE=DATE:20260817
+SUMMARY:Le Concierge
+LOCATION:SummerWorks Performance Festival\, Toronto\, Toronto
+DESCRIPTION:Official SummerWorks show page for Le Concierge\, a 2026 Summer
+ Works Performance Festival production.
+URL:https://seminarschools.com/polymythseminars/events/5efce8fea021/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:4576be2cc5ae3a88782a@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260811
+DTEND;VALUE=DATE:20260814
+SUMMARY:Transfers
+LOCATION:SummerWorks Performance Festival\, Toronto\, Toronto
+DESCRIPTION:Official SummerWorks show page for Transfers\, a 2026 SummerWor
+ ks production described as a curated audio experience of verbatim stories 
+ from TTC operators.
+URL:https://seminarschools.com/polymythseminars/events/f82d010848d9/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:ef3787f6d52f4d2dc654@seminarschools.com
 DTSTAMP:20260813T040000Z
 DTSTART:20260812T173600Z
@@ -1076,15 +2510,17 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:67db8eb3e2cdbc9ddc5d@seminarschools.com
-DTSTAMP:20260813T040000Z
-DTSTART:20260812T174700Z
+DTSTAMP:20261003T110658Z
+DTSTART:20260812T174600Z
 SUMMARY:Total solar eclipse
 LOCATION:Sky event\; visibility region in description\, Toronto
 DESCRIPTION:Totality crossed Greenland\, Iceland\, Spain\, Russia\, and a s
  mall part of Portugal\; Toronto experienced a partial eclipse. NASA gives 
  greatest eclipse at 17:47:06 TD (17:46 UT). Historical political\, ritual\
  , and mythic interpretations remain distinct from the physical eclipse and
-  its visibility.
+  its visibility. The listed time is NASA’s global greatest-eclipse predi
+ ction in UT\, rounded to the minute\; local visibility and observing times
+  depend on location.
 URL:https://seminarschools.com/polymythseminars/events/total-solar-eclipse-
  2026-08-12/
 STATUS:CONFIRMED
@@ -1116,6 +2552,18 @@ URL:https://seminarschools.com/polymythseminars/events/utoronto-eeb-ilia-fe
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:37348c8c084ca1513759@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260814
+DTEND;VALUE=DATE:20260817
+SUMMARY:AFROFEST 2026
+LOCATION:Woodbine Park\, 1695 Queen St E\, Toronto\, Toronto
+DESCRIPTION:Annual African music and cultural festival at Woodbine Park.
+URL:https://seminarschools.com/polymythseminars/events/afrofest-2026-2026-0
+ 8-14/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:4155631c4b1118c9e242@seminarschools.com
 DTSTAMP:20260814T000800Z
 DTSTART:20260814T230000Z
@@ -1127,6 +2575,19 @@ DESCRIPTION:Toronto screening followed by an in-person Q&A with director Ri
 URL:https://seminarschools.com/polymythseminars/events/hot-docs-nekai-walks
  -director-subject-q-and-a-2026-08-14/
 STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:72544741a7eb69df1dbf@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260815
+DTEND;VALUE=DATE:20260816
+SUMMARY:Bringing Us Together: Dance\, Description and Access
+LOCATION:SummerWorks Performance Festival\, Toronto\, Toronto
+DESCRIPTION:Official SummerWorks conversation page for Bringing Us Together
+ : Dance\, Description and Access\, a community-driven access and movement 
+ project.
+URL:https://seminarschools.com/polymythseminars/events/f08f93f61ec9/
+STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:b674d3f095f7f449ed44@seminarschools.com
@@ -1309,7 +2770,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:0d9f3d3b198cf358ef9a@seminarschools.com
-DTSTAMP:20260815T020000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20260816T200000Z
 DTEND:20260816T220000Z
 SUMMARY:ToQue Trad Québécois Jam — August
@@ -1627,13 +3088,15 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5f8d321e39d6045255c6@seminarschools.com
-DTSTAMP:20260815T020000Z
+DTSTAMP:20261003T042124Z
 DTSTART:20260819T230000Z
-DTEND:20260820T010000Z
+DTEND:20260820T020000Z
 SUMMARY:Dancing on the Square — Cajun dance with Tom and Myra
-LOCATION:Harbourfront Centre Public Square\, Toronto
-DESCRIPTION:Free all-levels instruction and social dancing: Cajun dance wit
- h Tom and Myra.
+LOCATION:Concert Stage\, Harbourfront Centre\, 235 Queens Quay West\, Toron
+ to\, Toronto
+DESCRIPTION:Venue changed to Concert Stage. The event listing runs 7–10 p
+ m\, with a dance class from 7–8 pm and live music from 8–9:45 pm. The 
+ class requires free registration.
 URL:https://seminarschools.com/polymythseminars/events/harbourfront-dancing
  -on-square-2026-08-19/
 STATUS:CONFIRMED
@@ -1714,7 +3177,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:763429c340ccea3d5709@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART;VALUE=DATE:20260821
 DTEND;VALUE=DATE:20261027
 SUMMARY:Toronto municipal election cycle 2026
@@ -1762,7 +3225,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5b73f2f5849cef9ed1eb@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART:20260821T180000Z
 SUMMARY:Toronto municipal election — nomination\, withdrawal\, and office
  -change deadline
@@ -1864,11 +3327,11 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:6951606c165938226373@seminarschools.com
-DTSTAMP:20260815T160000Z
+DTSTAMP:20261003T110658Z
 DTSTART:20260822T170000Z
 DTEND:20260823T030000Z
 SUMMARY:SankofaFest Day 2 — Block Party featuring Mýa
-LOCATION:Sankofa Square\, Toronto
+LOCATION:Sankofa Square\, 1 Dundas Street East\, Toronto\, Toronto
 DESCRIPTION:A public downtown Toronto block party within SankofaFest.
 URL:https://seminarschools.com/polymythseminars/events/sankofafest-block-pa
  rty-2026/
@@ -1950,7 +3413,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5993e35f8ab98fcd6943@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART;VALUE=DATE:20260824
 DTEND;VALUE=DATE:20260825
 SUMMARY:Toronto municipal election — candidate certification deadline
@@ -2024,7 +3487,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:895f49ac9ca081877326@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART:20260824T223000Z
 DTEND:20260825T003000Z
 SUMMARY:Toronto municipal election — Manage Your Campaign information ses
@@ -2115,26 +3578,30 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5cf9f2515eb253c374e4@seminarschools.com
-DTSTAMP:20260815T160000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20260826T223000Z
 DTEND:20260827T000000Z
 SUMMARY:Architecture on Bloor Reimagined
-LOCATION:Official tour meeting point\, Toronto
+LOCATION:Start at Lillian Massey Building\, 125 Queens Park\, Toronto\; fin
+ ish at Mirvish Village\, Bloor and Bathurst.\, Toronto
 DESCRIPTION:An official Heritage Toronto public tour interpreting bloor str
- eet architecture and adaptive change.
+ eet architecture and adaptive change. Advance registration on the event pa
+ ge\; $10.05 per person including the transaction fee.
 URL:https://seminarschools.com/polymythseminars/events/heritage-toronto-arc
  hitecture-bloor-aug26-2026/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:1c5fb0c05a313494e61c@seminarschools.com
-DTSTAMP:20260815T020000Z
+DTSTAMP:20261003T042124Z
 DTSTART:20260826T230000Z
-DTEND:20260827T010000Z
+DTEND:20260827T020000Z
 SUMMARY:Dancing on the Square — Lindy Hop with Gabrielle and Charlie
-LOCATION:Harbourfront Centre Public Square\, Toronto
-DESCRIPTION:Free all-levels instruction and social dancing: Lindy Hop with 
- Gabrielle and Charlie.
+LOCATION:Community Square\, Harbourfront Centre\, 235 Queens Quay West\, To
+ ronto\, Toronto
+DESCRIPTION:The event listing runs 7–10 pm\, with a dance class from 7–
+ 8 pm and live music from 8–9:45 pm. The class requires free registration
+ .
 URL:https://seminarschools.com/polymythseminars/events/harbourfront-dancing
  -on-square-2026-08-26/
 STATUS:CONFIRMED
@@ -2189,25 +3656,29 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:b420eadef8cec393aa63@seminarschools.com
-DTSTAMP:20260721T160000Z
+DTSTAMP:20261003T042124Z
 DTSTART;VALUE=DATE:20260828
 DTEND;VALUE=DATE:20260831
 SUMMARY:TAIWANfest
-LOCATION:Location unconfirmed · Lieu non confirmé\, Toronto
+LOCATION:Harbourfront Centre\, 235 Queens Quay West\, Toronto\, Toronto
+DESCRIPTION:TAIWANfest at Harbourfront Centre. Concerts\, workshops and an 
+ artist market take place on selected dates and times within the festival.
 URL:https://seminarschools.com/polymythseminars/events/research-a07bde95821
  1/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:74afb84d7730b7b48ff4@seminarschools.com
-DTSTAMP:20260813T040000Z
-DTSTART:20260828T041400Z
+DTSTAMP:20261003T110658Z
+DTSTART:20260828T041300Z
 SUMMARY:Partial lunar eclipse
 LOCATION:Sky event\; visibility region in description\, Toronto
 DESCRIPTION:Partial lunar eclipse visible from the Americas\, Europe\, and 
  Africa. NASA gives greatest eclipse at 04:14:04 TD (04:13 UT). Historical 
  political\, ritual\, and mythic interpretations remain distinct from the p
- hysical eclipse and its visibility.
+ hysical eclipse and its visibility. The listed time is NASA’s global gre
+ atest-eclipse prediction in UT\, rounded to the minute\; local visibility 
+ and observing times depend on location.
 URL:https://seminarschools.com/polymythseminars/events/partial-lunar-eclips
  e-2026-08-28/
 STATUS:CONFIRMED
@@ -2227,7 +3698,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4382910e1daded9c9653@seminarschools.com
-DTSTAMP:20260814T000800Z
+DTSTAMP:20260907T000000Z
 DTSTART:20260828T150000Z
 DTEND:20260828T160000Z
 SUMMARY:The Making of Shokkan — curator coffee and chat (morning session)
@@ -2241,7 +3712,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5d4677c6e8a80adea53e@seminarschools.com
-DTSTAMP:20260814T000800Z
+DTSTAMP:20260907T000000Z
 DTSTART:20260828T173000Z
 DTEND:20260828T183000Z
 SUMMARY:The Making of Shokkan — curator coffee and chat (afternoon sessio
@@ -2340,7 +3811,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:d6c12c25cb4b323eab75@seminarschools.com
-DTSTAMP:20260815T160000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20260830T150000Z
 DTEND:20260830T163000Z
 SUMMARY:Uptown Uncovered
@@ -2378,7 +3849,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:f8925e9ef32c1154c16c@seminarschools.com
-DTSTAMP:20260815T160000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20260830T190000Z
 DTEND:20260830T203000Z
 SUMMARY:Best Pictures of Toronto
@@ -2404,7 +3875,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:17c3c7743a7e7a074510@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART;VALUE=DATE:20260901
 DTEND;VALUE=DATE:20260902
 SUMMARY:Toronto municipal election — mail voting\, voters' list updates\,
@@ -2459,8 +3930,9 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:85064c9cf5e3fe45ba14@seminarschools.com
-DTSTAMP:20260815T160000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20260902T223000Z
+DTEND:20260903T000000Z
 SUMMARY:Hidden Histories at the University of Toronto
 LOCATION:Official tour meeting point\, Toronto
 DESCRIPTION:An official Heritage Toronto public tour interpreting universit
@@ -2471,17 +3943,19 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:08ae255d62a6ff5b60c4@seminarschools.com
-DTSTAMP:20260815T020000Z
+DTSTAMP:20261003T042124Z
 DTSTART:20260902T230000Z
-DTEND:20260903T010000Z
+DTEND:20260903T020000Z
 SUMMARY:Dancing on the Square — Scottish Country Dance with the Royal Sco
  ttish Country Dance Society
-LOCATION:Harbourfront Centre Public Square\, Toronto
-DESCRIPTION:Free all-levels instruction and social dancing: Scottish Countr
- y Dance with the Royal Scottish Country Dance Society.
+LOCATION:Community Square\, Harbourfront Centre\, 235 Queens Quay West\, To
+ ronto\, Toronto
+DESCRIPTION:Cancelled by the organizer because of inclement weather. The sc
+ heduled September 2 date\, venue and 7–10 pm event interval remain for r
+ eference.
 URL:https://seminarschools.com/polymythseminars/events/harbourfront-dancing
  -on-square-2026-09-02/
-STATUS:CONFIRMED
+STATUS:CANCELLED
 END:VEVENT
 BEGIN:VEVENT
 UID:342cfe28b445d070ed8a@seminarschools.com
@@ -2508,10 +3982,10 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5bc0819777b927244460@seminarschools.com
-DTSTAMP:20260814T000800Z
+DTSTAMP:20260907T000000Z
 DTSTART:20260903T230000Z
 SUMMARY:Ian Brown on Seventy — author discussion and signing
-LOCATION:Hot Docs Ted Rogers Cinema\, Toronto
+LOCATION:Hot Docs Ted Rogers Cinema\, Toronto\, Toronto
 DESCRIPTION:Live discussion with author Ian Brown followed by a book signin
  g.
 URL:https://seminarschools.com/polymythseminars/events/hot-docs-ian-brown-s
@@ -2590,7 +4064,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:9fdc6ae903d59cca4881@seminarschools.com
-DTSTAMP:20260815T160000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20260906T190000Z
 SUMMARY:Big Stories in Little India
 LOCATION:Official tour meeting point\, Toronto
@@ -2624,6 +4098,21 @@ DESCRIPTION:Term-length Fields Academy shared graduate course with registra
  tion through the host institute.
 URL:https://seminarschools.com/polymythseminars/events/fields-academy-compl
  ex-manifolds-fall-2026/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:047fed46dc7a166cc416@seminarschools.com
+DTSTAMP:20261002T000000Z
+DTSTART;VALUE=DATE:20260908
+DTEND;VALUE=DATE:20270607
+SUMMARY:Melissa Auf der Maur: My ‘90s Rock Photographs
+LOCATION:Art Gallery of Ontario\, 317 Dundas Street West\, Toronto\, Toront
+ o
+DESCRIPTION:Public access from September 8\, 2026\, through June 6\, 2027. 
+ Earlier access for members and annual passholders began before the public 
+ opening. Check the AGO for gallery hours.
+URL:https://seminarschools.com/polymythseminars/events/melissa-auf-der-maur
+ -my-90s-photographs-2026-09-01/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -2721,7 +4210,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:ed0886bb057012e3d7dc@seminarschools.com
-DTSTAMP:20260815T160000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20260909T223000Z
 SUMMARY:Queening Out
 LOCATION:Official tour meeting point\, Toronto
@@ -2758,6 +4247,21 @@ URL:https://seminarschools.com/polymythseminars/events/tpl-artists-responsi
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:e73499f19632643e3c47@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20260910
+DTEND;VALUE=DATE:20261019
+SUMMARY:Spring Awakening
+LOCATION:Baillie Theatre\, Young Centre for the Performing Arts\, Toronto\,
+  Toronto
+DESCRIPTION:The run has been extended through October 18\, 2026. Performanc
+ es take place on selected dates. See the production page for individual sh
+ owtimes.
+URL:https://seminarschools.com/polymythseminars/events/spring-awakening-202
+ 6-09-10/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:c7d4757d208036885a21@seminarschools.com
 DTSTAMP:20260815T160000Z
 DTSTART:20260910T210000Z
@@ -2780,6 +4284,19 @@ DESCRIPTION:Confirmed cello masterclass session in the Glenn Gould School's
   public-observation series.
 URL:https://seminarschools.com/polymythseminars/events/rcm-masterclass-stev
  en-isserlis-2026/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:1d90e027681b029997ea@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260910
+DTEND;VALUE=DATE:20260921
+SUMMARY:Toronto International Film Festival 2026 (TIFF\, 51st)
+LOCATION:TIFF Bell Lightbox\, 350 King St W + multiple venues\, Toronto\, T
+ oronto
+DESCRIPTION:51st edition of TIFF.
+URL:https://seminarschools.com/polymythseminars/events/toronto-internationa
+ l-film-festival-2026-tiff-51st-2026-09-10/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -2818,6 +4335,21 @@ DESCRIPTION:An Artists in the Library participatory arts program\; the offi
  cial featured page confirms the date and hands-on creative format.
 URL:https://seminarschools.com/polymythseminars/events/tpl-artists-botanica
  l-photography-sunprints-2026-09-12/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:a30d617450ff24159adb@seminarschools.com
+DTSTAMP:20261002T000000Z
+DTSTART;VALUE=DATE:20260912
+DTEND;VALUE=DATE:20260913
+SUMMARY:Brian Groombridge: New Models for Measurement
+LOCATION:Art Gallery of Ontario\, 317 Dundas Street West\, Toronto\, Toront
+ o
+DESCRIPTION:Exhibition opens 2026-09-12. The exact closing date is awaiting
+  confirmation. Consult the AGO for opening hours and current exhibition de
+ tails.
+URL:https://seminarschools.com/polymythseminars/events/brian-groombridge-fi
+ rst-ago-solo-exhibition-2026-09-12/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
@@ -3042,6 +4574,18 @@ URL:https://seminarschools.com/polymythseminars/events/tranzac-open-stage-2
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:0f7d2e17f9f033e4a465@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART:20260915T203000Z
+DTEND:20260915T220000Z
+SUMMARY:ROM Identification Clinic
+LOCATION:Lunch Room\, Level B1\, Royal Ontario Museum\, Toronto\, Toronto
+DESCRIPTION:Bring an object for ROM experts to identify\; free with RSVP.
+URL:https://seminarschools.com/polymythseminars/events/rom-identification-c
+ linic-2026-09-15/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:8c6ee28cd3b5a1565d15@seminarschools.com
 DTSTAMP:20260814T000800Z
 DTSTART:20260916T013000Z
@@ -3056,12 +4600,15 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:b3e8ff827e2639965ab4@seminarschools.com
-DTSTAMP:20260815T160000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20260916T223000Z
+DTEND:20260917T000000Z
 SUMMARY:Architecture on Bloor Reimagined
-LOCATION:Official tour meeting point\, Toronto
+LOCATION:Start at Lillian Massey Building\, 125 Queens Park\, Toronto\; fin
+ ish at Mirvish Village\, Bloor and Bathurst.\, Toronto
 DESCRIPTION:An official Heritage Toronto public tour interpreting bloor str
- eet architecture and adaptive change.
+ eet architecture and adaptive change. Advance registration on the event pa
+ ge\; $10.05 per person including the transaction fee.
 URL:https://seminarschools.com/polymythseminars/events/heritage-toronto-arc
  hitecture-bloor-sep16-2026/
 STATUS:CONFIRMED
@@ -3094,27 +4641,44 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:a71a15d83b709e2fa966@seminarschools.com
-DTSTAMP:20260814T000800Z
-DTSTART:20260917T233000Z
-DTEND:20261102T003000Z
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20260917
+DTEND;VALUE=DATE:20261102
 SUMMARY:TIFA Presents — Fall 2026 creator programme
 LOCATION:Multiple Toronto venues\, Toronto
-DESCRIPTION:Fall series of author conversations and performances\, includin
- g the flagship festival. Individual named-person occurrences are indexed s
- eparately.
+DESCRIPTION:Fall selection of author conversations and performances on indi
+ vidual dates. The date range covers the separately indexed September 17 th
+ rough November 1 events\; check each event for its time and status.
 URL:https://seminarschools.com/polymythseminars/events/tifa-fall-program-20
  26/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:ed4d6db045e3d1392bf1@seminarschools.com
-DTSTAMP:20260814T000800Z
+DTSTAMP:20261003T042124Z
 DTSTART:20260917T233000Z
+DTEND:20260918T014500Z
 SUMMARY:The Moth Mainstage
-LOCATION:Koerner Hall\, Toronto
+LOCATION:Koerner Hall\, 273 Bloor Street West\, Toronto\, Toronto
 DESCRIPTION:TIFA Presents occurrence featuring Featured storytellers.
 URL:https://seminarschools.com/polymythseminars/events/tifa-moth-mainstage-
  2026-09-17/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:f410d17184748f2f260f@seminarschools.com
+DTSTAMP:20261002T185749Z
+DTSTART;VALUE=DATE:20260918
+DTEND;VALUE=DATE:20261018
+SUMMARY:La Traviata (Verdi)
+LOCATION:Four Seasons Centre for the Performing Arts\, 145 Queen Street Wes
+ t\, Toronto
+DESCRIPTION:Canadian Opera Company 2026/27 season at the Four Seasons Centr
+ e\, Toronto. Production run: September 18 - October 17\, 2026. Performance
+ s occur on selected dates\; consult the production page for individual dat
+ es\, times and tickets.
+URL:https://seminarschools.com/polymythseminars/events/la-traviata-verdi-20
+ 26-09-18/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -3211,6 +4775,20 @@ URL:https://seminarschools.com/polymythseminars/events/daily-bread-red-bag-
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:bcd261e9cd9d8d691a68@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20260919
+DTEND;VALUE=DATE:20261012
+SUMMARY:Wine in the Wilderness (Childress)
+LOCATION:Berkeley Street Theatre\, 26 Berkeley Street\, Toronto\, Toronto
+DESCRIPTION:The run is extended through October 11\, 2026. Performances tak
+ e place on selected dates\; see the official production page for individua
+ l showtimes.
+URL:https://seminarschools.com/polymythseminars/events/wine-in-the-wilderne
+ ss-childress-2026-09-19/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:b7d601c5ac0e74df5cdd@seminarschools.com
 DTSTAMP:20260815T020000Z
 DTSTART:20260919T140000Z
@@ -3236,18 +4814,6 @@ URL:https://seminarschools.com/polymythseminars/events/tpl-weston-book-club
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
-UID:ce7fcaa56cf12c5324a1@seminarschools.com
-DTSTAMP:20260815T160000Z
-DTSTART:20260919T150000Z
-SUMMARY:Uptown Uncovered
-LOCATION:Official tour meeting point\, Toronto
-DESCRIPTION:An official Heritage Toronto public tour interpreting uptown to
- ronto built heritage.
-URL:https://seminarschools.com/polymythseminars/events/heritage-toronto-upt
- own-uncovered-sep19-2026/
-STATUS:CONFIRMED
-END:VEVENT
-BEGIN:VEVENT
 UID:09fac7ac39bfffbd506c@seminarschools.com
 DTSTAMP:20260608T120000Z
 DTSTART:20260919T150000Z
@@ -3255,6 +4821,18 @@ DTEND:20260920T230000Z
 SUMMARY:Roncesvalles Polish Festival 2026 (20th Anniversary)
 LOCATION:Roncesvalles Village\, Toronto\, Toronto
 URL:https://seminarschools.com/polymythseminars/events/5e82d05f1d39/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:ce7fcaa56cf12c5324a1@seminarschools.com
+DTSTAMP:20260907T000000Z
+DTSTART:20260919T150000Z
+SUMMARY:Uptown Uncovered
+LOCATION:Official tour meeting point\, Toronto
+DESCRIPTION:An official Heritage Toronto public tour interpreting uptown to
+ ronto built heritage.
+URL:https://seminarschools.com/polymythseminars/events/heritage-toronto-upt
+ own-uncovered-sep19-2026/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -3297,7 +4875,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:1becdedf0a2e537941cf@seminarschools.com
-DTSTAMP:20260815T160000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20260920T190000Z
 SUMMARY:Best Pictures of Toronto
 LOCATION:Official tour meeting point\, Toronto
@@ -3309,7 +4887,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:0593e3bd870875960bd0@seminarschools.com
-DTSTAMP:20260815T020000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20260920T200000Z
 DTEND:20260920T220000Z
 SUMMARY:ToQue Trad Québécois Jam — September
@@ -3322,7 +4900,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:51905221a8dee46d87e1@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART:20260921T035900Z
 SUMMARY:Toronto municipal election — voter information card mailing-list 
  cutoff
@@ -3387,10 +4965,11 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:14a8ebcdc87782b4826b@seminarschools.com
-DTSTAMP:20260814T000800Z
+DTSTAMP:20261003T042124Z
 DTSTART:20260922T233000Z
+DTEND:20260923T003000Z
 SUMMARY:An Evening with R.F. Kuang
-LOCATION:Winter Garden Theatre\, Toronto
+LOCATION:Winter Garden Theatre\, 189 Yonge Street\, Toronto\, Toronto
 DESCRIPTION:TIFA Presents occurrence featuring R.F. Kuang.
 URL:https://seminarschools.com/polymythseminars/events/tifa-rf-kuang-2026-0
  9-22/
@@ -3398,10 +4977,11 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:c12663d9b2613c2f28e5@seminarschools.com
-DTSTAMP:20260608T120000Z
+DTSTAMP:20261003T042124Z
 DTSTART:20260922T233000Z
+DTEND:20260923T003000Z
 SUMMARY:TIFA Presents: An Evening with R.F. Kuang
-LOCATION:Winter Garden Theatre\, Toronto\, Toronto
+LOCATION:Winter Garden Theatre\, 189 Yonge Street\, Toronto\, Toronto
 URL:https://seminarschools.com/polymythseminars/events/b55174632dbf/
 STATUS:CONFIRMED
 END:VEVENT
@@ -3416,6 +4996,19 @@ DESCRIPTION:September equinox in Toronto. Seasonal turning points structure
  dition's account remains separate.
 URL:https://seminarschools.com/polymythseminars/events/september-equinox-20
  26/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:16e96647b614c628d243@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20260923
+DTEND;VALUE=DATE:20261026
+SUMMARY:Hell's Kitchen
+LOCATION:CAA Ed Mirvish Theatre\, 244 Victoria Street\, Toronto\, Toronto
+DESCRIPTION:Mirvish production run. Performances take place on selected dat
+ es. See the official show page for individual showtimes.
+URL:https://seminarschools.com/polymythseminars/events/hell-s-kitchen-2026-
+ 09-23/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -3514,7 +5107,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:2b5850986c7e179f916d@seminarschools.com
-DTSTAMP:20260815T160000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20260923T223000Z
 DTEND:20260924T000000Z
 SUMMARY:Plaque City
@@ -3539,6 +5132,18 @@ URL:https://seminarschools.com/polymythseminars/events/practical-philosophy
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:70fe59dedc5de6ee4e10@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260924
+DTEND;VALUE=DATE:20260925
+SUMMARY:AGO Art Bash
+LOCATION:Art Gallery of Ontario\, Toronto
+DESCRIPTION:8 p.m.–1 a.m. fundraiser.
+URL:https://seminarschools.com/polymythseminars/events/ago-art-bash-2026-09
+ -24/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:4af28a9a980e6b0fa800@seminarschools.com
 DTSTAMP:20260815T033000Z
 DTSTART;VALUE=DATE:20260924
@@ -3552,6 +5157,18 @@ DESCRIPTION:Monthly public board meetings normally open at 9 a.m.\, move in
  ute.
 URL:https://seminarschools.com/polymythseminars/events/toronto-police-servi
  ce-board-fall-2026/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:8d8c1cf630d26182fe20@seminarschools.com
+DTSTAMP:20261002T000000Z
+DTSTART;VALUE=DATE:20260924
+DTEND;VALUE=DATE:20260928
+SUMMARY:Yuja Wang Plays Prokofiev
+LOCATION:Roy Thomson Hall\, 60 Simcoe Street\, Toronto\, Toronto
+DESCRIPTION:Toronto Symphony Orchestra 2026/27.
+URL:https://seminarschools.com/polymythseminars/events/yuja-wang-plays-prok
+ ofiev-2026-09-24/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -3585,7 +5202,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:0db49c25c0c5dca03c96@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART:20260924T203000Z
 SUMMARY:Toronto municipal election — vote-by-mail request deadline
 LOCATION:Toronto / online\, Toronto
@@ -3596,7 +5213,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:62628ab7e11c5b82ec98@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART;VALUE=DATE:20260925
 DTEND;VALUE=DATE:20260926
 SUMMARY:Toronto municipal election — final spending and self-contribution
@@ -3634,6 +5251,20 @@ URL:https://seminarschools.com/polymythseminars/events/daily-bread-red-bag-
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:099c37dd73e68e90ce5a@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART;VALUE=DATE:20260926
+DTEND;VALUE=DATE:20261012
+SUMMARY:Soulpepper Fringe Encore Series
+LOCATION:Young Centre for the Performing Arts\, Toronto
+DESCRIPTION:This announced September 26 to October 11\, 2026 run could not 
+ be reconfirmed in the current official programme. Check with the organizer
+  before planning attendance.
+URL:https://seminarschools.com/polymythseminars/events/soulpepper-fringe-en
+ core-series-2026-09-26/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:69da1494c0f85acdd11e@seminarschools.com
 DTSTAMP:20260815T160000Z
 DTSTART:20260926T130000Z
@@ -3647,7 +5278,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:d21a53e9752ab03b59ac@seminarschools.com
-DTSTAMP:20260815T160000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20260926T150000Z
 SUMMARY:The Next Stop is ART
 LOCATION:Official tour meeting point\, Toronto
@@ -3695,7 +5326,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:e48c78e1f199c00b65ed@seminarschools.com
-DTSTAMP:20260815T160000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20260927T150000Z
 DTEND:20260927T163000Z
 SUMMARY:Tales of the Dead — St. James Cemetery
@@ -3747,7 +5378,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:75def8bfe06f390bdf97@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART;VALUE=DATE:20260928
 DTEND;VALUE=DATE:20260929
 SUMMARY:Toronto municipal election — voter information cards begin mailin
@@ -3810,6 +5441,20 @@ URL:https://seminarschools.com/polymythseminars/events/toronto-public-libra
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:c7c979869ad29a87fd05@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20260929
+DTEND;VALUE=DATE:20261102
+SUMMARY:The Karate Kid – The Musical
+LOCATION:Princess of Wales Theatre\, 300 King Street West\, Toronto\, Toron
+ to
+DESCRIPTION:Mirvish production run. Performances take place on selected dat
+ es. See the official show page for individual showtimes.
+URL:https://seminarschools.com/polymythseminars/events/the-karate-kid-the-m
+ usical-2026-09-29/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:9027f2e8d4476041a511@seminarschools.com
 DTSTAMP:20260815T020000Z
 DTSTART:20260929T230000Z
@@ -3824,10 +5469,12 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:439c49fd2980a0f7080f@seminarschools.com
-DTSTAMP:20260814T000800Z
+DTSTAMP:20261003T042124Z
 DTSTART:20260929T233000Z
+DTEND:20260930T003000Z
 SUMMARY:B.K. Borison & Danielle McKechnie
-LOCATION:Hot Docs Ted Rogers Cinema\, Toronto
+LOCATION:Hot Docs Ted Rogers Cinema\, 506 Bloor Street West\, Toronto\, Tor
+ onto
 DESCRIPTION:TIFA Presents occurrence featuring B.K. Borison\, Danielle McKe
  chnie.
 URL:https://seminarschools.com/polymythseminars/events/tifa-bk-borison-dani
@@ -3846,6 +5493,20 @@ DESCRIPTION:Tarragon Theatre production written/created by Ho Ka Kei (Jeff
  rrences.
 URL:https://seminarschools.com/polymythseminars/events/tarragon-prophetess-
  2026-27/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:93ab4ce4e89f51895ae3@seminarschools.com
+DTSTAMP:20261003T110658Z
+DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20270121
+SUMMARY:RCM Adult Community Choir — Fall 2026
+LOCATION:Oscar Peterson School of Music\, Toronto
+DESCRIPTION:Wednesday Community Choir\, 7:30–9 pm\, across 14 sessions fr
+ om September 30\, 2026 through January 20\, 2027. The course is listed as 
+ sold out. This term range does not imply continuous attendance.
+URL:https://seminarschools.com/polymythseminars/events/rcm-adult-community-
+ choir-fall-2026/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -3915,21 +5576,20 @@ URL:https://seminarschools.com/polymythseminars/events/ago-life-drawing-fal
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
-UID:93ab4ce4e89f51895ae3@seminarschools.com
-DTSTAMP:20260815T160000Z
-DTSTART:20260930T233000Z
-DTEND:20270121T020000Z
-SUMMARY:RCM Adult Community Choir — Fall 2026
-LOCATION:Oscar Peterson School of Music\, Toronto
-DESCRIPTION:Fourteen-session adult community choir offered as a public grou
- p course.
-URL:https://seminarschools.com/polymythseminars/events/rcm-adult-community-
- choir-fall-2026/
+UID:b3327d381d40f3931194@seminarschools.com
+DTSTAMP:20261002T000000Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261004
+SUMMARY:Petrushka & Passions of Spain
+LOCATION:Roy Thomson Hall\, 60 Simcoe Street\, Toronto\, Toronto
+DESCRIPTION:TSO.
+URL:https://seminarschools.com/polymythseminars/events/petrushka-passions-o
+ f-spain-2026-10-01/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:76d53ed14dc1ffa3a3d3@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART;VALUE=DATE:20261001
 DTEND;VALUE=DATE:20261002
 SUMMARY:Toronto municipal election — election-sign period opens
@@ -4109,16 +5769,20 @@ URL:https://seminarschools.com/polymythseminars/events/munk-symposium-young
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
-UID:4c994796dfe4c6606fb2@seminarschools.com
-DTSTAMP:20260720T040000Z
+UID:a145b60c8bbb824afee6@seminarschools.com
+DTSTAMP:20261002T185749Z
 DTSTART;VALUE=DATE:20261003
-DTEND;VALUE=DATE:20261005
-SUMMARY:Nuit Blanche Toronto 2026 (20th anniversary)
-LOCATION:Citywide Toronto\, Toronto
-DESCRIPTION:Tomorrow's Memories.
-URL:https://seminarschools.com/polymythseminars/events/nuit-blanche-toronto
- -2026-20th-anniversary-2026-10-03/
-STATUS:TENTATIVE
+DTEND;VALUE=DATE:20261019
+SUMMARY:Così fan tutte (Mozart)
+LOCATION:Four Seasons Centre for the Performing Arts\, 145 Queen Street Wes
+ t\, Toronto
+DESCRIPTION:Canadian Opera Company 2026/27 season at the Four Seasons Centr
+ e\, Toronto. Production run: October 3 - 18\, 2026. Performances occur on 
+ selected dates\; consult the production page for individual dates\, times 
+ and tickets.
+URL:https://seminarschools.com/polymythseminars/events/cos-fan-tutte-mozart
+ -2026-10-03/
+STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:e15b24e3ca998a9724f7@seminarschools.com
@@ -4161,6 +5825,32 @@ URL:https://seminarschools.com/polymythseminars/events/heritage-toronto-che
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:4c994796dfe4c6606fb2@seminarschools.com
+DTSTAMP:20261003T195436Z
+DTSTART:20261003T230000Z
+DTEND:20261004T110000Z
+SUMMARY:Nuit Blanche Toronto 2026 (20th anniversary)
+LOCATION:Citywide Toronto\, Toronto
+DESCRIPTION:Tomorrow's Memories.
+URL:https://seminarschools.com/polymythseminars/events/nuit-blanche-toronto
+ -2026-20th-anniversary-2026-10-03/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:0c33d8dacf1e2628c671@seminarschools.com
+DTSTAMP:20261003T195436Z
+DTSTART:20261003T230000Z
+DTEND:20261004T110000Z
+SUMMARY:Nuit Blanche Toronto 2026 (20th anniversary\, 'Tomorrow's Memories'
+ )
+LOCATION:Multiple sites citywide\, including Canada Malting Silos waterfron
+ t and Humber Polytechnic Lakeshore\, Toronto
+DESCRIPTION:20th-anniversary edition. Theme: Tomorrow's Memories. 7 PM Oct 
+ 3 through 7 AM Oct 4.
+URL:https://seminarschools.com/polymythseminars/events/3018f2437e1f/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:387da6bb285fc4630755@seminarschools.com
 DTSTAMP:20260815T020000Z
 DTSTART:20261004T160000Z
@@ -4188,12 +5878,14 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:55b95e0e2fb08dbf71f0@seminarschools.com
-DTSTAMP:20260815T033000Z
-DTSTART:20261006T140000Z
-DTEND:20261011T230000Z
+DTSTAMP:20261002T185749Z
+DTSTART;VALUE=DATE:20261006
+DTEND;VALUE=DATE:20261012
 SUMMARY:Toronto municipal election — advance voting period
 LOCATION:Advance voting places across Toronto\, Toronto
-DESCRIPTION:Toronto municipal election — advance voting period
+DESCRIPTION:Advance voting runs October 6–11\, 2026\, from 10 a.m. to 7 p
+ .m. each day. The date range covers separate daily sessions\; voting is no
+ t open overnight.
 URL:https://seminarschools.com/polymythseminars/events/toronto-election-adv
  ance-voting-2026/
 STATUS:CONFIRMED
@@ -4307,6 +5999,18 @@ URL:https://seminarschools.com/polymythseminars/events/practical-philosophy
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:078b60c192f0700c8b11@seminarschools.com
+DTSTAMP:20261002T000000Z
+DTSTART;VALUE=DATE:20261008
+DTEND;VALUE=DATE:20261011
+SUMMARY:Beethoven's Fifth (Angela Hewitt)
+LOCATION:Roy Thomson Hall\, 60 Simcoe Street\, Toronto\, Toronto
+DESCRIPTION:TSO.
+URL:https://seminarschools.com/polymythseminars/events/beethoven-s-fifth-an
+ gela-hewitt-2026-10-08/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:3ac4d72815148aa63f1a@seminarschools.com
 DTSTAMP:20260814T000800Z
 DTSTART:20261008T143000Z
@@ -4372,24 +6076,6 @@ URL:https://seminarschools.com/polymythseminars/events/draconids-2026/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
-UID:c54bced1a2971d9ebd4c@seminarschools.com
-DTSTAMP:20260720T040000Z
-DTSTART;VALUE=DATE:20261008
-DTEND;VALUE=DATE:20261009
-SUMMARY:YoungArts National Arts Competition
-LOCATION:Not eligible for most Toronto students\, US citizens\, residents\,
-  or those able to receive US taxable income only. Submission deadline proj
- ected from the October window. Writing categories\, ages 15 to 18. Thirty-
- five dollar fee with waivers.\, Toronto
-DESCRIPTION:Not eligible for most Toronto students\, US citizens\, resident
- s\, or those able to receive US taxable income only. Submission deadline p
- rojected from the October window. Writing categories\, ages 15 to 18. Thir
- ty-five dollar fee with waivers.
-URL:https://seminarschools.com/polymythseminars/events/youngarts-national-a
- rts-competition-2026/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:82eea597c870b07fa1e1@seminarschools.com
 DTSTAMP:20260815T020000Z
 DTSTART;VALUE=DATE:20261009
@@ -4418,12 +6104,14 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:f29a983f708bbf158f31@seminarschools.com
-DTSTAMP:20260815T033000Z
-DTSTART:20261010T140000Z
-DTEND:20261011T230000Z
+DTSTAMP:20261002T185749Z
+DTSTART;VALUE=DATE:20261010
+DTEND;VALUE=DATE:20261012
 SUMMARY:Toronto municipal election — Kids Vote Weekend
 LOCATION:All Toronto advance voting places\, Toronto
-DESCRIPTION:Toronto municipal election — Kids Vote Weekend
+DESCRIPTION:Kids Vote Weekend runs October 10–11\, 2026\, from 10 a.m. to
+  7 p.m. each day. The date range covers separate daily sessions\; voting i
+ s not open overnight.
 URL:https://seminarschools.com/polymythseminars/events/toronto-election-kid
  s-vote-weekend-2026/
 STATUS:CONFIRMED
@@ -4463,6 +6151,21 @@ DESCRIPTION:Performance of Prophetess followed by moderated post-show Tarra
  ames remain unannounced.
 URL:https://seminarschools.com/polymythseminars/events/tarragon-prophetess-
  2026-27-2026-10-11-1400-tarragon-talk/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:33a2622847b04b324a70@seminarschools.com
+DTSTAMP:20261002T000000Z
+DTSTART;VALUE=DATE:20261013
+DTEND;VALUE=DATE:20270301
+SUMMARY:Sunday Best: The Power & The Glory of Black Style
+LOCATION:Art Gallery of Ontario\, 317 Dundas Street West\, Toronto\, Toront
+ o
+DESCRIPTION:Public access from October 13\, 2026\, through February 28\, 20
+ 27. Members have earlier access beginning October 7. Check the AGO for adm
+ ission details and gallery hours.
+URL:https://seminarschools.com/polymythseminars/events/sunday-best-an-exhib
+ ition-of-black-style-and-self--2026-10-17/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -4508,7 +6211,7 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:2f7aaf04f0893a0b5f08@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART:20261014T160000Z
 SUMMARY:Toronto municipal election — completed mail-in voting packages du
  e
@@ -4558,6 +6261,19 @@ URL:https://seminarschools.com/polymythseminars/events/fields-medal-student
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:cf8cb5e55f440eb3c765@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20261015
+DTEND;VALUE=DATE:20261018
+SUMMARY:Ron James: The View From Here
+LOCATION:CAA Theatre\, 651 Yonge Street\, Toronto\, Toronto
+DESCRIPTION:Mirvish production run. Performances take place on selected dat
+ es. See the official show page for individual showtimes.
+URL:https://seminarschools.com/polymythseminars/events/ron-james-the-view-f
+ rom-here-2026-10-15/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:6580c69b7e494f4f76dc@seminarschools.com
 DTSTAMP:20260814T000800Z
 DTSTART:20261015T180000Z
@@ -4572,10 +6288,12 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:b91db7a712af6acfe539@seminarschools.com
-DTSTAMP:20260814T000800Z
+DTSTAMP:20261003T042124Z
 DTSTART:20261015T233000Z
+DTEND:20261016T003000Z
 SUMMARY:Bonnie Garmus
-LOCATION:Hot Docs Ted Rogers Cinema\, Toronto
+LOCATION:Hot Docs Ted Rogers Cinema\, 506 Bloor Street West\, Toronto\, Tor
+ onto
 DESCRIPTION:TIFA Presents occurrence featuring Bonnie Garmus.
 URL:https://seminarschools.com/polymythseminars/events/tifa-bonnie-garmus-2
  026-10-15/
@@ -4583,16 +6301,18 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:bdc7b9081245818ba7b8@seminarschools.com
-DTSTAMP:20260814T000800Z
-DTSTART:20261016T130000Z
-DTEND:20261017T220000Z
+DTSTAMP:20260907T000000Z
+DTSTART;VALUE=DATE:20261016
+DTEND;VALUE=DATE:20261018
 SUMMARY:University of Toronto Philosophy Graduate Conference 2026
-LOCATION:Jackman Humanities Building\, Toronto
+LOCATION:Department of Philosophy\, University of Toronto\, 170 St George S
+ t\, Toronto M5R 2M8\, Toronto
 DESCRIPTION:Graduate philosophy conference featuring historical and contemp
- orary work and keynote speakers Don Garrett and Alva Noë.
+ orary work and keynote speakers Don Garrett and Alva Noë. No registration
+  required. The organizer has not published session times.
 URL:https://seminarschools.com/polymythseminars/events/university-of-toront
  o-philosophy-graduate-conferen-2026-10-16/
-STATUS:CONFIRMED
+STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:b0a048e4e5f8921ea6a9@seminarschools.com
@@ -4622,6 +6342,34 @@ URL:https://seminarschools.com/polymythseminars/events/daily-bread-tcs-char
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:6f9e5d5d5f91f16b143d@seminarschools.com
+DTSTAMP:20261002T000000Z
+DTSTART;VALUE=DATE:20261017
+DTEND;VALUE=DATE:20261018
+SUMMARY:In Plain Sight: Highlights from the AGO’s Collection of Historic 
+ Picture Frames
+LOCATION:Art Gallery of Ontario\, 317 Dundas Street West\, Toronto\, Toront
+ o
+DESCRIPTION:Exhibition opens 2026-10-17. The exact closing date is awaiting
+  confirmation. Consult the AGO for opening hours and current exhibition de
+ tails.
+URL:https://seminarschools.com/polymythseminars/events/in-plain-sight-highl
+ ights-from-the-ago-s-collectio-2026-10-17/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:0387d3eaa2d8c2f0bf8c@seminarschools.com
+DTSTAMP:20261002T000000Z
+DTSTART;VALUE=DATE:20261017
+DTEND;VALUE=DATE:20261019
+SUMMARY:The Nightmare Before Christmas in Concert
+LOCATION:Roy Thomson Hall\, 60 Simcoe Street\, Toronto\, Toronto
+DESCRIPTION:TSO film-in-concert.
+URL:https://seminarschools.com/polymythseminars/events/the-nightmare-before
+ -christmas-in-concert-2026-10-17/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:dacebb1a63754030b046@seminarschools.com
 DTSTAMP:20260815T020000Z
 DTSTART:20261017T140000Z
@@ -4636,8 +6384,9 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:b2bf81cfe1024e74e342@seminarschools.com
-DTSTAMP:20260815T160000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20261017T150000Z
+DTEND:20261017T163000Z
 SUMMARY:Plaque City
 LOCATION:Official tour meeting point\, Toronto
 DESCRIPTION:An official Heritage Toronto public tour interpreting public pl
@@ -4686,7 +6435,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:06d81ecb7fc5274fe674@seminarschools.com
-DTSTAMP:20260815T160000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20261018T190000Z
 SUMMARY:The Next Stop is ART
 LOCATION:Official tour meeting point\, Toronto
@@ -4774,10 +6523,12 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:98bd5925576405cdc725@seminarschools.com
-DTSTAMP:20260814T000800Z
+DTSTAMP:20261003T042124Z
 DTSTART:20261020T233000Z
+DTEND:20261021T003000Z
 SUMMARY:Emily St. John Mandel in conversation with Mattea Roach
-LOCATION:Hot Docs Ted Rogers Cinema\, Toronto
+LOCATION:Hot Docs Ted Rogers Cinema\, 506 Bloor Street West\, Toronto\, Tor
+ onto
 DESCRIPTION:TIFA Presents occurrence featuring Emily St. John Mandel\, Matt
  ea Roach.
 URL:https://seminarschools.com/polymythseminars/events/tifa-emily-st-john-m
@@ -4906,6 +6657,21 @@ URL:https://seminarschools.com/polymythseminars/events/orionids-2026/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:45686163f616db3bdf34@seminarschools.com
+DTSTAMP:20261002T185749Z
+DTSTART;VALUE=DATE:20261022
+DTEND;VALUE=DATE:20261023
+SUMMARY:COC Centre Stage: Ensemble Studio Competition & Gala
+LOCATION:Four Seasons Centre for the Performing Arts\, 145 Queen Street Wes
+ t\, Toronto
+DESCRIPTION:Canadian Opera Company 2026/27 season at the Four Seasons Centr
+ e\, Toronto. Gala date: October 22\, 2026. Consult the event page for tick
+ eting and performance time.
+URL:https://seminarschools.com/polymythseminars/events/coc-centre-stage-ens
+ emble-studio-competition-gala-2026-10-22/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:d4b1f3259f6ae9f29577@seminarschools.com
 DTSTAMP:20260815T020000Z
 DTSTART:20261022T180000Z
@@ -4945,7 +6711,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:eea1d0ad54f346c6742a@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART;VALUE=DATE:20261023
 DTEND;VALUE=DATE:20261024
 SUMMARY:Toronto municipal election — third-party advertiser registration 
@@ -4972,9 +6738,24 @@ URL:https://seminarschools.com/polymythseminars/events/utoronto-climate-hea
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:3976e5cddc1a8fbc6c9e@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20261024
+DTEND;VALUE=DATE:20270308
+SUMMARY:Saks Afridi: SpaceMosque
+LOCATION:Temporary Exhibitions Gallery\, Aga Khan Museum\, Toronto\, Toront
+ o
+DESCRIPTION:Exhibition run. Gallery access follows the museum’s opening h
+ ours\, with closures and special hours listed on its website.
+URL:https://seminarschools.com/polymythseminars/events/saks-afridi-spacemos
+ que-2026-10-24/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:5daccadfd794a3fca369@seminarschools.com
-DTSTAMP:20260815T160000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20261024T150000Z
+DTEND:20261024T163000Z
 SUMMARY:Tales of the Dead — St. James Cemetery
 LOCATION:Official tour meeting point\, Toronto
 DESCRIPTION:An official Heritage Toronto public tour interpreting st. james
@@ -4985,8 +6766,9 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4256577c7e30019c77af@seminarschools.com
-DTSTAMP:20260815T160000Z
+DTSTAMP:20260907T000000Z
 DTSTART:20261025T150000Z
+DTEND:20261025T163000Z
 SUMMARY:Queening Out
 LOCATION:Official tour meeting point\, Toronto
 DESCRIPTION:An official Heritage Toronto public tour interpreting 2slgbtq+ 
@@ -5036,7 +6818,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:7986c5e1d3229921466c@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART:20261026T140000Z
 DTEND:20261027T000000Z
 SUMMARY:Toronto municipal election day 2026
@@ -5061,10 +6843,11 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:ca684e6c66eb580f4058@seminarschools.com
-DTSTAMP:20260814T000800Z
+DTSTAMP:20261003T042124Z
 DTSTART:20261026T233000Z
+DTEND:20261027T003000Z
 SUMMARY:Ann Cleeves
-LOCATION:Isabel Bader Theatre\, Toronto
+LOCATION:Isabel Bader Theatre\, 93 Charles Street West\, Toronto\, Toronto
 DESCRIPTION:TIFA Presents occurrence featuring Ann Cleeves.
 URL:https://seminarschools.com/polymythseminars/events/tifa-ann-cleeves-202
  6-10-26/
@@ -5126,13 +6909,41 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:a7294da4f00674077ab2@seminarschools.com
-DTSTAMP:20260814T000800Z
+DTSTAMP:20261003T042124Z
 DTSTART:20261027T233000Z
-SUMMARY:PEN Canada Graeme Gibson Talk with Evan Gershkovich
-LOCATION:Winter Garden Theatre\, Toronto
+DTEND:20261028T003000Z
+SUMMARY:TIFA Presents Notes on the New Global Order — PEN Canada Graeme G
+ ibson Talk
+LOCATION:Winter Garden Theatre\, 189 Yonge Street\, Toronto\, Toronto
 DESCRIPTION:TIFA Presents occurrence featuring Evan Gershkovich.
 URL:https://seminarschools.com/polymythseminars/events/tifa-evan-gershkovic
  h-pen-graeme-gibson-talk-2026-10-27/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:e7281bb31dadf79e4da0@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20261028
+DTEND;VALUE=DATE:20261102
+SUMMARY:Toronto International Festival of Authors (TIFA) 2026
+LOCATION:Victoria University and Winter Garden Theatre\, Toronto\, Toronto
+DESCRIPTION:Festival programme on selected dates from October 28 through No
+ vember 1. Main programming is at Victoria University\, with selected eveni
+ ng events at Winter Garden Theatre. See individual events for times.
+URL:https://seminarschools.com/polymythseminars/events/0cc0dee6936c/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:7dc6ebadb6ffee3350be@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20261028
+DTEND;VALUE=DATE:20261102
+SUMMARY:Toronto International Festival of Authors 2026 (TIFA)
+LOCATION:Victoria University and Winter Garden Theatre\, Toronto\, Toronto
+DESCRIPTION:Festival programme on selected dates from October 28 through No
+ vember 1. Main programming is at Victoria University\, with selected eveni
+ ng events at Winter Garden Theatre. See individual events for times.
+URL:https://seminarschools.com/polymythseminars/events/tifa-2026-festival/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -5149,27 +6960,6 @@ URL:https://seminarschools.com/polymythseminars/events/tpl-story-planet-com
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
-UID:7dc6ebadb6ffee3350be@seminarschools.com
-DTSTAMP:20260814T000800Z
-DTSTART:20261028T210000Z
-DTEND:20261102T040000Z
-SUMMARY:Toronto International Festival of Authors 2026 (TIFA)
-LOCATION:Victoria University at the University of Toronto\, Toronto
-DESCRIPTION:The 2026 flagship festival at Victoria University\, with indivi
- dual creator-present events stored separately.
-URL:https://seminarschools.com/polymythseminars/events/tifa-2026-festival/
-STATUS:CONFIRMED
-END:VEVENT
-BEGIN:VEVENT
-UID:e7281bb31dadf79e4da0@seminarschools.com
-DTSTAMP:20260608T120000Z
-DTSTART:20261028T210000Z
-SUMMARY:Toronto International Festival of Authors (TIFA) 2026
-LOCATION:Victoria University North Quad and city venues\, Toronto\, Toronto
-URL:https://seminarschools.com/polymythseminars/events/0cc0dee6936c/
-STATUS:CONFIRMED
-END:VEVENT
-BEGIN:VEVENT
 UID:514b3b662fee41ad8f42@seminarschools.com
 DTSTAMP:20260815T020000Z
 DTSTART:20261028T223000Z
@@ -5183,18 +6973,6 @@ URL:https://seminarschools.com/polymythseminars/events/tpl-east-end-writers
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
-UID:32b8b4f15895331f0c93@seminarschools.com
-DTSTAMP:20260815T160000Z
-DTSTART:20261028T223000Z
-SUMMARY:Hidden Histories at the University of Toronto
-LOCATION:Official tour meeting point\, Toronto
-DESCRIPTION:An official Heritage Toronto public tour interpreting universit
- y of toronto campus and social history.
-URL:https://seminarschools.com/polymythseminars/events/heritage-toronto-hid
- den-histories-uoft-oct28-2026/
-STATUS:CONFIRMED
-END:VEVENT
-BEGIN:VEVENT
 UID:5709b5946cd0f01ae41b@seminarschools.com
 DTSTAMP:20260815T020000Z
 DTSTART:20261028T223000Z
@@ -5205,6 +6983,31 @@ DESCRIPTION:A participatory book discussion in which readers interpret and
  discuss a selected work together.
 URL:https://seminarschools.com/polymythseminars/events/tpl-parkdale-2slgbtq
  -book-club-2026-10-28/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:32b8b4f15895331f0c93@seminarschools.com
+DTSTAMP:20260907T000000Z
+DTSTART:20261028T223000Z
+SUMMARY:Hidden Histories at the University of Toronto
+LOCATION:Official tour meeting point\, Toronto
+DESCRIPTION:An official Heritage Toronto public tour interpreting universit
+ y of toronto campus and social history.
+URL:https://seminarschools.com/polymythseminars/events/heritage-toronto-hid
+ den-histories-uoft-oct28-2026/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:3f816c0c0fd0b7f1f6f1@seminarschools.com
+DTSTAMP:20261002T185749Z
+DTSTART;VALUE=DATE:20261029
+DTEND;VALUE=DATE:20261030
+SUMMARY:Toronto municipal election — election signs must be removed
+LOCATION:Toronto / online\, Toronto
+DESCRIPTION:Election signs must be removed by the end of October 29\, 2026.
+  The official schedule does not specify an exact clock time.
+URL:https://seminarschools.com/polymythseminars/events/toronto-election-sig
+ n-removal-deadline-2026/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -5247,26 +7050,45 @@ URL:https://seminarschools.com/polymythseminars/events/tpl-reading-challeng
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
-UID:3f816c0c0fd0b7f1f6f1@seminarschools.com
-DTSTAMP:20260815T033000Z
-DTSTART:20261030T035900Z
-SUMMARY:Toronto municipal election — election signs must be removed
-LOCATION:Toronto / online\, Toronto
-DESCRIPTION:Toronto municipal election — election signs must be removed
-URL:https://seminarschools.com/polymythseminars/events/toronto-election-sig
- n-removal-deadline-2026/
+UID:09ff9cf46e14f1f8cd5d@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART:20261031T000000Z
+DTEND:20261031T010000Z
+SUMMARY:Barbara Kingsolver
+LOCATION:Winter Garden Theatre\, 189 Yonge Street\, Toronto\, Toronto
+DESCRIPTION:The organizer has cancelled this event. Ticketmaster single-tic
+ ket purchases will be refunded automatically\; festival pass holders will 
+ receive instructions from TIFA.
+URL:https://seminarschools.com/polymythseminars/events/tifa-barbara-kingsol
+ ver-2026-10-30/
+STATUS:CANCELLED
+END:VEVENT
+BEGIN:VEVENT
+UID:ca222a6068a2842f46b3@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20261031
+DTEND;VALUE=DATE:20261109
+SUMMARY:Romeo and Juliet (Cranko / Prokofiev)
+LOCATION:Four Seasons Centre for the Performing Arts\, Toronto\, Toronto
+DESCRIPTION:National Ballet of Canada production run. Performances take pla
+ ce on selected dates. See the official production page for individual show
+ times.
+URL:https://seminarschools.com/polymythseminars/events/romeo-and-juliet-cra
+ nko-prokofiev-2026-10-31/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
-UID:09ff9cf46e14f1f8cd5d@seminarschools.com
-DTSTAMP:20260814T000800Z
-DTSTART:20261031T000000Z
-SUMMARY:Barbara Kingsolver
-LOCATION:Winter Garden Theatre\, Toronto
-DESCRIPTION:TIFA Presents occurrence featuring Barbara Kingsolver.
-URL:https://seminarschools.com/polymythseminars/events/tifa-barbara-kingsol
- ver-2026-10-30/
-STATUS:CONFIRMED
+UID:8f9aa80541bfda16c5d8@seminarschools.com
+DTSTAMP:20261002T000000Z
+DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
+SUMMARY:Symphony Spooktacular — TSO Young People’s Concert
+LOCATION:Roy Thomson Hall\, 60 Simcoe Street\, Toronto\, Toronto
+DESCRIPTION:Toronto Symphony Orchestra Young People’s Concert on November
+  1\, 2026. Consult the official performance schedule for session times.
+URL:https://seminarschools.com/polymythseminars/events/tso-young-people-s-c
+ oncert-2026-11-01/
+STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:3bf0028e2adf55d65016@seminarschools.com
@@ -5296,10 +7118,11 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:51ee074d6ab3d212a790@seminarschools.com
-DTSTAMP:20260814T000800Z
+DTSTAMP:20261003T042124Z
 DTSTART:20261101T220000Z
+DTEND:20261102T000000Z
 SUMMARY:East West Street: A Song of Good & Evil
-LOCATION:Winter Garden Theatre\, Toronto
+LOCATION:Winter Garden Theatre\, 189 Yonge Street\, Toronto\, Toronto
 DESCRIPTION:TIFA Presents occurrence featuring Philippe Sands.
 URL:https://seminarschools.com/polymythseminars/events/tifa-east-west-stree
  t-philippe-sands-2026-11-01/
@@ -5315,6 +7138,20 @@ DESCRIPTION:Public hybrid board meetings with published agendas and a route
   for members of the public to make deputations.
 URL:https://seminarschools.com/polymythseminars/events/toronto-public-libra
  ry-board-fall-2026-2026-11-02/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:bd9da49e64d8235427c2@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20261103
+DTEND;VALUE=DATE:20261130
+SUMMARY:De Profundis: Oscar Wilde in Jail
+LOCATION:Michael Young Theatre\, Young Centre for the Performing Arts\, Tor
+ onto\, Toronto
+DESCRIPTION:Soulpepper 2026/27 production run. Performances take place on s
+ elected dates. See the production page for individual showtimes.
+URL:https://seminarschools.com/polymythseminars/events/de-profundis-oscar-w
+ ilde-in-jail-2026-11-03/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -5466,6 +7303,30 @@ URL:https://seminarschools.com/polymythseminars/events/rotman-open-house-20
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:1fd2523b270120af68a1@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20261107
+DTEND;VALUE=DATE:20270301
+SUMMARY:Wildlife Photographer of the Year
+LOCATION:Patricia Harris Gallery\, Level 4\, Royal Ontario Museum\, 100 Que
+ en’s Park\, Toronto\, Toronto
+DESCRIPTION:Exhibition run. Admission follows the museum’s opening hours\
+ , including closures and special hours published by ROM.
+URL:https://seminarschools.com/polymythseminars/events/wildlife-photographe
+ r-of-the-year-2026-11-21/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:b161efac43133f36a99e@seminarschools.com
+DTSTAMP:20260815T220000Z
+DTSTART:20261107T140000Z
+SUMMARY:Toronto Workshop on Moral Psychology and Moral Theory
+LOCATION:Jackman Humanities Building\, U of T (St. George)\, Toronto
+URL:https://seminarschools.com/polymythseminars/events/toronto-workshop-on-
+ moral-psychology-and-moral-the-2026-11-07/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:bdaab7b8f402161d6171@seminarschools.com
 DTSTAMP:20260815T020000Z
 DTSTART:20261107T163000Z
@@ -5479,6 +7340,19 @@ URL:https://seminarschools.com/polymythseminars/events/repair-cafe-mid-scar
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:e5a742d97d12d910aa76@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20261108
+DTEND;VALUE=DATE:20261214
+SUMMARY:Rogers v. Rogers
+LOCATION:Berkeley Street Theatre\, 26 Berkeley Street\, Toronto\, Toronto
+DESCRIPTION:Canadian Stage production run on selected performance dates. Se
+ e the official production page for individual showtimes.
+URL:https://seminarschools.com/polymythseminars/events/rogers-v-rogers-heal
+ ey-2026-11-08/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:1b40ca6a963e0266533a@seminarschools.com
 DTSTAMP:20260815T020000Z
 DTSTART:20261108T170000Z
@@ -5489,20 +7363,6 @@ DESCRIPTION:A free drop-in repair session where visitors work alongside vol
  unteer fixers\; item intake normally ends at 3:00 p.m.
 URL:https://seminarschools.com/polymythseminars/events/repair-cafe-creative
  -reuse-2026-11-08/
-STATUS:CONFIRMED
-END:VEVENT
-BEGIN:VEVENT
-UID:e5a742d97d12d910aa76@seminarschools.com
-DTSTAMP:20260814T000800Z
-DTSTART:20261108T190000Z
-DTEND:20261214T040000Z
-SUMMARY:Rogers v. Rogers
-LOCATION:Berkeley Street Theatre\, Toronto
-DESCRIPTION:Canadian Stage production written by Michael Healey and directe
- d by Chris Abraham\; the post-show talkback is stored as a child occurrenc
- e.
-URL:https://seminarschools.com/polymythseminars/events/rogers-v-rogers-heal
- ey-2026-11-08/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -5583,6 +7443,20 @@ URL:https://seminarschools.com/polymythseminars/events/8d9bc31ec525/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:dae0dbdd91f4b0250c08@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20261113
+DTEND;VALUE=DATE:20261121
+SUMMARY:Emergence & Silent Screen
+LOCATION:Four Seasons Centre for the Performing Arts\, Toronto\, Toronto
+DESCRIPTION:National Ballet of Canada production run. Performances take pla
+ ce on selected dates. See the official production page for individual show
+ times.
+URL:https://seminarschools.com/polymythseminars/events/emergence-silent-scr
+ een-2026-11-13/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:7ffc2fc0babba7c4d0db@seminarschools.com
 DTSTAMP:20260815T020000Z
 DTSTART:20261113T203000Z
@@ -5646,6 +7520,20 @@ URL:https://seminarschools.com/polymythseminars/events/1c531062baf8/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:e25fb9a5d96146fa3692@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20261117
+DTEND;VALUE=DATE:20261118
+SUMMARY:ROM Identification Clinic
+LOCATION:Royal Ontario Museum\, Toronto\, Toronto
+DESCRIPTION:The organizer confirms this clinic date. Its exact start time a
+ nd room are not yet established by the series page. Free with advance RSVP
+  for every participant\, including children.
+URL:https://seminarschools.com/polymythseminars/events/rom-identification-c
+ linic-2026-11-17/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:3718dc1ce50ed4e542de@seminarschools.com
 DTSTAMP:20260814T000800Z
 DTSTART:20261118T003000Z
@@ -5671,6 +7559,34 @@ DESCRIPTION:Approximate Toronto observing window for the leonid meteor show
  ect visibility. Meteor-shower names preserve historical constellational ma
  pping while modern observation coordinates public scientific attention.
 URL:https://seminarschools.com/polymythseminars/events/leonids-2026/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:5346eaf00c4329a6e16f@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20261118
+DTEND;VALUE=DATE:20261123
+SUMMARY:Duende International Flamenco Festival: Flamenco and the World
+LOCATION:Aga Khan Museum and Massey Hall\, Toronto\, Toronto
+DESCRIPTION:Festival events run November 18 to 22\, 2026\, including openin
+ g-day masterclasses and a film screening. Venues and individual times vary
+  by event.
+URL:https://seminarschools.com/polymythseminars/events/duende-international
+ -flamenco-festival-flamenco-an-2026-11-19/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:5b2a4f0314972c096d43@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20261118
+DTEND;VALUE=DATE:20261221
+SUMMARY:Parfumerie
+LOCATION:Baillie Theatre\, Young Centre for the Performing Arts\, Toronto\,
+  Toronto
+DESCRIPTION:Soulpepper 2026/27 production run. Performances take place on s
+ elected dates. See the production page for individual showtimes.
+URL:https://seminarschools.com/polymythseminars/events/parfumerie-2026-11-1
+ 8/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -5700,6 +7616,20 @@ URL:https://seminarschools.com/polymythseminars/events/tranzac-epic-klezmer
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:828e5dc2d78014aa084a@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20261119
+DTEND;VALUE=DATE:20261120
+SUMMARY:Rogers v. Rogers — post-show talkback
+LOCATION:Berkeley Street Theatre\, 26 Berkeley Street\, Toronto\, Toronto
+DESCRIPTION:Talkback after the November 19 performance. The performance sta
+ rts at 7:30 pm\; the talkback start time and participants are not publishe
+ d.
+URL:https://seminarschools.com/polymythseminars/events/rogers-v-rogers-talk
+ back-2026-11-19/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:ef8189f31b705021f165@seminarschools.com
 DTSTAMP:20260814T000800Z
 DTSTART:20261120T003000Z
@@ -5710,18 +7640,6 @@ DESCRIPTION:Performance of Goodnight Desdemona (Good Morning Juliet) follow
  articipants.
 URL:https://seminarschools.com/polymythseminars/events/goodnight-desdemona-
  talkback-2026-11-19/
-STATUS:CONFIRMED
-END:VEVENT
-BEGIN:VEVENT
-UID:828e5dc2d78014aa084a@seminarschools.com
-DTSTAMP:20260814T000800Z
-DTSTART:20261120T003000Z
-SUMMARY:Rogers v. Rogers — post-show talkback
-LOCATION:Berkeley Street Theatre\, Toronto
-DESCRIPTION:Performance of Rogers v. Rogers followed by a confirmed talkbac
- k. The official page does not name the talkback participants.
-URL:https://seminarschools.com/polymythseminars/events/rogers-v-rogers-talk
- back-2026-11-19/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -5772,6 +7690,20 @@ LOCATION:East End Food Hub\, 1470 Gerrard Street East\, Toronto
 DESCRIPTION:A community dinner open to everyone at the East End Food Hub.
 URL:https://seminarschools.com/polymythseminars/events/nourish-east-end-com
  munity-dinner-2026-11-23/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:fe5eb9f939b870108269@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20261124
+DTEND;VALUE=DATE:20261228
+SUMMARY:All's Well
+LOCATION:Guloien Theatre\, Crow’s Theatre\, Toronto\, Toronto
+DESCRIPTION:A Soulpepper and Crow’s Theatre co-production performed at Cr
+ ow’s Theatre. Performances take place on selected dates within the liste
+ d run.
+URL:https://seminarschools.com/polymythseminars/events/all-s-well-2026-11-2
+ 4/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -5852,6 +7784,20 @@ DESCRIPTION:Performance of The Night Logan Woke Up followed by moderated po
  while exact names remain unannounced.
 URL:https://seminarschools.com/polymythseminars/events/tarragon-night-logan
  -woke-up-2026-27-2026-11-29-1400-tarragon-talk/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:c7c1d2ab2fbb88ab96f1@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20270125
+SUMMARY:13 Going on 30: The Musical
+LOCATION:Princess of Wales Theatre\, 300 King Street West\, Toronto\, Toron
+ to
+DESCRIPTION:Mirvish production run. Performances take place on selected dat
+ es. See the official show page for individual showtimes.
+URL:https://seminarschools.com/polymythseminars/events/13-going-on-30-the-m
+ usical-2026-11-24/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -5936,6 +7882,18 @@ URL:https://seminarschools.com/polymythseminars/events/practical-philosophy
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:d5fad65c204e65870f77@seminarschools.com
+DTSTAMP:20261002T000000Z
+DTSTART;VALUE=DATE:20261203
+DTEND;VALUE=DATE:20261207
+SUMMARY:Elf in Concert
+LOCATION:Roy Thomson Hall\, 60 Simcoe Street\, Toronto\, Toronto
+DESCRIPTION:TSO film-in-concert.
+URL:https://seminarschools.com/polymythseminars/events/elf-in-concert-2026-
+ 12-03/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:4124a09aeccef3f50f6b@seminarschools.com
 DTSTAMP:20260814T000800Z
 DTSTART:20261203T153000Z
@@ -5947,6 +7905,33 @@ DESCRIPTION:Documentary screening followed by a special-guest conversation.
  ries page.
 URL:https://seminarschools.com/polymythseminars/events/hot-docs-doc-soup-20
  26-12-03-1030/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:9deb02bb606b14c93706@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20270104
+SUMMARY:Cinderella (holiday panto)
+LOCATION:Winter Garden Theatre\, 189 Yonge Street\, Toronto\, Toronto
+DESCRIPTION:Canadian Stage production run on selected performance dates. Se
+ e the official production page for individual showtimes.
+URL:https://seminarschools.com/polymythseminars/events/cinderella-holiday-p
+ anto-2026-12-05/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:552166fe4c1d404be281@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20270101
+SUMMARY:The Nutcracker (Kudelka)
+LOCATION:Four Seasons Centre for the Performing Arts\, Toronto\, Toronto
+DESCRIPTION:National Ballet of Canada production run. Performances take pla
+ ce on selected dates. See the official production page for individual show
+ times.
+URL:https://seminarschools.com/polymythseminars/events/the-nutcracker-kudel
+ ka-2026-12-05/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -6082,6 +8067,32 @@ URL:https://seminarschools.com/polymythseminars/events/geminids-2026/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:07119a04647546e8ac47@seminarschools.com
+DTSTAMP:20261002T000000Z
+DTSTART;VALUE=DATE:20261215
+DTEND;VALUE=DATE:20261221
+SUMMARY:Handel's Messiah (Toronto Mendelssohn Choir)
+LOCATION:Roy Thomson Hall\, 60 Simcoe Street\, Toronto\, Toronto
+DESCRIPTION:TSO with the Toronto Mendelssohn Choir.
+URL:https://seminarschools.com/polymythseminars/events/handel-s-messiah-tor
+ onto-mendelssohn-choir-2026-12-15/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:542fdbf0dac0c32f9266@seminarschools.com
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20261215
+DTEND;VALUE=DATE:20270104
+SUMMARY:The Thrill of Hope: A Holiday Concert
+LOCATION:Michael Young Theatre\, Young Centre for the Performing Arts\, Tor
+ onto\, Toronto
+DESCRIPTION:Soulpepper 2026/27 production run. Performances take place on s
+ elected dates. See the production page for individual showtimes.
+URL:https://seminarschools.com/polymythseminars/events/the-thrill-of-hope-a
+ -holiday-concert-2026-12-15/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:cbb12046826806a53877@seminarschools.com
 DTSTAMP:20260815T033000Z
 DTSTART;VALUE=DATE:20261215
@@ -6152,6 +8163,19 @@ URL:https://seminarschools.com/polymythseminars/events/practical-philosophy
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:477472933154e30d341c@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20261219
+DTEND;VALUE=DATE:20270907
+SUMMARY:Raptors
+LOCATION:Special Exhibition Gallery\, Level 1\, Royal Ontario Museum\, 100 
+ Queen’s Park\, Toronto\, Toronto
+DESCRIPTION:Exhibition run. Admission follows the museum’s opening hours\
+ , including closures and special hours published by ROM.
+URL:https://seminarschools.com/polymythseminars/events/raptors-2026-12-19/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:61254053d73673d14f8b@seminarschools.com
 DTSTAMP:20260815T020000Z
 DTSTART:20261219T150000Z
@@ -6206,7 +8230,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5e4674d7f7078207656d@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART;VALUE=DATE:20261231
 DTEND;VALUE=DATE:20270101
 SUMMARY:Toronto municipal election — initial campaign period ends and For
@@ -6300,6 +8324,22 @@ URL:https://seminarschools.com/polymythseminars/events/full-moon-2027-01-22
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:59fb644a04fbbf9a6734@seminarschools.com
+DTSTAMP:20261002T185749Z
+DTSTART;VALUE=DATE:20270123
+DTEND;VALUE=DATE:20270218
+SUMMARY:The Turn of the Screw (Britten)
+LOCATION:Four Seasons Centre for the Performing Arts\, 145 Queen Street Wes
+ t\, Toronto
+DESCRIPTION:Canadian Opera Company 2026/27 season at the Four Seasons Centr
+ e\, Toronto. Production run: January 23 - February 17\, 2027. Performances
+  occur on selected dates\; consult the production page for individual date
+ s\, times and tickets.
+URL:https://seminarschools.com/polymythseminars/events/the-turn-of-the-scre
+ w-britten-2027-01-23/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:b36ba3338459517b9180@seminarschools.com
 DTSTAMP:20260814T000800Z
 DTSTART:20270129T003000Z
@@ -6354,6 +8394,22 @@ URL:https://seminarschools.com/polymythseminars/events/hot-docs-doc-soup-20
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:62674c6fd392fdc22a0f@seminarschools.com
+DTSTAMP:20261002T185749Z
+DTSTART;VALUE=DATE:20270204
+DTEND;VALUE=DATE:20270221
+SUMMARY:Ariadne auf Naxos (R. Strauss)
+LOCATION:Four Seasons Centre for the Performing Arts\, 145 Queen Street Wes
+ t\, Toronto
+DESCRIPTION:Canadian Opera Company 2026/27 season at the Four Seasons Centr
+ e\, Toronto. Production run: February 4 - 20\, 2027. Performances occur on
+  selected dates\; consult the production page for individual dates\, times
+  and tickets.
+URL:https://seminarschools.com/polymythseminars/events/ariadne-auf-naxos-r-
+ strauss-2027-02-04/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:94e515f909193229de63@seminarschools.com
 DTSTAMP:20260814T000800Z
 DTSTART:20270204T153000Z
@@ -6369,28 +8425,17 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:e98b7c01abf165ffc487@seminarschools.com
-DTSTAMP:20260814T000800Z
-DTSTART:20270205T190000Z
-SUMMARY:University Lecture Series — speaker and topic TBA
+DTSTAMP:20261003T195436Z
+DTSTART:20270204T190000Z
+DTEND:20270204T200000Z
+SUMMARY:University Lecture Series — Kim Echlin: Tell Others: Storytelling
+  for a World in Turmoil
 LOCATION:University of Toronto St. George Campus\, Toronto
-DESCRIPTION:The date and hour are confirmed\; speaker and topic remain unan
- nounced.
+DESCRIPTION:Kim Echlin speaks on storytelling in the University Lecture Ser
+ ies. The current winter schedule lists Thursday\, February 4\, 2027\, from
+  2 to 3 p.m.\, in person at the St. George Campus.
 URL:https://seminarschools.com/polymythseminars/events/utoronto-uls-tba-202
  7-02-05/
-STATUS:CONFIRMED
-END:VEVENT
-BEGIN:VEVENT
-UID:ceb491ca3f152d2456bf@seminarschools.com
-DTSTAMP:20260813T040000Z
-DTSTART:20270206T155600Z
-SUMMARY:Annular solar eclipse
-LOCATION:Sky event\; visibility region in description\, Toronto
-DESCRIPTION:Annular eclipse visible in parts of South America and Africa\; 
- not visible as an annular eclipse from Toronto. Historical political\, rit
- ual\, and mythic interpretations remain distinct from the physical eclipse
-  and its visibility.
-URL:https://seminarschools.com/polymythseminars/events/annular-solar-eclips
- e-2027-02-06/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -6403,6 +8448,22 @@ DESCRIPTION:Astronomical new moon instant. Calendars and ritual traditions
  may refer to the same lunar phase while preserving their distinct meanings
  .
 URL:https://seminarschools.com/polymythseminars/events/new-moon-2027-02-06/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:ceb491ca3f152d2456bf@seminarschools.com
+DTSTAMP:20261003T110658Z
+DTSTART:20270206T160000Z
+SUMMARY:Annular solar eclipse
+LOCATION:Sky event\; visibility region in description\, Toronto
+DESCRIPTION:Annular eclipse visible in parts of South America and Africa\; 
+ not visible as an annular eclipse from Toronto. Historical political\, rit
+ ual\, and mythic interpretations remain distinct from the physical eclipse
+  and its visibility. The listed time is NASA’s global greatest-eclipse p
+ rediction in UT\, rounded to the minute\; local visibility and observing t
+ imes depend on location.
+URL:https://seminarschools.com/polymythseminars/events/annular-solar-eclips
+ e-2027-02-06/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -6419,7 +8480,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:e55faf810ebb986fdb40@seminarschools.com
-DTSTAMP:20260814T000800Z
+DTSTAMP:20260907T000000Z
 DTSTART:20270214T003000Z
 DTEND:20270301T040000Z
 SUMMARY:Cabaret — Canadian Stage
@@ -6456,6 +8517,20 @@ DESCRIPTION:The official calendar identifies the 2027 period in which the H
 URL:https://seminarschools.com/polymythseminars/events/ontario-legislature-
  2027-sitting-calendar/
 STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:022d9711dc3aa4a477b6@seminarschools.com
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20270216
+DTEND;VALUE=DATE:20270217
+SUMMARY:ROM Identification Clinic
+LOCATION:Royal Ontario Museum\, Toronto\, Toronto
+DESCRIPTION:The organizer confirms this clinic date. Its exact start time a
+ nd room are not yet established by the series page. Free with advance RSVP
+  for every participant\, including children.
+URL:https://seminarschools.com/polymythseminars/events/rom-identification-c
+ linic-2027-02-16/
+STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:b1c5d3173ff520c89a1f@seminarschools.com
@@ -6511,13 +8586,15 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:1c3279765500e9c820ad@seminarschools.com
-DTSTAMP:20260813T040000Z
-DTSTART:20270220T231400Z
+DTSTAMP:20261003T110658Z
+DTSTART:20270220T231300Z
 SUMMARY:Penumbral lunar eclipse
 LOCATION:Sky event\; visibility region in description\, Toronto
 DESCRIPTION:Penumbral lunar eclipse visible from the Americas\, Europe\, Af
  rica\, and Asia. Historical political\, ritual\, and mythic interpretation
- s remain distinct from the physical eclipse and its visibility.
+ s remain distinct from the physical eclipse and its visibility. The listed
+  time is NASA’s global greatest-eclipse prediction in UT\, rounded to th
+ e minute\; local visibility and observing times depend on location.
 URL:https://seminarschools.com/polymythseminars/events/penumbral-lunar-ecli
  pse-2027-02-20/
 STATUS:CONFIRMED
@@ -6575,6 +8652,20 @@ URL:https://seminarschools.com/polymythseminars/events/ontario-model-parlia
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:4accc022630209886140@seminarschools.com
+DTSTAMP:20260907T000000Z
+DTSTART;VALUE=DATE:20270225
+DTEND;VALUE=DATE:20270226
+SUMMARY:Cabaret — post-show talkback
+LOCATION:Bluma Appel Theatre\, Toronto
+DESCRIPTION:Performance of Cabaret followed by a confirmed talkback. The of
+ ficial page does not name the talkback participants. The talkback follows 
+ the 7:30 PM performance\; its own start time is not published.
+URL:https://seminarschools.com/polymythseminars/events/cabaret-talkback-202
+ 7-02-25/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:f8c4577c64b9617638b5@seminarschools.com
 DTSTAMP:20260814T000800Z
 DTSTART:20270225T190000Z
@@ -6585,18 +8676,6 @@ DESCRIPTION:Public University Lecture Series talk: The Expanding Landscape
  of GLP-1 Medicines.
 URL:https://seminarschools.com/polymythseminars/events/utoronto-uls-glp1-me
  dicines-2027-02-25/
-STATUS:CONFIRMED
-END:VEVENT
-BEGIN:VEVENT
-UID:4accc022630209886140@seminarschools.com
-DTSTAMP:20260814T000800Z
-DTSTART:20270226T003000Z
-SUMMARY:Cabaret — post-show talkback
-LOCATION:Bluma Appel Theatre\, Toronto
-DESCRIPTION:Performance of Cabaret followed by a confirmed talkback. The of
- ficial page does not name the talkback participants.
-URL:https://seminarschools.com/polymythseminars/events/cabaret-talkback-202
- 7-02-25/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -6752,6 +8831,21 @@ URL:https://seminarschools.com/polymythseminars/events/tarragon-shoplifters
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
+UID:d759f7c035cbf5d974b8@seminarschools.com
+DTSTAMP:20261003T110658Z
+DTSTART;VALUE=DATE:20270322
+DTEND;VALUE=DATE:20270323
+SUMMARY:Toronto Public Library Young Voices Magazine
+LOCATION:Online submissions to Toronto Public Library Young Voices Magazine
+ \, Toronto
+DESCRIPTION:Toronto Public Library accepts writing and art year-round for Y
+ oung Voices. The next issue deadline is March 22\, 2027. No exact submissi
+ on cutoff time is stated.
+URL:https://seminarschools.com/polymythseminars/events/toronto-public-libra
+ ry-young-voices-magazine-2027/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
 UID:462543168a6471bbb155@seminarschools.com
 DTSTAMP:20260813T040000Z
 DTSTART;VALUE=DATE:20270322
@@ -6777,24 +8871,6 @@ DESCRIPTION:Astronomical full moon instant. Calendars and ritual traditions
 URL:https://seminarschools.com/polymythseminars/events/full-moon-2027-03-22
  /
 STATUS:CONFIRMED
-END:VEVENT
-BEGIN:VEVENT
-UID:d759f7c035cbf5d974b8@seminarschools.com
-DTSTAMP:20260720T040000Z
-DTSTART;VALUE=DATE:20270322
-DTEND;VALUE=DATE:20270323
-SUMMARY:Toronto Public Library Young Voices Magazine
-LOCATION:Submission deadline\, projected from the annual March window. Poem
- s\, stories\, reviews\, comics. Teens who live\, work\, or study in Toront
- o\, ages 12 to 19. Free. Strict AI ban. Publication\, no cash prize. Confi
- rm on the site.\, Toronto
-DESCRIPTION:Submission deadline\, projected from the annual March window. P
- oems\, stories\, reviews\, comics. Teens who live\, work\, or study in Tor
- onto\, ages 12 to 19. Free. Strict AI ban. Publication\, no cash prize. Co
- nfirm on the site.
-URL:https://seminarschools.com/polymythseminars/events/toronto-public-libra
- ry-young-voices-magazine-2027/
-STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bc500528b44f9a7fa330@seminarschools.com
@@ -6838,7 +8914,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:d736ae90cd06b4e99a88@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART:20270330T180000Z
 SUMMARY:Toronto municipal election — initial financial statement deadline
 LOCATION:Toronto / online\, Toronto
@@ -6927,7 +9003,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:c07469fc81467143ce8f@seminarschools.com
-DTSTAMP:20260814T000800Z
+DTSTAMP:20260907T000000Z
 DTSTART:20270409T233000Z
 DTEND:20270503T030000Z
 SUMMARY:Creditors — Canadian Stage
@@ -6993,15 +9069,17 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:a13498752e49332294d2@seminarschools.com
-DTSTAMP:20260814T000800Z
-DTSTART:20270415T233000Z
+DTSTAMP:20260907T000000Z
+DTSTART;VALUE=DATE:20270415
+DTEND;VALUE=DATE:20270416
 SUMMARY:Creditors — post-show talkback
 LOCATION:Bluma Appel Theatre\, Toronto
 DESCRIPTION:Performance of Creditors followed by a confirmed talkback. The 
- official page does not name the talkback participants.
+ official page does not name the talkback participants. The talkback follow
+ s the 7:30 PM performance\; its own start time is not published.
 URL:https://seminarschools.com/polymythseminars/events/creditors-talkback-2
  027-04-15/
-STATUS:CONFIRMED
+STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:568adf015159b69f99de@seminarschools.com
@@ -7058,7 +9136,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:00c8563063ede25e553e@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART:20270429T180000Z
 SUMMARY:Toronto municipal election — initial financial statement grace de
  adline
@@ -7067,6 +9145,22 @@ DESCRIPTION:Toronto municipal election — initial financial statement grac
  e deadline
 URL:https://seminarschools.com/polymythseminars/events/toronto-election-ini
  tial-financial-grace-2027/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:3a18ae1b2756f4cff9f2@seminarschools.com
+DTSTAMP:20261002T185749Z
+DTSTART;VALUE=DATE:20270501
+DTEND;VALUE=DATE:20270522
+SUMMARY:Empire of Wild (world premiere)
+LOCATION:Four Seasons Centre for the Performing Arts\, 145 Queen Street Wes
+ t\, Toronto
+DESCRIPTION:Canadian Opera Company 2026/27 season at the Four Seasons Centr
+ e\, Toronto. Production run: May 1 - 21\, 2027. Performances occur on sele
+ cted dates\; consult the production page for individual dates\, times and 
+ tickets.
+URL:https://seminarschools.com/polymythseminars/events/empire-of-wild-world
+ -premiere-2027-05-01/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -7094,6 +9188,22 @@ DESCRIPTION:Astronomical new moon instant. Calendars and ritual traditions
  may refer to the same lunar phase while preserving their distinct meanings
  .
 URL:https://seminarschools.com/polymythseminars/events/new-moon-2027-05-06/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:45e4439fb5af53cf63ca@seminarschools.com
+DTSTAMP:20261002T185749Z
+DTSTART;VALUE=DATE:20270508
+DTEND;VALUE=DATE:20270530
+SUMMARY:The Elixir of Love (Donizetti)
+LOCATION:Four Seasons Centre for the Performing Arts\, 145 Queen Street Wes
+ t\, Toronto
+DESCRIPTION:Canadian Opera Company 2026/27 season at the Four Seasons Centr
+ e\, Toronto. Production run: May 8 - 29\, 2027. Performances occur on sele
+ cted dates\; consult the production page for individual dates\, times and 
+ tickets.
+URL:https://seminarschools.com/polymythseminars/events/the-elixir-of-love-d
+ onizetti-2027-05-08/
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
@@ -7330,7 +9440,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:e5eff5989a768efbd460@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART;VALUE=DATE:20270628
 DTEND;VALUE=DATE:20270629
 SUMMARY:Toronto municipal election — initial compliance-audit application
@@ -7344,7 +9454,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:1a8da0fc712915d35d18@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART;VALUE=DATE:20270630
 DTEND;VALUE=DATE:20270701
 SUMMARY:Toronto municipal election — supplementary campaign period ends
@@ -7382,13 +9492,16 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:bae0d1c3a55ee6730bec@seminarschools.com
-DTSTAMP:20260813T040000Z
-DTSTART:20270718T160400Z
+DTSTAMP:20261003T110658Z
+DTSTART:20270718T160300Z
 SUMMARY:Penumbral lunar eclipse
 LOCATION:Sky event\; visibility region in description\, Toronto
 DESCRIPTION:Penumbral lunar eclipse mainly visible from Africa\, Asia\, Aus
  tralia\, and the Pacific. Historical political\, ritual\, and mythic inter
- pretations remain distinct from the physical eclipse and its visibility.
+ pretations remain distinct from the physical eclipse and its visibility. T
+ he listed time is NASA’s global greatest-eclipse prediction in UT\, roun
+ ded to the minute\; local visibility and observing times depend on locatio
+ n.
 URL:https://seminarschools.com/polymythseminars/events/penumbral-lunar-ecli
  pse-2027-07-18/
 STATUS:CONFIRMED
@@ -7407,14 +9520,16 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:7b6a94d409066dff16f7@seminarschools.com
-DTSTAMP:20260813T040000Z
-DTSTART:20270802T100500Z
+DTSTAMP:20261003T110658Z
+DTSTART:20270802T100700Z
 SUMMARY:Total solar eclipse
 LOCATION:Sky event\; visibility region in description\, Toronto
 DESCRIPTION:Totality visible across southern Spain\, North Africa\, Saudi A
  rabia\, Yemen\, and nearby regions\; eastern Canada sees a partial eclipse
  . Historical political\, ritual\, and mythic interpretations remain distin
- ct from the physical eclipse and its visibility.
+ ct from the physical eclipse and its visibility. The listed time is NASA
+ ’s global greatest-eclipse prediction in UT\, rounded to the minute\; lo
+ cal visibility and observing times depend on location.
 URL:https://seminarschools.com/polymythseminars/events/total-solar-eclipse-
  2027-08-02/
 STATUS:CONFIRMED
@@ -7435,13 +9550,15 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:e655c12c4c3fcb4a555c@seminarschools.com
-DTSTAMP:20260813T040000Z
+DTSTAMP:20261003T110658Z
 DTSTART:20270817T071400Z
 SUMMARY:Penumbral lunar eclipse
 LOCATION:Sky event\; visibility region in description\, Toronto
 DESCRIPTION:Penumbral lunar eclipse visible from the Pacific and Americas. 
  Historical political\, ritual\, and mythic interpretations remain distinct
-  from the physical eclipse and its visibility.
+  from the physical eclipse and its visibility. The listed time is NASA’s
+  global greatest-eclipse prediction in UT\, rounded to the minute\; local 
+ visibility and observing times depend on location.
 URL:https://seminarschools.com/polymythseminars/events/penumbral-lunar-ecli
  pse-2027-08-17/
 STATUS:CONFIRMED
@@ -7512,7 +9629,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:9dbb600dc8c09efe7729@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART:20270924T180000Z
 SUMMARY:Toronto municipal election — supplementary financial statement de
  adline
@@ -7564,7 +9681,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:6816f920b8cc282d3a23@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART;VALUE=DATE:20271025
 DTEND;VALUE=DATE:20271026
 SUMMARY:Toronto municipal election — supplementary financial statement gr
@@ -7683,7 +9800,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:31d17d78afe5be205194@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART;VALUE=DATE:20271223
 DTEND;VALUE=DATE:20271224
 SUMMARY:Toronto municipal election — supplementary compliance-audit appli
@@ -7709,7 +9826,7 @@ STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:f601bb88b94287971a35@seminarschools.com
-DTSTAMP:20260815T033000Z
+DTSTAMP:20261002T185749Z
 DTSTART;VALUE=DATE:20271230
 DTEND;VALUE=DATE:20271231
 SUMMARY:Toronto municipal election — contribution rebate application dead

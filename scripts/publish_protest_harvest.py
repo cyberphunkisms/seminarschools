@@ -8,6 +8,9 @@ import subprocess
 import sys
 from collections import Counter
 from pathlib import Path
+from polymythcal_manual_observations import record_manual_observation
+from atomic_json import write_text_atomic
+from build_lock import ReleaseBuildLock, inherited_release_build_root
 
 from polymythcal_adapters import (
     event_identity_aliases,
@@ -114,6 +117,9 @@ def upsert(
             added += 1
             continue
         old = events[target]
+        if old.get("review_status") == "manual" and event.get("review_status") != "manual":
+            record_manual_observation(old, event)
+            continue
         canonical_id = old.get("id") or event.get("id")
         aliases = list(dict.fromkeys(
             list(old.get("identity_aliases") or event_identity_aliases(old))
@@ -177,8 +183,8 @@ def main() -> int:
     shadow = []
     updated, counts = upsert(public_data, events, shadow_sink=shadow)
     text = json.dumps(updated, indent=2, ensure_ascii=False) + "\n"
-    PUBLIC_PATH.write_text(text, encoding="utf-8")
-    MASTER_PATH.write_text(text, encoding="utf-8")
+    write_text_atomic(PUBLIC_PATH, text)
+    write_text_atomic(MASTER_PATH, text)
     shadow_report = {
         "schema": "polymythcal-identity-reschedule-shadow-v1",
         "generated_at": payload.get("generated_at"),
@@ -193,10 +199,7 @@ def main() -> int:
         "disagreements": sum(not row.get("agreement") for row in shadow),
         "items": shadow,
     }
-    SHADOW_PATH.write_text(
-        json.dumps(shadow_report, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
+    write_text_atomic(SHADOW_PATH, json.dumps(shadow_report, indent=2, ensure_ascii=False) + "\n")
     print(
         "DETERMINISTIC PROTEST PUBLICATION — "
         f"{counts['added']} added, {counts['refreshed']} refreshed, {counts['total']} total."
@@ -212,4 +215,5 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    with ReleaseBuildLock(inherited_release_build_root(ROOT)):
+        raise SystemExit(main())

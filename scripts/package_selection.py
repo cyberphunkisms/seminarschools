@@ -262,14 +262,17 @@ def collect_package_files(
         directory_names[:] = kept_directories
 
         for name in sorted(file_names):
+            # Restored build-lock/staging tombstones are disposable even when
+            # represented as files. Prune them before stat/selection work,
+            # just as the directory form is pruned before descent above.
+            if at_root and name in FIXED_GENERATED_DIRECTORIES:
+                continue
             stats["files_considered"] += 1
             candidate = current_path / name
             if candidate.is_symlink() or not candidate.is_file():
                 continue
             relative = candidate.relative_to(root)
             relative_name = relative.as_posix()
-            if len(relative.parts) == 1 and name in FIXED_GENERATED_DIRECTORIES:
-                continue
             if is_reconstruction_duplicate(relative_name):
                 stats["reconstruction_duplicates_pruned"] += 1
                 continue

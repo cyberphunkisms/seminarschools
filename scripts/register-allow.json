@@ -169,5 +169,28 @@
       "type": "FILLER",
       "max": 2
     }
+  ],
+  "protectedAcceptedText": [
+    {
+      "file": "polymyth/alwaysalready/index.html",
+      "visible_text_sha256": "877e4302dd70ebd07bb9211251f25b01f5637ab4959de95768ddb6bf6d681d17",
+      "spans": [
+        "—",
+        "04–05",
+        "actor–character",
+        "actor–role",
+        "relation, not a cross-filmography polymyth-dream.",
+        "polycognate, not a claim of influence or genealogy."
+      ],
+      "reason": "Exact accepted V3 source prose, source-title punctuation, range and relational notation are preserved. Any visible-text change invalidates this exception and requires review."
+    },
+    {
+      "file": "teacherresources/ieltsrubric/index.html",
+      "visible_text_sha256": "c558de0979660c6800e0df821c512301e58ff944e03854d21ce05e82efe6b4b3",
+      "spans": [
+        "evidence, not official IELTS results."
+      ],
+      "reason": "Exact accepted V3 source prose, source-title punctuation, range and relational notation are preserved. Any visible-text change invalidates this exception and requires review."
+    }
   ]
 }

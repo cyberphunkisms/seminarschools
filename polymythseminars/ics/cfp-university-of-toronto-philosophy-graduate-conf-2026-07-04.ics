@@ -5,13 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:76d262e519184019c14c@seminarschools.com
-DTSTAMP:20260815T220000Z
-DTSTART:20260705T035900Z
+DTSTAMP:20260907T000000Z
+DTSTART;VALUE=DATE:20260704
 SUMMARY:CFP: University of Toronto Philosophy Graduate Conference 2026
 LOCATION:Department of Philosophy\, University of Toronto\, JHB\, 170 St 
  George St
 DESCRIPTION:Submission deadline 11:59pm EST. Conference Oct 16-17\, 2026.
-  Keynotes Don Garrett (NYU)\, Alva Noe (UC Berkeley).
+  Keynotes Don Garrett (NYU)\, Alva Noe (UC Berkeley). The source states 
+ EST in July\; its UTC offset needs clarification. Applications have clos
+ ed.
 URL:https://seminarschools.com/polymythseminars/events/cfp-university-of-
  toronto-philosophy-graduate-conf-2026-07-04/
 STATUS:TENTATIVE

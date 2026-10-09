@@ -5,12 +5,14 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:f29a983f708bbf158f31@seminarschools.com
-DTSTAMP:20260815T033000Z
-DTSTART:20261010T140000Z
-DTEND:20261011T230000Z
+DTSTAMP:20261002T185749Z
+DTSTART;VALUE=DATE:20261010
+DTEND;VALUE=DATE:20261012
 SUMMARY:Toronto municipal election — Kids Vote Weekend
 LOCATION:All Toronto advance voting places
-DESCRIPTION:Toronto municipal election — Kids Vote Weekend
+DESCRIPTION:Kids Vote Weekend runs October 10–11\, 2026\, from 10 a.m. 
+ to 7 p.m. each day. The date range covers separate daily sessions\; voti
+ ng is not open overnight.
 URL:https://seminarschools.com/polymythseminars/events/toronto-election-k
  ids-vote-weekend-2026/
 STATUS:CONFIRMED

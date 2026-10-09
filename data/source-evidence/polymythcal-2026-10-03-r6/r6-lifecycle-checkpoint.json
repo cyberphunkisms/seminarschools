@@ -1,0 +1,49 @@
+{
+  "scope": "Private early-pipeline lifecycle checkpoint settled using the ordinary evidence normalizer followed by manual upsert in isolation. Final public canonical data is untouched. The normalizer is essential for a non-manual conference record whose final reviewed time remains separately qualified.",
+  "prior_settlement": {
+    "scope": "Only the private early-pipeline lifecycle checkpoint is settled from an isolated ordinary upsert of the already-built deterministic manual source. Public canonical records and generated pages are not changed.",
+    "before_sha256": "fed9307a25fda0daeece1a1c9d07cd85b4e10955690d6c8a6926c373a0f036d7",
+    "after_sha256": "457a423570d5bc3072ce804662a74d0d1604abaa293b7ffe52d14defdcd5b4ca",
+    "changed_records": {
+      "historical-thinking-institute-2026": [
+        "destination_url"
+      ],
+      "international-congress-on-medieval-studies-kalamazoo-62nd-2026": [
+        "qualification_reasons",
+        "time_precision"
+      ],
+      "canadas-history-inquiry-program-watch": [
+        "destination_evidence",
+        "destination_kind",
+        "destination_scope",
+        "destination_status",
+        "destination_url"
+      ]
+    },
+    "upsert_result": "MANUAL CALENDAR UPSERT — 0 inserted, 1796 refreshed, 2086 total."
+  },
+  "before_sha256": "457a423570d5bc3072ce804662a74d0d1604abaa293b7ffe52d14defdcd5b4ca",
+  "after_sha256": "84d8e4d05c06a16032a4a0dbe2207e6e80215dd30163e613e6d448a146d5ff93",
+  "changed_records": {
+    "international-congress-on-medieval-studies-kalamazoo-62nd-2026": [
+      "qualification_reasons",
+      "time_precision"
+    ]
+  },
+  "normalization_result": {
+    "status": "pass",
+    "targets": [
+      {
+        "path": "data/manual-events.json",
+        "events": 1796,
+        "changed": 0
+      },
+      {
+        "path": "polymythseminars/events.json",
+        "events": 2086,
+        "changed": 10
+      }
+    ]
+  },
+  "upsert_result": "MANUAL CALENDAR UPSERT — 0 inserted, 1796 refreshed, 2086 total."
+}

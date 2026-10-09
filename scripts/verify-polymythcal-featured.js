@@ -86,6 +86,7 @@ if (JSON.stringify(browseIds) !== JSON.stringify(chronologyIds)) {
 
 const expected = canonicalEvents
   .filter(event => chronologyIdSet.has(String(event.id || '')))
+  .filter(event => event.lifecycle_status !== 'cancelled')
   .sort((a, b) => codepointCompare(a.date, b.date) || codepointCompare(a.title, b.title))
   .filter(event => /^\d{4}-\d{2}-\d{2}/.test(String(event.date || '')) && String(event.date).slice(0, 10) >= buildDay)
   .slice(0, 64)
@@ -96,6 +97,10 @@ if (featured.count !== expected.length || !Array.isArray(featured.events) || fea
 }
 if (JSON.stringify(featured.events || []) !== JSON.stringify(expected)) {
   failures.push('featured events are not the exact next chronology subset');
+}
+const cancelledIds = new Set(canonicalEvents.filter(event => event.lifecycle_status === 'cancelled').map(event => event.id));
+if ((featured.events || []).some(event => cancelledIds.has(event.id))) {
+  failures.push('cancelled occurrences must not appear in the upcoming featured feed');
 }
 if ((featured.events || []).some(event => watchlistIdSet.has(String(event.id || '')))) {
   failures.push('featured feed contains a watchlist monitoring marker');

@@ -32,6 +32,8 @@
 /cyberphunkisms /saul 301
 
 # Other domain-shortener redirects
+/TR           /teacherresources/  301!
+/TR/          /teacherresources/  301!
 /tr           /teacherresources  301
 /leizuacademy /leizu  301
 /teach        /leizu/teach  301
@@ -199,8 +201,7 @@
 /devilsadvocate             /polymyth/devilsdiary/        301
 /devils-advocate/*          /polymyth/devilsdiary/:splat  301
 /devils-advocate            /polymyth/devilsdiary/        301
-/polymyth/devils-notebook/* /polymyth/devilsdiary/:splat  301
-# /polymyth/devils-notebook → its own index.html (Devil's Notebook page)
+# /polymyth/devils-notebook and its linked entry pages remain directly served.
 /polymyth/devilsnotebook/*  /polymyth/devilsdiary/:splat  301
 /polymyth/devilsnotebook    /polymyth/devilsdiary/        301
 /polymyth/devils-diary/*    /polymyth/devilsdiary/:splat  301

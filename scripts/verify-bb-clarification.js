@@ -40,7 +40,7 @@ must('About page protects sealed exegesis', about.includes('keeps the exegesis s
 must('About page removes public bootstrap block', !about.includes('copy bootstrap') && !about.includes('first ask me for the wormcards') && !about.includes('setupnpcs') && !about.includes('improvnpcs'));
 must('About page keeps teacher as human filter', about.includes('The teacher remains the voice at the table') || about.includes('the human filter stays active'));
 
-must('BB operations include clarification and startup synthesis entries', ['dm-108','dm-109','dm-110','ses-006','pen-015','dm-115','dm-116','dm-117','dm-118','dm-119','can-004','char-007','char-008','ses-007','ses-008'].every(id => bb.includes(`id:'${id}'`)));
+must('BB operations include clarification and startup synthesis entries', ['dm-108','dm-109','dm-110','ses-006','pen-015','dm-115','dm-116','dm-117','dm-118','dm-119','can-004','char-007','char-008','ses-007','ses-008'].every(id => require('./lib/parse-seed-with-addenda').parseSeedWithAddenda(bb).some(e=>e.id===id)));
 const seedMatch = bb.match(/const SEED = \[([\s\S]*?)\];\n\nlet entries/);
 let seedCount = 0;
 if(seedMatch){

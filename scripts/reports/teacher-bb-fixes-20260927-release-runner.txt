@@ -1,0 +1,27 @@
+VERIFY ALL FAST — 194 checks, concurrency 2, timeout 600000ms, mode: reuse verified canonical build
+PASS   1648ms  node scripts/verify-public-deploy-parity.js
+PASS    137ms  node scripts/verify-release-asset-identity.js
+PASS    949ms  node scripts/verify-polymythcal-destination-specificity.js
+PASS  50456ms  node scripts/verify-polymythcal-discovery-v2.js
+PASS  10324ms  node scripts/verify-front-facing-boundary.js
+PASS   4341ms  node scripts/verify-visible-geometry.js
+PASS   2989ms  node scripts/verify-meaningful-geometry.js
+VERIFY ALL FAST FAILED
+
+--- node scripts/verify-geometry.js (2343ms) ---
+MOTION COMPARISON {"evidence":"controlled 60 Hz clock and DOM stub, not browser FPS or physical-device performance","coarse":{"baseline":{"colorWrites":18,"maxStep":229.49005490434658,"pending":0,"final":0.7774},"current":{"colorWrites":18,"maxStep":66.74359894401859,"pending":0,"final":0.7774}},"fine":{"baseline":{"colorWrites":108,"maxStep":3.111028768751541,"pending":0,"final":0.0652},"current":{"colorWrites":46,"maxStep":2.776706682384737,"pending":0,"final":0.0652}}}
+canonical polymyth-mandala-main-v32: sha256 9eed9e07f1c79fffa3bdd926977745bad5f90283bee3f7c6705d752bce347a0b, 257930 bytes
+
+GEOMETRY CHECK FAILED
+ - /.public-build-quarantine/.ss-public-build-abandoned-Rcj5x0/staging/polymythseminars/events/bees-a-story-of-survival-2026-05-16/: standard camera travel 123.04px falls below contract
+
+
+CURRENT PAGE-SIZE GATE
+PAGE SIZE BUDGET FAILED
+ - polymyth/methodologylist/methodology/index.html current-release baseline is stale: 2016523 != 2016524
+ - polymyth/methodologylist/coreplus/index.html current-release baseline is stale: 396005 != 396006
+ - polymyth/bookwormburrows/index.html 645657 exceeds budget ceiling 630000
+ - polymyth/campaigncodex/index.html 1118506 exceeds budget ceiling 1070000
+ - polymyth/modulecanon/index.html 426414 exceeds budget ceiling 425000
+ - polymyth/modulecanon/thank-you-maam/index.html is 767303 bytes and lacks a page-size budget entry
+ - teacherresources/index.html 842541 exceeds budget ceiling 730000

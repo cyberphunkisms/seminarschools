@@ -1,0 +1,483 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> seminar-schools-leizu-pipeline@1.0.7 build
+> node scripts/assert-canonical-build-delegation.js "node scripts/run-python.js scripts/build-polymythcal-audit13.py" "node scripts/build-search-pages.js" && node scripts/run-python.js scripts/run-with-build-lock.py -- npm run build:locked
+
+CANONICAL BUILD DELEGATION PASSED — repository-only writers, site-only artifact checks, and canonical order are locked.
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> seminar-schools-leizu-pipeline@1.0.7 build:locked
+> node scripts/run-python.js scripts/assert-build-lock.py && node scripts/run-python.js scripts/import-polymythcal-comprehensive-2026-08-13.py && node scripts/run-python.js scripts/import-polymythcal-social-studies-set4-2026-08-13.py && node scripts/run-python.js scripts/import-polymythcal-media-literacy-set5-2026-08-13.py && node scripts/run-python.js scripts/import-polymythcal-interdisciplinary-set6-2026-08-13.py && node scripts/run-python.js scripts/import-polymythcal-director-present-set7-2026-08-13.py && node scripts/run-python.js scripts/import-polymythcal-creator-present-set8-2026-08-13.py && node scripts/run-python.js scripts/import-polymythcal-public-intellectual-academic-set9-2026-08-13.py && node scripts/run-python.js scripts/import-polymythcal-participatory-cultural-set11-2026-08-14.py && node scripts/run-python.js scripts/import-polymythcal-civic-political-legal-labour-set12-2026-08-14.py && node scripts/run-python.js scripts/normalize-polymythcal-manual-identities.py && node scripts/run-python.js scripts/normalize-polymythcal-evidence-model.py && node scripts/run-python.js scripts/import-polymythcal-community-charity-mutual-aid-heritage-place-set13-2026-08-15.py && node scripts/run-python.js scripts/import-polymythcal-live-media-digitally-native-set14-2026-08-15.py && node scripts/run-python.js scripts/import-polymythcal-courses-multi-session-programs-set15-2026-08-15.py && node scripts/run-python.js scripts/import-polymythcal-arts-set10-reconstruction-2026-08-14.py && node scripts/upsert-manual-calendar-events.js && node scripts/run-python.js scripts/apply-polymythcal-reviewed-corrections.py && node scripts/apply-polymythcal-destination-specificity.js && node scripts/run-python.js scripts/validate-polymythcal.py && node scripts/run-python.js scripts/apply-audit45-language-model.py && node scripts/build-polymythcal-browser-payload.js && node scripts/run-python.js scripts/build-polymythcal-audit13.py && node scripts/update-polymythcal-listing-counts.js && node scripts/build-search-pages.js && node scripts/apply-polymythcal-set13-15-facets.js && node scripts/build-writing-shortcuts.js && node scripts/build-academic-shortcuts.js && node scripts/run-python.js scripts/build-polymythcal-feeds.py && node scripts/apply-visible-geometry.js && node scripts/apply-sitewide-type-zoom-link.js && node scripts/apply-type-floor.js && node scripts/consolidate-google-fonts.js && node scripts/build-polymythcal-browser-payload.js && node scripts/run-python.js scripts/build-polymythcal-candidate-surface.py && node scripts/apply-audit48-approved-ui.js && node scripts/normalize-shared-asset-references.js && node scripts/build-leizu-i18n-source.js && node scripts/build-polymythcal-i18n-source.js && node scripts/apply-audit49-release-stamp.js && node scripts/run-python.js scripts/build-saul-ultimate-web-cv.py && node scripts/verify-saul-ultimate-web-cv.js && node scripts/run-python.js scripts/build-audit45-localized-routes.py && node scripts/apply-audit45-translation-ui.js && node scripts/apply-audit49-metadata-hygiene.js && node scripts/run-python.js scripts/build-saul-ultimate-web-cv.py && node scripts/verify-saul-ultimate-web-cv.js && node scripts/run-python.js scripts/build-audit45-localized-routes.py && node scripts/apply-audit45-translation-ui.js && node scripts/apply-audit49-metadata-hygiene.js && node scripts/update-polymythcal-destination-contract.js && node scripts/apply-sitewide-type-zoom-link.js && node scripts/build-polymythcal-discovery-site.js && node scripts/build-writing-shortcuts.js && node scripts/build-academic-shortcuts.js && node scripts/apply-visible-geometry.js && node scripts/update-release-asset-identity.js && node scripts/update-polymythcal-build-manifest.js && node scripts/build-public-deploy.js && node scripts/verify-public-deploy-parity.js && node scripts/verify-release-asset-identity.js && node scripts/verify-polymythcal-comprehensive-2026-08-13.js && node scripts/verify-polymythcal-social-studies-set4-2026-08-13.js && node scripts/verify-polymythcal-media-literacy-set5-2026-08-13.js && node scripts/verify-polymythcal-interdisciplinary-set6-2026-08-13.js && node scripts/verify-polymythcal-director-present-set7-2026-08-13.js && node scripts/verify-polymythcal-creator-present-set8-2026-08-13.js && node scripts/verify-polymythcal-public-intellectual-academic-set9-2026-08-13.js && node scripts/verify-polymythcal-arts-set10-reconstruction-2026-08-14.js && node scripts/verify-polymythcal-participatory-cultural-set11-2026-08-14.js && node scripts/verify-polymythcal-civic-political-legal-labour-set12-2026-08-14.js && node scripts/verify-polymythcal-community-charity-mutual-aid-heritage-place-set13-2026-08-15.js && node scripts/verify-polymythcal-live-media-digitally-native-set14-2026-08-15.js && node scripts/verify-polymythcal-courses-multi-session-programs-set15-2026-08-15.js && node scripts/verify-polymythcal-set-field-propagation.js && node scripts/verify-polymythcal-sets13-15-browser.js --dom-only && node scripts/verify-front-facing-boundary.js && node scripts/verify-polymyth-entry-points.js --site-only && node scripts/verify-visible-geometry.js && node scripts/verify-meaningful-geometry.js && node scripts/verify-geometry.js && node scripts/build-asset-weight-report.js && node scripts/verify-polymythcal-featured.js && node scripts/verify-polymythcal-browser-payload.js && node scripts/verify-polymythcal-discovery-v2.js && node scripts/verify-polymythcal-destination-specificity.js && node scripts/verify-polymythcal-build-efficiency.js && node scripts/verify-steady-ui.js && node scripts/run-python.js scripts/verify-audit45-translations.py && node scripts/verify-audit49-metadata-surface.js && node scripts/verify-audit49-runtime-efficiency.js && node scripts/verify-audit49-build-packaging-efficiency.js
+
+RELEASE BUILD LOCK VERIFIED — writer 37a86ca6ddf5:34 owns /workspace/scratch/cc6502ebeac7/r9-release.
+{
+  "records": 292,
+  "added": 0,
+  "refreshed": 292,
+  "manual_total": 1796,
+  "sources_total": 779,
+  "research_dir": "/workspace/scratch/cc6502ebeac7/r9-release/data/research/polymythcal-2026-08-13"
+}
+{
+  "records": 68,
+  "added": 0,
+  "refreshed": 68,
+  "cross_tagged_existing": 3,
+  "manual_total": 1796,
+  "sources_total": 779,
+  "research_file": "/workspace/scratch/cc6502ebeac7/r9-release/data/polymythcal-research-set-4-social-studies-2026-08-13.json"
+}
+{
+  "records": 73,
+  "added": 0,
+  "refreshed": 73,
+  "cross_tagged_existing": 9,
+  "manual_total": 1796,
+  "sources_total": 779,
+  "research_file": "/workspace/scratch/cc6502ebeac7/r9-release/data/polymythcal-research-set-5-media-literacy-2026-08-13.json"
+}
+{
+  "records": 42,
+  "added": 0,
+  "refreshed": 42,
+  "cross_tagged_existing": 7,
+  "manual_total": 1796,
+  "sources_total": 779,
+  "research_file": "/workspace/scratch/cc6502ebeac7/r9-release/data/polymythcal-research-set-6-interdisciplinary-2026-08-13.json"
+}
+{
+  "records": 9,
+  "added": 0,
+  "refreshed": 9,
+  "cross_tagged_existing": 1,
+  "manual_total": 1796,
+  "sources_total": 779,
+  "research_file": "/workspace/scratch/cc6502ebeac7/r9-release/data/polymythcal-research-set-7-director-present-2026-08-13.json"
+}
+{
+  "records": 91,
+  "added": 0,
+  "refreshed": 91,
+  "cross_tagged_existing": 10,
+  "manual_total": 1796,
+  "sources_total": 779,
+  "research_file": "/workspace/scratch/cc6502ebeac7/r9-release/data/polymythcal-research-set-8-creator-present-2026-08-13.json"
+}
+{
+  "existing_parent_records_enriched": 3,
+  "manual_total": 1796
+}
+{
+  "records": 181,
+  "added": 0,
+  "refreshed": 181,
+  "cross_tagged_existing": 23,
+  "manual_total": 1796,
+  "sources_total": 779,
+  "research_file": "/workspace/scratch/cc6502ebeac7/r9-release/data/polymythcal-research-set-9-public-intellectual-academic-2026-08-13.json"
+}
+{
+  "records": 181,
+  "added": 0,
+  "refreshed": 181,
+  "cross_tagged_existing": 23,
+  "manual_total": 1796,
+  "sources_total": 779,
+  "research_file": "/workspace/scratch/cc6502ebeac7/r9-release/data/polymythcal-research-set-9-public-intellectual-academic-2026-08-13.json",
+  "legacy_reconciled": 8,
+  "official_time_corrections": 6,
+  "source_url_corrections": 2
+}
+{
+  "records": 113,
+  "added": 0,
+  "refreshed": 113,
+  "cross_tagged_existing": 5,
+  "manual_total": 1796,
+  "sources_total": 779,
+  "research_file": "/workspace/scratch/cc6502ebeac7/r9-release/data/polymythcal-research-set-11-participatory-cultural-2026-08-14.json"
+}
+{
+  "records": 113,
+  "added": 0,
+  "refreshed": 113,
+  "cross_tagged_existing": 5,
+  "manual_total": 1796,
+  "sources_total": 779,
+  "research_file": "/workspace/scratch/cc6502ebeac7/r9-release/data/polymythcal-research-set-11-participatory-cultural-2026-08-14.json",
+  "legacy_records_reconciled": 0,
+  "parent_records": 12,
+  "child_occurrences": 54,
+  "confirmed_records": 110,
+  "qualified_records": 3
+}
+{
+  "records": 142,
+  "added": 0,
+  "refreshed": 142,
+  "cross_tagged_existing": 25,
+  "manual_total": 1796,
+  "sources_total": 779,
+  "research_file": "/workspace/scratch/cc6502ebeac7/r9-release/data/polymythcal-research-set-12-civic-political-legal-labour-2026-08-14.json"
+}
+{
+  "records": 142,
+  "added": 0,
+  "refreshed": 142,
+  "cross_tagged_existing": 25,
+  "manual_total": 1796,
+  "sources_total": 779,
+  "research_file": "/workspace/scratch/cc6502ebeac7/r9-release/data/polymythcal-research-set-12-civic-political-legal-labour-2026-08-14.json",
+  "legacy_records_reconciled": 0,
+  "parent_records": 14,
+  "child_occurrences": 107,
+  "confirmed_records": 134,
+  "qualified_records": 8,
+  "court_hearings": 31,
+  "election_records": 30
+}
+{
+  "status": "pass",
+  "events": 1796,
+  "changed": 0,
+  "shadow_reconciled": "research-90988e54ea05",
+  "all_ids_explicit": true
+}
+{
+  "status": "pass",
+  "targets": [
+    {
+      "path": "data/manual-events.json",
+      "events": 1796,
+      "changed": 487
+    },
+    {
+      "path": "polymythseminars/events.json",
+      "events": 2086,
+      "changed": 10
+    }
+  ]
+}
+{
+  "records": 120,
+  "added": 0,
+  "refreshed": 120,
+  "cross_tagged_existing": 50,
+  "manual_total": 1796,
+  "sources_added": 0,
+  "sources_total": 779
+}
+{
+  "records": 54,
+  "added": 0,
+  "refreshed": 54,
+  "cross_tagged_existing": 90,
+  "manual_total": 1796,
+  "sources_added": 0,
+  "sources_total": 779
+}
+{
+  "status": "pass",
+  "records": 81,
+  "added": 0,
+  "refreshed": 72,
+  "cross_tagged_existing": 9,
+  "manual_total": 1796,
+  "sources_total": 779,
+  "sources_added": 0
+}
+{
+  "source": "manual-polymythcal-arts-set10-reconstruction-2026-08-14",
+  "research_set": "10-Arts-Performance-Exhibitions-and-Festivals",
+  "records_enriched": 484,
+  "baseline_set9_arts_records": 401,
+  "post_set9_arts_records_cross_classified": 83,
+  "set11_arts_records_cross_classified": 62,
+  "set11_existing_records_cross_tagged": 3,
+  "set12_arts_records_cross_classified": 1,
+  "upsert_eligible_records": 480,
+  "canonical_duplicate_records_not_upserted": 4,
+  "stable_public_ids_backfilled": 67,
+  "unresolved_legacy_records_without_ids": 0,
+  "forms": {
+    "artist-curator-program": 3,
+    "dance-performance": 12,
+    "exhibition": 49,
+    "festival": 138,
+    "multidisciplinary-performance": 86,
+    "music-performance": 55,
+    "opera-orchestral": 10,
+    "public-art-site-specific": 31,
+    "screening-film-festival": 64,
+    "talkback-discussion": 86,
+    "theatre-performance": 107
+  },
+  "disciplines": {
+    "dance": 12,
+    "film-media-arts": 64,
+    "multidisciplinary-arts": 86,
+    "multidisciplinary-cultural-festival": 138,
+    "music": 55,
+    "opera-orchestral-music": 10,
+    "public-art": 31,
+    "theatre": 107,
+    "visual-arts": 49
+  },
+  "occurrence_roles": {
+    "child": 104,
+    "parent": 29,
+    "run": 165,
+    "single-occurrence": 186
+  },
+  "change_list_components": [
+    "CL-WEB-252",
+    "CL-WEB-253",
+    "CL-WEB-254",
+    "CL-WEB-255",
+    "CL-WEB-256",
+    "CL-WEB-257",
+    "CL-WEB-258",
+    "CL-WEB-259"
+  ],
+  "reconstruction_note": "Rebuilt from the verified Set 9 archive because the previously claimed Set 10 output was not present. No new source-verification claim is made for legacy records."
+}
+MANUAL CALENDAR UPSERT — 0 inserted, 1796 refreshed, 2086 total.
+Reviewed corrections applied from 4 dated ledgers; 2086 distinct records, 2 preserved identity aliases.
+POLYMYTHCAL DESTINATION SPECIFICITY — 2086 records; official-event-page 565; official-series-page 627; source-event-page 1; unavailable-specific-page 893; updated.
+PASS: 2086 canonical records; 779 qualified unconfirmed; 779 registered sources
+AUDIT 45 LANGUAGE MODEL APPLIED — events=2086, candidates=0, teacher_resources=646
+POLYMYTHCAL DISCOVERY V2 — 1873 chronology + 213 watchlist = 2086; 3006049 raw / 308748 gzip bytes; already current.
+Built 2086 stable bilingual event pages, 2150 legacy aliases, and standards-correct ICS files
+POLYMYTHCAL LISTING COUNTS — 2086 canonical records; 0 legacy route shells updated; 24 Discovery v2 shells use live payload counts.
+SEARCH SURFACE BUILD — 678 resource pages, 354 indexable event pages, 16 methodology sections, 1856 sitemap URLs, 2 files updated.
+POLYMYTHCAL SET 13-15 FACETS APPLY — 0 file(s) changed.
+WRITING SHORTCUT BUILD — unified clarity interface, 0 files updated.
+ACADEMIC SHORTCUT BUILD — unified clarity interface, 4 files updated.
+Built 11 chronology-only bilingual RSS/ICS pairs, compact featured feed, and subscription index; excluded 213 watchlist records; 15 files updated
+STEADY GEOMETRY APPLY — 1 of 7579 source HTML files updated; 7551 ordinary pages carry sha256-b2b5c4a61b06, 26 canonical star pages and 1 source-only controls remain shared-geometry-free.
+SITE-WIDE TYPE/ZOOM LINK APPLIED — 179 source HTML pages.
+TYPE + WORD-WRAP FLOOR APPLIED — 0 tiny declarations raised and 0 break-all rules repaired across 0 files.
+GOOGLE FONTS CONSOLIDATED — 0 source HTML documents changed.
+POLYMYTHCAL DISCOVERY V2 — 1873 chronology + 213 watchlist = 2086; 3006049 raw / 308748 gzip bytes; already current.
+POLYMYTHCAL UNDATED CANDIDATES — 0 announcements, already current.
+AUDIT 43 APPROVED UI APPLIED — 2 HTML files updated; 7225 route files carry the transition layer; 6 dense routes expose opt-in reader mode.
+SHARED ASSET NORMALIZATION PASSED — 7225 pages, 7225 stylesheet owners, 6 reader routes, 0 files updated, 0 duplicate references removed.
+LEIZU I18N SOURCE BUILT — en=262, zh=262, zhs=262, fa=262, fr=262
+POLYMYTHCAL I18N SOURCE BUILT — 296 static strings.
+MANIFEST RELEASE STAMP PASSED — 7225 active source pages inspected, 4062 updated, target 2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final / 20261004-repair-v9; historical audit evidence untouched.
+Wrote /workspace/scratch/cc6502ebeac7/r9-release/data/saul-cv-records.json with 65 records.
+Static-site build: reusing committed, verified Saul CV document outputs.
+Built the ultimate /saul application CV from one verified data source.
+SAUL ULTIMATE WEB CV CHECK PASSED — 37 application rows, integrated section and role details, 65 historical records, persistent focus filtering, simplified downloads and distinct complete-career outputs.
+AUDIT 45 LOCALIZED ROUTES BUILT — 61 governed route records, 376 sitemap URLs
+AUDIT 45 TRANSLATION UI APPLIED — 7098 pages checked, 56 updated.
+AUDIT49 METADATA HYGIENE PASSED — 1835 indexable pages carry JSON-LD; 0 generic WebPage schemas generated; 1 frozen archive exempted.
+Wrote /workspace/scratch/cc6502ebeac7/r9-release/data/saul-cv-records.json with 65 records.
+Static-site build: reusing committed, verified Saul CV document outputs.
+Built the ultimate /saul application CV from one verified data source.
+SAUL ULTIMATE WEB CV CHECK PASSED — 37 application rows, integrated section and role details, 65 historical records, persistent focus filtering, simplified downloads and distinct complete-career outputs.
+AUDIT 45 LOCALIZED ROUTES BUILT — 61 governed route records, 376 sitemap URLs
+AUDIT 45 TRANSLATION UI APPLIED — 7098 pages checked, 56 updated.
+AUDIT49 METADATA HYGIENE PASSED — 1835 indexable pages carry JSON-LD; 0 generic WebPage schemas generated; 1 frozen archive exempted.
+POLYMYTHCAL DESTINATION CONTRACT — 2086 records; official-event-page 565; official-series-page 627; source-event-page 1; source-series-page 0; unavailable-specific-page 893; already current.
+SITE-WIDE TYPE/ZOOM LINK APPLIED — 0 source HTML pages.
+POLYMYTHCAL DISCOVERY SITE BUILT — 6 bilingual routes, 6 changed.
+WRITING SHORTCUT BUILD — unified clarity interface, 10 files updated.
+ACADEMIC SHORTCUT BUILD — unified clarity interface, 12 files updated.
+STEADY GEOMETRY APPLY — 80 of 7579 source HTML files updated; 7551 ordinary pages carry sha256-b2b5c4a61b06, 26 canonical star pages and 1 source-only controls remain shared-geometry-free.
+RELEASE ASSET IDENTITY UPDATED
+POLYMYTHCAL BUILD MANIFEST — 2086 records, 779 sources, release 2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final.
+PUBLIC DEPLOY BUILD PASSED — 38 public directories copied to /public; full source remains in zip root.
+PUBLIC DEPLOY PARITY PASSED — 9800 allowlisted files are complete, byte-identical, and free of stale public-only files.
+RELEASE ASSET IDENTITY PASSED — 28 bound source assets and 23 public runtime mirrors
+{
+  "manual_records": 1796,
+  "consolidated_records": 2086,
+  "imported_records": 292,
+  "confirmed": 217,
+  "qualified_unconfirmed": 75,
+  "families": {
+    "astrology": 11,
+    "celestial": 64,
+    "creator-present": 1,
+    "opportunity": 193,
+    "performance": 1,
+    "public-event": 9,
+    "ritual": 13
+  },
+  "sources": 779,
+  "medusa_regression": "pass",
+  "corrected_2026_lunar_eclipse": "pass",
+  "ui_discovery": "pass"
+}
+{
+  "manual_records": 1796,
+  "consolidated_records": 2086,
+  "set4_records": 68,
+  "confirmed": 37,
+  "qualified_watches": 31,
+  "sources": 779,
+  "exact_grade_checks": "pass",
+  "parent_child_checks": "pass",
+  "social_studies_filter": "pass",
+  "change_list": "CL-WEB-204 through CL-WEB-211 complete"
+}
+{
+  "manual_records": 1796,
+  "consolidated_records": 2086,
+  "set5_records": 73,
+  "confirmed": 53,
+  "qualified_watches": 20,
+  "sources": 779,
+  "change_list": "CL-WEB-212 through CL-WEB-219 complete"
+}
+{
+  "manual_records": 1796,
+  "consolidated_records": 2086,
+  "set6_records": 42,
+  "confirmed": 30,
+  "qualified_watches": 12,
+  "sources": 779,
+  "change_list": "CL-WEB-220 through CL-WEB-227 complete"
+}
+{
+  "manual_records": 1796,
+  "consolidated_records": 2086,
+  "set7_records": 9,
+  "named_director_occurrences": 8,
+  "sources": 779,
+  "change_list": "CL-WEB-228 through CL-WEB-235 complete"
+}
+{
+  "manual_records": 1796,
+  "consolidated_records": 2086,
+  "set8_records": 91,
+  "parent_records": 13,
+  "child_occurrences": 74,
+  "tarragon_talkbacks": 46,
+  "doc_soup_occurrences": 14,
+  "sources": 779,
+  "change_list": "CL-WEB-236 through CL-WEB-243 complete"
+}
+{
+  "manual_records": 1796,
+  "consolidated_records": 2086,
+  "set9_records": 181,
+  "parent_records": 10,
+  "child_occurrences": 120,
+  "public_thesis_defences": 48,
+  "practical_philosophy_occurrences": 9,
+  "proust_reading_occurrences": 13,
+  "royal_institute_phd_seminars": 4,
+  "sources": 779,
+  "change_list": "CL-WEB-244 through CL-WEB-251 complete"
+}
+{
+  "manual_records": 1796,
+  "consolidated_records": 2086,
+  "set10_ledger_records": 484,
+  "set10_upsert_records": 480,
+  "stable_ids_backfilled": 67,
+  "duplicate_holdouts": 4,
+  "change_list": "CL-WEB-252 through CL-WEB-259 complete"
+}
+{
+  "manual_records": 1796,
+  "consolidated_records": 2086,
+  "set11_records": 113,
+  "parent_records": 12,
+  "child_occurrences": 54,
+  "confirmed_records": 104,
+  "qualified_watches": 3,
+  "sources": 779,
+  "change_list": "CL-WEB-260 through CL-WEB-267 complete"
+}
+{
+  "manual_records": 1796,
+  "consolidated_records": 2086,
+  "set12_records": 142,
+  "parent_records": 14,
+  "child_occurrences": 107,
+  "confirmed_records": 87,
+  "qualified_records": 55,
+  "court_hearings": 31,
+  "election_records": 30,
+  "sources": 779,
+  "change_list": "CL-WEB-268 through CL-WEB-275 complete"
+}
+{
+  "status": "pass",
+  "mode": "full-public",
+  "new_records": 120,
+  "cross_tagged_existing": 50,
+  "tagged_records": 170,
+  "formats": 22,
+  "parent_records": 8,
+  "child_occurrences": 33,
+  "sources": 31,
+  "exclusions": 9,
+  "manual_records": 1796,
+  "canonical_records": 2086
+}
+{
+  "manual_records": 1796,
+  "set14_new_records": 54,
+  "set14_cross_tagged_existing": 90,
+  "set14_tagged_records": 144,
+  "parent_records": 9,
+  "child_occurrences": 21,
+  "confirmed_records": 48,
+  "qualified_records": 6,
+  "source_records": 22,
+  "source_only": false
+}
+{
+  "status": "pass",
+  "set15_records": 81,
+  "new_records": 72,
+  "cross_tagged_existing": 9,
+  "normalized_formats": 19,
+  "parent_records": 7,
+  "child_records": 18,
+  "evidence_sources": 32,
+  "exclusions": 12,
+  "canonical_records": 2086,
+  "public_records": 2086,
+  "browser_records": 2086,
+  "second_run_additions": 0
+}
+POLYMYTHCAL SET FIELD PROPAGATION PASSED — 2086 canonical records retain private research fields; exact Sets 12–15 facets are lazy Research overlays for 1873 chronology records while 213 monitoring records retain stable detail routes.
+POLYMYTHCAL SETS 13-15 DOM-ONLY CHECK PASSED — 34252 assertions; exact 22/14/19 taxonomy, safe split payloads, compact EN/FR shells.
+FRONT-FACING BOUNDARY CHECK PASSED
+Coverage: 7579 source HTML; 7578 public HTML; 15064 reader-facing documents; 91 deliberate manual/tool documents; 49 browser JavaScript files; 23 generator/data sources; 36 summary-only locale routes; 346 Polymythlib records; 8472 generated event pages; 32 methodology section pages.
+POLYMYTH COHERENCE WORKBOOK SITE-ONLY PASSED — source/public deploy parity, byte-exact blank V5.1.2 workbook, protocol, answer-free schema, routing addendum, 35 sheets, 85,768 formulas, 24 protocol entries, 40 QA checks, 22 regressions, zero completed cases, and no worked-applications leak verified without private release masters.
+POLYMYTH COHERENCE ENTRY POINTS SITE-ONLY PASSED — source/public deploy parity, blank V5.1.2 instrument/protocol, operative answer-free schema, routing addendum, and no worked-applications leak verified without private release masters.
+VISIBLE GEOMETRY CHECK PASSED — 7551 source and 7551 public included pages use content token sha256-b2b5c4a61b06, one exact spectrum, protected page-fit fading, and document/nested/full-screen input ownership; 26 source/26 public star pages and 1 source-only control remain free of shared geometry.
+PATH-STABLE CANONICAL GEOMETRY CHECK PASSED — 7551 source and 7551 public included pages use sha256-b2b5c4a61b06; their exact spectrum and drawing are invariant while normalized-path cameras and bounded fading fit each page. 26 source/26 public star pages and 1 source-only control remain free of shared geometry.
+MOTION COMPARISON {"evidence":"controlled 60 Hz clock and DOM stub, not browser FPS or physical-device performance","coarse":{"baseline":{"colorWrites":18,"maxStep":229.49005490434658,"pending":0,"final":0.7774},"current":{"colorWrites":18,"maxStep":66.74359894401859,"pending":0,"final":0.7774}},"fine":{"baseline":{"colorWrites":108,"maxStep":3.111028768751541,"pending":0,"final":0.0652},"current":{"colorWrites":46,"maxStep":2.776706682384737,"pending":0,"final":0.0652}}}
+canonical polymyth-mandala-main-v32: sha256 9eed9e07f1c79fffa3bdd926977745bad5f90283bee3f7c6705d752bce347a0b, 257930 bytes
+GEOMETRY CHECK PASSED — the full three-gasket/flower/prismatic-jewel web, exact spectrum, two cameras, and bounded page-fit fading are canonical on every included page; star files and the source-only dashboard control remain free of shared geometry, and reduced motion remains visible and static.
+RELEASE BUILD LOCK VERIFIED — writer 37a86ca6ddf5:34 owns /workspace/scratch/cc6502ebeac7/r9-release.
+ASSET REPORT BUILT — 9801 public files, 170151414 bytes.
+POLYMYTHCAL FEATURED FEED CHECK PASSED — 64 chronology-only upcoming records from 2026-10-03, build-date-aligned, watchlist-free, and public-identical.
+PUNCTUATION TITLE REGRESSIONS PASSED — 400 terms across 346 records
+POLYMYTHCAL DISCOVERY CORE TESTS PASSED
+POLYMYTHCAL DATA/TRUTH TEST PASSED — canonical/public partition, temporal fixtures, exact facet aliases, language, freshness, and private-field boundary verified.
+POLYMYTHCAL DISCOVERY SHELL TESTS PASSED — 28 routes
+POLYMYTHCAL DISCOVERY V2 PASSED — 1873 chronology + 213 watchlist; 560 occurrences in 137 series; 308748 main gzip bytes; Unicode, collision, facet, celestial, series, temporal, accessibility, SEO, and public-boundary gates passed.
+PUNCTUATION TITLE REGRESSIONS PASSED — 400 terms across 346 records
+POLYMYTHCAL DISCOVERY CORE TESTS PASSED
+POLYMYTHCAL DATA/TRUTH TEST PASSED — canonical/public partition, temporal fixtures, exact facet aliases, language, freshness, and private-field boundary verified.
+POLYMYTHCAL DISCOVERY SHELL TESTS PASSED — 28 routes
+POLYMYTHCAL DISCOVERY V2 PASSED — 1873 chronology + 213 watchlist; 560 occurrences in 137 series; 308748 main gzip bytes; Unicode, collision, facet, celestial, series, temporal, accessibility, SEO, and public-boundary gates passed.
+POLYMYTHCAL DESTINATION SPECIFICITY PASSED — 2086 records; 1193 exact external actions; 893 specific destinations unresolved; 46 reviewed/reconciled URL replacements; 488 shared-series records; official-event-page 565; official-series-page 627; source-event-page 1; unavailable-specific-page 893; digest 974b6c049727701eb9080816767ef3a6571ae2091291c085d35769d3b4bb970a.
+POLYMYTHCAL BUILD/EFFICIENCY CHECK PASSED — 16673 byte shell; 2086 canonical = 1873 chronology + 213 monitoring; 3006049 raw / 308748 gzip discovery payload; 11 focused routes.
+STEADY UI CHECK PASSED — 7579 source pages, 7578 public pages, and 7303 active HTML/CSS/JS files satisfy the pre-paint, calm-interaction, scroll-geometry, anti-yap, bounded-render, and background-loop contracts.
+WARN Polymythcal search debounce was not detected
+AUDIT 45 TRANSLATION GATE PASSED — 41207/41207 assertions; 2086 events; 40 Leizu routes; 2086 French event routes plus 32 aliases; 646 Teacher Resources; weekly cadence preserved.
+=== AUDIT49 METADATA / PAGE-SURFACE GATE ===
+7577 source HTML documents; 5374 interactive; 2203 redirects; 1836 indexable; 5741 noindex.
+7577/7577 source/public byte-identical; 1856 sitemap URLs; 3254 JSON-LD blocks; 12960 hreflang links.
+AUDIT49 METADATA / PAGE-SURFACE PASSED.
+AUDIT49 RUNTIME EFFICIENCY PASSED — 7280 active runtime files, 10 lifecycle-bounded interval routes, 45 bounded startup timer slots, and 24 cached data assets (10715590 bytes).
+AUDIT49 BUILD/PACKAGING EFFICIENCY PASSED — 21271 deployer files selected after pruning, 16 package regressions, one source read per archived member, bounded runner commands, and one Linux canonical CI build.

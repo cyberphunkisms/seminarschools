@@ -158,8 +158,8 @@ requireEntryText(coreMap, 'b', 'None converts AI understanding into authorial se
 requireText('CHARTER.txt', 'Question/deliberation/bare use/review/audit/compare/critique/run-through => analysis only', 'the portable CORE questions, bare-use, and analysis-only boundary');
 requireText('CHARTER.txt', 'explicit mutation verb + named target controls.', 'the portable CORE named-target mutation boundary');
 requireText('CHARTER.txt', 'AI-generated question=>run OA first; received user question/audit alone≠OA.', 'the portable CORE question-generation OA trigger');
-requireText('CHARTER.txt', 'Repetition keeps target/scope; adds no authority/presumed defect.', 'the portable CORE repeated-audit boundary');
-requireText('CHARTER.txt', 'File/memory/artifact/publication/deployment/adjacent-object mutation requires explicit target permission.', 'the portable CORE no-mutation boundary');
+requireText('CHARTER.txt', 'Repetition keeps target/scope;adds no authority/presumed defect.', 'the portable CORE repeated-audit boundary');
+requireText('CHARTER.txt', 'File/memory/artifact/publication/deployment/adjacent mutation requires explicit target permission.', 'the portable CORE no-mutation boundary');
 requireText('CHARTER.txt', 'No authority radiation.', 'the portable CORE object boundary');
 requireText('CHARTER.txt', 'Correction supersedes conflict; no replacement implied. Constraint binds later authorized work.', 'the portable CORE correction and constraint boundary');
 requireText('CHARTER.txt', 'Stop=hold.', 'the portable CORE stop gate');
@@ -272,7 +272,7 @@ const personalRulesCrosswalk = Object.freeze([
   ['PR20', 'Exact request first.', PERSONAL_RULES_CURRENT_ID, 'Exact request first.', 'preserved'],
   ['PR21', 'Question/deliberation/review/audit/compare/critique/run-through => answer/one analytical move only.', PERSONAL_RULES_CURRENT_ID, 'Question/deliberation/bare use/review/audit/compare/critique/run-through => analysis only', 'strengthened'],
   ['PR22', 'Directive => named scope/target.', PERSONAL_RULES_CURRENT_ID, 'explicit mutation verb + named target controls.', 'clarified'],
-  ['PR23', 'Any file, memory, artifact, publication, deployment, or adjacent-object mutation requires explicit target permission.', PERSONAL_RULES_CURRENT_ID, 'File/memory/artifact/publication/deployment/adjacent-object mutation requires explicit target permission.', 'clarified'],
+  ['PR23', 'Any file, memory, artifact, publication, deployment, or adjacent-object mutation requires explicit target permission.', PERSONAL_RULES_CURRENT_ID, 'File/memory/artifact/publication/deployment/adjacent mutation requires explicit target permission.', 'clarified'],
   ['PR24', 'Stop=hold.', PERSONAL_RULES_CURRENT_ID, 'Stop=hold.', 'preserved'],
   ['PR25', 'Correction supersedes conflict without choosing replacement', PERSONAL_RULES_CURRENT_ID, 'Correction supersedes conflict; no replacement implied.', 'clarified'],
   ['PR26', 'constraint binds later authorized work', PERSONAL_RULES_CURRENT_ID, 'Constraint binds later authorized work. No authority radiation.', 'strengthened'],
@@ -280,29 +280,29 @@ const personalRulesCrosswalk = Object.freeze([
   ['PR28', 'Existing contract requires only its exact file within authorized operation.', PERSONAL_RULES_CURRENT_ID, 'Existing contract applies only to exact file in authorized operation.', 'clarified'],
   ['PR29', 'Main task stays live through correction/audit/rule/support work.', PERSONAL_RULES_CURRENT_ID, 'Main task stays live through correction/audit/rule/support work.', 'preserved'],
   ['PR30', 'Continuity reference=>retrieval only.', PERSONAL_RULES_CURRENT_ID, 'Continuity reference=>retrieve only.', 'clarified'],
-  ['PR31', 'Before using/revising/claiming existing work: retrieve newest canonical source in context', PERSONAL_RULES_CURRENT_ID, 'Before use/revision/claim, retrieve newest canonical source', 'clarified'],
+  ['PR31', 'Before using/revising/claiming existing work: retrieve newest canonical source in context', PERSONAL_RULES_CURRENT_ID, 'Before use/revision/claim,retrieve newest canonical source', 'clarified'],
   ['PR32', 'search exact/rare terms', PERSONAL_RULES_CURRENT_ID, 'search exact/rare terms', 'preserved'],
-  ['PR33', 'Fragment/one failed search proves neither completeness nor absence.', PERSONAL_RULES_CURRENT_ID, 'Fragment/failed search proves neither completeness nor absence.', 'clarified'],
+  ['PR33', 'Fragment/one failed search proves neither completeness nor absence.', PERSONAL_RULES_CURRENT_ID, 'Fragment/failed search≠completeness/absence.', 'clarified'],
   ['PR34', 'Preserve unresolved shorthand; ask only if blocked.', PERSONAL_RULES_CURRENT_ID, 'Preserve unresolved shorthand; ask only if blocked.', 'preserved'],
   ['PR35', 'Activate applicable CORE+ handlers each turn.', PERSONAL_RULES_CURRENT_ID, 'Each turn retrieve/apply triggered current handlers', 'clarified', [[PERSONAL_RULES_EXPANDED_ID, 'Before every substantive response, silently classify the request and activate the applicable scope, retrieval, CORE+ project-handler']]],
   ['PR36', 'ML* activates only for material/explicit work on Polymyth, Meaninglib, Seminar Schools, Mephistodata, Devil\'s Diary, named star files, CORE, CORE+', PERSONAL_RULES_CURRENT_ID, 'ML* activates only for material/explicit work on Polymyth, Meaninglib, Seminar Schools, Mephistodata, Devil\'s Diary, named star files, CORE, CORE+', 'preserved'],
   ['PR37', 'generic project/site/book/file/ZIP/audit/methodology/citation/mythology/philosophy mentions do not activate', PERSONAL_RULES_CURRENT_ID, 'generic project/site/book/file/ZIP/audit/methodology/citation/mythology/philosophy mentions do not activate', 'preserved'],
   ['PR38', 'Canonical ML*: https://seminarschools.com/polymyth/methodologylist/; cold-load CORE+ map: https://seminarschools.com/polymyth/methodologylist-coreplus.txt; full text: https://seminarschools.com/polymyth/methodologylist.txt.', PERSONAL_RULES_CURRENT_ID, 'Canonical ML*: https://seminarschools.com/polymyth/methodologylist/; cold-load CORE+ map: https://seminarschools.com/polymyth/methodologylist-coreplus.txt; full text: https://seminarschools.com/polymyth/methodologylist.txt.', 'preserved'],
-  ['PR39', 'When active: become Mephistodata; load current Methodologylist/addenda, CORE+ map, handlers, siblings.', PERSONAL_RULES_CURRENT_ID, 'When active: become Mephistodata; load current Methodologylist/addenda/map/handlers/relevant siblings.', 'clarified'],
+  ['PR39', 'When active: become Mephistodata; load current Methodologylist/addenda, CORE+ map, handlers, siblings.', PERSONAL_RULES_CURRENT_ID, 'When active: become Mephistodata;load current ML*/addenda/map/handlers/siblings.', 'clarified'],
   ['PR40', 'Project/technical rules stay CORE+.', PERSONAL_RULES_CURRENT_ID, 'Project/technical rules=>CORE+.', 'clarified'],
-  ['PR41', 'AI decides routine format/IDs/organization/CORE-vs-CORE+ placement; user override.', PERSONAL_RULES_CURRENT_ID, 'AI decides routine format/IDs/organization/CORE-vs-CORE+ placement; user override.', 'preserved'],
+  ['PR41', 'AI decides routine format/IDs/organization/CORE-vs-CORE+ placement; user override.', PERSONAL_RULES_CURRENT_ID, 'AI decides routine format/IDs/organization/CORE-vs-CORE+ filing; user override.', 'clarified'],
   ['PR42', 'CORE=indispensable universal/pre-retrieval triggers.', PERSONAL_RULES_CURRENT_ID, 'CORE=indispensable universal/pre-retrieval triggers.', 'preserved'],
   ['PR43', 'CORE+=lossless active detail, conditional/project/technical/evidence/procedure/history in best-fit canonical owners.', PERSONAL_RULES_CURRENT_ID, 'CORE+=lossless conditional/project/technical/evidence/procedure/history detail in best-fit owners.', 'clarified', [[PERSONAL_RULES_MAP_ID, 'Canonical rules remain in their proper owners.']]],
-  ['PR44', 'Preserve meaning + retrieval trigger.', PERSONAL_RULES_CURRENT_ID, 'Preserve meaning + retrieval trigger.', 'preserved'],
+  ['PR44', 'Preserve meaning + retrieval trigger.', PERSONAL_RULES_CURRENT_ID, 'Preserve meaning+retrieval trigger.', 'clarified'],
   ['PR45', 'Use verified 5,000-character ceiling', PERSONAL_RULES_CURRENT_ID, 'Use verified 5,000-char ceiling', 'clarified'],
   ['PR46', 'invent no smaller cap/content-cut remedy', PERSONAL_RULES_CURRENT_ID, 'invent no smaller cap/cut', 'clarified'],
   ['PR47', 'verify actual failing surface/constraint first', PERSONAL_RULES_CURRENT_ID, 'verify failing surface/constraint first', 'clarified'],
   ['PR48', 'Changed methodology=>canonical ML* owner', PERSONAL_RULES_CURRENT_ID, 'Changed methodology=>canonical ML* owner', 'preserved'],
   ['PR49', 'no random durable file', PERSONAL_RULES_CURRENT_ID, 'no random durable file', 'preserved'],
-  ['PR50', 'Follow user method; deliberation tentative.', PERSONAL_RULES_CURRENT_ID, 'Follow user method.', 'strengthened', [[PERSONAL_RULES_CURRENT_ID, 'Named method/ML*-active register=>load current owner; owner sets form.'], [PERSONAL_RULES_CURRENT_ID, 'Deliberation tentative.']]],
-  ['PR51', 'Ask only if missing authority, irreducible contradiction, authorship, costly default, or genuine choice blocks work', PERSONAL_RULES_CURRENT_ID, 'Ask only if authority/irreducible contradiction/authorship/costly default/genuine choice blocks', 'clarified'],
+  ['PR50', 'Follow user method; deliberation tentative.', PERSONAL_RULES_CURRENT_ID, 'Use user method.', 'strengthened', [[PERSONAL_RULES_CURRENT_ID, 'Named method/register=>current owner/form.'], [PERSONAL_RULES_CURRENT_ID, 'Deliberation tentative.']]],
+  ['PR51', 'Ask only if missing authority, irreducible contradiction, authorship, costly default, or genuine choice blocks work', PERSONAL_RULES_CURRENT_ID, 'Ask only if authority/irreducible contradiction/authorship/costly default/choice blocks', 'clarified', [[PERSONAL_RULES_EXPANDED_ID, 'Ask only for irreducible contradictions, authorship, costly defaults, mutation authority, or genuine user choices.']]],
   ['PR52', 'exhaust fixes', PERSONAL_RULES_CURRENT_ID, 'exhaust fixes', 'preserved'],
-  ['PR53', 'Ordinary meaning; no ambiguity/evasion.', PERSONAL_RULES_CURRENT_ID, 'Ordinary meaning; no ambiguity/evasion.', 'preserved'],
+  ['PR53', 'Ordinary meaning; no ambiguity/evasion.', PERSONAL_RULES_CURRENT_ID, 'Ordinary meaning; no ambiguity.', 'moved-losslessly', [[PERSONAL_RULES_EXPANDED_ID, 'Do not manufacture ambiguity through pedantry or legalism or use a distinction to evade the claim.']]],
   ['PR54', 'Report proposed/attempted/changed/verified truthfully', PERSONAL_RULES_CURRENT_ID, 'Report proposed/attempted/changed/verified truthfully', 'preserved'],
   ['PR55', 'tool success insufficient', PERSONAL_RULES_CURRENT_ID, 'tool success insufficient', 'preserved'],
   ['PR56', 'Complete + verify authorized unblocked requirements', PERSONAL_RULES_CURRENT_ID, 'Complete/verify authorized unblocked work', 'clarified'],
@@ -325,9 +325,9 @@ const personalRulesCrosswalk = Object.freeze([
   ['PR73', 'no unstated framework', PERSONAL_RULES_CURRENT_ID, 'no unstated framework', 'preserved'],
   ['PR74', 'psychological/wellbeing/institutional speculation unless requested/required', PERSONAL_RULES_CURRENT_ID, 'psychological/wellbeing/institutional speculation unless requested/required', 'preserved'],
   ['PR75', 'Apply full CORE+ citation/writing handlers.', PERSONAL_RULES_CURRENT_ID, 'Apply CORE+ citation/writing handlers.', 'clarified', [[PERSONAL_RULES_MAP_ID, 'CORE+ is every other current Mephistodata rule']]],
-  ['PR76', 'Cite substantive claims inline', PERSONAL_RULES_CURRENT_ID, 'Cite substantive claims inline', 'preserved'],
-  ['PR77', 'verify uncertain/unfamiliar facts from checked primary/canonical sources', PERSONAL_RULES_CURRENT_ID, 'verify uncertain/unfamiliar facts from checked primary/canonical sources', 'preserved'],
-  ['PR78', 'label inference/paraphrase', PERSONAL_RULES_CURRENT_ID, 'label inference/paraphrase', 'preserved'],
+  ['PR76', 'Cite substantive claims inline', PERSONAL_RULES_CURRENT_ID, 'Cite every substantive claim inline;', 'strengthened'],
+  ['PR77', 'verify uncertain/unfamiliar facts from checked primary/canonical sources', PERSONAL_RULES_CURRENT_ID, 'verify uncertain/unfamiliar via primary/canonical', 'clarified'],
+  ['PR78', 'label inference/paraphrase', PERSONAL_RULES_CURRENT_ID, 'Label inference/paraphrase', 'clarified'],
   ['PR79', 'preserve quotation provenance', PERSONAL_RULES_CURRENT_ID, 'preserve quote provenance', 'clarified'],
   ['PR80', 'fabricate nothing', PERSONAL_RULES_CURRENT_ID, 'fabricate nothing', 'preserved'],
   ['PR81', 'Lead requested substance', PERSONAL_RULES_CURRENT_ID, 'Lead requested substance', 'preserved'],
@@ -338,7 +338,7 @@ const personalRulesCrosswalk = Object.freeze([
   ['PR86', 'Ground first-person claims in actions/evidence', PERSONAL_RULES_CURRENT_ID, 'Ground first-person claims in actions/evidence', 'preserved'],
   ['PR87', 'translate shorthand without weakening', PERSONAL_RULES_CURRENT_ID, 'translate shorthand without weakening', 'preserved'],
   ['PR88', 'preserve verbatim/provenance', PERSONAL_RULES_CURRENT_ID, 'preserve verbatim/provenance', 'preserved'],
-  ['PR89', 'context not automatically publishable', PERSONAL_RULES_CURRENT_ID, 'context not automatically publishable', 'preserved'],
+  ['PR89', 'context not automatically publishable', PERSONAL_RULES_CURRENT_ID, 'context≠publishable', 'clarified'],
   ['PR90', 'End on final point.', PERSONAL_RULES_CURRENT_ID, 'End on final point.', 'preserved'],
 ]);
 
@@ -359,15 +359,15 @@ for (const [rowId, priorNeedle, currentId, currentNeedle, status, additional = [
   }
 }
 const personalRulesCrosswalkHash = sha256(JSON.stringify(personalRulesCrosswalk));
-if (personalRulesCrosswalkHash !== '16b89e3aa3137113b0cd1bb290a60e9dee1b0b5ebdc90c8ca7d517269eee27ad') failures.push(`Personal Rules crosswalk hash drifted (${personalRulesCrosswalkHash})`);
+if (personalRulesCrosswalkHash !== '0f7935ff47db50b06c11b60f4cecba4530c2917aa540475316830f0915484394') failures.push(`Personal Rules crosswalk hash drifted (${personalRulesCrosswalkHash})`);
 
 // Compression-sensitive unions and the two universal safeguards recovered by
 // this conversation receive explicit behavioral locks beyond row presence.
 requireIdText(PERSONAL_RULES_MAP_ID, 'b', 'CORE+ is every other current Mephistodata rule', 'the complete active CORE+ union for PR62 and PR75');
 requireIdText(PERSONAL_RULES_EXPANDED_ID, 'b', 'unresolved contradictions or tensions', 'the unresolved-tension preservation for PR71');
 requireIdText(PERSONAL_RULES_CURRENT_ID, 'b', 'bare use/review/audit/compare/critique/run-through => analysis only', 'the universal bare-use analysis-only trigger');
-requireIdText(PERSONAL_RULES_CURRENT_ID, 'b', 'Repetition keeps target/scope; adds no authority/presumed defect.', 'the universal repeated-audit scope and no-presumed-defect trigger');
-requireIdText(PERSONAL_RULES_CURRENT_ID, 'b', 'Named method/ML*-active register=>load current owner; owner sets form.', 'the fail-closed named-method and ML*-active register owner trigger');
+requireIdText(PERSONAL_RULES_CURRENT_ID, 'b', 'Repetition keeps target/scope;adds no authority/presumed defect.', 'the universal repeated-audit scope and no-presumed-defect trigger');
+requireIdText(PERSONAL_RULES_CURRENT_ID, 'b', 'Named method/register=>current owner/form.', 'the fail-closed named-method and ML*-active register owner trigger');
 
 for (const [caseId, condition, label] of [
   ['PRB-01', String(entryById(PERSONAL_RULES_CURRENT_ID).b).includes('generic project/site/book/file/ZIP/audit/methodology/citation/mythology/philosophy mentions do not activate'), 'generic philosophy and audit language leaves ML* inactive'],
@@ -461,11 +461,11 @@ const integrationContracts = [
   ['coreplus-handler-ouroborosanalyses', 'xc', 'Outside an active run, an assistant-generated question activates exactly one Ouroborosanalyses run.', 'inactive question starts exactly one OA run'],
   ['coreplus-handler-ouroborosanalyses', 'xc', 'Receiving a user question or a generic audit activates none.', 'received-question and generic-audit zero-run guard'],
   ['method-ouroborosanalyses-current-2026-08-23', 'b', 'First, review the whole conversation.', 'whole-conversation scope'],
-  ['method-ouroborosanalyses-current-2026-08-23', 'b', 'Fourth, return only the genuinely unanswerable residue.', 'genuine-unanswerables terminus'],
-  ['method-ouroborosanalyses-current-2026-08-23', 'b', 'Zero residue is valid and is delivered as: Zero genuine unanswerables remain.', 'zero-residue terminus'],
+  ['method-ouroborosanalyses-current-2026-08-23', 'b', 'Fourth, classify every surviving question as UNRESOLVABLE, PARTIALLY UNRESOLVED, or NOT ADEQUATELY RESOLVED', 'classified unresolved terminus'],
+  ['method-ouroborosanalyses-current-2026-08-23', 'b', 'Zero residue is valid and is delivered as: Zero unresolved residue remains.', 'zero-residue terminus'],
   ['method-ouroborosanalyses-current-2026-08-23', 'b', 'QUESTION-GENERATION HIJACK.', 'question-generation hijack'],
   ['method-ouroborosanalyses-current-2026-08-23', 'b', 'The plural form Ouroborosanalyses is mandatory', 'plural-only terminology'],
-  ['method-ouroborosanalyses-current-2026-08-23', 'xc', 'The four-paragraph body is the exact current operational form.', 'current-form integration control'],
+  ['method-ouroborosanalyses-current-2026-08-23', 'xc', 'The four-paragraph body is the exact current operational form, including academic-first then TLDRLAYMAN survivor output.', 'current-form integration control'],
   ['method-ouroborosanalyses-current-2026-08-23', 'xc', 'If the user asks about the method, audit the method before its product.', 'method-first integration control'],
   ['method-ouroboros-depth-escalation-current-2026-08-23', 'b', 'A repeated generic audit goes deeper into the same frozen target and scope.', 'generic-audit depth without target shift'],
   ['method-ouroboros-depth-escalation-current-2026-08-23', 'b', 'A repeated Ouroborosanalyses reruns its exact whole-conversation four steps.', 'OA repeat preserves whole conversation'],
@@ -541,8 +541,8 @@ for (const [query, expectedId] of [
 const historicalAudit = entryById('corehistory-audit-auto-capture-auto-zip-2026-05-29');
 if (historicalAudit.s !== 'corehistory') failures.push('stale automatic AUDIT owner remains active');
 const exactCurrentBodyHashes = Object.freeze({
-  'coreplus-current-map-amendment-2026-08-26': 'a4d84f7b5d0e78e2e0e9cc4390643f1fc8f2f5b536983b4052025d6f157d36cc',
-  'coreplus-handler-current-turn-scope-semantic-fidelity-2026-08-23': '405374e547301d0be0fb7327e0358c2158168e5ec7ca2784e4ec45c868c287b0',
+  'coreplus-current-map-amendment-2026-08-26': 'a452f1bcbedd5591f5349dc24bc6383ab105b4ab407c63fa04a4c7f8395bf6be',
+  'coreplus-handler-current-turn-scope-semantic-fidelity-2026-08-23': '724f131c936682042198fca5ead5a63c2b919f3361070fcb66deb566d2395b3c',
   'method-audit-current-scope-2026-08-23': '942aa8e32a56c9b6116d5edbd48c40679c5fc5af6d64566d9307b5a085d93f40',
   'method-comparative-corpus-integrity-2026-08-23': '87428139d0832f21e246a3933071c30a3a595c3e3b0ae8f308bdf692c6333f0b',
   'coreplus-handler-named-method-output-certification-2026-08-23': 'afe6bf10971441f41325b1b019f44fec508706816fa885e70deb68670e5cd7e9',
@@ -554,16 +554,29 @@ const exactCurrentBodyHashes = Object.freeze({
   'method-selection-architecture-operational-extraction-2026-08-23': '8c9e09013fa6e827021412bf596a3f8ddc41200b18cc7ca97ae0dc06cd034561',
   'method-expulsive-absorptive-predatory-loops-2026-08-23': '45c858e162965d56f94ad1f289a0b26400de135efa36a3b967fb6096c29252cc',
   'method-connected-seminar-collective-process-control-2026-08-23': '8e612bd91b27ff789e322014aade4fa866a2aea5e8eb38cd8279ac993ba45045',
-  'coreplus-handler-ouroborosanalyses': '148fb541673e0725826a3ac8ad5fb96e68044c98bb74994fe032e88cc814672a',
-  'method-ouroborosanalyses-current-2026-08-23': '24868fe6f70cef95fb8a871331253a7d27f3796884cb4397e3f9b740844ee3f5',
-  'method-ouroboros-depth-escalation-current-2026-08-23': '1a124de466c0fe953a7530d26cbb47b09b53c4ae066212adcc34b23c52d499ed',
-  'method-command-list-current-2026-08-23': '72736f97e4a6023313c4285d9badb819242195da05ca7f5b6242ec7e7c7d1594',
+  'coreplus-handler-ouroborosanalyses': 'd9ad21dc96eae57f57a8e1e3c1e612821d169d078f9841c6572f712431ab3c76',
+  'method-ouroborosanalyses-current-2026-08-23': '7848f9f027fd6b51bb0325b4f406f775ec2f58c7817b7d03a723c6d3a2a693ce',
+  'method-ouroboros-depth-escalation-current-2026-08-23': '856fb68794201d9d265e44496859a2deb764eeb564edf5fc257bc64ef629cddd',
+  'method-command-list-current-2026-08-23': '9206933b9d0c17561ce251eb48c652d4b3ad8dac00a6b059d23fe3b5f18516dd',
   'coreplus-handler-personal-rules-equivalence-2026-08-23': '37b7ce38bba3d7bb98841a8e2c86f17323bedcb0a8eab1a4aaaa63ba732d2ce5',
 });
 for (const [id, expected] of Object.entries(exactCurrentBodyHashes)) {
   const actual = sha256(String(entryById(id).b || ''));
   if (actual !== expected) failures.push(`${id} exact current body drifted (${actual})`);
 }
+
+requireIdText(
+  'coreplus-current-map-amendment-2026-08-26',
+  'b',
+  'SYNOPSIS AND SYN DISPATCH.',
+  'the current Synopsis/syn dispatch',
+);
+requireIdText(
+  'coreplus-handler-mephistodata-execution-gates-2026-08-26',
+  'b',
+  'SYNOPSIS TECHNICAL DEFINITION.',
+  'the technical Synopsis definition',
+);
 
 const exactHistoricalBodyHashes = Object.freeze({
   'corehistory-ouroborosanalyses-whole-conversation-paradox-hijack-2026-05': '26ca1b7dd32608be71c3cf23711fdf49d05971514a172ede3acdf9e36e0e3d91',

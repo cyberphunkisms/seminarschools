@@ -29,7 +29,7 @@ must('BBT evidence ceiling is explicit', bbt.includes('The evidence ceiling') &&
 must('BBT build requirements are explicit', bbt.includes('What must be built before BBT exists'));
 must('BBT links full research shelf', bbt.includes('/polymyth/bookwormburrows-bbt-therapy-bibliography-2026-07-09.md'));
 must('BBT has research citations', (bbt.match(/https:\/\/doi\.org\//g)||[]).length >= 9);
-must('BBT is canonical in BB library', lib.includes("id:'bbt-008'") && lib.includes('research assembled, therapeutic system unbuilt'));
+must('BBT is canonical in BB library', /(?:["']id["']|\bid)\s*:\s*["']bbt-008["']/.test(lib) && lib.includes('research assembled, therapeutic system unbuilt'));
 if (txt) must('BBT is regenerated into text mirror', txt.includes('ID: bbt-008'));
 must('Sitemap includes BBT', sitemap.includes('https://seminarschools.com/bb/bbt/'));
 must('Netlify canonicalizes BBT', netlify.includes('from = "/bb/bbt"') && netlify.includes('to = "/bb/bbt/"'));

@@ -36,6 +36,7 @@ const DETECTOR_CODES = Object.freeze({
   CONTRAST_FAR_FROM: 'W56_CONTRAST_FAR_FROM',
   CONTRAST_POINT_REVEAL: 'W56_CONTRAST_POINT_REVEAL',
   CONTRAST_PARALLEL_REVEAL: 'W56_CONTRAST_PARALLEL_REVEAL',
+  CONTRAST_REVERSE_PAIR: 'W56_CONTRAST_REVERSE_PAIR',
   MIC_DROP_FRAGMENT: 'W61_MIC_DROP_FRAGMENT',
   META_ANNOUNCEMENT: 'W65_META_ANNOUNCEMENT',
   PROCESS_NARRATION: 'W67_PROCESS_NARRATION',
@@ -92,6 +93,7 @@ const RULE_ID_BY_CODE = Object.freeze({
   [DETECTOR_CODES.CONTRAST_FAR_FROM]: 'W56',
   [DETECTOR_CODES.CONTRAST_POINT_REVEAL]: 'W56',
   [DETECTOR_CODES.CONTRAST_PARALLEL_REVEAL]: 'W56',
+  [DETECTOR_CODES.CONTRAST_REVERSE_PAIR]: 'W56',
   [DETECTOR_CODES.MIC_DROP_FRAGMENT]: 'W61',
   [DETECTOR_CODES.META_ANNOUNCEMENT]: 'W65',
   [DETECTOR_CODES.PROCESS_NARRATION]: 'W67',
@@ -393,6 +395,22 @@ function lintContrastForms(text, masked, sentences, issues) {
   for (let index = 0; index < sentences.length - 1; index += 1) {
     const first = masked.slice(sentences[index].start, sentences[index].end).trim();
     const second = masked.slice(sentences[index + 1].start, sentences[index + 1].end).trim();
+    // Candidate only. Source-protected spans have already been masked.
+    // Catch an affirmative description followed by a deictic negated foil,
+    // including A. They are not merely B. Semantic review decides relevance.
+    const affirmative = first.match(/^(?:(?:so|thus|therefore|hence)\s+)?[\p{L}\p{N}][^.!?\n]{0,180}?\s+(?:is|was|are|were)\s+(?!not\b)[^.!?\n]+[.!?]?$/iu);
+    const negatedFoil = second.match(/^(?:it|they|this|that|these|those)\s+(?:is|was|are|were)\s+not\b/iu);
+    if (affirmative && negatedFoil) {
+      issues.push(makeIssue(
+        text,
+        sentences,
+        DETECTOR_CODES.CONTRAST_REVERSE_PAIR,
+        sentences[index].start,
+        sentences[index + 1].end,
+        'Apply the information-gain test to both sentences. Delete an empty pair or express its warranted relation directly.',
+        sentences[index].sentenceIndex,
+      ));
+    }
     const opening = first.match(/\b(it|this|that)\s+(is|was|are|were)\s+not\b/i);
     if (!opening) continue;
     const reveal = new RegExp(`^${opening[1]}\\s+${opening[2]}\\b`, 'i');

@@ -1,28 +1,28 @@
 {
   "schema": "seminar-schools-audit45-translation-static-v1",
   "release": "audit45",
-  "assertions": 41213,
-  "passed": 41213,
+  "assertions": 41207,
+  "passed": 41207,
   "failed": 0,
   "metrics": {
-    "events": 2088,
+    "events": 2086,
     "event_types": 64,
     "sources": 779,
-    "french_event_routes": 2088,
-    "french_event_legacy_alias_routes": 28,
+    "french_event_routes": 2086,
+    "french_event_legacy_alias_routes": 32,
     "leizu_localized_routes": 40,
     "saul_localized_routes": 4,
-    "teacher_resources": 645,
+    "teacher_resources": 646,
     "teacher_language_counts": {
-      "en-CA": 619,
+      "en-CA": 620,
       "fr-CA": 23,
       "mul": 3
     },
     "methodology_entries": 1233,
     "governed_route_records": 61,
     "event_source_language_counts": {
-      "en-CA": 1422,
-      "und": 578,
+      "en-CA": 1421,
+      "und": 577,
       "fr-CA": 62,
       "mul": 24,
       "en-US": 2

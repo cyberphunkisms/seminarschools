@@ -5,14 +5,16 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:6e9eaeddc05db57b00b7@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260721
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20260714
 DTEND;VALUE=DATE:20260902
 SUMMARY:Free Flicks
-LOCATION:Location unconfirmed · Lieu non confirmé
-DESCRIPTION:Schedule note: Tuesdays.
+LOCATION:Harbourfront Centre\, 235 Queens Quay West\, Toronto
+DESCRIPTION:Tuesday outdoor film series. Check each screening for time an
+ d status. The July 21 School of Rock screening was cancelled\; this does
+  not cancel the whole series.
 URL:https://seminarschools.com/polymythseminars/events/research-293f230f1
  292/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

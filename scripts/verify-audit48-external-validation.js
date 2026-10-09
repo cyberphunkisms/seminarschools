@@ -16,11 +16,11 @@ const ROOT = path.resolve(__dirname, '..');
 const REPORT = path.join(ROOT, 'scripts', 'reports', 'audit48-external-validation.json');
 const EXPECTED_RELEASE =
   '2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final';
-const EXPECTED_ASSET = '20260815-sets1-15-synthesis';
+const EXPECTED_ASSET = '20261004-repair-v9';
 const PRESERVED_EVIDENCE_RELEASE =
   '2026-07-26-site-audit49-technical-efficiency-resilience-final';
-const EXPECTED_PACKAGE = '1.0.6';
-const EXPECTED_DISCOVERY_COUNTS = Object.freeze({canonical: 2088, chronology: 1954, watchlist: 134});
+const EXPECTED_PACKAGE = '1.0.7';
+const EXPECTED_DISCOVERY_COUNTS = Object.freeze({canonical: 2086, chronology: 1950, watchlist: 136});
 const WATCHLIST_REASON = Object.freeze({
   code: 'monitoring-marker',
   detail: 'Displayed date is a monitoring marker, not a confirmed event or deadline date.',

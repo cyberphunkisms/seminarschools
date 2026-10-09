@@ -1,0 +1,146 @@
+{
+  "status": "passed",
+  "assertions": 199,
+  "browser": "138.0.7204.23",
+  "rows": [
+    {
+      "lang": "en",
+      "width": 320,
+      "overflow": false,
+      "firstEvent": 1589.921875,
+      "nav": [
+        {
+          "text": "Calendar",
+          "x": 19.53125,
+          "right": 127.453125
+        },
+        {
+          "text": "Research filters",
+          "x": 135.21875,
+          "right": 285.4375
+        },
+        {
+          "text": "Date monitoring",
+          "x": 74.15625,
+          "right": 230.8125
+        }
+      ]
+    },
+    {
+      "lang": "en",
+      "width": 390,
+      "overflow": false,
+      "firstEvent": 1439.140625,
+      "nav": [
+        {
+          "text": "Calendar",
+          "x": 54.015625,
+          "right": 162.375
+        },
+        {
+          "text": "Research filters",
+          "x": 170.15625,
+          "right": 320.984375
+        },
+        {
+          "text": "Date monitoring",
+          "x": 108.84375,
+          "right": 266.140625
+        }
+      ]
+    },
+    {
+      "lang": "en",
+      "width": 1280,
+      "overflow": false,
+      "firstEvent": 1054.8125,
+      "nav": [
+        {
+          "text": "Calendar",
+          "x": 406.640625,
+          "right": 519.890625
+        },
+        {
+          "text": "Research filters",
+          "x": 528.03125,
+          "right": 685.71875
+        },
+        {
+          "text": "Date monitoring",
+          "x": 693.859375,
+          "right": 858.3125
+        }
+      ]
+    },
+    {
+      "lang": "fr",
+      "width": 320,
+      "overflow": false,
+      "firstEvent": 1819.828125,
+      "nav": [
+        {
+          "text": "Calendrier",
+          "x": 92.015625,
+          "right": 212.953125
+        },
+        {
+          "text": "Filtres de recherche",
+          "x": 61.078125,
+          "right": 243.890625
+        },
+        {
+          "text": "Suivi des dates",
+          "x": 78.5625,
+          "right": 226.40625
+        }
+      ]
+    },
+    {
+      "lang": "fr",
+      "width": 390,
+      "overflow": false,
+      "firstEvent": 1567.421875,
+      "nav": [
+        {
+          "text": "Calendrier",
+          "x": 31.109375,
+          "right": 152.546875
+        },
+        {
+          "text": "Filtres de recherche",
+          "x": 160.328125,
+          "right": 343.875
+        },
+        {
+          "text": "Suivi des dates",
+          "x": 113.28125,
+          "right": 261.71875
+        }
+      ]
+    },
+    {
+      "lang": "fr",
+      "width": 1280,
+      "overflow": false,
+      "firstEvent": 1054.8125,
+      "nav": [
+        {
+          "text": "Calendrier",
+          "x": 387.328125,
+          "right": 514.25
+        },
+        {
+          "text": "Filtres de recherche",
+          "x": 522.390625,
+          "right": 714.3125
+        },
+        {
+          "text": "Suivi des dates",
+          "x": 722.453125,
+          "right": 877.640625
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

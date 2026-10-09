@@ -5,14 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:4accc022630209886140@seminarschools.com
-DTSTAMP:20260814T000800Z
-DTSTART:20270226T003000Z
+DTSTAMP:20260907T000000Z
+DTSTART;VALUE=DATE:20270225
 SUMMARY:Cabaret — post-show talkback
 LOCATION:Bluma Appel Theatre
 DESCRIPTION:Performance of Cabaret followed by a confirmed talkback. The 
- official page does not name the talkback participants.
+ official page does not name the talkback participants. The talkback foll
+ ows the 7:30 PM performance\; its own start time is not published.
 URL:https://seminarschools.com/polymythseminars/events/cabaret-talkback-2
  027-02-25/
-STATUS:CONFIRMED
+STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

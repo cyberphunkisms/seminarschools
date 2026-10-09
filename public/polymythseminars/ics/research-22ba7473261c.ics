@@ -5,14 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:02b5f50d645b4be98d7e@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260723
+DTSTAMP:20261003T110658Z
+DTSTART;VALUE=DATE:20260604
 DTEND;VALUE=DATE:20261009
 SUMMARY:Gananoque Farmers’ Market
-LOCATION:Location unconfirmed · Lieu non confirmé
-DESCRIPTION:Weekly
+LOCATION:Town Hall Park\, 30 King Street East\, Gananoque
+DESCRIPTION:Farmers’ Market on Thursdays\, 4–7 pm. Seasonal range cov
+ ers those weekly occurrences\, not continuous opening.
 URL:https://seminarschools.com/polymythseminars/events/research-22ba74732
  61c/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

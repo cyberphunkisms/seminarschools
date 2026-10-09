@@ -106,7 +106,7 @@
     "page_owned_opacity_property": "--indra-opacity",
     "owner_fade_overrides": [
       { "exact_path": "/", "opacity": 0.055, "owner": "homepage" },
-      { "path_prefix": "/reviews/", "opacity": 0.060, "owner": "reviews" },
+      { "path_prefix": "/reviews/", "opacity": 0.160, "owner": "reviews" },
       { "path_prefix": "/bb/bbt/", "opacity": 0.100, "owner": "bbt" },
       { "path_prefix": "/saul/", "opacity": 0.085, "owner": "saul-cv" },
       { "path_prefix": "/marginalia/", "opacity": 0.100, "owner": "marginalia" },

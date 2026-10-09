@@ -4,7 +4,7 @@ plain-text dump with student-friendly versions plus original teacher/archive not
 canonical URL of this file: https://seminarschools.com/polymyth/bookwormburrows.txt
 canonical URL of dynamic version: https://seminarschools.com/polymyth/bookwormburrows/
 full file map: https://seminarschools.com/polymyth-file-map.txt
-last updated: 2026-09-06
+last updated: 2026-09-27
 ========================================================================
 
 FRAMEWORK MAP for AI assistants.
@@ -136,15 +136,17 @@ ROLE: both
 
 STUDENT-FRIENDLY VERSION:
 Use this when the group needs to know how the game works at the table.
-A regular session begins by returning to the text-world.
-Players review what happened, act inside the scene, write or speak choices, and record what changed.
-The session ends by saving consequences for next time.
+Use bookwormburrows (BB) for how to play, modulecanon (MC) for the reusable text-world and its sources, and campaigncodex (CC) for this group’s session record.
+For Thank You, Ma’am, read the MC module and linked source dossier before describing the world or starting play.
+A requested pretend game with three people uses three clearly fictional players, keeps story characters separate, and starts a new demo without changing saved student sessions.
 
 ORIGINAL TEACHER / ARCHIVE VERSION:
+CURRENT ROUTING 2026-09-27. BB* tells the teacher and players how to play. MC* supplies the reusable module, including Thank You, Ma’am and its source-text, setting, historical research, images and teaching preparation. CC* holds an individual campaign or playthrough: its particular participants, accepted actions, consequences and saved re-entry state. A module and a party's campaign are different records. For Thank You, Ma’am, load MC* mc-thank-you-maam and /polymyth/modulecanon/thank-you-maam.json before opening play. The cmp-001 identifier and cc-cmp001-* names are preserved legacy dossier identifiers, not evidence that the reusable module belongs in CC*. The legacy CC copies remain retrieval references; MC is the current reusable owner. Resolve original source links before asserting that an image is embedded in the site. A linked image, an embedded image, an archive asset and a research citation are distinct. Check the actual module, asset and public page for the requested category.
+
 CURRENT RULING 2026-07-09. This entry supersedes older startup orders wherever they differ. ONE, CHOOSE THE DIMENSION. The teacher selects the anchor text or campaign before the in-game translation is prepared. TWO, SESSION ZERO. Session Zero is character creation only. Players complete wormcards as fully as they can, and every new character begins at the Level 1 or humble-baseline equivalent. No practice adventure is required. THREE, RECEIVE AND TRANSLATE. The wormcard already is the persistent BookwormBurrows or rainbowworld character. When the DM receives it for a named campaign, the AI creates that character's in-game version by translating the card through the source's internal logic and external logic. For Thank You M'am, every wormcard character becomes a historically and textually fitting in-game character in that campaign world. The AI may summarize the original card for table use, but no separate invented rainbowworld character is required. FOUR, MEDIATE AND REFINE. The human teacher mediates the translation. Any inaccurate or awkward feature can be refined before play or as the campaign reveals more, while the player's authored wormcard remains the persistent source. FIVE, START GATE. Card receipt begins preparation. Play begins only after the human mediator gives the explicit start command. SIX, FIRST ENTRY. The campaign's first entry uses Rainbow Magic, the full burrow crossing, and a descriptive opening into a world already alive. The opening offers many concrete people, places, objects, sounds, texts, notices, routes, and situations without forcing a first action. Players may talk, read, investigate, wander, observe, intervene, or attempt anything consistent with the world. Their chosen activity gradually produces quests. SEVEN, LATER SESSIONS. Ordinary sessions re-enter through the saved CC* state and do not repeat the full ritual. EIGHT, SAVE. Party state, in-game translations, open quests, time, relationships, consequences, and session continuity live in CC*. Printed wormcards may be held by the student or teacher.
 
 EXTENSION:
-Direct synthesis of Saul rulings 1, 2, 3, 4, 9, 10, 15, 18, and 19 from the 2026-07-09 BB startup audit.
+Direct synthesis of Saul rulings 1, 2, 3, 4, 9, 10, 15, 18, and 19 from the 2026-07-09 BB startup audit. September 27 2026 clarification: load reusable MC module before preparing a new individual CC campaign. For an explicitly requested three-person demonstration, use three clearly fictional player characters, preserve the source characters as NPCs, keep demonstration state separate from actual student records, and proceed through the existing explicit start gate. A new game never resumes an unrelated saved party.
 
 ------------------------------------------------------------------------
 ID: dm-116
@@ -3529,7 +3531,16 @@ ROLE: both
 
 STUDENT-FRIENDLY VERSION:
 Use this when the group needs to know how the game works at the table.
-campaigncodex (campaigncodex) handles pre-session preparation per book-world.
+CURRENT ROUTING 2026-09-27. bookwormburrows tells the teacher and players how to play. modulecanon supplies the reusable module, including Thank You, Ma’am and its source-text, setting, historical research, images and teaching preparation. campaigncodex holds an individual campaign or playthrough: its particular participants, accepted actions, consequences and saved re-entry state.
+A module and a party's campaign are different records.
+For Thank You, Ma’am, load modulecanon mc-thank-you-maam and /polymyth/modulecanon/thank-you-maam.json before opening play.
+The cmp-001 identifier and cc-cmp001-* names are preserved legacy dossier identifiers, not evidence that the reusable module belongs in campaigncodex.
+The legacy CC copies remain retrieval references; MC is the current reusable owner.
+Resolve original source links before asserting that an image is embedded in the site.
+A linked image, an embedded image, an saved notes asset and a research citation are distinct.
+Check the actual module, asset and public page for the requested category.
+HISTORICAL PREPARATION rule choice.
+The following wording is retained for provenance; its assignment of reusable Thank You, Ma’am material to CC is superseded by the current routing above. campaigncodex (campaigncodex) handles pre-session preparation per book-world.
 Before any session runs, the DM consults campaigncodex for the relevant book-world to surface session-prep including age-adjustment-guidance (per k all-ages-adjustable rule) and historical-base system-handling (per OP-16 operationalization).
 Saul-directive: ’that should just be before any session; these go in the campaigncodex’. campaigncodex CONTENTS PER book-world.
 Each campaigncodex book-world-entry includes the following session-prep content.
@@ -3562,6 +3573,10 @@ Where this came from: k May 23 2026.
 Saul-directive ’that should just be before any session; these go in the campaigncodex the first one we are looking at is ’’thank you mam’’ and the second one will be ’’all summer in a day’’’.
 
 ORIGINAL TEACHER / ARCHIVE VERSION:
+CURRENT ROUTING 2026-09-27. BB* tells the teacher and players how to play. MC* supplies the reusable module, including Thank You, Ma’am and its source-text, setting, historical research, images and teaching preparation. CC* holds an individual campaign or playthrough: its particular participants, accepted actions, consequences and saved re-entry state. A module and a party's campaign are different records. For Thank You, Ma’am, load MC* mc-thank-you-maam and /polymyth/modulecanon/thank-you-maam.json before opening play. The cmp-001 identifier and cc-cmp001-* names are preserved legacy dossier identifiers, not evidence that the reusable module belongs in CC*. The legacy CC copies remain retrieval references; MC is the current reusable owner. Resolve original source links before asserting that an image is embedded in the site. A linked image, an embedded image, an archive asset and a research citation are distinct. Check the actual module, asset and public page for the requested category.
+
+HISTORICAL PREPARATION RULING. The following wording is retained for provenance; its assignment of reusable Thank You, Ma’am material to CC is superseded by the current routing above.
+
 LAYMAN. cc* (campaigncodex) handles pre-session preparation per dimension. Before any session runs, the DM consults cc* for the relevant dimension to surface session-prep including age-adjustment-guidance (per T115k all-ages-adjustable rule) and historical-substrate-handling (per T107 OP-16 operationalization). Saul-directive: ’that should just be before any session; these go in the cc*’.
 
 CC* CONTENTS PER DIMENSION. Each cc* dimension-entry includes the following session-prep content. ANCHOR-TEXT (which passages from the source-text are foundational substrate). AGE-ADJUSTMENT-GUIDANCE (per T115k all-ages-adjustable rule, what to soften or defer or foreground per participant-ages). HISTORICAL-SUBSTRATE-HANDLING (per OP-16, how actual-historical-events drive in-dimension mechanics if the dimension is history-anchored). MAGIC-PARADIGM-FOREGROUNDED (per Section 5 magic-coexistence, which paradigm dominates this dimension). RULE-SHIFT-INTENSITY (per Architecture 7, light/middle/hard). EXPECTED-SKILLS (per T115g mc-and-badges-unified-workstream, which skills bookworms can demonstrate). SUGGESTED-CHARACTER-TYPES (per Architecture 3 character-smash, what concept-archetypes fit this dimension). CONTENT-WARNINGS (per all-ages-adjustable rule, what content needs DM pre-framing).

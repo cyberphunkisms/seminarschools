@@ -30,7 +30,7 @@ INVENTORY_CONTRACT = json.loads(
 )
 MINIMUM_CANONICAL_EVENTS = int(INVENTORY_CONTRACT["minimum_canonical_events"])
 EXPECTED_FEED_ICS_FILES = 12
-EXPECTED_DISCOVERY_COUNTS = {"canonical": 2_088, "chronology": 1_954, "watchlist": 134}
+EXPECTED_DISCOVERY_COUNTS = {"canonical": 2_086, "chronology": 1_950, "watchlist": 136}
 WATCHLIST_REASON = {
     "code": "monitoring-marker",
     "detail": "Displayed date is a monitoring marker, not a confirmed event or deadline date.",
@@ -353,7 +353,9 @@ class CurrentCalendarCorpusTests(unittest.TestCase):
                 expected_end = parse_source_datetime(
                     source.get("end_date"), source.get("timezone") or "America/Toronto"
                 )
-                if expected_end is None:
+                if source.get("end_date_precision") == "month":
+                    self.assertIsNone(actual_end, "Month-only source must not invent an exact end date")
+                elif expected_end is None:
                     self.assertIsNone(actual_end)
                 elif source.get("time_precision") == "exact" and isinstance(expected_end, datetime):
                     self.assertEqual(actual_end, expected_end.astimezone(timezone.utc))

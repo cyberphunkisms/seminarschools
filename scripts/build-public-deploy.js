@@ -588,4 +588,8 @@ if (durabilityPassAuthorized !== true) {
   throw new Error('PUBLIC DEPLOY BUILD FAILED — durability pass lacks captured release-build authorization');
 }
 writeCommittedPublicTree(committedPublicFiles);
+// The durability pass may expose lower-layer exports from an earlier public
+// tree. Reapply the publication boundary after every committed write so
+// watchlist transitions cannot revive stale attendance calendars.
+pruneBlockedArtifactsAfterCommit();
 console.log(`PUBLIC DEPLOY BUILD PASSED — ${PUBLIC_DIRS.length} public directories copied to /public; full source remains in zip root.`);

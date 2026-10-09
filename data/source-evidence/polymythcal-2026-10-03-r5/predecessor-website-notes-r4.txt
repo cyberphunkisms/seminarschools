@@ -1,0 +1,63 @@
+POLYMYTHCAL WEBSITE FIXES — REVISION 4, 3 OCTOBER 2026
+
+One complete editable website ZIP, including built public/. All other Seminar
+Schools website sections remain included. No deployment or repository push.
+
+THIS PASS
+169 existing records corrected. These contain 38 direct official-source field
+reviews, 153 geographic normalizations, and an inconclusive Fringe Encore
+follow-up. The groups overlap. Geography-only normalization does not advance
+the event's source-verification timestamp.
+
+- Corrected nine Shaw Festival production runs and their individual theatres.
+- Updated five Soulpepper runs, including the Spring Awakening extension and
+  All's Well's Crow's Theatre venue.
+- Updated five Mirvish records: Secret Chord's extension and CAA Theatre venue,
+  the 13 Going on 30 run and Princess of Wales Theatre venue, and three other
+  direct show destinations with verified date ranges.
+- Added reviewed destinations and Toronto locations for three National Ballet
+  productions. Production runs export as dates; individual showtimes vary.
+- Corrected Medusa's date-only run using its co-producer's page. Its separate
+  talkback remains unresolved; earlier conflicting evidence stays in history.
+- Reviewed 15 Aga Khan Museum records, including the Duende opening day,
+  Doors Open dates, actual off-site venues, exhibition ranges, two artist-talk
+  identities, and verified end times. Unsupported concert clocks were removed
+  from public date displays and exports while preserved privately. The summer
+  camp publisher's July 6/July 7 conflict remains explicit and unconfirmed.
+- Normalized locations from explicit existing venue/address text, exact-venue
+  peers, explicit online venues, or the official Aga Khan Museum address.
+- Fringe Encore could not be reconfirmed from the current official programme.
+  It remains qualified; absence was not treated as proof of cancellation.
+
+MEASURED CHANGE FROM REVISION 3
+Canonical IDs: 2,086 retained; 1,871 chronology and 215 watchlist.
+Verified specific external destinations: 915 -> 943 (+28).
+Unresolved specific destinations: 1,171 -> 1,143.
+Unknown city: 367 -> 200 (-167).
+Qualified/unconfirmed records: 851 -> 848.
+1,383 records retain at least one of those unresolved destination, confirmation,
+or city flags. Counts overlap. This pass does not claim every source is verified.
+The complete machine census of remaining flags is included privately.
+
+VALIDATION
+All canonical build gates completed, with ordinary locked staging recovery.
+4,340 focused static assertions passed, preserving every predecessor ID,
+field-specific source freshness, date-only calendar bounds, watchlist exclusions,
+and source/public parity. Browser checks passed: 78 existing regression assertions
+and 169 focused assertions across 30 event-detail and six listing renders in
+English and French at 320px, 390px and 1280px. Both mobile screenshots inspected.
+The geometry gate passed 75 renders covering four changed surface families,
+reduced motion, natural input, Reader View, and the canonical star pages.
+An isolated full rebuild proved durable-file byte idempotence without mutating
+the source tree. Archive members are checked against the included integrity
+manifest before handoff. This is not the historical full-project 196-gate suite.
+Physical-device, native assistive-technology, and cross-engine checks remain open.
+
+HISTORY AND EVIDENCE
+Earlier accepted fixes and correction ledgers remain in place. The full prior
+receipt and notes are preserved under data/source-evidence/polymythcal-2026-10-03-r4/.
+Current corrections: data/polymythcal-reviewed-corrections-2026-10-03.json.
+Current receipt: POLYMYTHCAL_WEBSITE_CHANGE_RECEIPT_2026-10-02.json.
+Evidence, full predecessor records, field-review scope, unresolved flags, logs
+and screenshots remain outside public/. The filename keeps its original date
+to preserve the existing deliverable's identity; this internal revision is 4.

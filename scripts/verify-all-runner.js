@@ -10,6 +10,16 @@ const { spawn, spawnSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
+// Release verification regenerates hash-bound Meaninglib reports. Pin their
+// deterministic content timestamp to the export being checked; actual test
+// execution time belongs in the run receipt, not those content snapshots.
+if (!process.env.MEPHISTODATA_GENERATED_AT && !process.env.SOURCE_DATE_EPOCH) {
+  const exportFile = path.join(__dirname, '..', 'hf_export/search/meaninglib_search_index.json');
+  const timestamp = JSON.parse(fs.readFileSync(exportFile, 'utf8')).generated_at;
+  if (!timestamp || Number.isNaN(Date.parse(timestamp))) throw new Error('Meaninglib export has no valid deterministic timestamp');
+  process.env.MEPHISTODATA_GENERATED_AT = new Date(timestamp).toISOString();
+}
+
 const argv = new Set(process.argv.slice(2));
 const reuseBuild = argv.has('--reuse-build');
 const siteOnly = argv.has('--site-only');
@@ -86,6 +96,9 @@ const reusedBuildPreparation = [
   'node scripts/verify-visible-geometry.js',
   'node scripts/verify-meaningful-geometry.js',
   'node scripts/verify-geometry.js',
+  'node scripts/verify-geometry-route-variation.js',
+  'node scripts/test-polymythcal-comprehensive-flows.js',
+  'node scripts/test-comprehensive-runtime.cjs',
   'node scripts/run-python.js scripts/verify-polymyth-coherence-workbook.py',
   'node scripts/verify-polymyth-entry-points.js',
   'node scripts/run-python.js scripts/verify-audit45-translations.py',
@@ -110,6 +123,7 @@ function selectSiteCoherence(commands) {
 }
 selectSiteCoherence(reusedBuildPreparation);
 const sequential = [
+  'node scripts/run-python.js -m unittest scripts.test_readonly_harvest',
   ...(reuseBuild ? reusedBuildPreparation : fullBuildPreparation),
   // Fail a stale or exceeded heavy-page budget before any multi-minute
   // isolated rebuild or browser sweep. This remains one of the same 184
@@ -117,6 +131,10 @@ const sequential = [
   'node scripts/verify-page-size-budget.js',
   'node scripts/verify-asset-weights.js',
   'node scripts/verify-bookwormcard-gate.js',
+  'node scripts/verify-teacher-search-20260927.js',
+  'node scripts/verify-teacher-bb-audit-20260927.js',
+  'node scripts/verify-teacher-bb-fixes-20260927.js',
+  'node scripts/verify-teacher-metadata-20260928.js',
   // The portable CORE is a package-wide control surface. Reject a stale
   // shorthand contract before any multi-minute rebuild or browser sweep.
   'node scripts/verify-ml-shorthand-resolution.js',
@@ -127,6 +145,8 @@ const sequential = [
   'node scripts/verify-ml-execution-gates.js',
   'node scripts/verify-ml-document-continuity.js',
   'node scripts/verify-mephistodata-runtime-gate.js',
+  'node scripts/verify-mephistodata-concept-application.js',
+  'node scripts/verify-ml-concept-update-preservation.js',
   'node scripts/verify-ml-active-form-conflicts.js',
   'node scripts/verify-ml-project-adjudication-v2.js',
   // Canonical CORE and its generated retrieval surfaces are a single ordered
@@ -273,6 +293,9 @@ const checks = [
   'node scripts/verify-harvest-pipeline.js',
   'node scripts/verify-polymythcalendar-name.js',
   'node scripts/verify-geometry.js',
+  'node scripts/verify-geometry-route-variation.js',
+  'node scripts/test-polymythcal-comprehensive-flows.js',
+  'node scripts/test-comprehensive-runtime.cjs',
   'node scripts/verify-visible-geometry.js',
   'node scripts/verify-meaningful-geometry.js',
   'node scripts/verify-zoom-resilience.js',
@@ -288,6 +311,7 @@ const checks = [
   'node scripts/verify-responsive-regression.js',
   'node scripts/verify-saul-ultimate-web-cv.js',
   'node scripts/verify-teacherresources-finder.js',
+  'node scripts/verify-polymyth-source-link-reviews.js',
   'node scripts/verify-aa-polymyth-funnel.js',
   'node scripts/verify-polymythcal-freshness-labels.js',
   'node scripts/verify-polymythcal-featured.js',
@@ -346,6 +370,9 @@ const canonicalBuildCoveredChecks = new Set([
   'node scripts/verify-release-asset-identity.js',
   'node scripts/verify-visible-geometry.js',
   'node scripts/verify-geometry.js',
+  'node scripts/verify-geometry-route-variation.js',
+  'node scripts/test-polymythcal-comprehensive-flows.js',
+  'node scripts/test-comprehensive-runtime.cjs',
   'node scripts/verify-meaningful-geometry.js',
   'node scripts/verify-polymythcal-featured.js',
   'node scripts/verify-polymythcal-browser-payload.js',

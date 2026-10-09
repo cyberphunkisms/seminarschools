@@ -5,14 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:2a733cf7217f55a8acfc@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260723
+DTSTAMP:20261003T042124Z
+DTSTART;VALUE=DATE:20260621
 DTEND;VALUE=DATE:20260828
 SUMMARY:Summer Music in the Garden
-LOCATION:Location unconfirmed · Lieu non confirmé
-DESCRIPTION:Schedule note: Multiple dates.
+LOCATION:Toronto Music Garden\, 479 Queens Quay West\, Toronto
+DESCRIPTION:Concert series on selected Thursdays and Sundays. Check the i
+ ndividual concert pages for times and weather-related cancellations.
 URL:https://seminarschools.com/polymythseminars/events/research-5caa1ebb5
  8e2/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

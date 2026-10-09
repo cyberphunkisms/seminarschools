@@ -5,14 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:a7664c5c88dc2ae1c771@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260725
+DTSTAMP:20261003T110658Z
+DTSTART;VALUE=DATE:20260606
 DTEND;VALUE=DATE:20260927
 SUMMARY:Gananoque Craft Market
-LOCATION:Location unconfirmed · Lieu non confirmé
-DESCRIPTION:Weekly
+LOCATION:Town Hall Park\, 30 King Street East\, Gananoque
+DESCRIPTION:Craft Market on Saturdays\, 10 am–4 pm. Seasonal range cove
+ rs those weekly occurrences\, not continuous opening.
 URL:https://seminarschools.com/polymythseminars/events/research-e01960267
  910/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

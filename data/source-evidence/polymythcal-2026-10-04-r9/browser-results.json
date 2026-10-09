@@ -1,0 +1,1256 @@
+{
+  "status": "passed",
+  "assertions": 193,
+  "browser": "138.0.7204.23",
+  "checks": [
+    {
+      "label": "en/320 finds literal query drop-in",
+      "pass": true
+    },
+    {
+      "label": "en/320 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/320 finds literal query year-round",
+      "pass": true
+    },
+    {
+      "label": "en/320 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/320 finds literal query l’écoute",
+      "pass": true
+    },
+    {
+      "label": "en/320 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/320 finds literal query l'écoute",
+      "pass": true
+    },
+    {
+      "label": "en/320 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/320 finds literal query Montréal-Nord",
+      "pass": true
+    },
+    {
+      "label": "en/320 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/320 finds literal query title:drop-in",
+      "pass": true
+    },
+    {
+      "label": "en/320 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/320 finds literal query place:montreal-nord",
+      "pass": true
+    },
+    {
+      "label": "en/320 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/320 finds literal query \"drop-in\"",
+      "pass": true
+    },
+    {
+      "label": "en/320 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/320 query retains incompatible place filter",
+      "pass": true
+    },
+    {
+      "label": "en/320 clear-all restores search",
+      "pass": true
+    },
+    {
+      "label": "en/320 bookmarked punctuation search loads",
+      "pass": true
+    },
+    {
+      "label": "en/320 search fits viewport",
+      "pass": true
+    },
+    {
+      "label": "en/320 monitoring series is found",
+      "pass": true
+    },
+    {
+      "label": "en/320 existing plain series heading is preserved",
+      "pass": true
+    },
+    {
+      "label": "en/320 monitoring series has one Save button",
+      "pass": true
+    },
+    {
+      "label": "en/320 monitoring save updates button",
+      "pass": true
+    },
+    {
+      "label": "en/320 saved title is the series title",
+      "pass": true
+    },
+    {
+      "label": "en/320 save keeps internal details and exact return view",
+      "pass": true
+    },
+    {
+      "label": "en/320 monitoring save survives reload",
+      "pass": true
+    },
+    {
+      "label": "en/320 saved view survives research navigation",
+      "pass": true
+    },
+    {
+      "label": "en/320 detail recognizes monitoring save",
+      "pass": true
+    },
+    {
+      "label": "en/320 details return to monitoring filters",
+      "pass": true
+    },
+    {
+      "label": "en/320 detail removal updates list save state",
+      "pass": true
+    },
+    {
+      "label": "en/320 monitoring fits viewport",
+      "pass": true
+    },
+    {
+      "label": "en/390 finds literal query drop-in",
+      "pass": true
+    },
+    {
+      "label": "en/390 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/390 finds literal query year-round",
+      "pass": true
+    },
+    {
+      "label": "en/390 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/390 finds literal query l’écoute",
+      "pass": true
+    },
+    {
+      "label": "en/390 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/390 finds literal query l'écoute",
+      "pass": true
+    },
+    {
+      "label": "en/390 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/390 finds literal query Montréal-Nord",
+      "pass": true
+    },
+    {
+      "label": "en/390 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/390 finds literal query title:drop-in",
+      "pass": true
+    },
+    {
+      "label": "en/390 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/390 finds literal query place:montreal-nord",
+      "pass": true
+    },
+    {
+      "label": "en/390 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/390 finds literal query \"drop-in\"",
+      "pass": true
+    },
+    {
+      "label": "en/390 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/390 query retains incompatible place filter",
+      "pass": true
+    },
+    {
+      "label": "en/390 clear-all restores search",
+      "pass": true
+    },
+    {
+      "label": "en/390 bookmarked punctuation search loads",
+      "pass": true
+    },
+    {
+      "label": "en/390 search fits viewport",
+      "pass": true
+    },
+    {
+      "label": "en/390 monitoring series is found",
+      "pass": true
+    },
+    {
+      "label": "en/390 existing plain series heading is preserved",
+      "pass": true
+    },
+    {
+      "label": "en/390 monitoring series has one Save button",
+      "pass": true
+    },
+    {
+      "label": "en/390 monitoring save updates button",
+      "pass": true
+    },
+    {
+      "label": "en/390 saved title is the series title",
+      "pass": true
+    },
+    {
+      "label": "en/390 save keeps internal details and exact return view",
+      "pass": true
+    },
+    {
+      "label": "en/390 monitoring save survives reload",
+      "pass": true
+    },
+    {
+      "label": "en/390 saved view survives research navigation",
+      "pass": true
+    },
+    {
+      "label": "en/390 detail recognizes monitoring save",
+      "pass": true
+    },
+    {
+      "label": "en/390 details return to monitoring filters",
+      "pass": true
+    },
+    {
+      "label": "en/390 detail removal updates list save state",
+      "pass": true
+    },
+    {
+      "label": "en/390 monitoring fits viewport",
+      "pass": true
+    },
+    {
+      "label": "en/1280 finds literal query drop-in",
+      "pass": true
+    },
+    {
+      "label": "en/1280 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/1280 finds literal query year-round",
+      "pass": true
+    },
+    {
+      "label": "en/1280 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/1280 finds literal query l’écoute",
+      "pass": true
+    },
+    {
+      "label": "en/1280 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/1280 finds literal query l'écoute",
+      "pass": true
+    },
+    {
+      "label": "en/1280 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/1280 finds literal query Montréal-Nord",
+      "pass": true
+    },
+    {
+      "label": "en/1280 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/1280 finds literal query title:drop-in",
+      "pass": true
+    },
+    {
+      "label": "en/1280 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/1280 finds literal query place:montreal-nord",
+      "pass": true
+    },
+    {
+      "label": "en/1280 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/1280 finds literal query \"drop-in\"",
+      "pass": true
+    },
+    {
+      "label": "en/1280 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "en/1280 query retains incompatible place filter",
+      "pass": true
+    },
+    {
+      "label": "en/1280 clear-all restores search",
+      "pass": true
+    },
+    {
+      "label": "en/1280 bookmarked punctuation search loads",
+      "pass": true
+    },
+    {
+      "label": "en/1280 search fits viewport",
+      "pass": true
+    },
+    {
+      "label": "en/1280 monitoring series is found",
+      "pass": true
+    },
+    {
+      "label": "en/1280 existing plain series heading is preserved",
+      "pass": true
+    },
+    {
+      "label": "en/1280 monitoring series has one Save button",
+      "pass": true
+    },
+    {
+      "label": "en/1280 monitoring save updates button",
+      "pass": true
+    },
+    {
+      "label": "en/1280 saved title is the series title",
+      "pass": true
+    },
+    {
+      "label": "en/1280 save keeps internal details and exact return view",
+      "pass": true
+    },
+    {
+      "label": "en/1280 monitoring save survives reload",
+      "pass": true
+    },
+    {
+      "label": "en/1280 saved view survives research navigation",
+      "pass": true
+    },
+    {
+      "label": "en/1280 detail recognizes monitoring save",
+      "pass": true
+    },
+    {
+      "label": "en/1280 details return to monitoring filters",
+      "pass": true
+    },
+    {
+      "label": "en/1280 detail removal updates list save state",
+      "pass": true
+    },
+    {
+      "label": "en/1280 monitoring fits viewport",
+      "pass": true
+    },
+    {
+      "label": "fr/320 finds literal query drop-in",
+      "pass": true
+    },
+    {
+      "label": "fr/320 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/320 finds literal query year-round",
+      "pass": true
+    },
+    {
+      "label": "fr/320 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/320 finds literal query l’écoute",
+      "pass": true
+    },
+    {
+      "label": "fr/320 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/320 finds literal query l'écoute",
+      "pass": true
+    },
+    {
+      "label": "fr/320 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/320 finds literal query Montréal-Nord",
+      "pass": true
+    },
+    {
+      "label": "fr/320 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/320 finds literal query title:drop-in",
+      "pass": true
+    },
+    {
+      "label": "fr/320 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/320 finds literal query place:montreal-nord",
+      "pass": true
+    },
+    {
+      "label": "fr/320 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/320 finds literal query \"drop-in\"",
+      "pass": true
+    },
+    {
+      "label": "fr/320 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/320 query retains incompatible place filter",
+      "pass": true
+    },
+    {
+      "label": "fr/320 clear-all restores search",
+      "pass": true
+    },
+    {
+      "label": "fr/320 bookmarked punctuation search loads",
+      "pass": true
+    },
+    {
+      "label": "fr/320 search fits viewport",
+      "pass": true
+    },
+    {
+      "label": "fr/320 monitoring series is found",
+      "pass": true
+    },
+    {
+      "label": "fr/320 existing plain series heading is preserved",
+      "pass": true
+    },
+    {
+      "label": "fr/320 monitoring series has one Save button",
+      "pass": true
+    },
+    {
+      "label": "fr/320 monitoring save updates button",
+      "pass": true
+    },
+    {
+      "label": "fr/320 saved title is the series title",
+      "pass": true
+    },
+    {
+      "label": "fr/320 save keeps internal details and exact return view",
+      "pass": true
+    },
+    {
+      "label": "fr/320 monitoring save survives reload",
+      "pass": true
+    },
+    {
+      "label": "fr/320 saved view survives research navigation",
+      "pass": true
+    },
+    {
+      "label": "fr/320 detail recognizes monitoring save",
+      "pass": true
+    },
+    {
+      "label": "fr/320 details return to monitoring filters",
+      "pass": true
+    },
+    {
+      "label": "fr/320 detail removal updates list save state",
+      "pass": true
+    },
+    {
+      "label": "fr/320 monitoring fits viewport",
+      "pass": true
+    },
+    {
+      "label": "fr/390 finds literal query drop-in",
+      "pass": true
+    },
+    {
+      "label": "fr/390 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/390 finds literal query year-round",
+      "pass": true
+    },
+    {
+      "label": "fr/390 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/390 finds literal query l’écoute",
+      "pass": true
+    },
+    {
+      "label": "fr/390 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/390 finds literal query l'écoute",
+      "pass": true
+    },
+    {
+      "label": "fr/390 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/390 finds literal query Montréal-Nord",
+      "pass": true
+    },
+    {
+      "label": "fr/390 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/390 finds literal query title:drop-in",
+      "pass": true
+    },
+    {
+      "label": "fr/390 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/390 finds literal query place:montreal-nord",
+      "pass": true
+    },
+    {
+      "label": "fr/390 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/390 finds literal query \"drop-in\"",
+      "pass": true
+    },
+    {
+      "label": "fr/390 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/390 query retains incompatible place filter",
+      "pass": true
+    },
+    {
+      "label": "fr/390 clear-all restores search",
+      "pass": true
+    },
+    {
+      "label": "fr/390 bookmarked punctuation search loads",
+      "pass": true
+    },
+    {
+      "label": "fr/390 search fits viewport",
+      "pass": true
+    },
+    {
+      "label": "fr/390 monitoring series is found",
+      "pass": true
+    },
+    {
+      "label": "fr/390 existing plain series heading is preserved",
+      "pass": true
+    },
+    {
+      "label": "fr/390 monitoring series has one Save button",
+      "pass": true
+    },
+    {
+      "label": "fr/390 monitoring save updates button",
+      "pass": true
+    },
+    {
+      "label": "fr/390 saved title is the series title",
+      "pass": true
+    },
+    {
+      "label": "fr/390 save keeps internal details and exact return view",
+      "pass": true
+    },
+    {
+      "label": "fr/390 monitoring save survives reload",
+      "pass": true
+    },
+    {
+      "label": "fr/390 saved view survives research navigation",
+      "pass": true
+    },
+    {
+      "label": "fr/390 detail recognizes monitoring save",
+      "pass": true
+    },
+    {
+      "label": "fr/390 details return to monitoring filters",
+      "pass": true
+    },
+    {
+      "label": "fr/390 detail removal updates list save state",
+      "pass": true
+    },
+    {
+      "label": "fr/390 monitoring fits viewport",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 finds literal query drop-in",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 finds literal query year-round",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 finds literal query l’écoute",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 finds literal query l'écoute",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 finds literal query Montréal-Nord",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 finds literal query title:drop-in",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 finds literal query place:montreal-nord",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 finds literal query \"drop-in\"",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 matching record is visible",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 query retains incompatible place filter",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 clear-all restores search",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 bookmarked punctuation search loads",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 search fits viewport",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 monitoring series is found",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 existing plain series heading is preserved",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 monitoring series has one Save button",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 monitoring save updates button",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 saved title is the series title",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 save keeps internal details and exact return view",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 monitoring save survives reload",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 saved view survives research navigation",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 detail recognizes monitoring save",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 details return to monitoring filters",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 detail removal updates list save state",
+      "pass": true
+    },
+    {
+      "label": "fr/1280 monitoring fits viewport",
+      "pass": true
+    },
+    {
+      "label": "No browser runtime exceptions",
+      "pass": true
+    }
+  ],
+  "rows": [
+    {
+      "language": "en",
+      "width": 320,
+      "query": "drop-in",
+      "count": "15 listings in 3 result groups",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 320,
+      "query": "year-round",
+      "count": "2 listings",
+      "ids": [
+        "teen-ink-submissions-2026-2027",
+        "toronto-public-library-young-voices-magazine-2027"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 320,
+      "query": "l’écoute",
+      "count": "1 listing",
+      "ids": [
+        "research-4025b4d53bc6"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 320,
+      "query": "l'écoute",
+      "count": "1 listing",
+      "ids": [
+        "research-4025b4d53bc6"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 320,
+      "query": "Montréal-Nord",
+      "count": "4 listings in 1 result groups",
+      "ids": [
+        "montreal-nord-borough-council-fall-2026"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 320,
+      "query": "title:drop-in",
+      "count": "14 listings in 3 result groups",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 320,
+      "query": "place:montreal-nord",
+      "count": "4 listings in 1 result groups",
+      "ids": [
+        "montreal-nord-borough-council-fall-2026"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 320,
+      "query": "\"drop-in\"",
+      "count": "14 listings in 3 result groups",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "query": "drop-in",
+      "count": "15 listings in 3 result groups",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "query": "year-round",
+      "count": "2 listings",
+      "ids": [
+        "teen-ink-submissions-2026-2027",
+        "toronto-public-library-young-voices-magazine-2027"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "query": "l’écoute",
+      "count": "1 listing",
+      "ids": [
+        "research-4025b4d53bc6"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "query": "l'écoute",
+      "count": "1 listing",
+      "ids": [
+        "research-4025b4d53bc6"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "query": "Montréal-Nord",
+      "count": "4 listings in 1 result groups",
+      "ids": [
+        "montreal-nord-borough-council-fall-2026"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "query": "title:drop-in",
+      "count": "14 listings in 3 result groups",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "query": "place:montreal-nord",
+      "count": "4 listings in 1 result groups",
+      "ids": [
+        "montreal-nord-borough-council-fall-2026"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "query": "\"drop-in\"",
+      "count": "14 listings in 3 result groups",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 1280,
+      "query": "drop-in",
+      "count": "15 listings in 3 result groups",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 1280,
+      "query": "year-round",
+      "count": "2 listings",
+      "ids": [
+        "teen-ink-submissions-2026-2027",
+        "toronto-public-library-young-voices-magazine-2027"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 1280,
+      "query": "l’écoute",
+      "count": "1 listing",
+      "ids": [
+        "research-4025b4d53bc6"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 1280,
+      "query": "l'écoute",
+      "count": "1 listing",
+      "ids": [
+        "research-4025b4d53bc6"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 1280,
+      "query": "Montréal-Nord",
+      "count": "4 listings in 1 result groups",
+      "ids": [
+        "montreal-nord-borough-council-fall-2026"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 1280,
+      "query": "title:drop-in",
+      "count": "14 listings in 3 result groups",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 1280,
+      "query": "place:montreal-nord",
+      "count": "4 listings in 1 result groups",
+      "ids": [
+        "montreal-nord-borough-council-fall-2026"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 1280,
+      "query": "\"drop-in\"",
+      "count": "14 listings in 3 result groups",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 320,
+      "query": "drop-in",
+      "count": "15 fiches dans 3 groupes de résultats",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 320,
+      "query": "year-round",
+      "count": "2 fiches",
+      "ids": [
+        "teen-ink-submissions-2026-2027",
+        "toronto-public-library-young-voices-magazine-2027"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 320,
+      "query": "l’écoute",
+      "count": "1 fiche",
+      "ids": [
+        "research-4025b4d53bc6"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 320,
+      "query": "l'écoute",
+      "count": "1 fiche",
+      "ids": [
+        "research-4025b4d53bc6"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 320,
+      "query": "Montréal-Nord",
+      "count": "4 fiches dans 1 groupes de résultats",
+      "ids": [
+        "montreal-nord-borough-council-fall-2026"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 320,
+      "query": "title:drop-in",
+      "count": "14 fiches dans 3 groupes de résultats",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 320,
+      "query": "place:montreal-nord",
+      "count": "4 fiches dans 1 groupes de résultats",
+      "ids": [
+        "montreal-nord-borough-council-fall-2026"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 320,
+      "query": "\"drop-in\"",
+      "count": "14 fiches dans 3 groupes de résultats",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 390,
+      "query": "drop-in",
+      "count": "15 fiches dans 3 groupes de résultats",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 390,
+      "query": "year-round",
+      "count": "2 fiches",
+      "ids": [
+        "teen-ink-submissions-2026-2027",
+        "toronto-public-library-young-voices-magazine-2027"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 390,
+      "query": "l’écoute",
+      "count": "1 fiche",
+      "ids": [
+        "research-4025b4d53bc6"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 390,
+      "query": "l'écoute",
+      "count": "1 fiche",
+      "ids": [
+        "research-4025b4d53bc6"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 390,
+      "query": "Montréal-Nord",
+      "count": "4 fiches dans 1 groupes de résultats",
+      "ids": [
+        "montreal-nord-borough-council-fall-2026"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 390,
+      "query": "title:drop-in",
+      "count": "14 fiches dans 3 groupes de résultats",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 390,
+      "query": "place:montreal-nord",
+      "count": "4 fiches dans 1 groupes de résultats",
+      "ids": [
+        "montreal-nord-borough-council-fall-2026"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 390,
+      "query": "\"drop-in\"",
+      "count": "14 fiches dans 3 groupes de résultats",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 1280,
+      "query": "drop-in",
+      "count": "15 fiches dans 3 groupes de résultats",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 1280,
+      "query": "year-round",
+      "count": "2 fiches",
+      "ids": [
+        "teen-ink-submissions-2026-2027",
+        "toronto-public-library-young-voices-magazine-2027"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 1280,
+      "query": "l’écoute",
+      "count": "1 fiche",
+      "ids": [
+        "research-4025b4d53bc6"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 1280,
+      "query": "l'écoute",
+      "count": "1 fiche",
+      "ids": [
+        "research-4025b4d53bc6"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 1280,
+      "query": "Montréal-Nord",
+      "count": "4 fiches dans 1 groupes de résultats",
+      "ids": [
+        "montreal-nord-borough-council-fall-2026"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 1280,
+      "query": "title:drop-in",
+      "count": "14 fiches dans 3 groupes de résultats",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 1280,
+      "query": "place:montreal-nord",
+      "count": "4 fiches dans 1 groupes de résultats",
+      "ids": [
+        "montreal-nord-borough-council-fall-2026"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 1280,
+      "query": "\"drop-in\"",
+      "count": "14 fiches dans 3 groupes de résultats",
+      "ids": [
+        "research-e9b8f1c64f51",
+        "repair-cafe-creative-reuse-fall-2026",
+        "bad-dog-improv-drop-ins-fall-2026"
+      ]
+    }
+  ],
+  "errors": []
+}

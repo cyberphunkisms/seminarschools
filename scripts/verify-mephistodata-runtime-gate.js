@@ -3,7 +3,9 @@
 
 const fs = require('fs');
 const path = require('path');
+const legacyConceptFixtureHost = require('./fixtures/ml-execution-gates/legacy-concept-fixture-host');
 const crypto = require('crypto');
+const {execFileSync} = require('child_process');
 const {
   BLOOM_OPENER,
   CORRECTION_ATTESTATION_SCHEMA,
@@ -13,6 +15,7 @@ const {
   DRAFT_SCAN_ATTESTATION_SCHEMA,
   MephistodataGateError,
   OUROBOROS_OWNER,
+  SYNOPSIS_OWNER,
   WORK_ATTESTATION_SCHEMA,
   assertDeliverable,
   canonicalEntrySha,
@@ -20,6 +23,7 @@ const {
   createRuntimeGate,
   definitionOwnerMatches,
   invokesDegorgonifiedFeminism,
+  invokesSyn,
   isCategoricalRetraction,
   standaloneAssertedStatementSpan,
   localDraftClaimBindings,
@@ -166,6 +170,19 @@ function fail(message) {
 function ownerRecordsFor(fixture, records) {
   const mode = fixture.owner_registry_mode;
   if (!mode) return records;
+  if (String(mode).startsWith('synopsis-')) {
+    const owner = records.find(entry => entry.id === SYNOPSIS_OWNER);
+    if (!owner) throw new Error(`canonical Synopsis owner missing: ${SYNOPSIS_OWNER}`);
+    if (mode === 'synopsis-missing') return records.filter(entry => entry.id !== SYNOPSIS_OWNER);
+    if (mode === 'synopsis-duplicate') return [...records, {...owner}];
+    if (mode === 'synopsis-stale-body') return records.map(entry => {
+      if (entry.id !== SYNOPSIS_OWNER) return entry;
+      const stale = {...entry, b: 'An obsolete execution owner without the technical Synopsis contract.'};
+      stale.semantic_sha256 = canonicalEntrySha(stale);
+      return stale;
+    });
+    throw new Error(`unknown Synopsis owner_registry_mode: ${mode}`);
+  }
   if (String(mode).startsWith('definition-')) {
     const spec = DEGORGONIFIED_FEMINISM_OWNER_SPECS.find(entry => entry.key === fixture.definition_owner_key);
     if (!spec) throw new Error(`unknown definition_owner_key: ${fixture.definition_owner_key}`);
@@ -240,6 +257,10 @@ function assertExpectedPlan(fixture, plan) {
         || !plan.definition_bundle.owner_snapshots.every(Object.isFrozen))) {
     throw new Error('definition bundle and owner snapshots must be immutable');
   }
+  if (expected.synopsis_mode && (!plan.synopsis_operation || plan.synopsis_operation.mode !== expected.synopsis_mode)) throw new Error(`expected synopsis mode ${expected.synopsis_mode}`);
+  if (expected.synopsis_required !== undefined && (!plan.synopsis_operation || plan.synopsis_operation.required !== expected.synopsis_required)) throw new Error(`expected synopsis required=${expected.synopsis_required}`);
+  if (expected.synopsis_owner_id && (!plan.synopsis_operation || plan.synopsis_operation.owner_id !== expected.synopsis_owner_id)) throw new Error(`expected Synopsis owner ${expected.synopsis_owner_id}`);
+  if (expected.synopsis_mode && !Object.isFrozen(plan.synopsis_operation)) throw new Error('Synopsis operation must be immutable');
 }
 
 function assertParserExpectation(fixture) {
@@ -263,16 +284,16 @@ function assertParserExpectation(fixture) {
 
 const fixtureDocument = JSON.parse(fs.readFileSync(FIXTURE_PATH, 'utf8'));
 const fixtures = fixtureDocument.fixtures;
-if (fixtureDocument.schema_version !== 'mephistodata-runtime-gate-fixtures.v4.2026-09-05') {
+if (fixtureDocument.schema_version !== 'mephistodata-runtime-gate-fixtures.v5.2026-09-08') {
   fail(`runtime fixture schema drifted: ${fixtureDocument.schema_version || '<missing>'}`);
 }
-if (!Array.isArray(fixtures) || fixtures.length !== 141) {
-  fail(`expected exactly 141 runtime fixtures and found ${Array.isArray(fixtures) ? fixtures.length : 'non-array'}`);
+if (!Array.isArray(fixtures) || fixtures.length !== 151) {
+  fail(`expected exactly 151 runtime fixtures and found ${Array.isArray(fixtures) ? fixtures.length : 'non-array'}`);
 }
 const permittedFixtures = (fixtures || []).filter(fixture => fixture.expected_pass).length;
 const rejectedFixtures = (fixtures || []).filter(fixture => !fixture.expected_pass).length;
-if (permittedFixtures !== 37 || rejectedFixtures !== 104) {
-  fail(`expected runtime fixture polarity 37 permits / 104 rejections and found ${permittedFixtures} / ${rejectedFixtures}`);
+if (permittedFixtures !== 43 || rejectedFixtures !== 108) {
+  fail(`expected runtime fixture polarity 43 permits / 108 rejections and found ${permittedFixtures} / ${rejectedFixtures}`);
 }
 const ids = new Set();
 const phases = new Set(['plan', 'deliver']);
@@ -382,6 +403,7 @@ for (const fixture of (fixtures || []).filter(candidate => candidate.post_correc
 }
 
 const FIXTURE_RUNTIME_GATE = createRuntimeGate({
+  ...legacyConceptFixtureHost('legacy-runtime-fixture'),
   draftVerifierId: 'fixture-host-full-draft-classifier.v1',
   workVerifierId: 'fixture-host-work-verifier.v1',
   correctionVerifierId: 'fixture-host-correction-verifier.v1',
@@ -390,10 +412,12 @@ const FIXTURE_RUNTIME_GATE = createRuntimeGate({
   verifyCorrectionAttestation: verifyCorrectionEvidence,
 });
 const DRAFT_ONLY_RUNTIME_GATE = createRuntimeGate({
+  ...legacyConceptFixtureHost('legacy-draft-only-fixture'),
   draftVerifierId: 'fixture-host-full-draft-classifier.v1',
   verifyDraftWorkStatusAttestation,
 });
 const mutableBootstrapConfiguration = {
+  ...legacyConceptFixtureHost('legacy-immutable-bootstrap-fixture'),
   draftVerifierId: 'fixture-host-full-draft-classifier.v1',
   verifyDraftWorkStatusAttestation,
 };
@@ -404,6 +428,8 @@ mutableBootstrapConfiguration.verifyDraftWorkStatusAttestation = () => ({complet
 const records = canonicalOwnerRecords(ROOT);
 const canonicalOwners = records.filter(entry => entry.id === OUROBOROS_OWNER);
 if (canonicalOwners.length !== 1) fail(`canonical OA owner count is ${canonicalOwners.length}`);
+const synopsisOwners = records.filter(entry => entry.id === SYNOPSIS_OWNER);
+if (synopsisOwners.length !== 1) fail(`canonical Synopsis owner count is ${synopsisOwners.length}`);
 for (const spec of DEGORGONIFIED_FEMINISM_OWNER_SPECS) {
   const owners = records.filter(entry => definitionOwnerMatches(entry, spec));
   if (owners.length !== 1) fail(`canonical degorgonified-feminism owner ${spec.key} count is ${owners.length}`);
@@ -423,6 +449,9 @@ for (const [text, expected] of [
     fail(`degorgonified-feminism invocation parser mismatch for ${JSON.stringify(text)}`);
   }
 }
+for (const [text, expected] of [['syn', true], ['Run syn.', true], ['The source says “syn”.', false], ['The source uses syn as wording.', false], ['Discuss the term syn.', false], ['`syn`', false], ['```text\nsyn\n```', false]]) {
+  if (invokesSyn(text) !== expected) fail(`syn invocation parser mismatch for ${JSON.stringify(text)}`);
+}
 
 let adjudicated = 0;
 for (const fixture of fixtures || []) {
@@ -436,7 +465,10 @@ for (const fixture of fixtures || []) {
   try {
     const ownerRecords = ownerRecordsFor(fixture, records);
     const request = requestForFixture(fixture, ownerRecords);
-    const plan = planRequest(request, {owner_records: ownerRecords});
+    const planningGate = fixture.bootstrap_config_mutation ? IMMUTABLE_BOOTSTRAP_RUNTIME_GATE
+      : fixture.omit_trusted_verifier ? DRAFT_ONLY_RUNTIME_GATE : FIXTURE_RUNTIME_GATE;
+    const plan = fixture.phase === 'plan' ? planRequest(request, {owner_records: ownerRecords})
+      : planningGate.planRequest(request, {owner_records: ownerRecords});
     if (fixture.phase === 'plan') {
       assertExpectedPlan(fixture, plan);
     } else {
@@ -473,7 +505,7 @@ for (const fixture of fixtures || []) {
 if (correctionContextCases.length !== 3) fail(`expected 3 post-correction conflict cases and found ${correctionContextCases.length}`);
 for (const {fixture, draft, conflict} of correctionContextCases) {
   try {
-    const plan = planRequest(fixture.request, {owner_records: records});
+    const plan = FIXTURE_RUNTIME_GATE.planRequest(fixture.request, {owner_records: records});
     FIXTURE_RUNTIME_GATE.assertDeliverable(plan, draft, fixture.evidence);
     fail(`post-correction conflict was accepted: ${conflict}`);
   } catch (error) {
@@ -498,6 +530,12 @@ for (const needle of [
   'DEFINITION_BUNDLE_CONTRADICTION',
   'function invokesDegorgonifiedFeminism(',
   'function validateDegorgonifiedFeminismBundle(',
+  'function invokesSyn(',
+  'function resolveSynopsisOperation(',
+  'MISSING_SYNOPSIS_OWNER',
+  'AMBIGUOUS_SYNOPSIS_OWNER',
+  'STALE_SYNOPSIS_OWNER',
+  'technical-synopsis-current-target',
   'BLOOM_QUESTION_FIRST',
   'NON_RESIDUE_OUTPUT',
   'function validateCompletionClaims(',
@@ -515,6 +553,9 @@ for (const needle of [
   'UNREPAIRED_FALSE_CLAIM',
 ]) {
   if (!source.includes(needle)) fail(`runtime owner missing ${needle}`);
+}
+for (const fixtureId of ['plan_syn_explicit_bare_pass', 'plan_syn_explicit_command_pass', 'plan_syn_quoted_nontrigger_pass', 'plan_syn_inline_code_nontrigger_pass', 'plan_syn_fenced_code_nontrigger_pass', 'plan_syn_source_occurrence_nontrigger_pass', 'plan_syn_outside_ml_fail', 'plan_syn_missing_owner_fail', 'plan_syn_duplicate_owner_fail', 'plan_syn_stale_owner_fail']) {
+  if (!ids.has(fixtureId)) fail(`required Synopsis fixture is missing: ${fixtureId}`);
 }
 for (const fixtureId of [
   'plan_degorgonified_feminism_bundle_pass',
@@ -637,3 +678,9 @@ if (failures.length) {
 }
 
 console.log(`MEPHISTODATA RUNTIME GATE PASS — ${adjudicated}/${fixtures.length} (${permittedFixtures} permits / ${rejectedFixtures} rejections)`);
+// Preserve the historical runtime suite's exact counts and run the new public-API
+// regressions as a separately counted mandatory gate rather than inflating them.
+execFileSync(process.execPath, [path.join(__dirname, 'verify-ouroboros-claim-fidelity.js')], {
+  cwd: ROOT,
+  stdio: 'inherit',
+});

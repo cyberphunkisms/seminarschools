@@ -114,7 +114,7 @@ assert(
 );
 assert(html.includes('...RHETORIC_TAXONOMY_ADDENDUM'), 'LIVE_SEED does not spread the rhetoric addendum');
 
-const coherenceScript = '/polymyth/methodologylist/polymyth-coherence-routing-addendum.js?v=20260806';
+const coherenceScript = '/polymyth/methodologylist/polymyth-coherence-routing-addendum.js?v=20261005-concept-application';
 assert(html.includes('<script src="' + coherenceScript + '"></script>'), 'Polymyth Coherence routing addendum script tag is missing');
 assert(
   html.indexOf(coherenceScript) < html.indexOf('const LIVE_SEED=Object.freeze(['),
@@ -126,7 +126,7 @@ assert(
   'combined ML* is missing the Polymyth Coherence routing entry'
 );
 
-const hardeningScript = '/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js?v=20260906-document-continuity';
+const hardeningScript = '/polymyth/methodologylist/mephistodata-rule-hardening-addendum.js?v=20261005-concept-application';
 assert(html.includes('<script src="' + hardeningScript + '"></script>'), 'current Mephistodata hardening script tag is missing');
 assert(
   html.indexOf(hardeningScript) < html.indexOf('const LIVE_SEED=Object.freeze(['),
@@ -139,6 +139,7 @@ assert(currentMap, 'combined ML* is missing the current CORE+ map');
 assert(executionOwner, 'combined ML* is missing the current execution owner');
 for (const phrase of [
   'REGISTER DISPATCH.',
+  'SYNOPSIS AND SYN DISPATCH.',
   'It begins at byte zero with exactly one “Mephistodata would say:”.',
   'The next ML*-active response resets to the default',
   'The opener never substitutes for substantive PM15 Mephisto-plus-Data fusion.',

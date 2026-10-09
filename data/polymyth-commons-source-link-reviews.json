@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "scope": "Review of source-link availability and explicitly identified successor destinations only. This overlay does not revise the book evidence or certify a project’s overall current status.",
+  "links": {
+    "http://www.arl.org/create/resources/CreateChange2003.pdf": {
+      "status": "unavailable",
+      "checkedOn": "2026-09-07",
+      "note": "The recorded historical source returned HTTP 404 on 7 September 2026. No exact replacement for that historical page or document has been verified."
+    },
+    "http://www.earthforce.org/resources.cfm": {
+      "status": "unavailable",
+      "checkedOn": "2026-09-07",
+      "note": "The recorded historical source returned HTTP 404 on 7 September 2026. No exact replacement for that historical page or document has been verified.",
+      "successor": {
+        "url": "https://www.earthforce.org/cop",
+        "label": "Current resources community",
+        "scope": "current-resources-service",
+        "note": "Earth Force identifies this as its Community of Practice (Resources), a current gateway to teaching resources and training. Resource access is through the community; this is not the historical resources page.",
+        "evidenceUrls": [
+          "https://www.earthforce.org/cop",
+          "https://www.earthforce.org/educator-partnerships"
+        ]
+      }
+    },
+    "http://www.earlham.edu/~peters/fos/": {
+      "status": "unavailable",
+      "checkedOn": "2026-09-07",
+      "note": "The recorded historical source returned HTTP 404 on 7 September 2026. No exact replacement for that historical page or document has been verified."
+    },
+    "http://www.library.yale.edu/~llicense/": {
+      "status": "unavailable",
+      "checkedOn": "2026-09-07",
+      "note": "The recorded historical source returned HTTP 404 on 7 September 2026. No exact replacement for that historical page or document has been verified.",
+      "successor": {
+        "url": "https://www.charleston-hub.com/liblicense/",
+        "label": "Current Liblicense website",
+        "scope": "relocated-project-home",
+        "note": "Liblicense’s official site documents its move from Yale to the Center for Research Libraries and then to Charleston Hub in 2026. The current project website is at Charleston Hub. A preserved copy of the Yale page has not been verified.",
+        "evidenceUrls": [
+          "https://www.charleston-hub.com/liblicense/"
+        ]
+      }
+    }
+  }
+}

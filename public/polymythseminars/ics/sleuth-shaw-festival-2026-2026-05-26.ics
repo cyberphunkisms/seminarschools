@@ -5,13 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:41e1f9d32b3bd27eea69@seminarschools.com
-DTSTAMP:20260815T220000Z
-DTSTART:20260526T233000Z
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20260402
+DTEND;VALUE=DATE:20261010
 SUMMARY:Sleuth (Shaw Festival 2026)
 LOCATION:Court House Theatre\, Niagara-on-the-Lake
-DESCRIPTION:
+DESCRIPTION:Shaw Festival 2026 production run. Performances take place on
+  selected dates. See the production page for individual showtimes.
 URL:https://seminarschools.com/polymythseminars/events/sleuth-shaw-festiv
  al-2026-2026-05-26/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

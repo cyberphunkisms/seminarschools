@@ -111,13 +111,26 @@ if (englishRuntime && frenchRuntime) {
   check(/never change or add results/i.test(englishGuidance.suggestions) && /choose/i.test(englishGuidance.suggestions), 'English suggestion guidance does not disclose click-to-apply behavior');
   check(/mots exacts/i.test(frenchGuidance.search) && /expressions/i.test(frenchGuidance.search) && /au moins cinq caractères/i.test(frenchGuidance.search), 'French live search status does not explain the actual matching rules');
   check(/ne changent ni n’ajoutent de résultats/i.test(frenchGuidance.suggestions), 'French suggestion guidance does not disclose click-to-apply behavior');
-  check(englishRuntime.detail('a/b') === '/polymythseminars/events/a%2Fb/', 'English detail links do not safely encode listing IDs');
-  check(frenchRuntime.detail('a/b') === '/polymythseminars/fr/events/a%2Fb/', 'French detail links do not use the localized route');
+  for (const [runtime, expectedPath, expectedReturn, label] of [
+    [englishRuntime, '/polymythseminars/events/a%2Fb/', '/polymythseminars/', 'English'],
+    [frenchRuntime, '/polymythseminars/fr/events/a%2Fb/', '/polymythseminars/fr/', 'French'],
+  ]) {
+    const detail = new URL(runtime.detail('a/b'), 'https://example.test');
+    check(detail.origin === 'https://example.test' && detail.pathname === expectedPath, `${label} detail links must safely encode listing IDs on the localized internal route`);
+    check(detail.searchParams.get('from') === expectedReturn, `${label} detail links must retain their current calendar return route`);
+  }
   const safeActions = englishRuntime.actions({ id: 'astronomy-night', title: 'Astronomy Night', actions: [
     { kind: 'details', url: '/polymythseminars/events/astronomy-night/', scope: 'listing' },
-    { kind: 'detail', url: 'https://example.test/official', scope: 'event' },
+    { kind: 'detail', url: 'https://organizer.example/official', scope: 'event' },
   ] });
-  check(safeActions.includes('https://example.test/official') && safeActions.includes('/polymythseminars/events/astronomy-night/'), 'Result actions do not expose verified and local detail paths');
+  check(safeActions.includes('https://organizer.example/official') && safeActions.includes('/polymythseminars/events/astronomy-night/'), 'Result actions do not expose verified and local detail paths');
+  const actionTags = [...safeActions.matchAll(/<a\b[^>]*>/g)].map(match => match[0]);
+  check(actionTags.length === 2, 'Result actions must de-duplicate the payload Details link');
+  check(actionTags[0]?.includes('class="pm-action primary-link"') && actionTags[0]?.includes('href="https://organizer.example/official"'), 'The verified destination must be the primary action');
+  check(actionTags[0]?.includes('rel="noopener noreferrer"'), 'External primary actions must preserve safe link semantics');
+  check(actionTags[1]?.includes('/polymythseminars/events/astronomy-night/') && !actionTags[1]?.includes('primary-link'), 'Stable Details must remain a secondary action');
+  const missingActions = englishRuntime.actions({ id: 'no-source', title: 'No verified source', actions: [] });
+  check(missingActions.includes('class="pmd-link-missing"') && missingActions.includes('/polymythseminars/events/no-source/'), 'Missing external destinations must be explained while stable Details remains available');
   const unsafeActions = runtimeFor('en-CA')?.actions({ id: 'unsafe', title: 'Unsafe', actions: [
     { kind: 'detail', url: 'javascript:alert(1)', scope: 'event' },
     { kind: 'source', url: 'data:text/plain,test', scope: 'event' },
@@ -145,7 +158,8 @@ for (const { rel, locale, slug } of pages) {
   for (const needle of [
     'class="pmd-search-panel" aria-labelledby="pmdSearchLabel"',
     'for="pmdSearch"',
-    'aria-describedby="pmdSearchHelp pmdSearchStatus"',
+    'aria-describedby="pmdSearchStatus"',
+    '<details class="pmd-search-tips"><summary>',
     'id="pmdSearchHelp"',
     'id="pmdSearchStatus" class="pmd-status" role="status" aria-live="polite"',
     'id="pmdFilterDrawer"',

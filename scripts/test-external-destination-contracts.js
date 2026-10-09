@@ -25,6 +25,7 @@ assert.equal(polymythcalDestination({id:'OK',destination_url:'https://organizer.
 assert.equal(polymythCommonsDestination({ verified: 'yes', currentCanonicalUrl: 'https://current.example/', currentStatusGroup: 'ACTIVE', bookPrintedUrls: ['https://old.example/'] }).href, 'https://current.example/');
 assert.equal(polymythCommonsDestination({ verified: '', currentCanonicalUrl: '', bookPrintedUrls: ['https://old.example/'] }).status, 'book-listed-site');
 assert.equal(teacherResourceDestination({ url: '/unknown/' }, ['/approved/']).status, 'unavailable');
+assert.deepEqual(teacherResourceDestination({ url: 'https://publisher.example/missing.pdf', source_availability: 'unavailable' }), { status: 'unavailable', href: '', label: 'Original resource unavailable' });
 assert.equal(teacherResourceDestination({ url: '/approved/' }, ['/approved/']).status, 'seminar-schools-original');
 assert.equal(resolvePolymythcalDestination(invalid.polymythcal, {groupEvents:[invalid.polymythcal]}).status, 'unavailable-specific-page');
 assert.equal(teacherResourceDestination(invalid.teacher, []).status, 'unavailable');
@@ -245,4 +246,18 @@ assert.equal(destinationLabel(officialSeries, 'en'), 'Open official series page'
 assert.equal(destinationLabel(officialSeries, 'fr'), 'Ouvrir la page officielle de la série');
 assert.equal(destinationLabel(sourceSeries, 'en'), 'Open series source page');
 assert.equal(destinationLabel(sourceSeries, 'fr'), 'Ouvrir la page source de la série');
+// September 7 regression cases use independent acceptance and rejection inputs.
+const sharedLecture = { id:'shared-lecture', title:'Public Philosophy Lecture', source_quality:'official', source_url:'https://organizer.example/events/public-philosophy-lecture/' };
+assert.equal(resolvePolymythcalDestination(sharedLecture,{groupEvents:[sharedLecture,{...sharedLecture,id:'second-date'}]}).scope,'event');
+const sameRegistration = {...sharedLecture,registration_url:sharedLecture.source_url};
+assert.equal(resolvePolymythcalDestination(sameRegistration,{groupEvents:[sameRegistration]}).href,sharedLecture.source_url);
+const hotDocs = {title:'An opaque film event', source_quality:'official',source_url:'https://boxoffice.hotdocs.ca/websales/pages/info.aspx?evtinfo=643175~cf285ddd-dacb-4f18-89b8-1252c6dcffa6'};
+assert.equal(resolvePolymythcalDestination(hotDocs,{groupEvents:[hotDocs]}).scope,'event');
+for(const url of ['https://organizer.example/events/?date=20260815&tracking=123456789','https://organizer.example/events/special-program/']){
+ const record={title:'Alpha Lecture',source_quality:'official',source_url:url};
+ assert.equal(resolvePolymythcalDestination(record,{groupEvents:[record,{title:'Beta Workshop',source_url:url}]}).status,'unavailable-specific-page');
+}
+const unrelatedId = {title:'A Different Prize',source_quality:'official',source_url:'https://organizer.example/news/1472741'};
+assert.equal(resolvePolymythcalDestination(unrelatedId,{groupEvents:[unrelatedId,{title:'Original Prize'}]}).status,'unavailable-specific-page');
+
 console.log('EXTERNAL DESTINATION CONTRACT TESTS PASS — precedence, route semantics, shared-family scope, fail-closed materialization, and bilingual labels covered.');

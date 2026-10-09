@@ -16,7 +16,7 @@ function fail(s){ failures.push(s); }
 function count(re, text){ return [...text.matchAll(re)].length; }
 function extractJsonScript(html,id){ const m=html.match(new RegExp(`<script[^>]+id=["']${id}["'][^>]*>([\\s\\S]*?)<\\/script>`,'i')); if(!m) throw new Error(`missing #${id}`); return JSON.parse(m[1]); }
 function sourcePath(url){ const u=new URL(url); const p=u.pathname; return p.endsWith('/') ? p.slice(1)+'index.html' : p.slice(1); }
-function checkGeneratedPage(url, label){ const rel=sourcePath(url); if(!fs.existsSync(path.join(ROOT,rel))) { fail(`${label}: missing ${rel}`); return; } const h=read(rel); const roots=new Set([SITE+'/teacherresources/',SITE+'/polymythseminars/',SITE+'/polymyth/methodologylist/']); const stableEvent=url.startsWith(SITE+'/polymythseminars/events/') && h.includes('data-route-type="calendar-event"'); if(!roots.has(url) && !h.includes('Seminar Schools Static Search Surface') && !stableEvent) fail(`${label}: generated-page ownership marker missing in ${rel}`); const canonical=h.match(/<link rel="canonical" href="([^"]+)"/i)?.[1]; if(canonical!==url) fail(`${label}: canonical mismatch in ${rel}`); if(!/<h1\b/i.test(h)) fail(`${label}: no H1 in ${rel}`); }
+function checkGeneratedPage(url, label){ const rel=sourcePath(url); if(!fs.existsSync(path.join(ROOT,rel))) { fail(`${label}: missing ${rel}`); return; } const h=read(rel); const roots=new Set([SITE+'/teacherresources/',SITE+'/polymythseminars/',SITE+'/polymyth/methodologylist/']); const stableEvent=url.startsWith(SITE+'/polymythseminars/events/') && h.includes('data-route-type="calendar-event"'); const authoredManual=url===SITE+'/teacherresources/ieltsrubric/' && h.includes('data-route-type="teacher-manual"') && h.includes('href="/teacherresources/ieltsrubric/ielts-band-guide-and-assessment-rubric.pdf"') && fs.existsSync(path.join(ROOT,'scripts/verify-ielts-rubric-release.js')); if(!roots.has(url) && !h.includes('Seminar Schools Static Search Surface') && !stableEvent && !authoredManual) fail(`${label}: generated-page ownership marker missing in ${rel}`); const canonical=h.match(/<link rel="canonical" href="([^"]+)"/i)?.[1]; if(canonical!==url) fail(`${label}: canonical mismatch in ${rel}`); if(!/<h1\b/i.test(h)) fail(`${label}: no H1 in ${rel}`); }
 function main(){
   const manifest=JSON.parse(read('scripts/search-surface-manifest.json'));
   const catalog=read('teacherresources/index.html');
@@ -52,14 +52,14 @@ function main(){
   }
   if(!catalog.includes('/teacherresources/finder.js')) fail('catalog browser: route-scoped finder controller is missing');
   if(catalog.includes('id="resources-data"')) fail('catalog browser: duplicate inline resource dataset remains');
-  if(resourceReviewSection({})!=='') fail('catalog detail: empty records still generate a Classroom fit section');
+  if(resourceReviewSection({})!=='') fail('catalog detail: empty records still generate a Catalog notes section');
   const noteReview=resourceReviewSection({notes:'Specific classroom note.'});
-  if(!noteReview.includes('<h2>Classroom fit</h2>') || !noteReview.includes('Specific classroom note.')) fail('catalog detail: genuine notes do not generate a Classroom fit section');
+  if(!noteReview.includes('<h2>Catalog notes</h2>') || !noteReview.includes('Specific classroom note.')) fail('catalog detail: genuine notes do not generate a Catalog notes section');
   const blurbReview=resourceReviewSection({notes:' ',blurb:'Specific classroom blurb.'});
   if(!blurbReview.includes('Specific classroom blurb.')) fail('catalog detail: a genuine blurb is not used when notes are blank');
   const aliasDescription=resourceDescription({title:'Museum source',format:'museum-lesson',grade:'all'},{},{},data);
   if(!aliasDescription.includes('Museum Lesson')) fail('catalog detail: fallback descriptions do not use resolved taxonomy labels');
-  if(read('scripts/build-search-pages.js').includes('The record keeps subject, level, and source visible')) fail('catalog detail: generic Classroom fit filler remains in the generator');
+  if(read('scripts/build-search-pages.js').includes('The record keeps subject, level, and source visible')) fail('catalog detail: generic Catalog notes filler remains in the generator');
 
   const calendar=read('polymythseminars/index.html');
   const browse=JSON.parse(read('polymythseminars/browse.json'));

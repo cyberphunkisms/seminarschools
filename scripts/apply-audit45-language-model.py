@@ -31,9 +31,12 @@ else:
 
 def write_json(path: Path, payload: object) -> None:
     rendered = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+    prior_mtime = path.stat().st_mtime if path.exists() else 0
     if not path.exists() or path.read_text(encoding="utf-8") != rendered:
         path.write_text(rendered, encoding="utf-8")
-    if path.stat().st_mtime < BUILD_MTIME:
+        stamp = max(BUILD_MTIME, prior_mtime + 2)
+        os.utime(path, (stamp, stamp))
+    elif prior_mtime < BUILD_MTIME:
         os.utime(path, (BUILD_MTIME, BUILD_MTIME))
 
 

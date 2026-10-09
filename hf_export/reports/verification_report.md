@@ -1,6 +1,6 @@
 # Meaninglib dataset verification report
 
-Generated: 2026-09-07T04:00:00.000Z
+Generated: 2026-09-27T00:00:00.000Z
 
 Failures: 0
 Warnings: 0
@@ -14,9 +14,9 @@ Warnings: 0
 - PASS: found hf_export/data/relations/crossrefs.jsonl
 - PASS: found hf_export/reports/latest_export_report.md
 - PASS: found hf_export/schemas/meaninglib_entry.schema.json
-- PASS: total rows: 2013
-- PASS: all export rows share one timestamp: 2026-09-07T04:00:00.000Z
-- PASS: export timestamp matches deterministic build timestamp 2026-09-07T04:00:00.000Z
+- PASS: total rows: 2014
+- PASS: all export rows share one timestamp: 2026-09-27T00:00:00.000Z
+- PASS: export timestamp matches deterministic build timestamp 2026-09-27T00:00:00.000Z
 - PASS: ML row count exactly matches canonical: 1233
 - PASS: all_meaninglib_rows contains exactly 1233 canonical ML rows
 - PASS: main methodologylist JSONL exactly matches 1233 canonical ML rows
@@ -39,7 +39,7 @@ Warnings: 0
 - PASS: section JSONL sabachtan exactly matches 35 canonical ML rows
 - PASS: section JSONL studylist exactly matches 38 canonical ML rows
 - PASS: bb row count 246
-- PASS: mc row count 234
+- PASS: mc row count 235
 - PASS: cc row count 296
 - PASS: ML section counts exactly match canonical Methodologylist
 - PASS: portable CORE HF row is exact, canonical, and present on every ML export surface

@@ -5,14 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:88b60dc53058853bc506@seminarschools.com
-DTSTAMP:20260721T160000Z
+DTSTAMP:20261003T110658Z
 DTSTART;VALUE=DATE:20260910
 DTEND;VALUE=DATE:20261005
 SUMMARY:Wonderful Joe
-LOCATION:Location unconfirmed · Lieu non confirmé
-DESCRIPTION:Wonderful Joe
+LOCATION:Firehall Theatre\, Thousand Islands Playhouse\, Gananoque
+DESCRIPTION:Production run on selected performance dates. Check the theat
+ re’s booking schedule for each performance time and any exceptions.
 URL:https://seminarschools.com/polymythseminars/events/research-7c861d0af
  602/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

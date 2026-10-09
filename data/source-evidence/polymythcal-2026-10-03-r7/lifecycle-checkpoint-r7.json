@@ -1,0 +1,12 @@
+{
+  "scope": "Private early-pipeline lifecycle checkpoint settled from the ordinary import, evidence-normalization and manual-upsert pipeline in an isolated diagnostic root. Final public canonical facts are untouched. The same checkpoint distinction was documented by revision 6.",
+  "before_sha256": "6094f2b7a3b88fe07c99892fef93860a900e763846961882905585661f596c7c",
+  "after_sha256": "c2929a370cd324836d5dd9bd2340a23b08408b9ad272c1dfea1c577dc92ef76c",
+  "changed_records": {
+    "international-congress-on-medieval-studies-kalamazoo-62nd-2026": [
+      "qualification_reasons",
+      "time_precision"
+    ]
+  },
+  "canonical_record_unchanged": true
+}

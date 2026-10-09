@@ -20,6 +20,14 @@ import sys
 from datetime import datetime, timezone
 from email.utils import format_datetime
 from pathlib import Path
+if __package__:
+    from .polymythcal_manual_observations import record_manual_observation
+    from .atomic_json import write_text_atomic
+    from .build_lock import ReleaseBuildLock, inherited_release_build_root
+else:
+    from polymythcal_manual_observations import record_manual_observation
+    from atomic_json import write_text_atomic
+    from build_lock import ReleaseBuildLock, inherited_release_build_root
 from urllib.parse import urlparse
 
 try:
@@ -246,13 +254,14 @@ def enforce_no_aggregator_leak(records, discovery_only_hosts, blocked_exact_urls
 def merge(harvest_records, manual_records):
     """Manual wins on (normalized_title, date_to_hour) collision."""
     manual_keys = {
-        (normalize_title(r["title"]), round_to_hour(r["date"]))
+        (normalize_title(r["title"]), round_to_hour(r["date"])): r
         for r in manual_records
     }
     deduped = list(manual_records)
     for r in harvest_records:
         key = (normalize_title(r["title"]), round_to_hour(r["date"]))
         if key in manual_keys:
+            record_manual_observation(manual_keys[key], r)
             continue
         deduped.append(r)
     deduped.sort(key=lambda r: r["date"])
@@ -322,7 +331,7 @@ def write_rss(records):
         + '</channel></rss>'
     )
     RSS_PATH.parent.mkdir(parents=True, exist_ok=True)
-    RSS_PATH.write_text(feed, encoding="utf-8")
+    write_text_atomic(RSS_PATH, feed)
 
 
 def write_log(harvest_data, final_records, aggregator_drops):
@@ -351,15 +360,12 @@ def write_log(harvest_data, final_records, aggregator_drops):
         "aggregator_leak_examples": aggregator_drops[:5],
     }
     LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
-    LOG_PATH.write_text(json.dumps(log, indent=2), encoding="utf-8")
+    write_text_atomic(LOG_PATH, json.dumps(log, indent=2))
 
     HISTORY_DIR.mkdir(parents=True, exist_ok=True)
     snapshot = HISTORY_DIR / f"festivals-{datetime.now(timezone.utc).strftime('%Y-%m-%d')}.json"
-    snapshot.write_text(
-        json.dumps({"generated_at": now_iso(), "count": len(final_records),
-                    "events": final_records}, indent=2),
-        encoding="utf-8",
-    )
+    write_text_atomic(snapshot, json.dumps({"generated_at": now_iso(), "count": len(final_records),
+                    "events": final_records}, indent=2))
 
 
 def main():
@@ -412,7 +418,7 @@ def main():
         "count": len(merged),
         "events": merged,
     }
-    OUT_PATH.write_text(json.dumps(output, indent=2), encoding="utf-8")
+    write_text_atomic(OUT_PATH, json.dumps(output, indent=2))
     print(f"wrote {OUT_PATH}")
 
     write_rss(merged)
@@ -438,4 +444,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    with ReleaseBuildLock(inherited_release_build_root(ROOT)):
+        main()

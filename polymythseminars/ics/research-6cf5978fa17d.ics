@@ -5,13 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:9f53f6f084d65d3b174e@seminarschools.com
-DTSTAMP:20260721T160000Z
+DTSTAMP:20261003T042124Z
 DTSTART:20260801T233000Z
+DTEND:20260802T010000Z
 SUMMARY:Hardcore Band featuring Steele
-LOCATION:Location unconfirmed · Lieu non confirmé
+LOCATION:Stage in the Park\, Harbourfront Centre\, 235 Queens Quay West\,
+  Toronto
 DESCRIPTION:Hardcore Band featuring Steele
 URL:https://seminarschools.com/polymythseminars/events/research-6cf5978fa
  17d/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

@@ -1,8 +1,8 @@
 {
   "schema": "asset-weight-budget-v1",
-  "updated": "2026-09-06",
-  "policy": "This budget constrains the generated September 6 public deploy. The aggregate ceiling remains above the verified deploy while the Methodologylist text mirror, its rule-hardening addendum, the exact complete concordance, and the user-supplied full-resolution Always Already evidence capture retain narrow measured exceptions. Existing archival sources, research workbooks, pinned graph engine, compact Polymythcal datasets, localization routes, and other documented large assets retain their prior narrow ceilings. All other runtime and media assets use the extension limits below.",
-  "totalPublicCeilingBytes": 167773082,
+  "updated": "2026-10-05",
+  "policy": "This budget constrains the generated public deploy, with September 28 measurements for the final V4 fixes. The aggregate ceiling remains above the verified deploy while the Methodologylist text mirror, its rule-hardening addendum, the exact complete concordance, and the user-supplied full-resolution Always Already evidence capture retain narrow measured exceptions. Existing archival sources, research workbooks, pinned graph engine, compact Polymythcal datasets, localization routes, and other documented large assets retain their prior narrow ceilings. All other runtime and media assets use the extension limits below. September 28 measurements bind the exact accepted V3 Methodologylist, concordance and rule-addendum bytes. The full deploy is smaller than V3. Their measured exceptions and the aggregate ceiling are refreshed with narrow headroom; extension limits are retained. October 5 ML concept-application amendment: refresh only measured ML reference baselines and the narrow ceilings exceeded by the authorized existing-owner extensions; retain every unrelated budget and global/type ceiling.",
+  "totalPublicCeilingBytes": 171000000,
   "limitsByExtension": {
     ".css": 50000,
     ".gif": 500000,
@@ -37,13 +37,13 @@
     },
     {
       "path": "polymyth/concordance/concordance-index.json",
-      "baselineBytes": 11007984,
-      "ceilingBytes": 11100000,
+      "baselineBytes": 11229796,
+      "ceilingBytes": 11300000,
       "reason": "complete exact public concordance for the current methodology corpus"
     },
     {
       "path": "polymyth/methodologylist.txt",
-      "baselineBytes": 4188931,
+      "baselineBytes": 4219010,
       "ceilingBytes": 4230000,
       "reason": "canonical Methodologylist text mirror for the September 6 corpus"
     },
@@ -55,8 +55,8 @@
     },
     {
       "path": "polymyth/methodologylist/mephistodata-rule-hardening-addendum.js",
-      "baselineBytes": 131907,
-      "ceilingBytes": 134000,
+      "baselineBytes": 150829,
+      "ceilingBytes": 153000,
       "reason": "canonical Mephistodata rule-hardening addendum"
     },
     {
@@ -87,19 +87,45 @@
       "path": "js/polymythcal-revamp.js",
       "baselineBytes": 132809,
       "ceilingBytes": 134000,
-      "reason": "complete English and French Sets 1–15 calendar controller with goal-led discovery, 55 explicit Set 13–15 facets, and fail-closed exact-destination actions"
+      "reason": "complete English and French Sets 1\u201315 calendar controller with goal-led discovery, 55 explicit Set 13\u201315 facets, and fail-closed exact-destination actions"
     },
     {
       "path": "polymythseminars/events.json",
       "baselineBytes": 8526314,
       "ceilingBytes": 8560000,
-      "reason": "complete reusable 2,088-record canonical Polymythcal corpus with source provenance, researched Sets 1–15 fields, and reviewed destination evidence"
+      "reason": "complete reusable 2,088-record canonical Polymythcal corpus with source provenance, researched Sets 1\u201315 fields, and reviewed destination evidence"
     },
     {
       "path": "polymythseminars/browse.json",
-      "baselineBytes": 4534825,
-      "ceilingBytes": 4555000,
-      "reason": "lossless browser projection for 2,088 Polymythcal records, 55 Set 13–15 filter values, and exact-destination actions"
+      "baselineBytes": 3051714,
+      "ceilingBytes": 3080000,
+      "reason": "compact chronology with explicit destination status and end-date precision; gzip remains under the discovery gate"
+    },
+    {
+      "path": "js/polymythcal-discovery.js",
+      "baselineBytes": 95049,
+      "ceilingBytes": 96000,
+      "reason": "bilingual actions release: ongoing ranges, bounded dates, primary actions and return state"
+    },
+    {
+      "path": "css/polymythcal-discovery.css",
+      "baselineBytes": 23557,
+      "ceilingBytes": 24000,
+      "reason": "actions release presentation with plain metadata, ongoing groups and phone controls"
+    },
+    {
+      "path": "polymythseminars/watchlist.json",
+      "baselineBytes": 219509,
+      "ceilingBytes": 220000,
+      "reason": "compact monitoring projection with explicit destination status"
     }
-  ]
+  ],
+  "totalPublicBaselineBytes": 170261295,
+  "v4_review": {
+    "predecessor_public_bytes": 170264042,
+    "current_public_bytes": 170261295,
+    "change_bytes": -2747,
+    "prior_ceiling_bytes": 167773082,
+    "reason": "September 6 ceilings predate accepted V3 content. Current build is smaller than V3, retains all predecessor paths, and includes complete new module surfaces. Aggregate headroom is below 0.5%. Default extension limits are unchanged."
+  }
 }

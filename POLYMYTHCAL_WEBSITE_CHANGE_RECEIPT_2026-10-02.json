@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-04",
+  "revision": 9,
+  "release_id": "2026-10-04-polymythcal-search-save-repairs-r9",
+  "generated_at": "2026-10-04T03:20:20.516452+00:00",
+  "package_scope": "Complete editable website including built public/. Two existing-feature repairs.",
+  "predecessor_website_sha256": "43d93e07dd4ed52d67ac9939aa3e80bb39c467965b0b7eae61765bf45e3a3941",
+  "predecessor_full_receipt": "data/source-evidence/polymythcal-2026-10-04-r9/predecessor-r8-POLYMYTHCAL_WEBSITE_CHANGE_RECEIPT_2026-10-02.json",
+  "predecessor_notes": "data/source-evidence/polymythcal-2026-10-04-r9/predecessor-r8-POLYMYTHCAL_WEBSITE_FIXES_2026-10-02.txt",
+  "repairs": [
+    "Split normalized unquoted query terms at punctuation-created word boundaries while retaining AND semantics, field scope, quoted phrases and short-prefix collision protections.",
+    "Restore the existing Save event control on monitoring series cards by reading their internal Details action and visible heading. Preserve saved identity, title, language and return view."
+  ],
+  "supporting_changes": [
+    "Refresh runtime cache versions and active release assertions.",
+    "Add persistent unit and browser regressions for both repairs."
+  ],
+  "audit": {
+    "status": "passed",
+    "assertions": 2280,
+    "canonical_records": 2086,
+    "canonical_records_changed": 0,
+    "chronology_records": 1873,
+    "monitoring_records": 213,
+    "protected_document_and_history_files": 187,
+    "scope": "Two existing-feature repairs. Event facts, identities, classification and historical evidence retained.",
+    "limits": [
+      "No new source-by-source verification of event facts."
+    ]
+  },
+  "validation": {
+    "canonical_build": "passed",
+    "literal_punctuated_title_terms": 400,
+    "distinct_title_records": 346,
+    "new_browser_assertions": 193,
+    "existing_browser_assertions": 338,
+    "total_browser_assertions": 531,
+    "browser": "138.0.7204.23",
+    "languages": [
+      "en",
+      "fr"
+    ],
+    "viewport_widths": [
+      320,
+      390,
+      1280
+    ],
+    "geometry_renders": 339,
+    "geometry_surface_signatures": 92,
+    "inspected_renders": [
+      "search-390.png",
+      "search-1280.png",
+      "monitoring-series-390.png"
+    ],
+    "build_idempotence": "21270 durable files byte-identical after isolated immediate rebuild; canonical root unchanged.",
+    "public_parity": "9800 allowlisted source/public files byte-identical.",
+    "asset_identity": "28 bound source assets and 23 public runtime mirrors passed.",
+    "evidence_directory": "data/source-evidence/polymythcal-2026-10-04-r9"
+  },
+  "preservation": [
+    "All 2086 canonical events retain their facts and stable IDs.",
+    "The 1873 chronology records, 213 monitoring records and their taxonomy are unchanged.",
+    "All predecessor payload paths retained, with document and release-history hashes checked.",
+    "Existing presentation, controls, routes, source corrections and accepted scope retained."
+  ],
+  "limits": [
+    "Browser checks used headless Chromium.",
+    "No fresh source-by-source verification of event facts or external destinations."
+  ]
+}

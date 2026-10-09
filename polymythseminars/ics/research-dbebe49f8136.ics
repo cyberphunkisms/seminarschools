@@ -5,13 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:e3a3643500b08db21e56@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260921
+DTSTAMP:20261003T110658Z
+DTSTART:20260921T230000Z
+DTEND:20260922T010000Z
 SUMMARY:Floral Design Workshop
-LOCATION:Location unconfirmed · Lieu non confirmé
+LOCATION:St. Andrew’s Church Hall\, Sydenham Street entrance\, Gananoqu
+ e
 DESCRIPTION:Floral Design Workshop
 URL:https://seminarschools.com/polymythseminars/events/research-dbebe49f8
  136/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

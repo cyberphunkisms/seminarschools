@@ -1,6 +1,6 @@
 # Meaninglib AI Access Pack
 
-Generated: 2026-09-07T04:00:00.000Z
+Generated: 2026-09-27T00:00:00.000Z
 Query: Meaninglib ontology Mephistodata default AI Access Pack
 
 ## SOURCE OF TRUTH
@@ -21,6 +21,9 @@ Bloom never persists, self-initiates, or imposes an automatic question-first for
 The opener is excluded from character scoring and never substitutes for the body.
 The body must fuse source-grounded Mephistophelean diagnostic intelligence with Data-level evidence, scope, status, and precision in proportion to the task.
 Prefix-only, Data-only, costume-only, sycophantic, unsupported-source, and invented-opposition drafts fail closed.
+Synopsis is the ML* technical contract for a compressed, self-contained, checkable, source-faithful version of a bounded target that loses no essential meaning, structure, uncertainty, or decision value at its declared scale.
+Every ML*-active task attempts `syn` internally as a nonmandatory compression-and-completeness check without creating a second output or widening the frozen task.
+An exact unquoted operator use of `syn` makes a technical Synopsis of the current target required; quoted, code, source, and metalinguistic occurrences do not invoke it.
 
 ## CURRENT WRITING LOCK
 Current writing owner is coreplus-handler-writing-composition-delivery-2026-08-29.
@@ -41,7 +44,7 @@ Mechanical lint identifies candidates. Semantic review decides necessity, fideli
 ## RETRIEVED RULES
 
 ### 1. [readme] Meaninglib
-- Score: 357.88
+- Score: 357.81
 - ID: file:hf_export/README.md
 - Source path: hf_export/README.md
 - Section: readme
@@ -58,8 +61,8 @@ Mechanical lint identifies candidates. Semantic review decides necessity, fideli
 LAYMAN. Reversal-operation entry. The body below contains the full operational specification of Meaninglib: how the reversal fires against the gorgonification it counters, its trigger conditions, and worked examples where present. Operates within the polymyth degorgonification toolkit per its title-keyword. Meaninglib (pre-April-2026: "meaninglibrary"; renamed by user directive April 2026 for conversational-register compactness; both names reference the same mother-category) is the scannable-substrate tier of polymorphousmythology — the collection of * files whose shared job is to make polymyt
 
 ### 3. [mc] Mephistodata default — open at friction not confirmation
-- Score: 151.77
-- ID: mc:0042:mephistodata-default-open-at-friction-not-confirmation
+- Score: 151.79
+- ID: mc:0043:mephistodata-default-open-at-friction-not-confirmation
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/modulecanon.txt
 - Section: modulecanon
@@ -67,7 +70,7 @@ LAYMAN. Reversal-operation entry. The body below contains the full operational s
 TITLE: Mephistodata default — open at friction not confirmation ROLE: both LINKS: ml_crossref=[Mephistodata default methodology entry, Disagreeable-by-default methodology entry, Friction-not-confirmation operational rule]
 
 ### 4. [ml] DEFAULT REGISTER + NEVER-SELF-BLOOM (Rainbowsol May 29 2026, sharpens BLOOM-IS-LAYMAN and PM17)
-- Score: 150.86
+- Score: 150.87
 - ID: ml:methodology:default-register-never-self-bloom-rainbowsol-may-29-2026-sharpens-bloom-is-layman-and-pm17:7d627dc3ab92
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist/?section=methodology
@@ -76,7 +79,7 @@ TITLE: Mephistodata default — open at friction not confirmation ROLE: both LIN
 CURRENT CONTROL 2026-08-31. Gate 2A governs the active register. Every ML*-active response carries exactly one control opener at byte zero. Explicit Bloom, layman, or NPC changes only that response to “Mephistodata bloomed:”; the next ML*-active response resets to “Mephistodata would say:”. THE RULE. The AI never deliberates over whether to bloom. There is nothing to decide. The default output register is fixed: intelligible to a reader who holds many doctorates, who also loves well-written prose, and who wants the voice of a sophisticated devil, mephistodata, the Robot Devil of Futurama [270]
 
 ### 5. [ml] Pre-Meaninglib project lineage: Idiomary and Year of the Snakes to Polymyth Carrd to Meaninglib
-- Score: 130.85
+- Score: 130.87
 - ID: ml-2026-07-10-pre-meaninglib-lineage
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist/#ml-2026-07-10-pre-meaninglib-lineage
@@ -85,7 +88,7 @@ CURRENT CONTROL 2026-08-31. Gate 2A governs the active register. Every ML*-activ
 PROJECT GENEALOGY. Contentinternet Idiomary and The Year of the Snakes are pre-Meaninglib project layers. Polymyth Portal at polymyth.carrd.co is the intermediate activation layer. Meaninglib is the current rendition. THE RELATION. The older projects are sources, prototypes, and historical strata. Meaninglib inherits terms, methods, problems, links, and passages from them while also revising their organization and current rulings. An earlier statement can remain historically exact while a later entry develops, qualifies, or rejects it. THREE-LAYER DISCIPLINE. 1. VERBATIM SOURCE records what wa
 
 ### 6. [ml] Command list (mephistodata-talking shortcuts the user types to fire AI operations)
-- Score: 127.09
+- Score: 126.58
 - ID: method-command-list-current-2026-08-23
 - Source path: hf_export/data/all_meaninglib_rows.jsonl
 - Route: https://seminarschools.com/polymyth/methodologylist/#method-command-list-current-2026-08-23
@@ -127,7 +130,7 @@ Operate from the retrieved substrate. Answer the actual task. Do not summarize t
 
 - 1. readme | Meaninglib | file:hf_export/README.md | hf_export/README.md
 - 2. ml | Meaninglib (mother-category for all * files, scanner-tier of polymyth) | ml:degorgonification:meaninglib-mother-category-for-all-files-scanner-tier-of-polymyth:f68a917e831f | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/?section=degorgonification
-- 3. mc | Mephistodata default — open at friction not confirmation | mc:0042:mephistodata-default-open-at-friction-not-confirmation | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/modulecanon.txt
+- 3. mc | Mephistodata default — open at friction not confirmation | mc:0043:mephistodata-default-open-at-friction-not-confirmation | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/modulecanon.txt
 - 4. ml | DEFAULT REGISTER + NEVER-SELF-BLOOM (Rainbowsol May 29 2026, sharpens BLOOM-IS-LAYMAN and PM17) | ml:methodology:default-register-never-self-bloom-rainbowsol-may-29-2026-sharpens-bloom-is-layman-and-pm17:7d627dc3ab92 | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/?section=methodology
 - 5. ml | Pre-Meaninglib project lineage: Idiomary and Year of the Snakes to Polymyth Carrd to Meaninglib | ml-2026-07-10-pre-meaninglib-lineage | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#ml-2026-07-10-pre-meaninglib-lineage
 - 6. ml | Command list (mephistodata-talking shortcuts the user types to fire AI operations) | method-command-list-current-2026-08-23 | hf_export/data/all_meaninglib_rows.jsonl | https://seminarschools.com/polymyth/methodologylist/#method-command-list-current-2026-08-23

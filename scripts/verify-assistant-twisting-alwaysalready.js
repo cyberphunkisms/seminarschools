@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 'use strict';
+const {currentConceptArtifactHash}=require('./lib/ml-concept-release-binding');
 
 const crypto = require('crypto');
 const fs = require('fs');
@@ -172,7 +173,38 @@ check(Array.isArray(releaseUpdate.preserved_record_identifiers)
   && releaseUpdate.preserved_record_identifiers.includes('ml:gorgonification:platformstrawmanculture:b1e10aeffc03'), 'release manifest omits preserved record identities');
 const releaseArtifactHashes = releaseUpdate.artifact_sha256 || {};
 check(Object.keys(releaseArtifactHashes).length >= 14, 'release manifest does not bind the complete update artifact set');
-for (const [relative, expected] of Object.entries(releaseArtifactHashes)) {
+// Later release deltas bind current bytes; earlier records retain their provenance.
+const currentArtifactBindings = {
+  ...releaseArtifactHashes,
+  ...(releaseManifest.ml_star_citation_ouroboros_update_2026_09_08?.artifact_sha256 || {}),
+  ...(releaseManifest.ml_star_antifluff_update_2026_09_08?.artifact_sha256 || {}),
+  ...(releaseManifest.ml_star_synopsis_syn_update_2026_09_08?.artifact_sha256 || {}),
+  ...(releaseManifest.ml_star_ouroboros_update_2026_09_11?.artifact_sha256 || {}),
+};
+// Later complete handoffs retain the earlier amendment objects verbatim and
+// advance file hashes only through an exact predecessor-to-successor chain.
+for (const [key, pin] of [
+ ['teacher_resources_bb_update_20260927','a39addd86a06b340624d5bec2bdabaaeadb6f199e8a5ef11590caf29f2820864'],
+ ['teacher_resources_bb_audit_20260927','2e54d3ccc6f1055ac362774710b9e769bd7f981440a5cd3db3c70ba7e42791dc'],
+ ['teacher_resources_bb_fixes_20260927','ae01ef48ba27a7a4bf5328963af83367178f5f8c5643d312ca617b92ac9e7ab7']
+]) if (sha256(JSON.stringify(releaseManifest[key])) !== pin) check(false,'Immutable teacher/BB predecessor amendment changed: '+key);
+function currentArtifactHash(relative) {
+ let expected = currentArtifactBindings[relative];
+ const original = releaseManifest.teacher_resources_bb_update_20260927;
+ if (original?.artifact_sha256?.[relative]) expected=original.artifact_sha256[relative];
+ for (const [key,id,predecessor] of [
+ ['teacher_resources_bb_audit_20260927','seminar-schools-teacher-resources-bb-audited-v2-2026-09-27','7be2545f0c3bfaf01f68c2b64b930ecfbaac5770f63f85a0afecfca09f14e169'],
+ ['teacher_resources_bb_fixes_20260927','seminar-schools-teacher-resources-bb-fixed-v3-2026-09-27','51023737aa3b2e70ea84ea8aa4fc028cf5bccb6a4f35611f6565f01b638b45a0'],
+ ['teacher_resources_bb_final_20260928','seminar-schools-teacher-resources-bb-final-v4-2026-09-28','93f00bdef4a639eed7e349df26ba6764b6bc811ab33893ba12b43e71caebc6e9'],
+ ['polymythcal_maintenance_20261001','2026-10-01-polymythcal-maintenance-v6','b963e1eed45eab5fe4118e0b6670f0dbc1ecceda2b650fb91c195f9d3537c33a']
+ ]) {
+  const next=releaseManifest[key];
+  if (next?.release_id===id && next.predecessor_sha256===predecessor && next.predecessor_artifact_sha256?.[relative]===expected) expected=next.artifact_sha256?.[relative] || expected;
+ }
+ return currentConceptArtifactHash(releaseManifest,relative,expected);
+}
+for (const relative of Object.keys(releaseArtifactHashes)) {
+  const expected = currentArtifactHash(relative);
   check(/^[0-9a-f]{64}$/.test(expected) && sha256(read(relative, null)) === expected, `release artifact hash differs: ${relative}`);
 }
 

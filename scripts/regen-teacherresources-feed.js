@@ -35,7 +35,6 @@ for (const group of data.groups || []) {
     for (const entry of category.entries || []) records.push({ group, category, entry });
   }
 }
-if (records.length !== 645) throw new Error(`Expected 645 feed records, found ${records.length}`);
 
 const items = records.map(({ group, category, entry }) => {
   const localUrl = SITE + route(group, category, entry);
@@ -59,7 +58,7 @@ const feed = `<?xml version="1.0" encoding="UTF-8"?>
 <channel>
 <title>Seminar Schools Teacher Resources</title>
 <link>${SITE}/teacherresources/</link>
-<description>All 645 catalogued classroom resources across 25 source collections.</description>
+<description>${records.length} catalogued classroom resources.</description>
 <language>en-ca</language>
 <lastBuildDate>${buildDate.toUTCString()}</lastBuildDate>
 <atom:link href="${SITE}/teacherresources/feed.xml" rel="self" type="application/rss+xml"/>

@@ -75,10 +75,13 @@ for (const id of monitoredIds) {
 const allowedChronology = new Set(PUBLIC_EVENT_KEYS);
 const allowedMonitoring = new Set(PUBLIC_WATCHLIST_KEYS);
 const canonicalById = new Map(canonicalItems.map(item => [String(item.id || ''), item]));
+const publicDestinationStatuses = new Set([
+  'official-event-page', 'official-series-page', 'source-event-page', 'unavailable-specific-page',
+]);
 const privateRawFields = new Set([
   'raw_excerpt', 'qualification_reasons', 'presence_claims', 'eligibility_rules',
   'community_heritage_formats', 'live_digital_formats', 'course_program_formats',
-  'source_url', 'source_name', 'destination_url', 'destination_status',
+  'source_url', 'source_name', 'destination_url',
   'destination_scope', 'destination_kind', 'registration_url', 'application_url',
   'submission_url', 'rules_url', 'ticket_url', 'tickets_url', 'stream_url',
   'livestream_url', 'watch_url',
@@ -95,6 +98,7 @@ for (const [name, items, allowed] of [['chronology', chronologyItems, allowedChr
     if (detailActions.length !== 1 || detailActions[0].url !== item.route || detailActions[0].scope !== 'listing') problems.push(`${name} ${item.id} lacks exactly one stable internal details action`);
     if (externalActions.length > 1) problems.push(`${name} ${item.id} exposes more than one external action`);
     const canonical = canonicalById.get(String(item.id || ''));
+    if (!publicDestinationStatuses.has(item.destination_status) || item.destination_status !== canonical?.destination_status) problems.push(`${name} ${item.id} has no accurate controlled public destination status`);
     const expectedExternal = canonical?.destination_url && canonical.destination_status !== 'unavailable-specific-page'
       ? String(canonical.destination_url) : '';
     if ((externalActions[0]?.url || '') !== expectedExternal) problems.push(`${name} ${item.id} external action bypasses the materialized exact destination`);
@@ -159,7 +163,9 @@ for (const [token, label] of [
   ["event.target.closest('[data-correction]')", 'click-to-apply correction'],
   ['class="pmd-match-reason"', 'visible match explanations'],
   ['function safeUrl(rawUrl)', 'safe destination URL validation'],
-  ["addAction(detailHref(event), COPY.details, 'primary-link')", 'universal stable internal Details action'],
+  ["addAction(detailHref(event), COPY.details)", 'universal stable secondary Details action'],
+  ["externalCount === 0 ? 'primary-link' : 'pm-source-action'", 'verified destination as the primary action'],
+  ['class="pmd-link-missing"', 'explicit missing external destination message'],
   ['pm-source-action', 'separate exact destination action'],
   ["kind === 'details' ? detailHref(event) : action.url", 'payload/internal Details de-duplication'],
 ]) if (!app.includes(token)) problems.push(`discovery controller lacks ${label}`);

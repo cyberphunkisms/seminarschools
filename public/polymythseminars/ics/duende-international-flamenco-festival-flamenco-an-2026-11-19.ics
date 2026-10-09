@@ -5,14 +5,16 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:5346eaf00c4329a6e16f@seminarschools.com
-DTSTAMP:20260720T040000Z
-DTSTART;VALUE=DATE:20261119
+DTSTAMP:20261003T023241Z
+DTSTART;VALUE=DATE:20261118
 DTEND;VALUE=DATE:20261123
 SUMMARY:Duende International Flamenco Festival: Flamenco and the World
-LOCATION:Aga Khan Museum
-DESCRIPTION:
+LOCATION:Aga Khan Museum and Massey Hall\, Toronto
+DESCRIPTION:Festival events run November 18 to 22\, 2026\, including open
+ ing-day masterclasses and a film screening. Venues and individual times 
+ vary by event.
 URL:https://seminarschools.com/polymythseminars/events/duende-internation
  al-flamenco-festival-flamenco-an-2026-11-19/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

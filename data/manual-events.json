@@ -2244,40 +2244,6 @@
       "qualification_reasons": []
     },
     {
-      "date": "2026-06-01T10:00:00-04:00",
-      "end_date": "2026-12-31T17:30:00-05:00",
-      "title": "The Impressionist Revolution: Monet to Matisse",
-      "venue": "Art Gallery of Ontario, 317 Dundas Street West",
-      "type": "site-specific-art",
-      "source_url": "https://ago.ca/press-release/ago-announces-2026-exhibition-line-featuring-paul-mccartney-monet-and-melissa-auf-der",
-      "raw_excerpt": "Major exhibition from the Dallas Museum of Art, Canadian debut, June 2026 opening at AGO.",
-      "source_id": "manual-curated",
-      "confidence": 90,
-      "review_status": "manual",
-      "id": "b62fe9ac2e56",
-      "identity_key": "f6d0075d3bf54d90044d",
-      "arts_event_forms": [
-        "exhibition",
-        "public-art-site-specific"
-      ],
-      "arts_disciplines": [
-        "visual-arts",
-        "public-art"
-      ],
-      "arts_occurrence_role": "run",
-      "arts_access_status": "public-or-ticketed",
-      "research_set_cross_tags": [
-        "10-Arts-Performance-Exhibitions-and-Festivals"
-      ],
-      "_upsert_batches": [
-        "manual-polymythcal-arts-set10-reconstruction-2026-08-14"
-      ],
-      "set10_classified_at": "2026-08-14T22:00:00-04:00",
-      "time_precision": "not-applicable",
-      "confirmation_status": "confirmed",
-      "qualification_reasons": []
-    },
-    {
       "date": "2026-06-02T19:00:00-04:00",
       "end_date": "2026-06-07T23:00:00-04:00",
       "title": "imagineNATIVE Film + Media Arts Festival 2026 (in-person)",
@@ -6495,77 +6461,6 @@
       ],
       "arts_disciplines": [
         "multidisciplinary-arts"
-      ],
-      "arts_occurrence_role": "run",
-      "arts_access_status": "access-unconfirmed",
-      "research_set_cross_tags": [
-        "10-Arts-Performance-Exhibitions-and-Festivals"
-      ],
-      "_upsert_batches": [
-        "manual-polymythcal-arts-set10-reconstruction-2026-08-14"
-      ],
-      "set10_classified_at": "2026-08-14T22:00:00-04:00"
-    },
-    {
-      "date": "2026-07-21T00:00-04:00",
-      "end_date": "2026-10-18T00:00-04:00",
-      "title": "BEES: A Story of Survival",
-      "speaker_or_director": null,
-      "venue": "Location unconfirmed · Lieu non confirmé",
-      "type": "exhibition",
-      "source_url": "https://www.rom.on.ca/whats-on/events",
-      "source_id": "manual-curated",
-      "description": "",
-      "secondary_types": [],
-      "parent_id": null,
-      "is_parent_festival": false,
-      "age_band": "public",
-      "id": "research-54ecc2f1065b",
-      "attendance_confirmed": false,
-      "confidence": 86,
-      "four_condition_test": {
-        "time_place": false,
-        "prepared_offering": true,
-        "substantive_engagement": true,
-        "intellectual_stake": true
-      },
-      "raw_excerpt": "BEES: A Story of Survival",
-      "scraped_at": "2026-07-21T12:00:00-04:00",
-      "review_status": "manual",
-      "marginalia_url": null,
-      "_src": "manual-deep-research-2026-07-21",
-      "record_kind": "event",
-      "date_precision": "date",
-      "time_precision": "not-applicable",
-      "source_quality": "official-or-institutional",
-      "source_language": "und",
-      "platform_adapter": "manual-research-import",
-      "organizer": "Royal Ontario Museum",
-      "first_seen_at": "2026-07-21T12:00:00-04:00",
-      "last_checked_at": "2026-07-21T12:00:00-04:00",
-      "lifecycle_status": "active",
-      "city": "Toronto",
-      "province": "Ontario",
-      "country": "Canada",
-      "corridor_zone": "toronto",
-      "timezone": "America/Toronto",
-      "confirmation_status": "unconfirmed",
-      "qualification_reasons": [
-        "location-unconfirmed"
-      ],
-      "legacy_ids": [],
-      "identity_key": "fb6901af262e552fff4a",
-      "missing_count": 0,
-      "research_id": "54ecc2f1065b",
-      "research_source_ref": "turn197446search3",
-      "research_priority": "P1",
-      "research_registry_status": "registered-exact",
-      "recurrence_note": null,
-      "arts_event_forms": [
-        "exhibition"
-      ],
-      "arts_disciplines": [
-        "visual-arts"
       ],
       "arts_occurrence_role": "run",
       "arts_access_status": "access-unconfirmed",
@@ -156862,7 +156757,7 @@
       "qualification_reasons": []
     }
   ],
-  "count": 1798,
+  "count": 1796,
   "last_backbone_update": "2026-06-28",
   "backbone_import_count_2026_06_28": 21,
   "philosophy_humanities_cfp_update_2026_06_29": {
@@ -157242,25 +157137,25 @@
   "polymythcal_arts_set10_reconstruction_2026_08_14": {
     "source": "manual-polymythcal-arts-set10-reconstruction-2026-08-14",
     "research_set": "10-Arts-Performance-Exhibitions-and-Festivals",
-    "records_enriched": 486,
+    "records_enriched": 484,
     "baseline_set9_arts_records": 401,
-    "post_set9_arts_records_cross_classified": 85,
+    "post_set9_arts_records_cross_classified": 83,
     "set11_arts_records_cross_classified": 62,
     "set11_existing_records_cross_tagged": 3,
     "set12_arts_records_cross_classified": 1,
-    "upsert_eligible_records": 482,
+    "upsert_eligible_records": 480,
     "canonical_duplicate_records_not_upserted": 4,
     "stable_public_ids_backfilled": 67,
     "unresolved_legacy_records_without_ids": 0,
     "forms": {
       "artist-curator-program": 3,
       "dance-performance": 12,
-      "exhibition": 51,
+      "exhibition": 49,
       "festival": 138,
       "multidisciplinary-performance": 86,
       "music-performance": 55,
       "opera-orchestral": 10,
-      "public-art-site-specific": 32,
+      "public-art-site-specific": 31,
       "screening-film-festival": 64,
       "talkback-discussion": 86,
       "theatre-performance": 107
@@ -157272,14 +157167,14 @@
       "multidisciplinary-cultural-festival": 138,
       "music": 55,
       "opera-orchestral-music": 10,
-      "public-art": 32,
+      "public-art": 31,
       "theatre": 107,
-      "visual-arts": 51
+      "visual-arts": 49
     },
     "occurrence_roles": {
       "child": 104,
       "parent": 29,
-      "run": 167,
+      "run": 165,
       "single-occurrence": 186
     },
     "change_list_components": [

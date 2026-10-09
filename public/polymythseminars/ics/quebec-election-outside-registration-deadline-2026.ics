@@ -5,15 +5,16 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:01de192a19b0e65eb8d4@seminarschools.com
-DTSTAMP:20260815T033000Z
-DTSTART:20260916T040000Z
+DTSTAMP:20261003T110658Z
+DTSTART;VALUE=DATE:20260916
 SUMMARY:Québec general election — registration deadline for voting out
  side Québec
 LOCATION:Online / Élections Québec
-DESCRIPTION:Deadline for eligible electors using the outside-Québec voti
- ng route to complete registration.
+DESCRIPTION:Registration to vote outside Québec closes September 16\, 20
+ 26. The day is confirmed\; the exact deadline clock remains unverified. 
+ Check the organizer’s application instructions.
 URL:https://seminarschools.com/polymythseminars/events/quebec-election-ou
  tside-registration-deadline-2026/
-STATUS:CONFIRMED
+STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

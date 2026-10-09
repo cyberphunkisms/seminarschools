@@ -5,14 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:f3d494689cabd002c352@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260721
+DTSTAMP:20261001T000000Z
+DTSTART;VALUE=DATE:20251218
 DTEND;VALUE=DATE:20261019
 SUMMARY:À l’écoute des archives
-LOCATION:Location unconfirmed · Lieu non confirmé
+LOCATION:Centre Canadien d’Architecture\, Vitrines\, 1920 rue Baile\, M
+ ontréal
 DESCRIPTION:À l’écoute des archives
 URL:https://seminarschools.com/polymythseminars/events/research-4025b4d53
  bc6/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

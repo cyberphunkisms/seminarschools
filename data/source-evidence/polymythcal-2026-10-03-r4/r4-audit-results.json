@@ -1,0 +1,1259 @@
+{
+  "status": "passed",
+  "assertions": 4340,
+  "before": {
+    "canonical": 2086,
+    "destination_status": {
+      "unavailable-specific-page": 1171,
+      "official-event-page": 432,
+      "official-series-page": 482,
+      "source-event-page": 1
+    },
+    "unconfirmed": 851,
+    "unknown_city": 367
+  },
+  "after": {
+    "canonical": 2086,
+    "destination_status": {
+      "unavailable-specific-page": 1143,
+      "official-event-page": 459,
+      "official-series-page": 483,
+      "source-event-page": 1
+    },
+    "unconfirmed": 848,
+    "unknown_city": 200
+  },
+  "correction_records": 169,
+  "official_source_field_reviews": 38,
+  "geography_normalizations": 153,
+  "changed_record_fields": {
+    "hayv-kahraman-nabog-2026-03-10": [
+      "city",
+      "corridor_zone",
+      "last_checked_at",
+      "source_notes",
+      "source_url"
+    ],
+    "game-on-exhibition-2026-04-03": [
+      "city",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "end_date",
+      "last_checked_at",
+      "previous_dates",
+      "source_notes",
+      "source_url",
+      "venue"
+    ],
+    "karina-vernon-lecture-2026-04-15": [
+      "city",
+      "corridor_zone"
+    ],
+    "miles-away-film-screening-and-director-s-panel-2026-04-15": [
+      "city",
+      "corridor_zone"
+    ],
+    "new-approaches-to-slaving-and-slave-trading-in-the-2026-04-15": [
+      "city",
+      "corridor_zone"
+    ],
+    "ago-talk-what-art-can-ask-of-us-why-seeing-is-not--2026-04-18": [
+      "city",
+      "corridor_zone"
+    ],
+    "ago-talk-the-beatles-never-went-out-of-fashion-2026-04-19": [
+      "city",
+      "corridor_zone"
+    ],
+    "tpn-pop-speaker-series-student-symposium-2026-04-20": [
+      "city",
+      "corridor_zone"
+    ],
+    "tpn-pop-speaker-series-student-symposium-2026-04-21": [
+      "city",
+      "corridor_zone"
+    ],
+    "tpl-salon-series-at-appel-salon-2026-04-22": [
+      "city",
+      "corridor_zone"
+    ],
+    "ago-teacher-workshop-art-and-indigenous-studies-2026-04-25": [
+      "city",
+      "corridor_zone"
+    ],
+    "massey-dialogues-2026-04-25": [
+      "city",
+      "corridor_zone"
+    ],
+    "ago-talk-reliving-beatlemania-with-paul-mccartney--2026-05-02": [
+      "city",
+      "corridor_zone"
+    ],
+    "tpn-pop-speaker-series-jenna-nobles-2026-05-05": [
+      "city",
+      "corridor_zone"
+    ],
+    "entangled-oligarchies-us-china-power-relations-in--2026-05-08": [
+      "city",
+      "corridor_zone"
+    ],
+    "rom-speaks-on-archaeology-and-memory-2026-05-14": [
+      "city",
+      "corridor_zone"
+    ],
+    "aga-khan-museum-crossing-traditions-cimbalom-and-s-2026-05-12": [
+      "city",
+      "confirmation_status",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "last_checked_at",
+      "previous_dates",
+      "qualification_reasons",
+      "source_notes",
+      "source_url",
+      "time_precision",
+      "venue"
+    ],
+    "bees-a-story-of-survival-2026-05-16": [
+      "city",
+      "corridor_zone"
+    ],
+    "crossing-traditions-cimbalom-and-santoor-in-dialog-2026-05-16": [
+      "city",
+      "confirmation_status",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "last_checked_at",
+      "previous_dates",
+      "qualification_reasons",
+      "source_notes",
+      "source_url",
+      "time_precision",
+      "venue"
+    ],
+    "aga-khan-museum-artist-talk-and-demonstration-2026-05-16": [
+      "city",
+      "corridor_zone",
+      "date",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "speaker_or_director",
+      "title",
+      "venue"
+    ],
+    "aga-khan-museum-artist-talk-and-demonstration-2026-05-17": [
+      "city",
+      "corridor_zone",
+      "date",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "speaker_or_director",
+      "title",
+      "venue"
+    ],
+    "doors-open-toronto-aga-khan-museum-and-ismaili-cen-2026-05-24": [
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "end_date",
+      "last_checked_at",
+      "previous_dates",
+      "source_notes",
+      "time_precision",
+      "venue"
+    ],
+    "april-hickox-vantage-point-passing-2026-05-26": [
+      "city",
+      "corridor_zone"
+    ],
+    "sin-wai-kin-essence-contact-exhibition-2026-05-26": [
+      "city",
+      "corridor_zone"
+    ],
+    "amadeus-shaw-festival-2026-2026-05-26": [
+      "arts_access_status",
+      "arts_disciplines",
+      "arts_event_forms",
+      "arts_occurrence_role",
+      "city",
+      "confirmation_status",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "end_date",
+      "last_checked_at",
+      "qualification_reasons",
+      "source_notes",
+      "source_url",
+      "time_precision",
+      "type",
+      "venue"
+    ],
+    "heartbreak-house-shaw-festival-2026-2026-05-26": [
+      "arts_access_status",
+      "arts_disciplines",
+      "arts_event_forms",
+      "arts_occurrence_role",
+      "city",
+      "confirmation_status",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "end_date",
+      "last_checked_at",
+      "qualification_reasons",
+      "source_notes",
+      "source_url",
+      "time_precision",
+      "type",
+      "venue"
+    ],
+    "jeeves-wooster-in-perfect-nonsense-shaw-festival-2-2026-05-26": [
+      "arts_access_status",
+      "arts_disciplines",
+      "arts_event_forms",
+      "arts_occurrence_role",
+      "city",
+      "confirmation_status",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "end_date",
+      "last_checked_at",
+      "qualification_reasons",
+      "source_notes",
+      "source_url",
+      "time_precision",
+      "type"
+    ],
+    "ohio-state-murders-shaw-festival-2026-2026-05-26": [
+      "arts_access_status",
+      "arts_disciplines",
+      "arts_event_forms",
+      "arts_occurrence_role",
+      "city",
+      "confirmation_status",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "end_date",
+      "last_checked_at",
+      "qualification_reasons",
+      "source_notes",
+      "source_url",
+      "time_precision",
+      "type",
+      "venue"
+    ],
+    "one-for-the-pot-shaw-festival-2026-2026-05-26": [
+      "arts_access_status",
+      "arts_disciplines",
+      "arts_event_forms",
+      "arts_occurrence_role",
+      "city",
+      "confirmation_status",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "end_date",
+      "last_checked_at",
+      "qualification_reasons",
+      "source_notes",
+      "source_url",
+      "time_precision",
+      "type",
+      "venue"
+    ],
+    "sleuth-shaw-festival-2026-2026-05-26": [
+      "arts_access_status",
+      "arts_disciplines",
+      "arts_event_forms",
+      "arts_occurrence_role",
+      "city",
+      "confirmation_status",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "end_date",
+      "last_checked_at",
+      "qualification_reasons",
+      "source_notes",
+      "source_url",
+      "time_precision",
+      "type"
+    ],
+    "the-wind-in-the-willows-shaw-festival-2026-2026-05-26": [
+      "arts_disciplines",
+      "arts_event_forms",
+      "city",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "end_date",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "type",
+      "venue"
+    ],
+    "karolina-krzy-anowska-on-experimental-epistemology-2026-05-27": [
+      "city",
+      "corridor_zone"
+    ],
+    "anakana-schofield-library-of-brothel-2026-05-28": [
+      "city",
+      "corridor_zone"
+    ],
+    "dhrupad-vocal-recital-by-pt-uday-bhawalkar-2026-05-30": [
+      "city",
+      "confirmation_status",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "last_checked_at",
+      "qualification_reasons",
+      "source_notes",
+      "time_precision",
+      "venue"
+    ],
+    "toronto-rome-programme-in-manuscript-studies-2026-06-01": [
+      "city",
+      "corridor_zone"
+    ],
+    "imaginenative-film-media-arts-festival-2026-in-per-2026-06-02": [
+      "city",
+      "corridor_zone"
+    ],
+    "imaginenative-opening-night-aki-2026-06-02": [
+      "city",
+      "corridor_zone"
+    ],
+    "dc714fd2df1c": [
+      "city",
+      "corridor_zone"
+    ],
+    "imaginenative-art-crawl-2026-06-04": [
+      "city",
+      "corridor_zone"
+    ],
+    "playing-with-the-world-how-games-have-shaped-moder-2026-06-04": [
+      "city",
+      "corridor_zone",
+      "date",
+      "destination_evidence",
+      "end_date",
+      "last_checked_at",
+      "source_notes"
+    ],
+    "motive-crime-mystery-festival-2026-tifa-2026-06-05": [
+      "city",
+      "corridor_zone"
+    ],
+    "jackman-humanities-annual-lecture-2026-06-05": [
+      "city",
+      "corridor_zone"
+    ],
+    "mississauga-polish-days-2026-2026-06-05": [
+      "city",
+      "corridor_zone"
+    ],
+    "niagara-canada-international-film-festival-2026-2026-06-06": [
+      "city",
+      "corridor_zone"
+    ],
+    "the-power-of-land-luminato-indigenous-programming--2026-06-06": [
+      "city",
+      "corridor_zone"
+    ],
+    "dana-a-williams-toni-at-random-2026-06-08": [
+      "city",
+      "corridor_zone"
+    ],
+    "canadian-sync-awards-nxne-2026-2026-06-11": [
+      "city",
+      "corridor_zone"
+    ],
+    "pete-crighton-the-vinyl-diaries-2026-06-11": [
+      "city",
+      "corridor_zone"
+    ],
+    "mississauga-halal-food-festival-2026-2026-06-12": [
+      "city",
+      "corridor_zone"
+    ],
+    "edb124435d99": [
+      "city",
+      "corridor_zone"
+    ],
+    "the-algorithmic-state-sovereignty-safety-and-the-g-2026-06-16": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "terry-tempest-williams-the-glorians-2026-06-17": [
+      "city",
+      "corridor_zone"
+    ],
+    "massey-ideas-ideals-civic-responsibility-2026-06-18": [
+      "city",
+      "corridor_zone"
+    ],
+    "soulpepper-medusa-2026": [
+      "corridor_zone",
+      "date",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "end_date",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "time_precision",
+      "venue"
+    ],
+    "red-revue-concert-summer-solstice-celebration-2026-06-20": [
+      "city",
+      "confirmation_status",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "last_checked_at",
+      "qualification_reasons",
+      "source_notes",
+      "time_precision",
+      "venue"
+    ],
+    "laila-biali-at-jazz-bistro-toronto-jazz-festival-2026-06-21": [
+      "city",
+      "corridor_zone"
+    ],
+    "julia-hotz-the-connection-cure-2026-06-22": [
+      "city",
+      "corridor_zone"
+    ],
+    "emilie-claire-barlow-at-koerner-hall-toronto-jazz--2026-06-23": [
+      "city",
+      "corridor_zone"
+    ],
+    "ago-annual-general-meeting-2026-06-24": [
+      "city",
+      "corridor_zone"
+    ],
+    "beyond-earth-a-conversation-on-artemis-leadership--2026-06-24": [
+      "city",
+      "corridor_zone",
+      "date",
+      "destination_evidence",
+      "end_date",
+      "last_checked_at",
+      "source_notes"
+    ],
+    "2ea6faeee4a4": [
+      "city",
+      "corridor_zone",
+      "province"
+    ],
+    "pride-toronto-2026-45th-anniversary-we-won-t-stop-2026-06-25": [
+      "city",
+      "corridor_zone"
+    ],
+    "toronto-trans-march-pride-toronto-2026-2026-06-26": [
+      "city",
+      "corridor_zone"
+    ],
+    "norma-winstone-with-atlantic-jazz-collective-toron-2026-06-26": [
+      "city",
+      "corridor_zone"
+    ],
+    "mississauga-taco-fest-2026-debut-2026-06-27": [
+      "city",
+      "corridor_zone"
+    ],
+    "toronto-dyke-march-pride-toronto-2026-2026-06-27": [
+      "city",
+      "corridor_zone"
+    ],
+    "hiromi-s-sonicwonder-at-koerner-hall-toronto-jazz--2026-06-27": [
+      "city",
+      "corridor_zone"
+    ],
+    "ibrahim-maalouf-t-o-m-a-at-danforth-music-hall-tor-2026-06-27": [
+      "city",
+      "corridor_zone"
+    ],
+    "pride-toronto-parade-2026-2026-06-28": [
+      "city",
+      "corridor_zone"
+    ],
+    "97222228bc8e": [
+      "city",
+      "corridor_zone"
+    ],
+    "ad7b80663935": [
+      "city",
+      "corridor_zone"
+    ],
+    "7241619d213e": [
+      "city",
+      "corridor_zone",
+      "province"
+    ],
+    "rhythms-of-canada-2026-07-01": [
+      "city",
+      "corridor_zone",
+      "date",
+      "destination_evidence",
+      "end_date",
+      "last_checked_at",
+      "source_notes"
+    ],
+    "c9b230134d30": [
+      "city",
+      "corridor_zone"
+    ],
+    "1ce636088711": [
+      "city",
+      "corridor_zone"
+    ],
+    "55335321d10e": [
+      "city",
+      "corridor_zone",
+      "province"
+    ],
+    "2fe410f5efc7": [
+      "city",
+      "corridor_zone"
+    ],
+    "3830157c28b8": [
+      "city",
+      "corridor_zone",
+      "province"
+    ],
+    "2026-summer-camps-2026-07-06": [
+      "city",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_scope",
+      "destination_status",
+      "end_date",
+      "last_checked_at",
+      "qualification_reasons",
+      "source_notes"
+    ],
+    "the-impressionist-revolution-monet-to-matisse-2026-07-07": [
+      "city",
+      "corridor_zone"
+    ],
+    "the-secret-chord-a-leonard-cohen-experience-2026-07-08": [
+      "city",
+      "corridor_zone",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "end_date",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "venue"
+    ],
+    "c7eb8ca496f2": [
+      "city",
+      "corridor_zone",
+      "province"
+    ],
+    "455d5b079312": [
+      "city",
+      "corridor_zone"
+    ],
+    "fdc0f440490c": [
+      "city",
+      "corridor_zone",
+      "province"
+    ],
+    "74f79ea5ff35": [
+      "city",
+      "corridor_zone"
+    ],
+    "td-festival-of-south-asia-2026-24th-edition-2026-07-11": [
+      "city",
+      "corridor_zone"
+    ],
+    "td-salsa-on-st-clair-2026-2026-07-11": [
+      "city",
+      "corridor_zone"
+    ],
+    "caribana-junior-king-queen-showcase-2026-07-11": [
+      "city",
+      "corridor_zone"
+    ],
+    "hamilton-fringe-festival-2026-2026-07-15": [
+      "city",
+      "corridor_zone"
+    ],
+    "a82c1caf76cf": [
+      "city",
+      "corridor_zone",
+      "province"
+    ],
+    "083b2f76f382": [
+      "city",
+      "corridor_zone"
+    ],
+    "dae6c0d27ea4": [
+      "city",
+      "corridor_zone",
+      "province"
+    ],
+    "hillside-festival-2026-2026-07-17": [
+      "city",
+      "corridor_zone"
+    ],
+    "bollywoodmonster-mashup-2026-2026-07-24": [
+      "city",
+      "corridor_zone"
+    ],
+    "massey-alumni-agm-summer-bbq-2026-07-25": [
+      "city",
+      "corridor_zone"
+    ],
+    "275a3d6c2cb5": [
+      "city",
+      "corridor_zone"
+    ],
+    "king-queen-showcase-caribana-2026-07-30": [
+      "city",
+      "corridor_zone"
+    ],
+    "8c0a1af041b0": [
+      "city",
+      "corridor_zone",
+      "province"
+    ],
+    "sos-fest-summer-soca-festival-mississauga-2026-2026-07-31": [
+      "city",
+      "corridor_zone"
+    ],
+    "caribana-king-queen-showcase-2026-07-31": [
+      "city",
+      "corridor_zone"
+    ],
+    "119d86af47de": [
+      "city",
+      "corridor_zone"
+    ],
+    "91219ec49135": [
+      "city",
+      "corridor_zone",
+      "province"
+    ],
+    "caribana-pan-alive-closing-day-2026-08-02": [
+      "city",
+      "corridor_zone"
+    ],
+    "1c1cf2c43f4a": [
+      "city",
+      "corridor_zone"
+    ],
+    "4630f11e087b": [
+      "city",
+      "corridor_zone"
+    ],
+    "td-kitchener-blues-festival-2026-2026-08-06": [
+      "city",
+      "corridor_zone"
+    ],
+    "mississauga-latin-festival-2026-08-07": [
+      "city",
+      "corridor_zone"
+    ],
+    "229c166bbbe6": [
+      "city",
+      "corridor_zone"
+    ],
+    "5efce8fea021": [
+      "city",
+      "corridor_zone"
+    ],
+    "f82d010848d9": [
+      "city",
+      "corridor_zone"
+    ],
+    "ed75a83a0030": [
+      "city",
+      "corridor_zone"
+    ],
+    "afrofest-2026-2026-08-14": [
+      "city",
+      "corridor_zone"
+    ],
+    "f08f93f61ec9": [
+      "city",
+      "corridor_zone"
+    ],
+    "mississauga-italfest-2026-08-21": [
+      "city",
+      "corridor_zone"
+    ],
+    "be17416e9fa8": [
+      "city",
+      "corridor_zone",
+      "province"
+    ],
+    "muslimfest-mississauga-2026-08-29": [
+      "city",
+      "corridor_zone"
+    ],
+    "spring-awakening-2026-09-10": [
+      "city",
+      "corridor_zone",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "end_date",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "venue"
+    ],
+    "toronto-international-film-festival-2026-tiff-51st-2026-09-10": [
+      "city",
+      "corridor_zone"
+    ],
+    "harvard-radcliffe-fellowship-application-deadline-projected-2026-09-10-070c4df8": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "philippine-festival-mississauga-2026-09-11": [
+      "city",
+      "corridor_zone"
+    ],
+    "supercrawl-2026-17th-edition-2026-09-11": [
+      "city",
+      "corridor_zone"
+    ],
+    "guelph-jazz-festival-2026-2026-09-11": [
+      "city",
+      "corridor_zone"
+    ],
+    "2d4871c236e5": [
+      "city",
+      "corridor_zone",
+      "province"
+    ],
+    "hell-s-kitchen-2026-09-23": [
+      "city",
+      "corridor_zone",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "venue"
+    ],
+    "ago-art-bash-2026-09-24": [
+      "city",
+      "corridor_zone"
+    ],
+    "acls-fellowship-competition-projected-2026-09-25-7fb8bbd9": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "soulpepper-fringe-encore-series-2026-09-26": [
+      "city",
+      "confirmation_status",
+      "corridor_zone",
+      "description",
+      "qualification_reasons"
+    ],
+    "the-karate-kid-the-musical-2026-09-29": [
+      "city",
+      "corridor_zone",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "end_date",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "venue"
+    ],
+    "10af63c0cc5e": [
+      "city",
+      "corridor_zone"
+    ],
+    "acla-annual-meeting-seminar-proposal-deadline-projected-2026-09-30-f04d246c": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "institute-for-human-sciences-vienna-fellowships-projected-2026-09-30-bbfde239": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "b36ec2702947": [
+      "city",
+      "corridor_zone"
+    ],
+    "ecfdde06c1f8": [
+      "city",
+      "corridor_zone"
+    ],
+    "d01293323905": [
+      "city",
+      "corridor_zone"
+    ],
+    "ron-james-the-view-from-here-2026-10-15": [
+      "city",
+      "corridor_zone",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "venue"
+    ],
+    "hastac-opportunities-and-cfp-scan-projected-2026-10-15-ac3dcc91": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "institute-for-advanced-study-fellowship-applications-projected-2026-10-15-8bf56b34": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "acls-dissertation-innovation-fellowship-projected-2026-10-23-073dcfc0": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "saks-afridi-spacemosque-2026-10-24": [
+      "city",
+      "confirmation_status",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "end_date",
+      "last_checked_at",
+      "previous_dates",
+      "qualification_reasons",
+      "source_notes",
+      "venue"
+    ],
+    "romeo-and-juliet-cranko-prokofiev-2026-10-31": [
+      "city",
+      "corridor_zone",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "venue"
+    ],
+    "american-academy-in-rome-rome-prize-projected-2026-11-01-2894fc00": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "dumbarton-oaks-fellowships-and-awards-projected-2026-11-01-bb66f30b": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "de-profundis-oscar-wilde-in-jail-2026-11-03": [
+      "city",
+      "corridor_zone",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "venue"
+    ],
+    "casbs-fellowship-applications-projected-2026-11-04-949f4dcb": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "emergence-silent-screen-2026-11-13": [
+      "city",
+      "corridor_zone",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "venue"
+    ],
+    "a-year-with-frog-and-toad-shaw-festival-2026-holid-2026-11-15": [
+      "arts_disciplines",
+      "arts_event_forms",
+      "city",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "end_date",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "type",
+      "venue"
+    ],
+    "rodgers-hammerstein-s-cinderella-shaw-festival-202-2026-11-15": [
+      "arts_disciplines",
+      "arts_event_forms",
+      "city",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "end_date",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "type",
+      "venue"
+    ],
+    "huntington-library-fellowships-projected-2026-11-15-309085c1": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "princeton-uchv-visiting-faculty-and-fellowship-opportunities-projected-2026-11-15-9cc2f41d": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "duende-international-flamenco-festival-flamenco-an-2026-11-19": [
+      "city",
+      "confirmation_status",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "end_date",
+      "last_checked_at",
+      "previous_dates",
+      "qualification_reasons",
+      "source_notes",
+      "venue"
+    ],
+    "parfumerie-2026-11-18": [
+      "city",
+      "corridor_zone",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "venue"
+    ],
+    "13-going-on-30-the-musical-2026-11-24": [
+      "city",
+      "corridor_zone",
+      "date",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "end_date",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "venue"
+    ],
+    "all-s-well-2026-11-24": [
+      "city",
+      "corridor_zone",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "venue"
+    ],
+    "sharp-annual-conference-cfp-projected-2026-11-30-68705585": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "society-for-applied-philosophy-annual-conference-cfp-projected-2026-11-30-8c2d0535": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "warburg-institute-fellowships-projected-2026-11-30-af58d79d": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "cinderella-holiday-panto-2026-12-05": [
+      "city",
+      "corridor_zone"
+    ],
+    "the-nutcracker-kudelka-2026-12-05": [
+      "city",
+      "corridor_zone",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "venue"
+    ],
+    "the-thrill-of-hope-a-holiday-concert-2026-12-15": [
+      "city",
+      "corridor_zone",
+      "date_precision",
+      "description",
+      "destination_evidence",
+      "destination_kind",
+      "destination_scope",
+      "destination_status",
+      "destination_url",
+      "last_checked_at",
+      "source_notes",
+      "source_url",
+      "venue"
+    ],
+    "chci-annual-meeting-proposals-projected-2026-12-15-c2df23ab": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "british-society-for-ethical-theory-annual-conference-cfp-projected-2027-01-10-e5c5c77c": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "european-society-for-aesthetics-annual-conference-cfp-projected-2027-01-15-77aaa40b": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "folger-shakespeare-library-fellowships-projected-2027-01-15-a45831ec": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "british-society-for-the-history-of-philosophy-annual-conference-cfp-projecte-2027-01-31-d40b03c7": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "north-american-society-for-social-philosophy-conference-cfp-projected-2027-02-01-aa5b3ad4": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "asor-annual-meeting-abstract-deadline-projected-2027-02-15-4ec34cf8": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "european-society-for-analytic-philosophy-congress-cfp-projected-2027-02-15-009cd006": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "nias-fellowships-projected-2027-03-15-604dca3d": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ],
+    "philosophy-of-science-association-biennial-meeting-cfp-projected-2027-11-01-1180c1ed": [
+      "city",
+      "corridor_zone",
+      "country",
+      "province"
+    ]
+  },
+  "remaining_unique_flagged_records": 1383,
+  "limits": [
+    "Backlog categories overlap. A machine census is not an individual factual source review.",
+    "Geography-only normalization does not advance event source freshness."
+  ]
+}

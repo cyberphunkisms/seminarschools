@@ -146,11 +146,9 @@ for ATTEMPT in $(seq 1 "${HARVEST_ATTEMPTS}"); do
   echo "=== festivals harvest attempt ${ATTEMPT}/${HARVEST_ATTEMPTS} ===" | tee -a "${LOG_FILE}"
   set +e
   timeout --signal=INT --kill-after=30s "${HARVEST_TIMEOUT_SECONDS}" \
-    claude -p "${PROMPT_BODY}" \
+    python3 scripts/run_readonly_harvest.py \
+      --stream "${STREAM}" --prompt "${PROMPT_BODY}" --output "${OUTPUT_FILE}" \
       --model "${CLAUDE_MODEL}" \
-      --tools "WebFetch,Read,Write" \
-      --allowedTools "WebFetch,Read,Write" \
-      --permission-mode acceptEdits \
       --max-turns "${MAX_TURNS}" \
       --max-budget-usd "${MAX_BUDGET_USD}" 2>&1 | tee -a "${LOG_FILE}"
   CLAUDE_STATUS="${PIPESTATUS[0]}"

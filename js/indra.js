@@ -259,6 +259,7 @@
   mountCamera('primary', false);
   mountCamera('secondary', true);
 
+  var drawingFit = 1;
   function frameViewport() {
     // Freeze the camera rectangle during phone browser-bar/keyboard changes.
     // The enclosing field still clips to the actual viewport.
@@ -269,6 +270,7 @@
       var contentWidth = Math.min(viewportWidth, numeric(root.clientWidth) || viewportWidth);
       camera.element.style.width = (contentWidth + 2 * overscan) + 'px';
       camera.element.style.height = (viewportHeight + 2 * overscan) + 'px';
+      drawingFit = Math.min(contentWidth + 2 * overscan, viewportHeight + 2 * overscan) / 760;
     });
   }
   frameViewport();
@@ -283,7 +285,23 @@
   if (fallbackReason) layer.setAttribute('data-geometry-fallback', fallbackReason);
   body.appendChild(layer);
 
-  function cameraPointFor(bank, seed, detailSeed, registerName, secondary, progress) {
+  function cameraVariation(seed, detailSeed) {
+    var unit = (seedOf(String(seed) + '|' + String(detailSeed) + '|focus') >>> 0) / 4294967296;
+    var theta = unit * Math.PI * 2;
+    return {
+      zoom: Math.exp(Math.log((1 + Math.sqrt(5)) / 2) * ((detailSeed / 4294967296) - 0.5)),
+      focusX: Math.cos(theta) * (18 + 24 * ((seed & 65535) / 65535)),
+      focusY: Math.sin(theta) * (18 + 24 * ((seed >>> 16) / 65535)),
+      bendX: Math.cos(theta + Math.PI / 2) * 16,
+      bendY: Math.sin(theta + Math.PI / 2) * 16
+    };
+  }
+  var primaryVariation = cameraVariation(seeds.first, seeds.second);
+  var secondaryVariation = cameraVariation(seeds.second, seeds.first);
+  function cameraPointFor(bank, seed, detailSeed, registerName, secondary, progress, preset) {
+    var variation = seed === seeds.first && detailSeed === seeds.second ? primaryVariation
+      : seed === seeds.second && detailSeed === seeds.first ? secondaryVariation : cameraVariation(seed, detailSeed);
+    var themeZoom = preset === 'overview' ? 0.82 : preset === 'reading' ? 0.94 : preset === 'study' ? 1.04 : preset === 'recurrence' ? 1.06 : 1;
     var offset = seed % bank.length;
     var direction = ((seed >>> 7) & 1) ? 1 : -1;
     var segments = 5;
@@ -302,25 +320,27 @@
        This is a viewport-wide optical correction, never a route exception:
        all routes keep the same bank, seed, direction, and full canonical web. */
     var viewportZoom = viewportWidth < 640 ? 0.40 : viewportWidth < 900 ? 0.50 : 0.45;
-    var zoom = (current.zoom + (next.zoom - current.zoom) * local) * registerZoom * viewportZoom;
-    var x = current.x + (next.x - current.x) * local;
-    var y = current.y + (next.y - current.y) * local;
+    var zoomFactor = registerZoom * viewportZoom * variation.zoom * themeZoom;
+    var zoom = Math.exp(Math.log(current.zoom) + Math.log(next.zoom / current.zoom) * local) * zoomFactor;
+    var bend = Math.sin(local * Math.PI);
+    var x = current.x + (next.x - current.x) * local + variation.focusX + variation.bendX * bend;
+    var y = current.y + (next.y - current.y) * local + variation.focusY + variation.bendY * bend;
     var centered = progress - 0.5;
     var travel = registerName === 'expressive' ? 200 : registerName === 'quiet' ? 90 : 135;
     var rotationTravel = secondary ? -3.4 : 4.2;
     var baseRotation = (seed / 4294967296) * 360 - 180;
     var rotation = baseRotation + centered * rotationTravel;
     var angle = rotation * Math.PI / 180;
-    var scaledX = x * zoom;
-    var scaledY = y * zoom;
+    var scaledX = x * drawingFit * zoom;
+    var scaledY = y * drawingFit * zoom;
     var rotatedX = scaledX * Math.cos(angle) - scaledY * Math.sin(angle);
     var rotatedY = scaledX * Math.sin(angle) + scaledY * Math.cos(angle);
     var first = point(0);
     var last = point(segments);
     var firstAngle = (baseRotation - 0.5 * rotationTravel) * Math.PI / 180;
     var lastAngle = (baseRotation + 0.5 * rotationTravel) * Math.PI / 180;
-    var firstZoom = first.zoom * registerZoom * viewportZoom;
-    var lastZoom = last.zoom * registerZoom * viewportZoom;
+    var firstZoom = first.zoom * zoomFactor * drawingFit;
+    var lastZoom = last.zoom * zoomFactor * drawingFit;
     var firstBaseY = -(first.x * firstZoom * Math.sin(firstAngle) + first.y * firstZoom * Math.cos(firstAngle));
     var lastBaseY = -(last.x * lastZoom * Math.sin(lastAngle) + last.y * lastZoom * Math.cos(lastAngle));
     var flowSign = lastBaseY - firstBaseY < 0 ? -1 : 1;
@@ -331,6 +351,9 @@
       y: -rotatedY + routeOffsetY + centered * travel * flowSign,
       zoom: zoom,
       rotation: rotation,
+      focusX: x,
+      focusY: y,
+      drawingFit: drawingFit,
       travel: travel
     };
   }
@@ -349,9 +372,9 @@
       secondary ? seeds.first : seeds.second,
       register,
       secondary,
-      journey
+      journey,
+      motionPreset
     );
-    if (motionPreset === 'overview') state.zoom *= 0.94;
     return state;
   }
 
@@ -360,8 +383,8 @@
   var selectionAmount = 0;
   var selectionTarget = 0;
   function paintAt(progress, colorProgress) {
-    // Colour follows input; interpolating the camera must not repaint all SVG
-    // lines on every catch-up frame. Identical RGB steps are written once.
+    // Colour follows input once; cameras catch up smoothly without repeatedly
+    // repainting the full SVG. Report both positions explicitly for diagnostics.
     var color = rainbowColor(colorProgress === undefined ? progress : colorProgress);
     if (color !== lastColor) {
       layer.style.setProperty('--indra-color', color);
@@ -378,6 +401,7 @@
       }
     }
     layer.setAttribute('data-geometry-progress', progress.toFixed(4));
+    layer.setAttribute('data-geometry-color-progress', (colorProgress === undefined ? progress : colorProgress).toFixed(4));
   }
 
   /* Most routes scroll the document, but several real projects deliberately
@@ -391,6 +415,7 @@
   var panLastX = 0;
   var panLastY = 0;
   var sectionStops = [];
+  var sectionMeasurementsDirty = false;
 
   function measureSections() {
     sectionStops = [];
@@ -399,6 +424,8 @@
     if (range < 1) return;
     var nodes = document.querySelectorAll('main h2, main section[id], article h2');
     for (var i = 0; i < nodes.length && i < 80; i++) {
+      // Closed panels and the hidden static fallback have no page position.
+      if (!nodes[i].getClientRects().length) continue;
       var top = nodes[i].getBoundingClientRect().top + numeric(window.scrollY);
       var stop = clamp(top / range, 0, 1);
       if (stop > 0.02 && stop < 0.98) sectionStops.push(stop);
@@ -516,6 +543,10 @@
     if (document.hidden) return;
     var now = Number.isFinite(timestamp) ? timestamp : clock();
     if (inputDirty || targetProgress < 0) {
+      if (sectionMeasurementsDirty) {
+        measureSections();
+        sectionMeasurementsDirty = false;
+      }
       var nextTarget = readProgress();
       if (Math.abs(nextTarget - targetProgress) > 0.000001) settlingSince = now;
       targetProgress = nextTarget;
@@ -531,6 +562,8 @@
       || now - settlingSince >= MOTION_SETTLE_MS;
     if (settled) progress = targetProgress;
     if (settled) selectionAmount = selectionTarget;
+    layer.setAttribute('data-geometry-target-progress', targetProgress.toFixed(4));
+    layer.setAttribute('data-geometry-settled', String(settled));
     if (lastProgress === progress && priorSelection === selectionAmount) {
       if (!settled) schedule(false);
       return;
@@ -542,6 +575,7 @@
 
   function schedule(markDirty) {
     if (markDirty !== false) inputDirty = true;
+    if (markDirty !== false) layer.setAttribute('data-geometry-settled', 'false');
     if (document.hidden) return;
     if (raf || paintFallbackTimer) return;
     if (markDirty !== false || !lastFrameTime) lastFrameTime = clock();
@@ -629,7 +663,9 @@
     panPointerId = null;
   }
   function onContentInteraction() {
-    measureSections();
+    // Other listeners may finish the cards after this listener runs. Measure
+    // once at the scheduled paint, after the complete interaction has settled.
+    sectionMeasurementsDirty = true;
     if (motionPreset === 'overview' && document.querySelector) {
       var selected = document.querySelector('.project-list-item button[aria-pressed="true"], [data-quick][aria-pressed="true"]');
       var next = selected ? 1 : 0;
@@ -679,6 +715,7 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measureSections(); schedule(); });
     document.addEventListener('toggle', onContentInteraction, { passive: true, capture: true });
     document.addEventListener('change', onContentInteraction, { passive: true });
+    document.addEventListener('polymythcal:results', onContentInteraction, { passive: true });
     if (motionPreset === 'overview') document.addEventListener('click', onContentInteraction, { passive: true });
     window.addEventListener('pagehide', cancelMotion);
     window.addEventListener('pageshow', schedule, { passive: true });

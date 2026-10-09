@@ -1,0 +1,111 @@
+{
+  "status": "passed",
+  "resource_count": 646,
+  "browser": "138.0.7204.23",
+  "tests": [
+    {
+      "test": "Unfiltered page prioritizes browsing over the initial ranked list",
+      "status": "passed"
+    },
+    {
+      "test": "Joined title",
+      "status": "passed"
+    },
+    {
+      "test": "Texts retains story",
+      "status": "passed"
+    },
+    {
+      "test": "Text and practice classifications",
+      "status": "passed"
+    },
+    {
+      "test": "Author precision",
+      "status": "passed"
+    },
+    {
+      "test": "Edition grouping",
+      "status": "passed"
+    },
+    {
+      "test": "IELTS indexed",
+      "status": "passed"
+    },
+    {
+      "test": "Enter shows results without navigation",
+      "status": "passed"
+    },
+    {
+      "test": "Filter recovery retains query",
+      "status": "passed"
+    },
+    {
+      "test": "Return to search",
+      "status": "passed"
+    },
+    {
+      "test": "Layout 320",
+      "status": "passed"
+    },
+    {
+      "test": "Layout 375",
+      "status": "passed"
+    },
+    {
+      "test": "Layout 768",
+      "status": "passed"
+    },
+    {
+      "test": "Layout 1280",
+      "status": "passed"
+    },
+    {
+      "test": "Missing metadata is opt-in and labelled",
+      "status": "passed"
+    },
+    {
+      "test": "Thank You Mam title alias",
+      "status": "passed"
+    },
+    {
+      "test": "Non-Latin query does not return the entire catalog",
+      "status": "passed"
+    },
+    {
+      "test": "Pagination expands without dropping source records",
+      "status": "passed"
+    },
+    {
+      "test": "Print includes all matching sources and restores pagination",
+      "status": "passed"
+    },
+    {
+      "test": "No-JavaScript catalog and print remain available",
+      "status": "passed"
+    },
+    {
+      "test": "Reduced motion",
+      "status": "passed"
+    },
+    {
+      "test": "Print excludes duplicate catalog",
+      "status": "passed"
+    },
+    {
+      "test": "MC entry page loads",
+      "status": "passed"
+    },
+    {
+      "test": "Readable module dossier opens preserved source records",
+      "status": "passed"
+    },
+    {
+      "test": "Public how-to-play guidance",
+      "status": "passed"
+    },
+    {
+      "test": "No runtime errors",
+      "status": "passed"
+    }
+  ]
+}

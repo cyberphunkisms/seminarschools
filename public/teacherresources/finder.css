@@ -1086,3 +1086,55 @@ body.searching details.category[hidden] {
      jumps. */
   .entry { content-visibility: auto; contain-intrinsic-size: auto 120px; }
 }
+/* 2026-09-27: classroom search, ranked work groups, readable controls. */
+#search-results[hidden],[hidden]{display:none!important}
+#search-results{scroll-margin-top:1rem;outline-offset:5px;margin:1.2rem 0 2rem}
+#search-results h2{font-size:1.5rem;margin:.6rem 0}
+.work-result{background:var(--bg,#fffdf8);border:1px solid var(--line,#c9c2b4);padding:1rem;margin:.8rem 0;border-radius:.35rem;overflow-wrap:anywhere}
+.work-heading{font-size:1.2rem;line-height:1.35;margin:.1rem 0 .7rem}
+.work-result .entry-shell{display:block;border-bottom:1px solid var(--line,#c9c2b4);padding:.45rem 0}
+.work-result .entry{background:transparent;display:block;padding:.6rem 0}
+.work-result .entry-title{font-size:1.08rem;line-height:1.45}
+.work-result .entry-byline,.resource-facts,.match-reason,.work-count{font-size:.92rem;line-height:1.5;letter-spacing:normal;text-transform:none}
+.match-reason{font-weight:700;margin:.3rem 0;color:var(--ink,#29271f)}
+.resource-facts{margin:.4rem 0}.work-result .entry-detail{display:inline-flex;align-items:center;min-height:44px;font-size:.95rem}
+.resource-version summary{cursor:pointer;padding:.7rem .2rem;min-height:44px;font-size:1rem}
+.ctrl-btn,.chip,.quick-finder button{min-height:44px;font-size:.88rem!important;letter-spacing:.02em!important;line-height:1.4}
+.finder-help,.finder-model,.chip-label,.quick-label,.quick-group-label{font-size:.88rem!important;color:var(--ink,#29271f)!important;opacity:1!important}
+#active-filters{display:flex;flex-wrap:wrap;gap:.4rem;margin:.7rem 0}
+.unknown-option{display:flex;align-items:center;gap:.65rem;font-size:1rem;padding:.6rem 0}.unknown-option input{width:20px;height:20px}
+.teacher-search{background:var(--bg,#fffdf8)}
+.teacher-facts{margin-bottom:1rem}.teacher-search .teacher-section-kicker{display:none}
+body.finder-active .teacher-facts{display:none}
+body.finder-active #expand-toggle{display:none}
+#more-results{width:100%;margin-top:.7rem}
+#empty p{font-size:1rem;text-align:left}#empty button{margin:.4rem}
+.teacher-only-label{display:block;padding:.5rem;background:#fff0ce;color:#302810}
+@media(max-width:650px){.search-row{display:flex;flex-wrap:wrap}.search-input{flex:1 1 100%;width:100%}.search-row .ctrl-btn{flex:1 1 auto}.work-result{padding:.8rem}.entry-meta{display:flex;flex-wrap:wrap}.teacher-facts{display:none}}
+@media(prefers-reduced-motion:reduce){#search-results,*{scroll-behavior:auto!important}}
+@media print{body.finder-enhanced #catalog,.teacher-orientation,.teacher-areas,.browse-heading,#more-results{display:none!important}.work-result{break-inside:avoid}.resource-version{display:block}.entry-detail{display:none!important}}
+
+/* Keep ornament in the margins, away from search text and controls. */
+.teacher-search{position:relative;z-index:2147483001;background:var(--bg,#fffdf8);padding:1rem;border-radius:.35rem}
+.work-result{background:var(--card,#fffdf8)}
+.work-result .entry-meta{font-size:.86rem;letter-spacing:.01em;line-height:1.6}
+.quick-toggle{margin:.3rem 0}
+@view-transition{navigation:none}
+@media print{.teacher-search,.work-result{background:white!important;color:black!important}.quick-toggle{display:none!important}}
+
+body[data-route-type="resource-catalog"]>.wrap{z-index:2147483001}
+
+@media(max-width:650px){.teacher-search{padding:.25rem}.work-result h3{margin:.35rem 0}.finder-actions{gap:.4rem}}
+.work-result .entry-source-cta{font-size:.86rem;line-height:1.4}
+/* A tall filter panel must never cover result actions while scrolling. */
+#resource-finder{position:static;top:auto;z-index:auto}
+
+/* Keep the search available immediately and browse choices ahead of results. */
+body[data-route-type="resource-catalog"] h1.titanic{font-size:clamp(2rem,6vw,3.5rem);line-height:1.1;margin:1.2rem 0 .7rem}
+.finder-intro{margin:.5rem 0;font-size:1rem}
+.teacher-facts{margin:.8rem 0}
+.teacher-search .teacher-section-head{margin-bottom:.75rem}
+body:not(.finder-enhanced) .teacher-search,body:not(.finder-enhanced) .teacher-orientation{display:none}
+body.finder-enhanced .finder-fallback{display:none}
+.finder-fallback{padding:1rem;border-left:3px solid var(--accent);background:var(--card,#fffdf8)}
+@media(max-width:650px){.teacher-facts{display:none}.finder-intro{font-size:.95rem}.teacher-search .teacher-section-head>p:not(.finder-model){display:none}.teacher-search .teacher-section-head h2{font-size:1.15rem}}

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 'use strict';
+const {currentConceptArtifactHash}=require('./lib/ml-concept-release-binding');
 
 /** The September 5 degorgonified-feminism retrieval gate is current; earlier evidence remains immutable. */
 const fs = require('fs');
@@ -75,6 +76,8 @@ const expectedReleaseAssetPaths = Object.freeze([
   'index.html',
   'teacherresources/finder.css',
   'teacherresources/finder.js',
+  'teacherresources/search-engine.js',
+  'teacherresources/return-to-search.js',
   'teacherresources/index.html',
   'data/polymyth-seminar-events.json',
   'data/polymythcal-event-schema-v2.json',
@@ -322,6 +325,52 @@ check(
       === 'af5dbf22d720e088b602f0337fa0ea12c213a7189b72d8e885e4a74d94646944',
   'immutable Aug29 non-strawman or article-synthesis provenance drifted',
 );
+// Resolve the inherited September 8–11 amendments without altering their historical evidence.
+const inheritedAmendments=[
+  [
+    "ml_star_citation_ouroboros_update_2026_09_08",
+    "d5a39f276865047b17c0d01105725cd4d8d215f171b28933ae487daf406a5062"
+  ],
+  [
+    "ml_star_antifluff_update_2026_09_08",
+    "881cd821aa1a062c0d2f47328297563a2c53bf15b1c05014fa598bf7345c2caa"
+  ],
+  [
+    "ml_star_synopsis_syn_update_2026_09_08",
+    "a9f79d85bf5f715978fd37a53fe3be67f1172a8d36e56785704ee014fc88b4ad"
+  ],
+  [
+    "ml_star_ouroboros_update_2026_09_11",
+    "862e4d78ce9f277c16d2528dd0571b4a60119d21c2b5075f573a5e3e5ba8e197"
+  ]
+];
+for(const [key,pin] of inheritedAmendments) check(canonicalObjectSha(manifest[key])===pin, 'Immutable predecessor amendment changed: '+key);
+check(canonicalObjectSha(manifest.teacher_resources_bb_update_20260927)==='a39addd86a06b340624d5bec2bdabaaeadb6f199e8a5ef11590caf29f2820864','Immutable September 27 implementation amendment changed');
+const teacherBbUpdate = manifest.teacher_resources_bb_audit_20260927;
+check(canonicalObjectSha(teacherBbUpdate)==='2e54d3ccc6f1055ac362774710b9e769bd7f981440a5cd3db3c70ba7e42791dc','Immutable V2 teacher/BB audit amendment changed');
+const teacherBbFixes = manifest.teacher_resources_bb_fixes_20260927;
+check(canonicalObjectSha(teacherBbFixes)==='ae01ef48ba27a7a4bf5328963af83367178f5f8c5643d312ca617b92ac9e7ab7','Immutable V3 teacher/BB fixes amendment changed');
+const teacherBbFinal = manifest.teacher_resources_bb_final_20260928;
+function currentArtifactMatches(relative, expected) {
+  if (!/^[0-9a-f]{64}$/.test(expected)) return false;
+  for(const [key] of inheritedAmendments){if(manifest[key]?.artifact_sha256?.[relative])expected=manifest[key].artifact_sha256[relative];}
+  if(manifest.teacher_resources_bb_update_20260927?.artifact_sha256?.[relative])expected=manifest.teacher_resources_bb_update_20260927.artifact_sha256[relative];
+  if (teacherBbUpdate?.release_id === 'seminar-schools-teacher-resources-bb-audited-v2-2026-09-27'
+    && teacherBbUpdate.predecessor_sha256 === '7be2545f0c3bfaf01f68c2b64b930ecfbaac5770f63f85a0afecfca09f14e169'
+    && teacherBbUpdate.predecessor_artifact_sha256?.[relative] === expected)expected=teacherBbUpdate.artifact_sha256?.[relative];
+  if (teacherBbFixes?.release_id === 'seminar-schools-teacher-resources-bb-fixed-v3-2026-09-27'
+    && teacherBbFixes.predecessor_sha256 === '51023737aa3b2e70ea84ea8aa4fc028cf5bccb6a4f35611f6565f01b638b45a0'
+    && teacherBbFixes.predecessor_artifact_sha256?.[relative] === expected)expected=teacherBbFixes.artifact_sha256?.[relative];
+  if (teacherBbFinal?.release_id === 'seminar-schools-teacher-resources-bb-final-v4-2026-09-28'
+    && teacherBbFinal.predecessor_sha256 === '93f00bdef4a639eed7e349df26ba6764b6bc811ab33893ba12b43e71caebc6e9'
+    && teacherBbFinal.predecessor_artifact_sha256?.[relative] === expected)expected=teacherBbFinal.artifact_sha256?.[relative];
+  const maintenance = manifest.polymythcal_maintenance_20261001;
+  if (maintenance?.release_id === '2026-10-01-polymythcal-maintenance-v6'
+    && maintenance.predecessor_sha256 === 'b963e1eed45eab5fe4118e0b6670f0dbc1ecceda2b650fb91c195f9d3537c33a'
+    && maintenance.predecessor_artifact_sha256?.[relative] === expected)expected=maintenance.artifact_sha256?.[relative];
+  expected=currentConceptArtifactHash(manifest,relative,expected);
+  return /^[0-9a-f]{64}$/.test(expected||'') && fileSha(relative)===expected;
+}
 const currentArtifactHashes = currentMlStar.artifact_sha256 || {};
 const requiredSep5ArtifactPaths = Object.freeze([
   'ML_EXECUTION_AND_CONTROLLED_ARCHIVE_SYNTHESIS_2026-08-26.md',
@@ -366,10 +415,10 @@ const requiredSep5ArtifactPaths = Object.freeze([
 check(
   Object.keys(currentArtifactHashes).length >= 84
     && Object.entries(currentArtifactHashes).every(([relative, expected]) => (
-      /^[0-9a-f]{64}$/.test(expected) && fileSha(relative) === expected
+      currentArtifactMatches(relative, expected)
     ))
     && requiredSep5ArtifactPaths.every(relative => (
-      currentArtifactHashes[relative] === fileSha(relative)
+      currentArtifactMatches(relative, currentArtifactHashes[relative])
     )),
   'current ML* artifacts through the September 6 document-continuity amendment are not exactly hash-bound',
 );
@@ -418,7 +467,7 @@ check(
     )
     && Object.keys(assistantTwistingAlwaysAlreadyArtifacts).length >= 14
     && Object.entries(assistantTwistingAlwaysAlreadyArtifacts).every(([relative, expected]) => (
-      /^[0-9a-f]{64}$/.test(expected) && fileSha(relative) === expected
+      currentArtifactMatches(relative, expected)
     )),
   'September 6 assistant-twisting / Always Already release record is missing or stale',
 );
@@ -626,23 +675,23 @@ check(
     && articleSynthesis.deployment === 'No deployment performed.',
   'Aug29 archive and article synthesis identity, sources, counts, or status drifted',
 );
-check(manifest.polymythcal_asset_version === '20260815-sets1-15-synthesis', `current asset version is ${manifest.polymythcal_asset_version}`);
+check(manifest.polymythcal_asset_version === '20261004-repair-v9', `current asset version is ${manifest.polymythcal_asset_version}`);
 check(
-  manifest.polymythcal_discovery_release_id === '2026-08-26-polymythcal-discovery-v2',
+  manifest.polymythcal_discovery_release_id === '2026-10-01-polymythcal-maintenance-v6',
   `current Discovery release is ${manifest.polymythcal_discovery_release_id}`,
 );
 check(
-  manifest.polymythcal_discovery_built_at === '2026-08-26T12:30:00-04:00',
+  Date.parse(manifest.polymythcal_discovery_built_at) >= Date.parse('2026-10-01T00:00:00Z'),
   `current Discovery build timestamp is ${manifest.polymythcal_discovery_built_at}`,
 );
 check(
-  manifest.polymythcal_discovery_asset_version === '20260826-discovery-v2',
+  manifest.polymythcal_discovery_asset_version === '20261004-discovery-v9',
   `current Discovery asset version is ${manifest.polymythcal_discovery_asset_version}`,
 );
 check(/^sha256-[0-9a-f]{12}$/.test(manifest.geometry_asset_version || ''), 'release manifest lacks a content-derived geometry asset version');
 check(
   manifest.teacherresources_asset_versions
-    && Object.keys(manifest.teacherresources_asset_versions).sort().join(',') === 'finder_css,finder_js'
+    && Object.keys(manifest.teacherresources_asset_versions).sort().join(',') === 'finder_css,finder_js,return_to_search_js,search_engine_js'
     && Object.values(manifest.teacherresources_asset_versions).every(value => /^sha256-[0-9a-f]{12}$/.test(value)),
   'release manifest lacks exact Teacher Resources asset versions',
 );
@@ -1320,6 +1369,9 @@ check(
 for (const gate of ['verify-geometry.js', 'verify-visible-geometry.js', 'verify-meaningful-geometry.js', 'verify-visible-geometry-browser.mjs', 'verify-front-facing-overlap-browser.js']) {
   check(runner.includes(`node scripts/${gate}`), `full release runner lacks ${gate}`);
 }
+for (const gate of ['verify-teacher-search-20260927.js','verify-teacher-bb-audit-20260927.js','verify-teacher-bb-fixes-20260927.js']) {
+  check(runner.split(`'node scripts/${gate}'`).length===2, `full release runner must run ${gate} exactly once`);
+}
 for (const command of ['npm run test:futureproofing', 'npm run verify:futureproofing']) {
   const escaped = command.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const exactSuffix = command === 'npm run verify:futureproofing' ? '(?!:site)' : '';
@@ -1673,6 +1725,7 @@ for (const relative of [
 ]) {
   check(deployer.includes(relative), `deployer package does not require ${relative}`);
 }
+check(runner.split("'node scripts/verify-teacher-metadata-20260928.js'").length===2, 'teacher metadata verifier must run exactly once');
 check(runner.includes('release-gate-report.json'), 'release runner does not write its report');
 
 if (failures.length) {

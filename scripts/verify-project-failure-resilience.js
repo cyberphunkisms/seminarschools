@@ -126,7 +126,7 @@ requireText(browserStress, 'test_polymyth_timeout_and_retry_button', 'timeout/re
 
 const resourceEntries = (resources.groups || []).flatMap(group => (group.categories || []).flatMap(category => category.entries || []));
 const resourceCollections = (resources.groups || []).reduce((total, group) => total + (group.categories || []).length, 0);
-if (resourceEntries.length !== 645) failures.push(`Teacher Resources inventory changed: ${resourceEntries.length}/645`);
+if (resourceEntries.length !== 646) failures.push(`Teacher Resources inventory changed: ${resourceEntries.length}/646`);
 if ((resources.groups || []).length !== 7) failures.push(`Teacher Resources group inventory changed: ${(resources.groups || []).length}/7`);
 if (resourceCollections !== 25) failures.push(`Teacher Resources collection inventory changed: ${resourceCollections}/25`);
 
@@ -141,4 +141,4 @@ if (failures.length) {
   if (failures.length > 200) console.error(` - … ${failures.length - 200} more`);
   process.exit(1);
 }
-console.log(`PROJECT FAILURE RESILIENCE CHECK PASSED — bounded retry/timeout/abort, strict payload/date/facet validation, accessible recovery, ${chronology.length}+${monitored.length} split listings, ${buildManifest.source_count} sources, and 645/25/7 Teacher inventory preserved.`);
+console.log(`PROJECT FAILURE RESILIENCE CHECK PASSED — bounded retry/timeout/abort, strict payload/date/facet validation, accessible recovery, ${chronology.length}+${monitored.length} split listings, ${buildManifest.source_count} sources, and 646/25/7 Teacher inventory preserved.`);

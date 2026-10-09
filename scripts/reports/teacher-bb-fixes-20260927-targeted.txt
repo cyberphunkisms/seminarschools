@@ -1,0 +1,51 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> seminar-schools-leizu-pipeline@1.0.7 verify:teacher-bb-fixes
+> node scripts/verify-teacher-search-20260927.js && node scripts/verify-teacher-bb-audit-20260927.js && node scripts/verify-teacher-bb-fixes-20260927.js
+
+PASS Unfiltered page prioritizes browsing over the initial ranked list
+PASS Joined title
+PASS Texts retains story
+PASS Text and practice classifications
+PASS Author precision
+PASS Edition grouping
+PASS IELTS indexed
+PASS Enter shows results without navigation
+PASS Filter recovery retains query
+PASS Return to search
+PASS Layout 320
+PASS Layout 375
+PASS Layout 768
+PASS Layout 1280
+PASS Missing metadata is opt-in and labelled
+PASS Thank You Mam title alias
+PASS Non-Latin query does not return the entire catalog
+PASS Pagination expands without dropping source records
+PASS Print includes all matching sources and restores pagination
+PASS No-JavaScript catalog and print remain available
+PASS Reduced motion
+PASS Print excludes duplicate catalog
+PASS MC entry page loads
+PASS Readable module dossier opens preserved source records
+PASS Public how-to-play guidance
+PASS No runtime errors
+PASS IELTS is retained by PDF filter
+PASS IELTS is retained by Webpage filter
+PASS Existing composite-file URL remains compatible
+PASS Joined title plus PDF query finds story
+PASS Joined title plus transposed letters finds story
+PASS Misspelled joined title finds story
+PASS Author plus file-format query finds sources
+PASS Unrelated title and author are not combined
+PASS Module contents link opens its record
+PASS Shared module fragment opens its record
+PASS Module printing expands all records and restores state
+PASS Module has visible colophon
+PASS Module is in sitemap
+PASS Canonical build invokes module generator
+PASS No mobile overflow
+PASS No runtime errors
+PASSED — 33/33 search, navigation, fallback, print and module checks
+
+STATE/LAYOUT CHECK
+TEACHER RESOURCES STATE/LAYOUT BROWSER CHECK PASSED — 373 assertions across clean, shared, history, and 7 responsive states.

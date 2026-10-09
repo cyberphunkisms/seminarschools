@@ -29,7 +29,6 @@ async function fetchCorpus(){
     var ctrl = new AbortController();
     var timeoutId = setTimeout(function(){ ctrl.abort(); }, 2000);
     var bbResp = await fetch('https://seminarschools.com/polymyth/bookwormburrows.txt', { signal: ctrl.signal });
-    clearTimeout(timeoutId);
     var bbText = bbResp.ok ? await bbResp.text() : '';
     var bbExcerpt = bbText.slice(0, 4000); // Reduced from 6000 to keep prompts smaller
 
@@ -45,6 +44,8 @@ async function fetchCorpus(){
     corpusCache = { bb: '', bbFull: 0, fetchedAt: new Date().toISOString(), error: String(e) };
     corpusCacheTime = Date.now();
     return corpusCache;
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
 
@@ -96,6 +97,9 @@ exports.handler = async function(event, context) {
   try { body = JSON.parse(event.body); }
   catch(e) { return { statusCode: 400, headers: headers, body: JSON.stringify({ ok:false, fallback:true, reason:'bad-body' }) }; }
 
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    return { statusCode: 400, headers: headers, body: JSON.stringify({ ok:false, fallback:true, reason:'bad-body' }) };
+  }
   // Validate
   var mode = body.mode; // 'reaction' | 'why' | 'stat-eval' | 'morpheus'
   var prompt = body.prompt;
@@ -283,8 +287,6 @@ exports.handler = async function(event, context) {
       body: JSON.stringify(payload),
       signal: controller.signal
     });
-    clearTimeout(timeoutId);
-
     if(!resp.ok){
       var errText = await resp.text();
       return { statusCode: 200, headers: headers, body: JSON.stringify({
@@ -308,5 +310,7 @@ exports.handler = async function(event, context) {
     clearTimeout(timeoutId);
     var reason = err.name === 'AbortError' ? 'timeout' : 'fetch-error';
     return { statusCode: 200, headers: headers, body: JSON.stringify({ ok:false, fallback:true, reason:reason }) };
+  } finally {
+    clearTimeout(timeoutId);
   }
 };

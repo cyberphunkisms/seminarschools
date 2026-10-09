@@ -5,13 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:d662229946690297d752@seminarschools.com
-DTSTAMP:20260721T160000Z
+DTSTAMP:20261002T000000Z
 DTSTART;VALUE=DATE:20261002
+DTEND;VALUE=DATE:20261004
 SUMMARY:Hellhound Trail
-LOCATION:Location unconfirmed · Lieu non confirmé
-DESCRIPTION:Hellhound Trail
+LOCATION:Kingston Grand Theatre\, Homestead Baby Grand
+DESCRIPTION:Performances on October 2 and 3\, 2026\, at 7:30 p.m. Check t
+ he organizer for availability for each performance.
 URL:https://seminarschools.com/polymythseminars/events/research-71f9d74c8
  84f/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

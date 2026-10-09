@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "scope": "Independent audit of combined queries, overlapping file formats, module navigation and build closure",
+  "browser": "138.0.7204.23",
+  "tests": [
+    {
+      "name": "IELTS is retained by PDF filter",
+      "passed": true
+    },
+    {
+      "name": "IELTS is retained by Webpage filter",
+      "passed": true
+    },
+    {
+      "name": "Existing composite-file URL remains compatible",
+      "passed": true
+    },
+    {
+      "name": "Joined title plus PDF query finds story",
+      "passed": true
+    },
+    {
+      "name": "Joined title plus transposed letters finds story",
+      "passed": true
+    },
+    {
+      "name": "Misspelled joined title finds story",
+      "passed": true
+    },
+    {
+      "name": "Author plus file-format query finds sources",
+      "passed": true
+    },
+    {
+      "name": "Unrelated title and author are not combined",
+      "passed": true
+    },
+    {
+      "name": "Module contents link opens its record",
+      "passed": true
+    },
+    {
+      "name": "Shared module fragment opens its record",
+      "passed": true
+    },
+    {
+      "name": "Module printing expands all records and restores state",
+      "passed": true
+    },
+    {
+      "name": "Module has visible colophon",
+      "passed": true
+    },
+    {
+      "name": "Module is in sitemap",
+      "passed": true
+    },
+    {
+      "name": "Canonical build invokes module generator",
+      "passed": true
+    },
+    {
+      "name": "No mobile overflow",
+      "passed": true
+    },
+    {
+      "name": "No runtime errors",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

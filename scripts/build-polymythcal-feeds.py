@@ -297,6 +297,8 @@ def event_time_lines(event) -> list[str]:
     start_date = parse_calendar_date(event.get('date'))
     if not start_date:
         return []
+    if event.get('end_date_precision') == 'month':
+        return ['DTSTART;VALUE=DATE:' + start_date.strftime('%Y%m%d')]
     inclusive_end = parse_calendar_date(event.get('end_date')) or start_date
     exclusive_end = inclusive_end + timedelta(days=1)
     return [
@@ -424,6 +426,8 @@ def build_featured(events) -> bool:
     build_day = BUILD_DT.astimezone(TORONTO).date()
     upcoming = []
     for event in events:
+        if event.get('lifecycle_status') == 'cancelled':
+            continue
         start_day = parse_calendar_date(event.get('date'))
         if not start_day or start_day < build_day:
             continue

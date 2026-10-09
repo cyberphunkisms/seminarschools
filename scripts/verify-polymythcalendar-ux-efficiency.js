@@ -132,7 +132,10 @@ for (const [token, label] of [
   ['const occurrenceLabel = matchingCount < declaredCount', 'filtered series occurrence label selection'],
   ['const CONFIRMATION_LABELS', 'bilingual confirmation trust labels'],
   ['const DESTINATION_LABELS', 'bilingual destination trust labels'],
-  ['function eventOccursOnDay(event, day)', 'multi-day calendar coverage'],
+  ['function eventOccursOnDay(event, day)', 'individual calendar sessions'],
+  ['const ranges = calendarMonthEvents(month).filter(isDateRange)', 'separate calendar date-range inventory'],
+  ['<details class="pmd-ongoing"><summary>', 'reachable date-range disclosure'],
+  ['${rangeList(ranges)}</details>', 'date-range listing links inside the disclosure'],
   ['function calendarVisibleEvents()', 'calendar-visible count authority'],
   ["const targetDate = surface === 'monitoring' && targetSurface !== 'monitoring' ? 'upcoming'", 'monitoring-to-calendar date reset'],
   ['timeZone: CALENDAR_TIME_ZONE', 'fixed-zone date rendering'],
@@ -208,8 +211,21 @@ function runtimeFor(lang = 'en-CA', dataset = {}) {
       activeToday = dayValue(today);
       return eventMatchesDate({ _startDay: dayValue(start), _endDay: dayValue(end || start) });
     },
-    calendarRangeIncludes(start, end, day) {
+    calendarOccursOnDay(start, end, day) {
+      state.date = 'all';
       return eventOccursOnDay({ _startDay: dayValue(start), _endDay: dayValue(end || start), series: null }, dayValue(day));
+    },
+    rangePresentation(start, end) {
+      state.date = 'all';
+      const event = normalizeEvent({ id: 'range-fixture', title: 'Exhibition date range', date: start, end_date: end, date_precision: 'range', time_precision: 'unknown', facets: { kind: ['attend'] } });
+      filteredEvents = [event];
+      const month = dayValue(start.slice(0, 7) + '-01');
+      return {
+        isRange: isDateRange(event),
+        inStartMonth: calendarMonthEvents(month).length,
+        afterEndMonth: calendarMonthEvents(addMonths(dayValue(end.slice(0, 7) + '-01'), 1)).length,
+        markup: rangeList([event]),
+      };
     },
     dayKey(value) {
       return isoDay(dayValue(value));
@@ -333,7 +349,12 @@ if (englishRuntime && frenchRuntime) {
   check(!englishRuntime.dateMatches('7d', '2026-08-24', '2026-08-31'), 'inclusive seven-day window must exclude day eight');
   check(englishRuntime.dateMatches('30d', '2026-08-24', '2026-09-22'), 'inclusive thirty-day window must include day thirty');
   check(!englishRuntime.dateMatches('30d', '2026-08-24', '2026-09-23'), 'inclusive thirty-day window must exclude day thirty-one');
-  check(englishRuntime.calendarRangeIncludes('2026-08-24', '2026-08-26', '2026-08-25'), 'multi-day event must appear on an intermediate calendar day');
+  check(!englishRuntime.calendarOccursOnDay('2026-08-24', '2026-08-26', '2026-08-25'), 'a date range must not invent an individual session on an intermediate day');
+  check(englishRuntime.calendarOccursOnDay('2026-08-25', '', '2026-08-25'), 'a genuine single-day event must appear on its own calendar day');
+  check(!englishRuntime.calendarOccursOnDay('2026-08-25', '', '2026-08-26'), 'a genuine single-day event must not appear on another day');
+  const range = englishRuntime.rangePresentation('2026-08-24', '2026-08-26');
+  check(range.isRange && range.inStartMonth === 1 && range.afterEndMonth === 0, 'date ranges must remain in their overlapping month and leave the calendar after their end');
+  check(range.markup.includes('class="pmd-range-list"') && range.markup.includes('/polymythseminars/events/range-fixture/') && range.markup.includes('Aug 24, 2026') && range.markup.includes('Aug 26, 2026'), 'separate date ranges must retain an accessible listing link and both boundary dates');
   check(englishRuntime.dayKey('2026-08-24T23:59:00+14:00') === '2026-08-24', 'source calendar day must not shift with timestamp offset or visitor zone');
   const monthOnly = englishRuntime.displayValue('2027-09-01', 'month', 'unknown');
   check(monthOnly.date === 'September 2027', 'month precision must not invent the first day');

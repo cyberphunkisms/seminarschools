@@ -27,8 +27,8 @@ const MARKDOWN = path.join(
 );
 const EXPECTED_RELEASE =
   '2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final';
-const EXPECTED_ASSET = '20260815-sets1-15-synthesis';
-const EXPECTED_PACKAGE = '1.0.6';
+const EXPECTED_ASSET = '20261004-repair-v9';
+const EXPECTED_PACKAGE = '1.0.7';
 
 const COMPONENTS = {
   metadata: {
@@ -925,7 +925,7 @@ for (const relative of requiredAudit49Artifacts) {
 for (const source of [releaseGates, predeployVerifier]) {
   check(source.includes(EXPECTED_RELEASE), 'release/predeploy gate omits the Audit 49 release ID');
   check(source.includes(EXPECTED_ASSET), 'release/predeploy gate omits the Audit 49 asset version');
-  check(source.includes(EXPECTED_PACKAGE), 'release/predeploy gate omits package version 1.0.6');
+  check(source.includes(EXPECTED_PACKAGE), `release/predeploy gate omits package version ${EXPECTED_PACKAGE}`);
   check(
     source.includes('verify:audit49-technical-efficiency'),
     'release/predeploy gate omits the Audit 49 aggregate command',

@@ -116,7 +116,7 @@ assert(
 );
 
 console.log(
-  'LIVE CONTENT INTEGRITY TESTS PASSED — the exact 1954 + 134 partition, private corpus, '
+  'LIVE CONTENT INTEGRITY TESTS PASSED — the exact 1950 + 136 partition, private corpus, '
     + 'monitoring reasons, uniqueness, and anti-collapse safeguards remain enforced.',
 );
 

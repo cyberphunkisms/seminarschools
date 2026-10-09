@@ -302,6 +302,8 @@ def temporal_presentation(e,projected,is_watch=False):
    return (moment.strftime('%Y-%m-%d %H:%M %Z'),moment.isoformat(timespec='minutes'),moment.strftime('%Y-%m-%d'))
  start=str(projected.get('date') or '')[:10]
  end=str(projected.get('end_date') or '')[:10]
+ if e.get('end_date_precision')=='month':
+  end=end[:7]+' (closing day unpublished · jour de clôture non publié)'
  if temporal_type=='date-range' and end and end!=start:
   return (f'{start} – {end}',start,start)
  if temporal_type=='estimated':
@@ -645,7 +647,7 @@ for e in events:
    raise ValueError(f'{sid}: exact calendar end must be later than its start')
  start=ics_start(e.get('date'),e.get('time_precision'),e.get('timezone') or DEFAULT_TZ)
  if start:lines.append(start)
- end=ics_end(e.get('end_date'),e.get('time_precision'),e.get('timezone') or DEFAULT_TZ)
+ end=ics_end(e.get('end_date'),e.get('time_precision'),e.get('timezone') or DEFAULT_TZ) if e.get('end_date_precision') != 'month' else ''
  if end:lines.append(end)
  lines+=['SUMMARY:'+ics_escape(title_text),'LOCATION:'+ics_escape(venue),'DESCRIPTION:'+ics_escape(desc[:800]),'URL:'+canonical,'STATUS:'+status_ics(e),'END:VEVENT','END:VCALENDAR','']
  ics_text='\r\n'.join(fold_ics(line) for line in lines)

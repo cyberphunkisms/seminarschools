@@ -15,7 +15,7 @@ const AUDIT47_RELEASE_ID = '2026-07-26-site-audit47-technical-efficiency-continu
 const AUDIT48_RELEASE_ID = '2026-07-26-site-audit48-external-validation-interoperability-final';
 const AUDIT49_RELEASE_ID = '2026-07-26-site-audit49-technical-efficiency-resilience-final';
 const CURRENT_RELEASE_ID = '2026-08-15-polymythcal-sets1-15-sitewide-fixes-synthesized-final';
-const CURRENT_ASSET_VERSION = '20260815-sets1-15-synthesis';
+const CURRENT_ASSET_VERSION = '20261004-repair-v9';
 const failures = [];
 let assertions = 0;
 

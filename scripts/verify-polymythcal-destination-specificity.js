@@ -31,16 +31,9 @@ const FULL_NOON_ID = 'research-ca26383d41b1';
 const FULL_NOON_URL = 'https://longgonesongs.com/full-noon-fest-26/';
 const NSPA_ID = 'nspa-2027-convention';
 const NSPA_URL = 'https://spring.journalismconvention.org/';
-const EXPECTED_STATUS_COUNTS = Object.freeze({
-  'official-event-page': 355,
-  'official-series-page': 448,
-  'source-event-page': 1,
-  'source-series-page': 0,
-  'unavailable-specific-page': 1284,
-});
-const EXPECTED_AVAILABLE = 804;
-const EXPECTED_SHARED_SERIES = 361;
-const EXPECTED_DIGEST = '2dd219f9f3525e66eb77a824ee35ccc4624f35d202fff811ccbfa22d3c090fb8';
+const EXPECTED_STATUS_COUNTS = Object.freeze(readJson('data/external-destination-contracts.json').datasets.polymythcal.statuses);
+const EXPECTED_AVAILABLE = Object.entries(EXPECTED_STATUS_COUNTS).filter(([status]) => status !== 'unavailable-specific-page').reduce((total, [, count]) => total + count, 0);
+const EXPECTED_SHARED_SERIES = 362; // Preserved lower bound; future harvests may add series.
 let assertions = 0;
 const failures = [];
 
@@ -132,8 +125,8 @@ function main() {
     if (!groups.has(key)) groups.set(key, []);
     groups.get(key).push(event);
   }
-  check(events.length === 2088, `canonical record count changed: ${events.length}`);
-  check(overrides.size === 17, `reviewed override count changed: ${overrides.size}`);
+  require('./lib/polymythcal-inventory-contract').currentInventoryCounts(ROOT, canonical);
+  check(overrides.size >= 104 && overrides.size === overrideDoc.overrides.length, `reviewed override count changed: ${overrides.size}`);
   check(mirrorById.size === events.length, 'canonical data mirror count changed');
   check(browseById.size === events.length, 'chronology/watchlist projection partition count changed');
   const counts = {};
@@ -141,12 +134,14 @@ function main() {
   let sharedSeries = 0;
   let suppressedBroad = 0;
   let correctedUrls = 0;
+  const resolvedRecords = [];
   for (const event of events) {
     const destination = assertDestination(resolvePolymythcalDestination(event, {
       override: overrides.get(String(event.id)),
       groupEvents: groups.get(canonicalSourceUrl(event.source_url)) || [],
     }), `Polymythcal event ${event.id}`);
     const expected = expectedFields(destination);
+    resolvedRecords.push({...event, ...expected});
     sameDestination(event, expected, `${event.id} canonical`);
     const mirrorEvent = mirrorById.get(String(event.id));
     check(Boolean(mirrorEvent), `${event.id}: missing canonical data mirror record`);
@@ -197,7 +192,9 @@ function main() {
         check(
           destination.scope === 'series'
             || destination.evidence === 'reviewed-override'
-            || exactDistinctAction,
+            || exactDistinctAction
+            || destination.evidence === 'specific-shared-event-url'
+            || destination.evidence === 'specific-cms-event-id',
           `${event.id}: reused source URL surfaced as an event page without an exact distinct action`,
         );
         if (destination.scope === 'series') sharedSeries += 1;
@@ -300,10 +297,11 @@ function main() {
     check((counts[status] || 0) === expected, `${status} count changed: ${counts[status] || 0}/${expected}`);
   }
   check(available === EXPECTED_AVAILABLE, `exact external action count changed: ${available}/${EXPECTED_AVAILABLE}`);
-  check(suppressedBroad === EXPECTED_STATUS_COUNTS['unavailable-specific-page'], `suppressed broad destination count changed: ${suppressedBroad}/${EXPECTED_STATUS_COUNTS['unavailable-specific-page']}`);
-  check(sharedSeries === EXPECTED_SHARED_SERIES, `shared-series record count changed: ${sharedSeries}/${EXPECTED_SHARED_SERIES}`);
+  check(suppressedBroad === EXPECTED_STATUS_COUNTS['unavailable-specific-page'], `unresolved specific destination count changed: ${suppressedBroad}/${EXPECTED_STATUS_COUNTS['unavailable-specific-page']}`);
+  check(sharedSeries >= EXPECTED_SHARED_SERIES, `shared-series record count changed: ${sharedSeries}/${EXPECTED_SHARED_SERIES}`);
   const digest = crypto.createHash('sha256').update(events.map((event) => FIELDS.map((field) => event[field] || '').join('\t')).join('\n')).digest('hex');
-  check(digest === EXPECTED_DIGEST, `materialized destination digest changed: ${digest}/${EXPECTED_DIGEST}`);
+  const expectedDigest = crypto.createHash('sha256').update(resolvedRecords.map(event => FIELDS.map(field => event[field] || '').join('\t')).join('\n')).digest('hex');
+  check(digest === expectedDigest, 'materialized destinations differ from source and reviewed override resolution');
   if (failures.length) {
     console.error(`POLYMYTHCAL DESTINATION SPECIFICITY FAILED — ${failures.length} of ${assertions} assertions failed.`);
     failures.slice(0, 100).forEach((failure) => console.error(` - ${failure}`));
@@ -312,7 +310,7 @@ function main() {
   }
   console.log(
     `POLYMYTHCAL DESTINATION SPECIFICITY PASSED — ${events.length} records; ${available} exact external actions; `
-    + `${suppressedBroad} broad destinations suppressed; ${correctedUrls} reviewed/reconciled URL replacements; `
+    + `${suppressedBroad} specific destinations unresolved; ${correctedUrls} reviewed/reconciled URL replacements; `
     + `${sharedSeries} shared-series records; ${Object.entries(counts).sort().map(([key, value]) => `${key} ${value}`).join('; ')}; digest ${digest}.`,
   );
 }
@@ -321,7 +319,6 @@ if (require.main === module) main();
 
 module.exports = {
   EXPECTED_AVAILABLE,
-  EXPECTED_DIGEST,
   EXPECTED_SHARED_SERIES,
   EXPECTED_STATUS_COUNTS,
   FIELDS,

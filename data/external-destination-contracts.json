@@ -4,13 +4,13 @@
   "datasets": {
     "polymythcal": {
       "source": "polymythseminars/events.json",
-      "recordCount": 2088,
+      "recordCount": 2086,
       "statuses": {
-        "official-event-page": 355,
-        "official-series-page": 448,
+        "official-event-page": 565,
+        "official-series-page": 627,
         "source-event-page": 1,
         "source-series-page": 0,
-        "unavailable-specific-page": 1284
+        "unavailable-specific-page": 893
       }
     },
     "polymyth-commons": {
@@ -22,23 +22,25 @@
         "surviving-archive": 2,
         "surviving-documentation": 2,
         "reviewed-destination": 1,
-        "book-listed-site": 100,
-        "unavailable": 226
+        "book-listed-site": 96,
+        "unavailable": 228,
+        "reviewed-successor": 2
       }
     },
     "teacher-resources": {
       "source": "teacherresources/resources-data.json",
-      "recordCount": 645,
+      "recordCount": 646,
       "statuses": {
-        "external-publisher": 640,
-        "seminar-schools-original": 5,
-        "unavailable": 0
+        "external-publisher": 636,
+        "seminar-schools-original": 6,
+        "unavailable": 4
       },
       "allowedInternalOriginals": [
         "/campaigns/thank-you-mam/",
         "/aitr/#denote",
         "/aitr/#monster-battle",
-        "/teacherresources/files/Pigeon_Monologues_Modular_Color_and_BW.pdf"
+        "/teacherresources/files/Pigeon_Monologues_Modular_Color_and_BW.pdf",
+        "/teacherresources/ieltsrubric/"
       ]
     }
   }

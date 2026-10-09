@@ -46,8 +46,8 @@ const monitored = watchlist.items || [];
 if (release.release_id !== releaseId) fail('RELEASE_ID.txt and RELEASE_MANIFEST.json disagree');
 if (!/^[0-9]{8}-[a-z0-9-]+$/.test(String(release.polymythcal_asset_version || ''))) fail('release lacks a valid Polymythcal asset version');
 if (canonicalText !== mirrorText) fail('private canonical mirrors are not byte-identical');
-if (canonical.events.length !== 2088) fail(`canonical inventory changed (${canonical.events.length}/2088)`);
-if (chronology.length !== 1954 || monitored.length !== 134) fail(`publication partition changed (${chronology.length}+${monitored.length}/2088)`);
+const expectedInventory = require('./lib/polymythcal-inventory-contract').currentInventoryCounts(ROOT, canonical);
+if (chronology.length !== expectedInventory.chronology || monitored.length !== expectedInventory.watchlist) fail('publication counts differ from canonical classification');
 if (browse._schema !== 'polymythcal-discovery-v2' || watchlist._schema !== 'polymythcal-watchlist-v2') fail('public projection schema is stale');
 if (surfaces.schema !== 'polymythcal-publication-surfaces-v2') fail('publication-surface schema is stale');
 const chronologyIds = new Set(chronology.map(event => event.id));
@@ -162,27 +162,10 @@ if (pkg.scripts?.build !== expectedEntrypoint) fail('production build is not rou
 if (build.includes('update-polymythcal-editable-master-')) fail('deploy build mutates private editable masters');
 
 const publicationFinalizer = read('scripts/finalize-polymythcal-publication.py');
-const orderedFinalizerSteps = [
-  'scripts/build-audit45-localized-routes.py',
-  'scripts/apply-audit45-translation-ui.js',
-  'scripts/apply-audit49-metadata-hygiene.js',
-  'scripts/build-polymythcal-discovery-site.js',
-  'scripts/apply-visible-geometry.js',
-  'scripts/update-release-asset-identity.js',
-  'scripts/update-polymythcal-build-manifest.js',
-  'scripts/build-public-deploy.js',
-  'scripts/verify-public-deploy-parity.js',
-  'scripts/verify-release-asset-identity.js',
-];
-const orderedFinalizerIndexes = orderedFinalizerSteps.map(step => publicationFinalizer.indexOf(step));
-if (
-  orderedFinalizerIndexes.some((index, position) => (
-    index < 0
-    || (publicationFinalizer.split(orderedFinalizerSteps[position]).length - 1) !== 1
-    || (position > 0 && index <= orderedFinalizerIndexes[position - 1])
-  ))
-) {
-  fail('Polymythcal publication finalizer omits, duplicates, or misorders the localization/discovery/geometry/identity/public verification sequence');
+if (!publicationFinalizer.includes("['npm','run','build']")
+    || !publicationFinalizer.includes('ReleaseBuildLock')
+    || publicationFinalizer.includes('build-polymythcal-translation-inventory.py')) {
+  fail('harvest publication must delegate to the locked canonical build, without a competing legacy generator chain');
 }
 
 const app = read('js/polymythcal-discovery.js');

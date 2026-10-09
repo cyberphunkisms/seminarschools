@@ -5,13 +5,17 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:291df40df819bf83bcdb@seminarschools.com
-DTSTAMP:20260813T040000Z
+DTSTAMP:20261003T110658Z
 DTSTART;VALUE=DATE:20270421
+DTEND;VALUE=DATE:20270425
 SUMMARY:National Council on Public History 2027 conference
-LOCATION:Online / organizer-defined
-DESCRIPTION:St. Louis conference\, April 21–24\, 2027.
+LOCATION:St. Louis\, Missouri\; individual conference sessions at organiz
+ er-listed venues
+DESCRIPTION:NCPH annual meeting\, Holding the Line\, April 21–24 in St.
+  Louis. The date range covers sessions with individual times\; this is a
+ n in-person conference\, not an online application.
 URL:https://seminarschools.com/polymythseminars/events/ncph-2027-conferen
  ce/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

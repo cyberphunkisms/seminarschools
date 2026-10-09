@@ -275,6 +275,9 @@ try {
 }
 for (const needle of [
   'coreplus-handler-writing-composition-delivery-2026-08-29',
+  'ANTIFLUFF / ANOB SHARPENING, 2026-09-08',
+  'Rewriting an empty pair into affirmative prose leaves the information defect intact.',
+  'Delete the whole empty pair.',
   'W25 protects necessary precise terms',
   'W24 blocks needless repetition',
   'W29 blocks empty method labels',
@@ -318,7 +321,8 @@ if (inventory.preserved_baseline !== 237
     || inventory.active_runtime_rules !== 84) {
   fail(`release manifest writing inventory is stale with ${JSON.stringify(inventory)}`);
 }
-const fixtureInventory = mlStarUpdate.writing_behavioral_fixtures || {};
+const antifluffUpdate = releaseManifest.ml_star_antifluff_update_2026_09_08 || {};
+const fixtureInventory = antifluffUpdate.writing_behavioral_fixtures || mlStarUpdate.writing_behavioral_fixtures || {};
 const expectedFixtureInventory = {
   positive: fixturePasses,
   negative: fixtureFailures,

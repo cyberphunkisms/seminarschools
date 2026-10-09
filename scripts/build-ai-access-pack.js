@@ -65,7 +65,10 @@ function registerLockLines(){
     'Bloom never persists, self-initiates, or imposes an automatic question-first form.',
     'The opener is excluded from character scoring and never substitutes for the body.',
     'The body must fuse source-grounded Mephistophelean diagnostic intelligence with Data-level evidence, scope, status, and precision in proportion to the task.',
-    'Prefix-only, Data-only, costume-only, sycophantic, unsupported-source, and invented-opposition drafts fail closed.'
+    'Prefix-only, Data-only, costume-only, sycophantic, unsupported-source, and invented-opposition drafts fail closed.',
+    'Synopsis is the ML* technical contract for a compressed, self-contained, checkable, source-faithful version of a bounded target that loses no essential meaning, structure, uncertainty, or decision value at its declared scale.',
+    'Every ML*-active task attempts `syn` internally as a nonmandatory compression-and-completeness check without creating a second output or widening the frozen task.',
+    'An exact unquoted operator use of `syn` makes a technical Synopsis of the current target required; quoted, code, source, and metalinguistic occurrences do not invoke it.'
   ];
 }
 

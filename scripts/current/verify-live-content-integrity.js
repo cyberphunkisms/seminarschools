@@ -8,8 +8,8 @@ const { isMonitoringMarker } = require('../lib/polymythcal-discovery-model');
 const { expectedPolymythcalEventRoutes } = require('../lib/source-html-inventory');
 
 const ROOT = path.resolve(__dirname, '../..');
-const CURRENT_THRESHOLDS = Object.freeze({ teacherResources: 645 });
-const EXPECTED_COUNTS = Object.freeze({ canonical: 2088, chronology: 1954, watchlist: 134 });
+const CURRENT_THRESHOLDS = Object.freeze({ teacherResources: 646 });
+const EXPECTED_COUNTS = require('../lib/polymythcal-inventory-contract').currentInventoryCounts(ROOT);
 const WATCHLIST_REASON = Object.freeze({
   code: 'monitoring-marker',
   detail: 'Displayed date is a monitoring marker, not a confirmed event or deadline date.',

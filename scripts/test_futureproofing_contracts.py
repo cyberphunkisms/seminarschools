@@ -658,26 +658,42 @@ class ApprovedDeletionTests(unittest.TestCase):
             "df680c57b93af68acfa5d3ff2cbdb5646c5d58476217899b625011283f0a8825",
         )
 
-    def test_sep5_degorgonified_feminism_transition_is_exact_and_tamper_detecting(self) -> None:
-        observed = sep5_degorgonified_feminism_preservation.observed_transition()
-        contract = json.loads(
-            (
-                SITE_ROOT
-                / "data/futureproofing/sep5-feminism-sep5-degorgonified-feminism-preservation-contract.json"
-            ).read_text(encoding="utf-8")
+    def test_sep5_degorgonified_feminism_historical_transition_is_exact_and_tamper_detecting(self) -> None:
+        contract_path = (
+            SITE_ROOT
+            / "data/futureproofing/sep5-feminism-sep5-degorgonified-feminism-preservation-contract.json"
         )
+        # September 5 is sealed historical evidence. Comparing today's complete
+        # successor tree to that transition would misclassify accepted later
+        # changes. Pin the historical bytes, exercise its tamper validator, and
+        # test the live V3-to-V4 tree separately below.
+        self.assertEqual(
+            sep5_degorgonified_feminism_preservation.sha256(contract_path),
+            "e745bb824070de84da105c35706086940ab439191a179c1b8d4f5649cceeb4ac",
+        )
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        observed = json.loads(json.dumps(contract["expected_transition"]))
         sep5_degorgonified_feminism_preservation.validate_expected(observed, contract)
-        fixture = json.loads(
-            (
-                SITE_ROOT
-                / "scripts/fixtures/futureproofing/sep5-degorgonified-feminism-preservation-tampered.json"
-            ).read_text(encoding="utf-8")
+        fixture_path = (
+            SITE_ROOT
+            / "scripts/fixtures/futureproofing/sep5-degorgonified-feminism-preservation-tampered.json"
         )
+        self.assertEqual(
+            sep5_degorgonified_feminism_preservation.sha256(fixture_path),
+            "8e6a0d3b78ca852c2911c82238ccd86e8e118a90e5c3cd43c05d5f368860dd53",
+        )
+        fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
         self.assertEqual(fixture["target"], "expected_transition.changed_paths_sha256")
         tampered = json.loads(json.dumps(contract))
         tampered["expected_transition"]["changed_paths_sha256"] = fixture["value"]
         with self.assertRaises(AssertionError):
             sep5_degorgonified_feminism_preservation.validate_expected(observed, tampered)
+
+    def test_current_v3_v4_transition_and_tamper_guards(self) -> None:
+        current = load_hyphen_module(
+            "futureproof_current_v3_v4", "verify-teacher-bb-current-preservation.py"
+        )
+        current.run()
 
     def test_protest_harvest_fixtures_remain_historical_bytes(self) -> None:
         baseline = json.loads(

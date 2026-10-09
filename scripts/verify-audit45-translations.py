@@ -41,7 +41,8 @@ FOCUSED = (
     "writinggrads", "university", "philosophy", "humanities", "cfps",
     "lectures", "fellowships",
 )
-FRENCH_LEGACY_ALIAS_COUNT = 28
+# Two reviewed duplicate merges preserve both original IDs and identity aliases.
+FRENCH_LEGACY_ALIAS_COUNT = 32
 
 failures: list[str] = []
 assertions = 0
@@ -144,7 +145,7 @@ check(
 )
 check(len({event["type"] for event in events}) >= MINIMUM_EVENT_TYPES, f"Polymythcal type inventory fell below {MINIMUM_EVENT_TYPES}")
 check(len(sources) >= MINIMUM_SOURCE_COUNT, f"Polymythcal source inventory fell below {MINIMUM_SOURCE_COUNT}: {len(sources)}")
-check(len(teacher_entries) == 645, f"Teacher Resources count changed: {len(teacher_entries)}/645")
+check(len(teacher_entries) == 646, f"Teacher Resources count changed: {len(teacher_entries)}/646")
 check(len(teacher_document["groups"]) == 7, "Teacher Resources group count changed from 7")
 check(sum(len(group.get("categories", [])) for group in teacher_document["groups"]) == 25,
       "Teacher Resources collection count changed from 25")
@@ -465,7 +466,7 @@ for segment, (tag, direction) in LOCALES.items():
 teacher_index = text("teacherresources/index.html")
 check('id="language-chips"' in teacher_index and "Source language" in teacher_index,
       "Teacher Resources source-language filter surface is missing")
-check(len(re.findall(r'\bdata-l=["\'][^"\']+["\']', teacher_index)) == 645,
+check(len(re.findall(r'\bdata-l=["\'][^"\']+["\']', teacher_index)) == 646,
       "Teacher Resources SSR entries do not all expose source language")
 finder = text("teacherresources/finder.js")
 for marker in ("LANGUAGES", "tr-filters-v4", "params.set('language'", "state.languages"):
@@ -475,7 +476,7 @@ for page in (ROOT / "teacherresources").rglob("index.html"):
     source = page.read_text(encoding="utf-8")
     if '"@type":"LearningResource"' in source:
         detail_pages.append((page, source))
-check(len(detail_pages) == 645, f"Teacher Resources detail route count changed: {len(detail_pages)}/645")
+check(len(detail_pages) == 646, f"Teacher Resources detail route count changed: {len(detail_pages)}/646")
 for page, source in detail_pages:
     check('"inLanguage":[' in source, f"{page.relative_to(ROOT)}: LearningResource.inLanguage missing")
     check("<dt>Source language</dt>" in source, f"{page.relative_to(ROOT)}: visible source language missing")
@@ -561,5 +562,5 @@ print(
     "AUDIT 45 TRANSLATION GATE PASSED — "
     f"{assertions}/{assertions} assertions; {len(events)} events; 40 Leizu routes; "
     f"{len(canonical_event_ids)} French event routes plus "
-    f"{len(legacy_alias_targets)} aliases; 645 Teacher Resources; weekly cadence preserved."
+    f"{len(legacy_alias_targets)} aliases; 646 Teacher Resources; weekly cadence preserved."
 )

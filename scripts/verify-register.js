@@ -27,6 +27,7 @@
    ========================================================================= */
 'use strict';
 const fs = require('fs');
+const crypto = require('crypto');
 const path = require('path');
 const {
   assertGeometryVersionScheme,
@@ -112,7 +113,13 @@ for (const f of files){
     // are explicitly outside the site's authored-register doctrine.
     .replace(/<([a-z][\w:-]*)\b[^>]*\bdata-source-language=["'][^"']*["'][^>]*>[\s\S]*?<\/\1>/gi, ' ')
     .replace(/<nav\b[^>]*\bclass=["'][^"']*\bpm-event-related\b[^"']*["'][^>]*>[\s\S]*?<\/nav>/gi, ' ');
-  const vt = visibleText(authoredOnly);
+  let vt = visibleText(authoredOnly);
+  for (const row of allow.protectedAcceptedText || []) {
+    if (row.file !== f) continue;
+    const digest = crypto.createHash('sha256').update(vt.replace(/\s+/g,' ').trim(),'latin1').digest('hex');
+    if (digest !== row.visible_text_sha256) continue;
+    for (const span of row.spans) vt = vt.split(span).join(' ');
+  }
 
   // English and French event-detail routes are the same generated surface.
   // Locale nesting must not change whether source-controlled record text is

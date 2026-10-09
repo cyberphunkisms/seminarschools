@@ -42,7 +42,7 @@ CARIBANA_PARENT_EXPECTATIONS = {
     '119d86af47de': None,
     'caribana-pan-alive-closing-day-2026-08-02': None,
 }
-EXPECTED_DISCOVERY_COUNTS = {'canonical': 2_088, 'chronology': 1_954, 'watchlist': 134}
+EXPECTED_DISCOVERY_COUNTS = {'canonical': 2_086, 'chronology': 1_950, 'watchlist': 136}
 WATCHLIST_REASON = {
     'code': 'monitoring-marker',
     'detail': 'Displayed date is a monitoring marker, not a confirmed event or deadline date.',
@@ -478,7 +478,7 @@ class CurrentDataConsolidationTests(unittest.TestCase):
             events,
             include_changes=True,
         )
-        self.assertEqual(len(reconciled), 2_088)
+        self.assertEqual(len(reconciled), 2_086)
         self.assertEqual(collapse_changes, [])
         self.assertEqual(
             [event['id'] for event in reconciled],

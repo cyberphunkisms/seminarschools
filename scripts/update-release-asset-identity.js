@@ -30,8 +30,14 @@ function loadManifest() {
 
 function writeAtomic(file, content) {
   const temporary = `${file}.tmp-${process.pid}`;
+  const priorMtime = fs.existsSync(file) ? fs.statSync(file).mtimeMs : 0;
+  const requestedMtime = process.env.SS_BUILD_OUTPUT_MTIME
+    ? Date.parse(process.env.SS_BUILD_OUTPUT_MTIME) : 0;
+  if (!Number.isFinite(requestedMtime)) throw new Error('SS_BUILD_OUTPUT_MTIME must be a valid timestamp');
   try {
     fs.writeFileSync(temporary, content, 'utf8');
+    const stamp = Math.max(requestedMtime, priorMtime > Date.now() + 60000 ? priorMtime + 2000 : 0);
+    if (stamp) fs.utimesSync(temporary, stamp / 1000, stamp / 1000);
     fs.renameSync(temporary, file);
   } finally {
     try { fs.rmSync(temporary, { force: true }); } catch (_) { /* best effort */ }

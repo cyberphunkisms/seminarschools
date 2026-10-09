@@ -1,6 +1,6 @@
 # Meaninglib Hugging Face export report
 
-Exported: 2026-09-07T04:00:00.000Z
+Exported: 2026-09-27T00:00:00.000Z
 
 Target repo: SeminarSchools/meaninglib
 
@@ -11,10 +11,10 @@ Target repo: SeminarSchools/meaninglib
 - bb: 246
 - cc: 296
 - manifest: 2
-- mc: 234
+- mc: 235
 - ml: 1233
 
-Total rows: 2013
+Total rows: 2014
 Canonical Methodologylist rows: 1233
 
 ## Methodologylist sections

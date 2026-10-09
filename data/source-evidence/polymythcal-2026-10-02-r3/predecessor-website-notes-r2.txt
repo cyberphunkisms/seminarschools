@@ -1,0 +1,106 @@
+POLYMYTHCAL WEBSITE FIXES — 2 OCTOBER 2026
+Revision 2, following the delivered-package audit.
+
+This ZIP contains the complete editable website source and its built public/
+folder. Polymythcal shares this website with other Seminar Schools sections,
+which are retained. It is a website handoff, not the full Polymyth project or
+research archive. It does not require the seven archive transport ZIPs to
+build the website. The original full project archive is preserved separately.
+
+CHANGES
+- Explicit unconfirmed "projected source watch" records now enter the undated
+  watchlist even when an old importer assigned an exact placeholder timestamp.
+- The first repair moved 26 such records out of the dated calendar and ICS
+  exports. This follow-up moves another 53 projected deadlines, annual windows
+  and placeholder dates to the watchlist, including 46 upcoming records.
+  No source-confirmed deadline is inferred from an annual pattern. Their stable detail
+  pages and original canonical records remain. All 2,086 record IDs are retained:
+  1,871 chronology records and 215 watchlist records.
+- The first repair made 18 targeted primary-source reviews correcting dates,
+  venues, titles, status or
+  destinations. National Humanities Center's deadline was October 1, not October
+  2. Getty Center's 2027–28 Scholars Program is paused. Hellhound Trail also plays
+  October 3. Melissa Auf der Maur and Sunday Best now use their verified public
+  opening dates, separately from early member access. Four Kingston productions,
+  seven TSO listings, four AGO exhibitions and the Scholastic cycle are reviewed.
+- In the first repair, exact external destinations rose from 851 to 868. Unverified broad links are
+  not promoted to event links. Unknown cities fall from 402 to 389.
+- Source-reviewed corrections survive normal rebuilds. The dated ledger retains
+  the complete predecessor records and source URLs. No historical source-check
+  timestamps outside those reviewed records are advanced by this repair.
+- The Scholastic regional-deadline listing now gives the current $15 individual
+  and $40 portfolio fees with waivers. The related cycle-opening listing carries
+  the same information. The regional deadline remains unknown and undated.
+  This brings the cumulative targeted source-review set to 19 distinct records.
+- National Humanities Center and Getty Scholar opportunities use the funding
+  filter. Existing fellowship metadata also outranks the legacy generic CFP type.
+- English and French listing cards expose lifecycle states, including closed
+  registration and cancelled or paused programs. Getty's date panel displays its
+  paused/cancelled state instead of saying it awaits a date.
+- Exact external destinations now total 869; 1,217 remain unresolved.
+- Long watchlist date/status labels fit within their column without overlapping
+  listing titles.
+- The scroll geometry refreshes its section measurements at the next paint after
+  asynchronous calendar results and their action buttons finish rendering. The Writing Kids desktop convergence
+  failure exposed stale measurements from before the listing load. Hidden panels
+  and fallback headings no longer create phantom outline positions. The browser
+  expectation was corrected to exclude those non-rendered headings as well; its
+  timeout and numerical tolerance remain unchanged.
+- The Discovery browser asset version advances to 20261002-discovery-v5 so
+  cached scripts from the earlier release cannot hide these interface repairs.
+
+AUDIT CORRECTION
+The audit's claim that the main calendar lacked initial listings without
+JavaScript was incorrect. It already contained 24 static listing links.
+That finding and the proposed reopening of issue 32 are withdrawn. Browser
+checks now verify the existing fallback and its detail links on the main,
+research and monitoring pages in both languages with JavaScript disabled.
+
+REMAINING WORK
+1,217 records still lack a verified specific external destination; 865 have
+qualified/unconfirmed information, and 389 have unknown city fields. These
+counts overlap. Broad source coverage, Grade 4/community coverage, daily or
+short-notice collection, and human review of cancellations remain ongoing work.
+Native screen-reader and physical-device checks have not been performed here.
+No production deployment, repository push, or paid collection run was done.
+
+VALIDATION
+The canonical build and its embedded validation passed. The English/French
+browser flow passed 78 assertions covering destinations, projected dates,
+fellowship filters, lifecycle labels and the existing JavaScript-free fallback.
+Package-boundary checks cover all 215 watchlist records. The focused rendered
+geometry gate passed 87 renders across eight Polymythcal surfaces, desktop,
+phone and reduced motion, together with its existing exemption/input probes.
+Build idempotence and final archive byte verification are recorded in the
+accompanying private validation receipt. This is not a claim that the entire
+historical 196-gate full-project release suite was rerun. Dated older reports
+and the V5-to-V6 complete-project preservation gate retain their original scope;
+that historical gate is not a certification of this October 2 website snapshot.
+
+IMPORTANT FILES
+- data/polymythcal-reviewed-corrections-2026-10-02.json: evidence and originals.
+- data/polymythcal-destination-overrides.json: reviewed exact destinations.
+- scripts/lib/polymythcal-discovery-model.js: source-watch classification fix.
+- scripts/test-polymythcal-data-truth.js: semantic and ICS regression checks.
+- scripts/verify-polymythcal-destination-browser.js: EN/FR browser regression.
+- PACKAGE_CONTENTS_SHA256.json: exact contents of this website ZIP.
+
+BUILD
+Use the versions pinned by this project's runtime files and package.json.
+  npm ci
+  python3 -m pip install --require-hashes -r requirements-audit.lock
+  SITE_BUILD_DATE=2026-10-02 npm run build
+For a later normal build, use that day's SITE_BUILD_DATE. A build date is not
+an assertion that all source records were checked that day.
+
+Repository handoff: inspect `git status`, create a review branch with
+`git switch -c polymythcal-fixes-2026-10-02`, apply this website tree to the
+website repository root, and review `git diff --stat` and `git diff` before any
+commit or deployment. Remove obsolete ICS paths listed in the change receipt;
+overlaying an extracted ZIP alone does not remove retired files in an existing
+checkout. Keep private source data out of hosting: only public/ is the publish
+folder. No push or deployment is implied by these instructions.
+
+BASE
+seminar-schools-polymythcal-repaired-v6-2026-10-01.zip
+SHA256 91c8affe601c22f1f8564ef8efe3499baef3bf34eb41dd30f0bf331512759ff4

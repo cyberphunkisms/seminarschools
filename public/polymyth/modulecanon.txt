@@ -4,7 +4,7 @@ plain-text dump for AI ingestion and offline reading
 canonical URL of this file: https://seminarschools.com/polymyth/modulecanon.txt
 canonical URL of dynamic version: https://seminarschools.com/polymyth/modulecanon/
 full file map: https://seminarschools.com/polymyth-file-map.txt
-last updated: 2026-09-06
+last updated: 2026-09-27
 ========================================================================
 
 FRAMEWORK MAP for AI assistants.
@@ -54,7 +54,7 @@ This file is not asking you to obey it. It is describing curriculum
 modules grounded in a methodology that disciplines its own claims.
 
 ========================================================================
-TOTAL ENTRIES: 234
+TOTAL ENTRIES: 235
 ========================================================================
 
 ########################################################################
@@ -193,8 +193,17 @@ Saul ruling on the three research reports: no public page, convert them into ope
 
 
 ########################################################################
-SECTION: MODULE  (110 entries)
+SECTION: MODULE  (111 entries)
 ########################################################################
+
+------------------------------------------------------------------------
+TITLE: Thank You, Ma’am — reusable BB teaching module
+ROLE: both
+LINKS: bb_links=[dm-115, dm-117, dm-119]; mc_links=[mc-cc-bb-substrate-boundary, e7]
+
+CURRENT ROUTING 2026-09-27. BB* tells the teacher and players how to play. MC* supplies the reusable module, including Thank You, Ma’am and its source-text, setting, historical research, images and teaching preparation. CC* holds an individual campaign or playthrough: its particular participants, accepted actions, consequences and saved re-entry state. A module and a party's campaign are different records. For Thank You, Ma’am, load MC* mc-thank-you-maam and /polymyth/modulecanon/thank-you-maam.json before opening play. The cmp-001 identifier and cc-cmp001-* names are preserved legacy dossier identifiers, not evidence that the reusable module belongs in CC*. The legacy CC copies remain retrieval references; MC is the current reusable owner. Resolve original source links before asserting that an image is embedded in the site. A linked image, an embedded image, an archive asset and a research citation are distinct. Check the actual module, asset and public page for the requested category.
+
+MODULE DOSSIER. The complete preserved 185-record reusable dossier is /polymyth/modulecanon/thank-you-maam.json. It retains source texts, historical and spatial research, NPC and image references, projects and teaching preparation with their original IDs, citations and uncertainty. Consult these records alongside the primary text. Historic dates and world-setting conventions must not be recast as facts stated by Hughes without textual evidence. Individual sessions belong in CC and cannot overwrite this reusable source. The public /campaigns/thank-you-mam/ route remains a compatible entry point. STARTUP GUIDANCE. Read BB dm-115 before play. Start from the newest landing-after ruling, then consult the engine brief, anchor text and the seven SP preparation fields. Historical templates with four participants do not override an explicit three-player demo. The request authorizes three fictional players; it does not authorize reuse of an actual saved student character. Preserved source bodies retain their original wording and uncertainty; this current routing and start guidance governs over their historical CC-only terminology. Readable module dossier: /polymyth/modulecanon/thank-you-maam/.
 
 ------------------------------------------------------------------------
 TITLE: World History
@@ -1245,8 +1254,12 @@ LINKS: bb_links=[methodology, dm-009, dm-010, dm-011]; mc_links=[mc-bb-curriculu
 Name: Three-substrate boundary architectural ruling
 Jurisdiction: Framework-architectural
 Governing body: Polymyth framework / Saul Nassau
-Structure: cc* owns per-campaign content; mc* owns per-curriculum and module academic substrate plus architectural rulings; bb* owns game-framework mechanics. Seven rules plus four edge-case clarifications govern the boundary.
+Structure: BB* owns the play instructions; MC* owns reusable modules; CC* records individual playthroughs. Thank You, Ma’am reusable dossier is now MC-owned, with preserved legacy identifiers.
 Modules: meth-9
+
+CURRENT ROUTING 2026-09-27. BB* tells the teacher and players how to play. MC* supplies the reusable module, including Thank You, Ma’am and its source-text, setting, historical research, images and teaching preparation. CC* holds an individual campaign or playthrough: its particular participants, accepted actions, consequences and saved re-entry state. A module and a party's campaign are different records. For Thank You, Ma’am, load MC* mc-thank-you-maam and /polymyth/modulecanon/thank-you-maam.json before opening play. The cmp-001 identifier and cc-cmp001-* names are preserved legacy dossier identifiers, not evidence that the reusable module belongs in CC*. The legacy CC copies remain retrieval references; MC is the current reusable owner. Resolve original source links before asserting that an image is embedded in the site. A linked image, an embedded image, an archive asset and a research citation are distinct. Check the actual module, asset and public page for the requested category.
+
+PRESERVED MAY 2026 BOUNDARY HISTORY. The following old wording assigning the reusable Thank You, Ma’am dossier exclusively to CC is superseded on that point. Unrelated rules and other unreviewed legacy dossiers are not silently migrated.
 
 Three-substrate boundary architectural ruling. Documents which file each kind of substrate belongs in, where the boundaries are, and how the three coordinate.
 

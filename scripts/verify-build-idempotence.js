@@ -20,6 +20,9 @@ const PRUNED_DIRECTORIES = new Set([
   '.git', '.netlify', 'node_modules', '__pycache__', '.pytest_cache',
   '.mypy_cache', '.ruff_cache', '.tox', '.nox', 'htmlcov',
   '.seminar-schools-build.lock',
+  // The public builder retains abandoned transient trees here for diagnosis;
+  // repository walking and package selection already classify this as cache.
+  '.public-build-quarantine',
 ]);
 const PUBLIC_BUILD_TRANSIENT_LABELS = new Map([
   ['.public-build-staging', 'staging'],
@@ -47,11 +50,31 @@ function shouldSkipFile(name) {
 }
 
 function assertNoPublicBuildTransients(root, context) {
-  const state = new PublicBuildLock({
+  const probe = new PublicBuildLock({
     root,
     buildOut: path.join(root, '.public-build-staging'),
     previousOut: path.join(root, '.public-build-previous'),
-  }).inspectTransientState();
+    authorizeEmptyOverlayRecovery: root === ROOT ? () => {
+      const authorization = spawnSync(process.execPath, [
+        path.join(ROOT, 'scripts', 'run-python.js'),
+        path.join(ROOT, 'scripts', 'assert-build-lock.py'),
+      ], {cwd: ROOT, env: process.env, encoding: 'utf8', windowsHide: true});
+      if (authorization.error || authorization.status !== 0) {
+        const detail = String(authorization.stderr || authorization.stdout || authorization.error?.message || '').trim();
+        throw new Error(`BUILD IDEMPOTENCE CHECK FAILED — ${context} recovery lacks the live release lease: ${detail}`);
+      }
+      return true;
+    } : undefined,
+  });
+  let state = probe.inspectTransientState();
+  // A managed workspace can replay an empty canonical lock after a child
+  // exits. Reconcile in this process after proving the live outer lease;
+  // a recovery subprocess alone can itself trigger another empty replay.
+  // Unknown/nonempty ownership and isolated probe roots retain strict checks.
+  if (root === ROOT && state.action === 'reclaim-empty-overlay') {
+    probe.reconcilePostBuildOverlayResidue();
+    state = probe.inspectTransientState();
+  }
   const recognized = new Set([...state.tombstones, ...state.directory_overlays]);
   const acceptable = state.present.length === 0
     ? state.action === 'retry'

@@ -208,6 +208,7 @@ function explicitActionDestination(event) {
 
 function normalizedOverride(override, official) {
   if (!override) return null;
+  if (override.destination_status === 'unavailable-specific-page' && override.review) return { ...unavailableDestination(), evidence: 'reviewed-unresolved' };
   const href = httpsUrl(override.destination_url);
   const scope = String(override.destination_scope || 'event');
   const kind = String(override.destination_kind || 'detail');
@@ -298,7 +299,14 @@ function resolvePolymythcalDestination(event, context = {}) {
   }
   const pathEvidence = positivePathEvidence(event, parsed);
   const identifierEvidence = opaqueIdentifierEvidence(parsed);
+  const sameSourceAction = ['registration', 'application', 'submission'].find(kind => httpsUrl(event[`${kind}_url`]) === href);
   const actionKind = inferActionKind(event, parsed);
+  const exactCmsPage = parsed.hostname.toLowerCase() === 'boxoffice.hotdocs.ca' && /\/websales\/pages\/info\.aspx$/i.test(parsed.pathname)
+    && /^[0-9]{5,}~[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(parsed.searchParams.get('evtinfo') || '');
+  if (exactCmsPage) return {
+    status: `${official ? 'official' : 'source'}-event-page`, href, scope: 'event',
+    kind: sameSourceAction || action?.declaredKind || 'detail', evidence: 'specific-cms-event-id',
+  };
   if (action) {
     const exactActionPage = pathEvidence.strongOverlap || pathEvidence.strongFinalOverlap || identifierEvidence;
     if (!exactActionPage || dateArchiveRoute(parsed) || genericCompoundTerminal(parsed)) return unavailableDestination();
@@ -326,7 +334,9 @@ function resolvePolymythcalDestination(event, context = {}) {
       kind: actionKind || (schedule ? 'schedule' : 'detail'), evidence: 'specific-source-series',
     };
   }
-  if (groupEvents.length > 1) return unavailableDestination();
+  const sharedExactEvent = markerSpecific && pathEvidence.strongFinalOverlap
+    && groupEvents.every(record => String(record.date || '').slice(0, 10) === String(event.date || '').slice(0, 10));
+  if (groupEvents.length > 1 && !sharedExactEvent) return unavailableDestination();
   // A recognized event/detail route ending in a specific slug or a non-date
   // opaque ID is an exact event page. It outranks generic title words such as
   // "conference" or "festival", which do not by themselves make a page a
@@ -335,7 +345,7 @@ function resolvePolymythcalDestination(event, context = {}) {
   if (markerSpecific && (identifierEvidence || declaredChild)) {
     return {
       status: `${official ? 'official' : 'source'}-event-page`, href, scope: 'event',
-      kind: actionKind || 'detail', evidence: 'specific-source-url',
+      kind: actionKind || 'detail', evidence: groupEvents.length > 1 ? 'specific-shared-event-url' : 'specific-source-url',
     };
   }
   if (recurringRecordEvidence(event) && specificSeriesRoute(event, parsed)) {
@@ -348,7 +358,7 @@ function resolvePolymythcalDestination(event, context = {}) {
   if (!actionKind && !nonBroadSpecificPath) return unavailableDestination();
   return {
     status: `${official ? 'official' : 'source'}-event-page`, href, scope: 'event',
-    kind: actionKind || 'detail', evidence: 'specific-source-url',
+    kind: actionKind || 'detail', evidence: groupEvents.length > 1 ? 'specific-shared-event-url' : 'specific-source-url',
   };
 }
 
@@ -415,7 +425,19 @@ function polymythCommonsDestination(project) {
     const [status, label] = byState[project.currentStatusGroup] || ['reviewed-destination', 'Open reviewed destination'];
     return { status, href: current, label };
   }
-  const historical = (project && Array.isArray(project.bookPrintedUrls) ? project.bookPrintedUrls : [])
+  const historicalUrls = project && Array.isArray(project.bookPrintedUrls) ? project.bookPrintedUrls : [];
+  const reviews = project && project.sourceLinkReviews || {};
+  const reviewedSuccessor = historicalUrls.map(url => reviews[url]).find(review =>
+    review && review.status === 'unavailable' && review.successor && httpUrl(review.successor.url)
+  );
+  if (reviewedSuccessor) return {
+    status: 'reviewed-successor',
+    href: httpUrl(reviewedSuccessor.successor.url),
+    label: reviewedSuccessor.successor.label,
+    note: reviewedSuccessor.successor.note,
+    checkedOn: reviewedSuccessor.checkedOn,
+  };
+  const historical = historicalUrls.filter(url => !reviews[url] || reviews[url].status !== 'unavailable')
     .map(httpUrl).find(Boolean) || '';
   return historical
     ? { status: 'book-listed-site', href: historical, label: 'Open website listed in the book' }
@@ -423,6 +445,7 @@ function polymythCommonsDestination(project) {
 }
 
 function teacherResourceDestination(entry, allowedInternalOriginals = []) {
+  if (entry && entry.source_availability === 'unavailable') return { status: 'unavailable', href: '', label: 'Original resource unavailable' };
   const value = String(entry && entry.url || '').trim();
   const external = httpUrl(value);
   if (external) return { status: 'external-publisher', href: external, label: 'Open original resource' };

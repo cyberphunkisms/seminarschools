@@ -5,13 +5,16 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:fd9c3122ac08dbd78dba@seminarschools.com
-DTSTAMP:20260815T033000Z
-DTSTART;VALUE=DATE:20261005
+DTSTAMP:20261003T110658Z
+DTSTART:20261005T133000Z
+DTEND:20261006T000000Z
 SUMMARY:Québec general election day 2026
 LOCATION:Voting places across Québec
-DESCRIPTION:Fixed-date provincial general election day.
+DESCRIPTION:Provincial election polling day\, 9:30 am–8 pm Eastern time
+ . Use Élections Québec’s address lookup to find the assigned polling
+  place.
 URL:https://seminarschools.com/polymythseminars/events/quebec-general-ele
  ction-day-2026/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

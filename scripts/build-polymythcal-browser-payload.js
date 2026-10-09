@@ -36,8 +36,8 @@ const WATCHLIST_PATH = path.join(ROOT, 'polymythseminars', 'watchlist.json');
 const RESEARCH_PATH = path.join(ROOT, 'polymythseminars', 'research.json');
 const SURFACE_MANIFEST_PATH = path.join(ROOT, 'data', 'polymythcal-publication-surfaces.json');
 const REPORT_PATH = path.join(ROOT, 'scripts', 'reports', 'polymythcal-browser-payload-report.json');
-const EXPECTED_CANONICAL_COUNT = 2088;
-const EXPECTED_CHRONOLOGY_COUNT = 1954;
+const EXPECTED_CANONICAL_COUNT = 2086;
+const EXPECTED_CHRONOLOGY_COUNT = 1950;
 const MINIMUM_GZIP_REDUCTION = 0.25;
 const BUILD_MTIME = new Date(process.env.SS_BUILD_OUTPUT_MTIME || '2034-01-11T00:00:00Z');
 
@@ -70,13 +70,15 @@ function serializeSurfaceManifest(payload) {
 }
 
 function writeIfChanged(file, text) {
+  const priorMtime = fs.existsSync(file) ? fs.statSync(file).mtimeMs : 0;
   if (fs.existsSync(file) && fs.readFileSync(file, 'utf8') === text) {
     if (fs.statSync(file).mtime < BUILD_MTIME) fs.utimesSync(file, BUILD_MTIME, BUILD_MTIME);
     return false;
   }
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, text);
-  fs.utimesSync(file, BUILD_MTIME, BUILD_MTIME);
+  const stamp = Math.max(BUILD_MTIME.getTime(), priorMtime + 2000) / 1000;
+  fs.utimesSync(file, stamp, stamp);
   return true;
 }
 
@@ -84,14 +86,9 @@ function assertReleaseInventory(canonical, payloads) {
   const canonicalCount = canonical.events.length;
   const chronologyCount = payloads.browse.events.length;
   const watchlistCount = payloads.watchlist.items.length;
-  if (canonicalCount !== EXPECTED_CANONICAL_COUNT) {
-    throw new Error(`Polymythcal discovery v2 expected ${EXPECTED_CANONICAL_COUNT} canonical records; found ${canonicalCount}.`);
-  }
-  if (watchlistCount !== EXPECTED_MONITORING_MARKER_COUNT) {
-    throw new Error(`Polymythcal discovery v2 expected ${EXPECTED_MONITORING_MARKER_COUNT} explicit monitoring markers; found ${watchlistCount}.`);
-  }
-  if (chronologyCount !== EXPECTED_CHRONOLOGY_COUNT) {
-    throw new Error(`Polymythcal discovery v2 expected ${EXPECTED_CHRONOLOGY_COUNT} chronology records; found ${chronologyCount}.`);
+  const expected = require('./lib/polymythcal-inventory-contract').currentInventoryCounts(ROOT, canonical);
+  if (chronologyCount !== expected.chronology || watchlistCount !== expected.watchlist) {
+    throw new Error('Public inventory does not match the canonical chronology/watchlist classification.');
   }
   if (chronologyCount + watchlistCount !== canonicalCount) {
     throw new Error('Polymythcal public surfaces do not partition the canonical inventory.');
@@ -200,7 +197,12 @@ function buildReport(canonicalBytes, payloads, outputBytes) {
     destination_policy: 'materialized-exact-destination-only',
     exact_external_destination_count: exactRecords.length,
     unresolved_destination_count: unresolvedRecords.length,
-    suppressed_broad_destination_count: unresolvedRecords.length,
+    unresolved_specific_destination_count: unresolvedRecords.length,
+    destination_coverage_percent: Number((100 * exactRecords.length / canonical.events.length).toFixed(2)),
+    exact_event_page_count: exactRecords.filter(event => event.destination_scope === 'event').length,
+    series_page_count: exactRecords.filter(event => event.destination_scope === 'series').length,
+    source_checks_completed_this_release: canonical.events.filter(event => String(event.last_checked_at || '').startsWith('2026-09-07')).length,
+    coverage_note: 'Projection parity measures delivery of accepted links, not link completeness or fresh verification of every source.',
     public_external_action_count: publicExternalActionCount,
     missing_exact_external_action_count: missingExactActionCount,
     mismatched_external_action_count: mismatchedExternalActionCount,
@@ -229,6 +231,11 @@ function main() {
   }
   const payloads = buildDiscoveryPayloads(canonical, { builtAt: discoveryBuildTimestamp });
   assertReleaseInventory(canonical, payloads);
+  const effectiveBuiltAt = payloads.browse.freshness.built_at;
+  if (releaseManifest.polymythcal_discovery_built_at !== effectiveBuiltAt) {
+    releaseManifest.polymythcal_discovery_built_at = effectiveBuiltAt;
+    writeIfChanged(RELEASE_MANIFEST_PATH, `${JSON.stringify(releaseManifest, null, 2)}\n`);
+  }
 
   const browserText = serializeBrowserPayload(payloads.browse);
   const watchlistText = serializeWatchlistPayload(payloads.watchlist);

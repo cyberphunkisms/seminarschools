@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "assertions": 4324,
+  "canonical_records": 2086,
+  "corrected_records": 16,
+  "before": {
+    "destination_status": {
+      "unavailable-specific-page": 894,
+      "official-event-page": 564,
+      "official-series-page": 627,
+      "source-event-page": 1
+    },
+    "unconfirmed": 767,
+    "unknown_city": 152
+  },
+  "after": {
+    "destination_status": {
+      "unavailable-specific-page": 893,
+      "official-event-page": 565,
+      "official-series-page": 627,
+      "source-event-page": 1
+    },
+    "unconfirmed": 779,
+    "unknown_city": 151
+  },
+  "chronology_records": 1873,
+  "watchlist_records": 213,
+  "public_audience_records": 1001,
+  "unknown_or_unclassified_audience_records": 746,
+  "scope": "Repairs to existing features and records only. No new filters, routes, recommendations, subscriptions or event records.",
+  "limits": "This pass does not re-verify the full source backlog. Existing unverified source facts retain qualifications and review dates."
+}

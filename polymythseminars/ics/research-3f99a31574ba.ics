@@ -5,13 +5,15 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:baaa95b453d17462a88b@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART:20260802T230000Z
+DTSTAMP:20261003T110658Z
+DTSTART;VALUE=DATE:20260802
 SUMMARY:KW Woodwind Quintet
-LOCATION:Location unconfirmed · Lieu non confirmé
-DESCRIPTION:KW Woodwind Quintet
+LOCATION:Mill Race Park Amphitheatre\, Cambridge
+DESCRIPTION:The City of Cambridge cancelled the August 2 KW Woodwind Quin
+ tet concert because of weather. The current notice does not retain an ex
+ act start clock.
 URL:https://seminarschools.com/polymythseminars/events/research-3f99a3157
  4ba/
-STATUS:TENTATIVE
+STATUS:CANCELLED
 END:VEVENT
 END:VCALENDAR

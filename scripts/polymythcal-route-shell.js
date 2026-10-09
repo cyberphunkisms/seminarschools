@@ -55,7 +55,8 @@ function write(rel,text,check){
 function esc(value){ return String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function contentLang(event){
   const value=String(event&&event.content_language||'').trim();
-  return /^[a-z]{2,3}(?:-[A-Za-z0-9]+)*$/.test(value)?` lang="${esc(value)}"`:'';
+  const lang=/^[a-z]{2,3}(?:-[A-Za-z0-9]+)*$/.test(value)?value:'und';
+  return ` lang="${esc(lang)}" data-source-language="${esc(lang)}"`;
 }
 function matchesRoute(event, slug){
   const cfg=ROUTES[slug]; if(!cfg) return true;
@@ -143,7 +144,7 @@ function buildRoutePage(slug, payload, locale='en'){
        Polymythcal shell's key/seed made every generated shortcut depend on the
        source page's camera until the later catch-all finalizer repaired it. */
     let preserved=attrs || '';
-    for(const attribute of ['data-route-type','data-geometry','data-indra-intensity','data-indra-fade-source','data-geometry-role','data-geometry-key','data-geometry-seed','data-geometry-register','data-geometry-profile','data-geometry-surface','data-front-facing']){
+    for(const attribute of ['data-route-type','data-geometry','data-indra-intensity','data-indra-fade-source','data-geometry-role','data-geometry-key','data-geometry-seed','data-geometry-register','data-geometry-profile','data-geometry-motion-preset','data-geometry-surface','data-front-facing']){
       preserved=preserved.replace(new RegExp(`\\s+${attribute}\\s*=\\s*(["'])[^"']*\\1`,'ig'),'');
     }
     const geometry=geometryBodyAttributes(GEOMETRY_CONTRACTS,`${slug}/${french?'fr/':''}index.html`,'calendar');
@@ -151,8 +152,7 @@ function buildRoutePage(slug, payload, locale='en'){
   });
   html=html.replace(
     /<header class="(?:pmd|pm)-header">[\s\S]*?<\/header>/i,
-    `<header class="pmd-header"><p class="pmd-kicker"><a href="/">${french?'Calendrier public de Seminar Schools':'Seminar Schools public calendar'}</a></p>
-<p class="pmd-commons"><a href="/polymythcommons/">Polymyth Commons</a><span aria-hidden="true"> / </span>${french?'calendrier ciblé':'focused calendar'}</p>
+    `<header class="pmd-header"><p class="pmd-commons"><a href="/">Seminar Schools</a><span aria-hidden="true"> / </span><a href="/polymythcommons/">Polymyth Commons</a></p>
 <h1>${esc(copy.heading)}</h1>
 <p id="polymythContext">${esc(copy.description)}</p></header>`,
   );
@@ -165,6 +165,7 @@ function buildRoutePage(slug, payload, locale='en'){
   html=html.replace(/<details class="pmd-focused"[\s\S]*?<\/details>/i,focusedRouteNavigation(slug,locale));
   html=html.replace(/<h2 id="(?:pmd|pm)ResultsTitle"(?:\s+tabindex="-1")?>[\s\S]*?<\/h2>/i,`<h2 id="pmdResultsTitle" tabindex="-1">${esc(copy.heading)}${french?' : fiches':' listings'}</h2>`);
   const events=(payload.events||[]).filter(e=>matchesRoute(e,slug)).filter(currentEvent).slice(0,40);
+  html=html.replace(/<section id="pmdFallback"[\s\S]*?<\/section>/i, `<section id="pmdFallback" class="pmd-fallback"><h2>${french?'Liens vers les fiches':'Listing links'}</h2><p>${french?'Sélection statique; les filtres se chargent avec JavaScript.':'Static selection; filters load with JavaScript.'}</p><ul>${events.slice(0,24).map(e=>`<li><a href="/polymythseminars/${french?'fr/':''}events/${encodeURIComponent(e.id)}/"${contentLang(e)}>${esc(e.title)}</a> · ${esc(String(e.date||'').slice(0,10))}</li>`).join('')}</ul></section>`);
   const noScript=`<noscript><section class="pmd-noscript"><h2>${esc(copy.heading)}</h2><p>${french?'Ces fiches courantes sont accessibles sans JavaScript.':'These current listings are available without JavaScript.'}</p><!-- SS_STATIC_EVENTS_START --><ul>${events.map(e=>`<li><a href="/polymythseminars/${french?'fr/':''}events/${encodeURIComponent(e.id)}/"${contentLang(e)}>${esc(e.title)}</a> <span>${esc(String(e.start||e.date||'').slice(0,10))}</span></li>`).join('')}</ul><!-- SS_STATIC_EVENTS_END --><p><a href="/polymythseminars/${french?'fr/':''}subscribe/">${french?'Fils RSS et calendriers':'RSS and calendar feeds'}</a> · <a href="/sitemap/">${french?'Plan du site':'Site map'}</a></p></section></noscript>`;
   html=html.replace(/<noscript>[\s\S]*?<\/noscript>/i,noScript);
   html=replaceJsonLdString(html,'@id',`${url}#webpage`);

@@ -45,7 +45,7 @@ The festival roster is intentionally wider than one bounded harvest. The runner 
 1. **Every-run regional anchors.** Toronto Fringe, SummerWorks, Brott Music Festival, Kingston WritersFest, Montréal International Jazz Festival, OSHEAGA, MUTEK Montréal, and Fantasia. These sources establish the Toronto, Southern Ontario, Kingston, and Montréal baseline and run every scheduled Tuesday harvest.
 2. **This run’s shard.** From the remaining `primary_sources` in `festivals-sources.json`, crawl only entries whose zero-based position satisfies `position % FESTIVAL_SHARD_COUNT == SHARD`. Record the others as `skipped-shard` in the source accounting.
 
-Across the default seven consecutive runs, or across one full `FESTIVAL_SHARD_COUNT` cycle if that value changes, the full festival roster is covered. Spend the bounded budget on the every-run anchors before the assigned shard. A source that cannot be reached receives an explicit `unreachable` status; it does not collapse the whole harvest. Before the budget is exhausted, write a valid JSON file with verified parent festival records and any verified children already collected; a smaller verified harvest is better than a failed run.
+Across the default seven consecutive runs, or across one full `FESTIVAL_SHARD_COUNT` cycle if that value changes, the full festival roster is covered. Spend the bounded budget on the every-run anchors before the assigned shard. A source that cannot be reached receives an explicit `unreachable` status; it does not collapse the whole harvest. Before the budget is exhausted, return valid JSON with verified parent festival records and any verified children already collected; a smaller verified harvest is better than a failed run.
 
 Every public programme must follow this hierarchy: the season itself is exactly `type: "festival"` with `is_parent_festival: true`; every named, dated production that qualifies receives its own record and its own official detail-page URL. Preserve a subtype such as `festival-of-form`, `cultural-reproduction`, or `site-specific-art` only in `secondary_types`.
 
@@ -85,7 +85,7 @@ If a candidate has no findable official site, drop it. Audit chain requires a pr
 
 ## Output format
 
-Emit a single JSON object to `/tmp/festivals-output.json` matching `/data/seminars-schema.json` (the same schema as seminars; festivals share the schema). Top-level shape:
+Return a single JSON object matching the host-supplied `data/seminars-schema.json` (the same schema as seminars; festivals share the schema). Top-level shape:
 
 ```json
 {
@@ -129,13 +129,13 @@ Do not read `/data/manual-events.json` and do not include its entries in your ou
 
 ## Tool budget
 
-You have `WebFetch`, `Read`, `Write`, `Bash`. The runner caps spend at the MAX_BUDGET_USD value announced by the workflow. Festivals normally run with a higher cap than seminars because two-pass crawl doubles fetch count. Use the budget. Crawl every discovery source. Verify every candidate. Do not stop early when budget remains.
+You have only `WebFetch`. The host supplies the roster and schema. The runner caps spend at the MAX_BUDGET_USD value announced by the workflow. Festivals normally run with a higher cap than seminars because two-pass crawl doubles fetch count. Use the budget. Crawl every discovery source. Verify every candidate. Do not stop early when budget remains.
 
 ## Output destination
 
-Write final JSON to `/tmp/festivals-output.json`. Print a one-line summary to stdout with total record count, parent vs child breakdown, and per-source counts. Then exit.
+Return the final JSON object as your response. The host parses and writes it, then validates source accounting before publication.
 
-Do not emit anything else to stdout. The output file is the deliverable.
+Do not include commentary or Markdown fences around the JSON.
 
 ## Theatre/performance talkbacks and creator-present child events
 

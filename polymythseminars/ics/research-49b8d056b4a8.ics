@@ -5,13 +5,14 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:70ae2b44274bab773cc9@seminarschools.com
-DTSTAMP:20260721T160000Z
-DTSTART;VALUE=DATE:20260725
+DTSTAMP:20261003T110658Z
+DTSTART:20260725T140000Z
+DTEND:20260725T190000Z
 SUMMARY:Thousand Islands Bark Bash
-LOCATION:Location unconfirmed · Lieu non confirmé
+LOCATION:Town Hall Park\, King Street East and Park Street\, Gananoque
 DESCRIPTION:Thousand Islands Bark Bash
 URL:https://seminarschools.com/polymythseminars/events/research-49b8d056b
  4a8/
-STATUS:TENTATIVE
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

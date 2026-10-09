@@ -71,7 +71,9 @@ for (const rel of discoveryPages) {
   for (const needle of [
     'class="skip-link" href="#pmdResultsTitle"',
     'for="pmdSearch"',
-    'aria-describedby="pmdSearchHelp pmdSearchStatus"',
+    'aria-describedby="pmdSearchStatus"',
+    '<details class="pmd-search-tips"><summary>',
+    'id="pmdSearchHelp"',
     'id="pmdResultsTitle" tabindex="-1"',
     'site-keyboard-enhancements.js',
   ]) {
@@ -112,4 +114,3 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(`KEYBOARD NAVIGATION CHECK PASSED — ${discoveryPages.length} Discovery routes preserve labelled search/results focus and the shared helper loads on ${loaded} HTML files; dense routes retain visible shortcut hints.`);
-

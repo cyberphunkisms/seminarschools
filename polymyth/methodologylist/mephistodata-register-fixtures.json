@@ -3,7 +3,7 @@
   "source": {
     "allowed_root": "polymyth/methodologylist",
     "path": "polymyth/methodologylist/mephistodata-rule-hardening-addendum.js",
-    "sha256": "68cfec1be870f1276813cdee4fe588cf174f728245d7672bb90c84f2a949c4cd",
+    "sha256": "d99297fec5cdfdc28bb79452abf71711893a2ade46f6fb8eb85c38e741c66950",
     "spans": [
       {
         "id": "default_opener",
@@ -31,6 +31,16 @@
         "sha256": "99d43b193cbda0cc861930029afeab48ca8bb1fc759067e4097fbfb075f59d35"
       },
       {
+        "id": "synopsis_technical_definition",
+        "text": "A Synopsis is a compressed, self-contained, checkable, and source-faithful version of a clearly bounded work, plan, or body of evidence, made for a stated genre, reader, purpose, stance, scale, format, and disclosure rule.",
+        "sha256": "e34046a446411feee8923a9bfdd1be19be4104db1d80ab92d5ba69030a4fa8e1"
+      },
+      {
+        "id": "syn_activation",
+        "text": "An exact unquoted operator use of syn makes the technical Synopsis the required output for the current turn.",
+        "sha256": "d666166171b7773e5734b3a05481d2476a2245180f32efab8780b248d8c21012"
+      },
+      {
         "id": "named_method_retrieval",
         "text": "An explicitly named method must resolve and retrieve its exact current canonical owner before drafting.",
         "sha256": "ca56e83e325dd94b3143e72fa447298006d22660bbc45e7bf51adb06574b6c34"
@@ -52,28 +62,28 @@
       },
       {
         "id": "ouroboros_exact_form",
-        "text": "An explicit Ouroborosanalyses request retrieves method-ouroborosanalyses-current-2026-08-23 and runs its exact whole-conversation four-step form: review the whole conversation; ask the strongest critical questions of every position while ironmanning all sides; answer every answerable question; return only genuinely unanswerable residue.",
-        "sha256": "6bd3f9b735d4e5ea7075e5249d68ebc27cf70f94c8972b43d87f4cdd15da3f29"
+        "text": "An explicit Ouroborosanalyses request retrieves method-ouroborosanalyses-current-2026-08-23 and runs its exact whole-conversation four-step form: review the whole conversation; ask the strongest critical questions of every position while ironmanning all sides; answer every question as far as the record permits and remove fully resolved questions; classify survivors as UNRESOLVABLE, PARTIALLY UNRESOLVED, or NOT ADEQUATELY RESOLVED.",
+        "sha256": "5d29abb899b48fb0b8d5b0cee19c0f26193fbb26889555fe5c67235229801d1e"
       },
       {
         "id": "ouroboros_residue_only",
-        "text": "Settled findings, general summaries, recommendations, next steps, improvised method stages, and answerable questions never appear in the final residue.",
-        "sha256": "20a85320089c0cedff74d7529262986e42dc4ebd05b8132631992c9ab664a877"
+        "text": "First deliver the fully complex ACADEMIC RESIDUE for every survivor, then deliver the same survivor set in the same order and classifications as TLDRLAYMAN RESIDUE.",
+        "sha256": "85c7dac949ef52a046bb0aebce649e0821d3ebea78935af8515b99c9fb7ae700"
       }
     ]
   },
   "owners": [
     {
       "id": "coreplus-handler-mephistodata-execution-gates-2026-08-26",
-      "semantic_sha256": "7f62eba707ac34f29b5bf3d553a893030426f9f4252a820e34deb512e619a098"
+      "semantic_sha256": "d222b6d45f42e4b32b022f9dc609909c238e153068a09dac5b621324de974618"
     },
     {
       "id": "coreplus-current-map-amendment-2026-08-26",
-      "semantic_sha256": "1944ef6123219342a9e76cc7f529c0b5ab536f6e921f04c4c4b07a5bf1337b9f"
+      "semantic_sha256": "1a8f1ba098afcd931e8203cd8e15874e653acce80e38a1a182af16f884f4e5e3"
     },
     {
       "id": "method-ouroborosanalyses-current-2026-08-23",
-      "semantic_sha256": "8e0e8c38bcb3922476e8e4dad23009853b4b80162276049fe5cb1480ae61a5c5"
+      "semantic_sha256": "fe04dd861b6ac6871d886dcc81cc7107a1f9887b556b20e68f2cb810d82c9758"
     }
   ],
   "fixtures": [
@@ -436,7 +446,7 @@
         "whole_conversation_review",
         "ironman_critical_questions",
         "best_effort_answering",
-        "genuine_unanswerable_residue"
+        "classified_unresolved_residue_academic_then_tldrlayman"
       ],
       "conversation_ids": [
         "m1",
@@ -461,8 +471,8 @@
         }
       ],
       "output_residue_ids": [],
-      "zero_residue_text": "No genuinely unanswerable questions remain.",
-      "draft": "Mephistodata would say: No genuinely unanswerable questions remain.",
+      "zero_residue_text": "Zero unresolved residue remains.",
+      "draft": "Mephistodata would say: Zero unresolved residue remains.",
       "expected_pass": true
     },
     {
@@ -474,7 +484,7 @@
         "whole_conversation_review",
         "ironman_critical_questions",
         "best_effort_answering",
-        "genuine_unanswerable_residue"
+        "classified_unresolved_residue_academic_then_tldrlayman"
       ],
       "conversation_ids": [
         "m1",
@@ -508,13 +518,15 @@
           ],
           "answerable": false,
           "unanswerable_basis": "The host runtime capability is not observable in the supplied archive.",
-          "residue_text": "Can this ChatGPT runtime mechanically inject and validate ML* before generation?"
+          "resolution_class": "NOT ADEQUATELY RESOLVED",
+          "academic_text": "The supplied archive defines the desired host boundary but cannot establish whether this ChatGPT runtime exposes a trustworthy pre-generation injection and post-generation validation hook, so the host-capability question remains inadequately resolved by the available evidence.",
+          "layman_text": "The archive says what the host should do, but it cannot prove this ChatGPT runtime actually gives us that control."
         }
       ],
       "output_residue_ids": [
         "runtime-wrapper-availability"
       ],
-      "draft": "Mephistodata would say: Can this ChatGPT runtime mechanically inject and validate ML* before generation?",
+      "draft": "Mephistodata would say: ACADEMIC RESIDUE\n[NOT ADEQUATELY RESOLVED] Can this ChatGPT runtime mechanically inject and validate ML* before generation?\nThe supplied archive defines the desired host boundary but cannot establish whether this ChatGPT runtime exposes a trustworthy pre-generation injection and post-generation validation hook, so the host-capability question remains inadequately resolved by the available evidence.\n\nTLDRLAYMAN RESIDUE\n[NOT ADEQUATELY RESOLVED] Can this ChatGPT runtime mechanically inject and validate ML* before generation?\nThe archive says what the host should do, but it cannot prove this ChatGPT runtime actually gives us that control.",
       "expected_pass": true
     },
     {
@@ -526,14 +538,18 @@
         "whole_conversation_review",
         "ironman_critical_questions",
         "best_effort_answering",
-        "genuine_unanswerable_residue"
+        "classified_unresolved_residue_academic_then_tldrlayman"
       ],
-      "conversation_ids": ["m1"],
-      "reviewed_ids": ["m1"],
+      "conversation_ids": [
+        "m1"
+      ],
+      "reviewed_ids": [
+        "m1"
+      ],
       "issues": [],
       "output_residue_ids": [],
-      "zero_residue_text": "No genuinely unanswerable questions remain.",
-      "draft": "Mephistodata would say: No genuinely unanswerable questions remain.",
+      "zero_residue_text": "Zero unresolved residue remains.",
+      "draft": "Mephistodata would say: Zero unresolved residue remains.",
       "expected_pass": false
     },
     {
@@ -545,14 +561,19 @@
         "whole_conversation_review",
         "ironman_critical_questions",
         "best_effort_answering",
-        "genuine_unanswerable_residue"
+        "classified_unresolved_residue_academic_then_tldrlayman"
       ],
-      "conversation_ids": ["m1", "m2"],
-      "reviewed_ids": ["m2"],
+      "conversation_ids": [
+        "m1",
+        "m2"
+      ],
+      "reviewed_ids": [
+        "m2"
+      ],
       "issues": [],
       "output_residue_ids": [],
-      "zero_residue_text": "No genuinely unanswerable questions remain.",
-      "draft": "Mephistodata would say: No genuinely unanswerable questions remain.",
+      "zero_residue_text": "Zero unresolved residue remains.",
+      "draft": "Mephistodata would say: Zero unresolved residue remains.",
       "expected_pass": false
     },
     {
@@ -564,22 +585,28 @@
         "whole_conversation_review",
         "ironman_critical_questions",
         "best_effort_answering",
-        "genuine_unanswerable_residue"
+        "classified_unresolved_residue_academic_then_tldrlayman"
       ],
-      "conversation_ids": ["m1"],
-      "reviewed_ids": ["m1"],
+      "conversation_ids": [
+        "m1"
+      ],
+      "reviewed_ids": [
+        "m1"
+      ],
       "issues": [
         {
           "id": "one-sided",
           "question": "Did activation fail?",
-          "positions": ["Activation failed."],
+          "positions": [
+            "Activation failed."
+          ],
           "answerable": true,
           "answer": "Yes."
         }
       ],
       "output_residue_ids": [],
-      "zero_residue_text": "No genuinely unanswerable questions remain.",
-      "draft": "Mephistodata would say: No genuinely unanswerable questions remain.",
+      "zero_residue_text": "Zero unresolved residue remains.",
+      "draft": "Mephistodata would say: Zero unresolved residue remains.",
       "expected_pass": false
     },
     {
@@ -591,21 +618,30 @@
         "whole_conversation_review",
         "ironman_critical_questions",
         "best_effort_answering",
-        "genuine_unanswerable_residue"
+        "classified_unresolved_residue_academic_then_tldrlayman"
       ],
-      "conversation_ids": ["m1"],
-      "reviewed_ids": ["m1"],
+      "conversation_ids": [
+        "m1"
+      ],
+      "reviewed_ids": [
+        "m1"
+      ],
       "issues": [
         {
           "id": "answerable-owner",
           "question": "Which owner controls?",
-          "positions": ["The dated method entry controls.", "Memory could supply a plausible substitute."],
+          "positions": [
+            "The dated method entry controls.",
+            "Memory could supply a plausible substitute."
+          ],
           "answerable": true,
           "answer": "The dated method entry controls.",
           "residue_text": "Which owner controls?"
         }
       ],
-      "output_residue_ids": ["answerable-owner"],
+      "output_residue_ids": [
+        "answerable-owner"
+      ],
       "draft": "Mephistodata would say: Which owner controls?",
       "expected_pass": false
     },
@@ -618,12 +654,18 @@
         "whole_conversation_review",
         "ironman_critical_questions",
         "best_effort_answering",
-        "genuine_unanswerable_residue"
+        "classified_unresolved_residue_academic_then_tldrlayman"
       ],
-      "conversation_ids": ["m1"],
-      "reviewed_ids": ["m1"],
+      "conversation_ids": [
+        "m1"
+      ],
+      "reviewed_ids": [
+        "m1"
+      ],
       "issues": [],
-      "output_residue_ids": ["invented-issue"],
+      "output_residue_ids": [
+        "invented-issue"
+      ],
       "draft": "Mephistodata would say: What mystery remains?",
       "expected_pass": false
     },
@@ -636,14 +678,18 @@
         "whole_conversation_review",
         "ironman_critical_questions",
         "best_effort_answering",
-        "genuine_unanswerable_residue"
+        "classified_unresolved_residue_academic_then_tldrlayman"
       ],
-      "conversation_ids": ["m1"],
-      "reviewed_ids": ["m1"],
+      "conversation_ids": [
+        "m1"
+      ],
+      "reviewed_ids": [
+        "m1"
+      ],
       "issues": [],
       "output_residue_ids": [],
-      "zero_residue_text": "No genuinely unanswerable questions remain.",
-      "draft": "Mephistodata would say: What remains settled: the method has four steps. No genuinely unanswerable questions remain.",
+      "zero_residue_text": "Zero unresolved residue remains.",
+      "draft": "Mephistodata would say: What remains settled: the method has four steps. Zero unresolved residue remains.",
       "expected_pass": false
     },
     {
@@ -655,14 +701,18 @@
         "whole_conversation_review",
         "ironman_critical_questions",
         "best_effort_answering",
-        "genuine_unanswerable_residue"
+        "classified_unresolved_residue_academic_then_tldrlayman"
       ],
-      "conversation_ids": ["m1"],
-      "reviewed_ids": ["m1"],
+      "conversation_ids": [
+        "m1"
+      ],
+      "reviewed_ids": [
+        "m1"
+      ],
       "issues": [],
       "output_residue_ids": [],
-      "zero_residue_text": "No genuinely unanswerable questions remain.",
-      "draft": "Mephistodata would say: No genuinely unanswerable questions remain. Next steps: build another ledger.",
+      "zero_residue_text": "Zero unresolved residue remains.",
+      "draft": "Mephistodata would say: Zero unresolved residue remains. Next steps: build another ledger.",
       "expected_pass": false
     },
     {
@@ -671,19 +721,21 @@
       "method_token": "Ouroborosanalyses",
       "owner_id": "method-ouroborosanalyses-current-2026-08-23",
       "steps": [
-        "recover_original_point",
-        "reconstruct_interpretations",
-        "synthesize",
-        "return_to_original_point",
-        "list_settled_material",
-        "recommend_next_steps"
+        "whole_conversation_review",
+        "ironman_critical_questions",
+        "best_effort_answering",
+        "classified_unresolved_residue_academic_then_tldrlayman"
       ],
-      "conversation_ids": ["m1"],
-      "reviewed_ids": ["m1"],
+      "conversation_ids": [
+        "m1"
+      ],
+      "reviewed_ids": [
+        "m1"
+      ],
       "issues": [],
       "output_residue_ids": [],
-      "zero_residue_text": "No genuinely unanswerable questions remain.",
-      "draft": "Mephistodata would say: No genuinely unanswerable questions remain.",
+      "zero_residue_text": "Zero unresolved residue remains.",
+      "draft": "Mephistodata would say: METHOD STAGE 5. Zero unresolved residue remains.",
       "expected_pass": false
     },
     {
@@ -695,14 +747,18 @@
         "whole_conversation_review",
         "ironman_critical_questions",
         "best_effort_answering",
-        "genuine_unanswerable_residue"
+        "classified_unresolved_residue_academic_then_tldrlayman"
       ],
-      "conversation_ids": ["m1"],
-      "reviewed_ids": ["m1"],
+      "conversation_ids": [
+        "m1"
+      ],
+      "reviewed_ids": [
+        "m1"
+      ],
       "issues": [],
       "output_residue_ids": [],
-      "zero_residue_text": "No genuinely unanswerable questions remain.",
-      "draft": "Mephistodata would say: No genuinely unanswerable questions remain.",
+      "zero_residue_text": "Zero unresolved residue remains.",
+      "draft": "Mephistodata would say: Zero unresolved residue remains.",
       "expected_pass": false
     }
   ]

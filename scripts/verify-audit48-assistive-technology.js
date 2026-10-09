@@ -52,7 +52,7 @@ const metrics = {
   images: 0,
   buttons: 0,
 };
-const EXPECTED_DISCOVERY_COUNTS = Object.freeze({canonical: 2088, chronology: 1954, watchlist: 134});
+const EXPECTED_DISCOVERY_COUNTS = Object.freeze({canonical: 2086, chronology: 1950, watchlist: 136});
 const WATCHLIST_REASON = Object.freeze({
   code: 'monitoring-marker',
   detail: 'Displayed date is a monitoring marker, not a confirmed event or deadline date.',

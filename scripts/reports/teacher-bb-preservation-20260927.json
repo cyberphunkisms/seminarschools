@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "original_resources_preserved": 645,
+  "total_resources": 646,
+  "bb_entries": 246,
+  "mc_entries": 235,
+  "cc_entries": 296,
+  "module_records_preserved": 185,
+  "saved_player_record_preserved": true,
+  "assertion_scope": "Every original record and field preserved except the explicitly identified routing/startup additions; reusable source records byte-equivalent after JSON parsing."
+}

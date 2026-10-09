@@ -29,9 +29,9 @@ for (const [relative, route, language, kind] of surfaces) {
   const html = read(relative);
   assert.match(html, /data-pm-app="discovery-v2"/, `${relative} mounts Discovery v2`);
   assert.doesNotMatch(html, /polymythcal-revamp\.(?:js|css)/, `${relative} has no legacy assets`);
-  assert.match(html, /\/css\/polymythcal-discovery\.css\?v=20260826-discovery-v2/);
-  const coreAt = html.indexOf('/js/polymythcal-discovery-core.js?v=20260826-discovery-v2');
-  const runtimeAt = html.indexOf('/js/polymythcal-discovery.js?v=20260826-discovery-v2');
+  assert.match(html, /\/css\/polymythcal-discovery\.css\?v=20261004-discovery-v9/);
+  const coreAt = html.indexOf('/js/polymythcal-discovery-core.js?v=20261004-discovery-v9');
+  const runtimeAt = html.indexOf('/js/polymythcal-discovery.js?v=20261004-discovery-v9');
   assert.ok(coreAt >= 0 && runtimeAt > coreAt, `${relative} loads core before runtime`);
   assert.match(html, new RegExp(`<html lang="${language}"`));
   assert.match(html, new RegExp(`<link rel="canonical" href="${SITE.replaceAll('.', '\\.')}${route.replaceAll('/', '\\/')}"`));

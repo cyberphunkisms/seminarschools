@@ -120,7 +120,7 @@ async function cleanUrlState(browser, base) {
       storage: keys.map(key => localStorage.getItem(key)),
     }), LEGACY_KEYS);
     check(initial.search === '', 'clean URL remains clean with legacy storage', initial.search);
-    check(initial.count === '645 resources across 25 collections', 'clean URL opens complete catalog', initial.count);
+    check(initial.count.startsWith('646 resources in '), 'clean URL opens complete catalog', initial.count);
     check(initial.persistence === 'url-only', 'finder declares URL-only persistence', initial.persistence);
     check(initial.storage.every(value => value === null), 'legacy local filter records are removed safely');
 
@@ -142,7 +142,7 @@ async function cleanUrlState(browser, base) {
 
     await page.locator('#clear').click();
     await page.waitForFunction(() => location.search === '');
-    check((await page.locator('#result-count').textContent()) === '645 resources across 25 collections', 'clear returns to complete clean catalog');
+    check((await page.locator('#result-count').textContent()).startsWith('646 resources in '), 'clear returns to complete clean catalog');
     check(errors.length === 0, 'clean/state scenario has no runtime errors', errors.join(' | '));
   } finally {
     await context.close();
@@ -207,7 +207,7 @@ async function reportedLayout(browser, base, width) {
     }, LEGACY_KEYS);
 
     check(result.search === REPORTED_QUERY, `w${width} explicit shared URL is preserved`, result.search);
-    check(result.count === '9 resources across 1 collection', `w${width} reported filter returns nine resources`, result.count);
+    check(result.count === '9 resources in 9 works', `w${width} reported filter returns nine resources`, result.count);
     check(result.cards.length === 9, `w${width} exposes exactly nine complete card shells`, String(result.cards.length));
     check(result.hiddenOrphans === 0, `w${width} has no orphan detail actions`, String(result.hiddenOrphans));
     check(!result.documentOverflow, `w${width} has no document overflow`);
@@ -216,7 +216,8 @@ async function reportedLayout(browser, base, width) {
       check(card.titleWidth >= Math.min(176, card.entryWidth * 0.72), `w${width} title track remains usable`, `${card.title}: ${Math.round(card.titleWidth)}px`);
       check(card.widthRatio >= 0.72, `w${width} title is not starved by metadata`, `${card.title}: ${card.widthRatio.toFixed(2)}`);
       check(card.lines.lines <= 10 && card.lines.charsPerLine >= 4, `w${width} title does not collapse to one glyph per line`, `${card.title}: ${card.lines.lines} lines / ${card.lines.charsPerLine.toFixed(1)} chars`);
-      check(card.shellHeight < 440, `w${width} card height remains bounded`, `${card.title}: ${Math.round(card.shellHeight)}px`);
+      // Includes the new explicit file/access facts and match reason.
+      check(card.shellHeight < 520, `w${width} card height remains bounded`, `${card.title}: ${Math.round(card.shellHeight)}px`);
       check(!card.overflow, `w${width} card has no horizontal overflow`, card.title);
     }
     check(errors.length === 0, `w${width} filtered layout has no runtime errors`, errors.join(' | '));

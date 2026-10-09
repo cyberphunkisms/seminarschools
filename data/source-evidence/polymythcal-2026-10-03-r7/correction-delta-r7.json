@@ -1,0 +1,2066 @@
+{
+  "revision": 7,
+  "reviewed_at": "2026-10-03T19:54:36.028771+00:00",
+  "scope": "Existing feature and record repairs only; no new records or identity migrations. Proust review dates are unchanged; its existing estimated times are now correctly qualified.",
+  "corrections": {
+    "3018f2437e1f": {
+      "date": "2026-10-03T19:00:00-04:00",
+      "end_date": "2026-10-04T07:00:00-04:00",
+      "date_precision": "exact",
+      "end_date_precision": "exact",
+      "time_precision": "exact",
+      "timezone": "America/Toronto",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "toronto",
+      "event_format": "in-person",
+      "confirmation_status": "confirmed",
+      "public_access_status": "free-public",
+      "cost_details": "Free",
+      "source_url": "https://www.toronto.ca/news/nuit-blanches-20th-anniversary-edition-features-new-commissions-and-remounts-of-iconic-past-works/",
+      "source_notes": "City of Toronto September 8 announcement confirms a free citywide event, October 3 at 7 p.m. through October 4 at 7 a.m. Reviewed October 3. Existing listing identity retained.",
+      "last_checked_at": "2026-10-03T19:54:36.028771+00:00",
+      "qualification_reasons": []
+    },
+    "nuit-blanche-toronto-2026-20th-anniversary-2026-10-03": {
+      "date": "2026-10-03T19:00:00-04:00",
+      "end_date": "2026-10-04T07:00:00-04:00",
+      "date_precision": "exact",
+      "end_date_precision": "exact",
+      "time_precision": "exact",
+      "timezone": "America/Toronto",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "toronto",
+      "event_format": "in-person",
+      "confirmation_status": "confirmed",
+      "public_access_status": "free-public",
+      "cost_details": "Free",
+      "source_url": "https://www.toronto.ca/news/nuit-blanches-20th-anniversary-edition-features-new-commissions-and-remounts-of-iconic-past-works/",
+      "source_notes": "City of Toronto September 8 announcement confirms a free citywide event, October 3 at 7 p.m. through October 4 at 7 a.m. Reviewed October 3. Existing listing identity retained.",
+      "last_checked_at": "2026-10-03T19:54:36.028771+00:00",
+      "qualification_reasons": []
+    },
+    "utoronto-uls-tba-2027-02-05": {
+      "title": "University Lecture Series — Kim Echlin: Tell Others: Storytelling for a World in Turmoil",
+      "speaker_or_director": "Kim Echlin",
+      "date": "2027-02-04T14:00:00-05:00",
+      "end_date": "2027-02-04T15:00:00-05:00",
+      "date_precision": "exact",
+      "time_precision": "exact",
+      "description": "Kim Echlin speaks on storytelling in the University Lecture Series. The current winter schedule lists Thursday, February 4, 2027, from 2 to 3 p.m., in person at the St. George Campus.",
+      "source_url": "https://learn.utoronto.ca/university-lecture-series",
+      "source_inconsistency": null,
+      "source_notes": "Current official winter schedule reviewed October 3; February 4 replaces the previously published February 5 listing. Stable record ID retained.",
+      "participant_identity_status": "confirmed",
+      "presence_claims": [
+        {
+          "person": "Kim Echlin",
+          "role": "lecturer",
+          "category": "scholar-expert",
+          "status": "confirmed",
+          "mode": "in-person",
+          "scope": "event",
+          "evidence": "Current official University Lecture Series winter 2027 schedule."
+        }
+      ],
+      "participant_presence": [
+        "Kim Echlin — lecturer (confirmed, in-person, event)"
+      ],
+      "last_checked_at": "2026-10-03T19:54:36.028771+00:00",
+      "qualification_reasons": []
+    },
+    "proust-readers-support-group-2026-27": {
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "time-unconfirmed"
+      ]
+    },
+    "proust-readers-support-group-2026-08-29": {
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "time-unconfirmed"
+      ]
+    },
+    "proust-readers-support-group-2026-09-12": {
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "time-unconfirmed"
+      ]
+    },
+    "proust-readers-support-group-2026-09-26": {
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "time-unconfirmed"
+      ]
+    },
+    "proust-readers-support-group-2026-10-10": {
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "time-unconfirmed"
+      ]
+    },
+    "proust-readers-support-group-2026-10-24": {
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "time-unconfirmed"
+      ]
+    },
+    "proust-readers-support-group-2026-11-07": {
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "time-unconfirmed"
+      ]
+    },
+    "proust-readers-support-group-2026-11-21": {
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "time-unconfirmed"
+      ]
+    },
+    "proust-readers-support-group-2026-12-05": {
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "time-unconfirmed"
+      ]
+    },
+    "proust-readers-support-group-2026-12-19": {
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "time-unconfirmed"
+      ]
+    },
+    "proust-readers-support-group-2027-01-02": {
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "time-unconfirmed"
+      ]
+    },
+    "proust-readers-support-group-2027-01-16": {
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "time-unconfirmed"
+      ]
+    },
+    "proust-readers-support-group-2027-01-30": {
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "time-unconfirmed"
+      ]
+    }
+  },
+  "pre_correction_records": {
+    "3018f2437e1f": {
+      "id": "3018f2437e1f",
+      "date": "2026-10-03T19:00-04:00",
+      "end_date": "2026-10-04T07:00-04:00",
+      "title": "Nuit Blanche Toronto 2026 (20th anniversary, 'Tomorrow's Memories')",
+      "venue": "Multiple sites citywide, including Canada Malting Silos waterfront and Humber Polytechnic Lakeshore",
+      "source_url": "https://www.toronto.ca/explore-enjoy/festivals-events/nuitblanche/",
+      "source_id": "manual-curated",
+      "type": "site-specific-art",
+      "speaker_or_director": null,
+      "attendance_confirmed": true,
+      "confidence": 100,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "20th-anniversary edition. Theme: Tomorrow's Memories. 7 PM Oct 3 through 7 AM Oct 4.",
+      "scraped_at": "2026-08-15T22:00:00.000Z",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "parent_id": null,
+      "is_parent_festival": false,
+      "secondary_types": [
+        "site-specific-art"
+      ],
+      "record_kind": "event",
+      "date_precision": "exact",
+      "time_precision": "not-applicable",
+      "source_quality": "official-or-institutional",
+      "first_seen_at": "2026-06-08T12:00:00Z",
+      "last_checked_at": "2026-08-15T22:00:00.000Z",
+      "lifecycle_status": "active",
+      "city": "Unknown",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [
+        "98410ad8a93b",
+        "c5886c8e117e20ec199f",
+        "9da10dbbb785",
+        "fec4b1adf01c0d1256cb"
+      ],
+      "identity_key": "0c33d8dacf1e2628c671",
+      "missing_count": 0,
+      "source_language": "en-CA",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_review": "required",
+      "source_language_method": "not-yet-determined",
+      "description": "20th-anniversary edition. Theme: Tomorrow's Memories. 7 PM Oct 3 through 7 AM Oct 4.",
+      "age_band": null,
+      "_src": "manual",
+      "platform_adapter": "manual",
+      "arts_event_forms": [
+        "public-art-site-specific"
+      ],
+      "arts_disciplines": [
+        "public-art"
+      ],
+      "arts_occurrence_role": "run",
+      "arts_access_status": "public-or-ticketed",
+      "research_set_cross_tags": [
+        "10-Arts-Performance-Exhibitions-and-Festivals"
+      ],
+      "_upsert_batches": [],
+      "set10_classified_at": "2026-08-14T22:00:00-04:00",
+      "set10_duplicate_of": "3018f2437e1f",
+      "previous_dates": [
+        "2026-10-03T19:00:00-04:00"
+      ],
+      "destination_url": "https://www.toronto.ca/explore-enjoy/festivals-events/nuitblanche/",
+      "destination_status": "official-event-page",
+      "destination_scope": "event",
+      "destination_kind": "detail",
+      "destination_evidence": "reviewed-specific-event-route"
+    },
+    "nuit-blanche-toronto-2026-20th-anniversary-2026-10-03": {
+      "date": "2026-10-03T00:00:00-04:00",
+      "title": "Nuit Blanche Toronto 2026 (20th anniversary)",
+      "speaker_or_director": "Multiple artists",
+      "venue": "Citywide Toronto",
+      "type": "site-specific-art",
+      "source_url": "https://nbto.com/",
+      "source_id": "may-27-research",
+      "description": "Tomorrow's Memories.",
+      "secondary_types": [],
+      "parent_id": null,
+      "is_parent_festival": false,
+      "end_date": "2026-10-04T07:00:00-04:00",
+      "age_band": null,
+      "id": "nuit-blanche-toronto-2026-20th-anniversary-2026-10-03",
+      "_src": "seminar-harvest",
+      "record_kind": "exhibition",
+      "date_precision": "date",
+      "time_precision": "not-applicable",
+      "source_quality": "official-or-institutional",
+      "first_seen_at": "2026-07-20T00:00:00-04:00",
+      "last_checked_at": "2026-07-20T00:00:00-04:00",
+      "lifecycle_status": "active",
+      "review_status": "needs-review",
+      "scraped_at": "2026-07-20T00:00:00-04:00",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "toronto",
+      "timezone": "America/Toronto",
+      "confirmation_status": "unconfirmed",
+      "qualification_reasons": [
+        "occurrence-unconfirmed"
+      ],
+      "legacy_ids": [],
+      "identity_key": "4c994796dfe4c6606fb2",
+      "missing_count": 0,
+      "source_language": "und",
+      "source_languages": [],
+      "source_language_review": "required",
+      "source_language_method": "not-yet-determined",
+      "destination_url": "",
+      "destination_status": "unavailable-specific-page",
+      "destination_scope": "unavailable",
+      "destination_kind": "unavailable",
+      "destination_evidence": "fail-closed"
+    },
+    "utoronto-uls-tba-2027-02-05": {
+      "id": "utoronto-uls-tba-2027-02-05",
+      "identity_key": "e98b7c01abf165ffc487",
+      "date": "2027-02-05T14:00-05:00",
+      "end_date": null,
+      "title": "University Lecture Series — speaker and topic TBA",
+      "venue": "University of Toronto St. George Campus",
+      "source_url": "https://learn.utoronto.ca/university-lecture-series",
+      "source_id": "u-t-lecture-series",
+      "type": "lecture",
+      "speaker_or_director": "University of Toronto School of Continuing Studies",
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "The date and hour are confirmed; speaker and topic remain unannounced.",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "secondary_types": [
+        "academic-events"
+      ],
+      "parent_id": "utoronto-university-lecture-series-2026-27",
+      "is_parent_festival": false,
+      "age_band": "public and academic audience",
+      "description": "The date and hour are confirmed; speaker and topic remain unannounced.",
+      "_src": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "exact",
+      "source_quality": "official-or-institutional",
+      "source_language": "en-CA",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Toronto",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "unknown",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [],
+      "missing_count": 0,
+      "subjects": [
+        "Public Intellectual & Academic",
+        "public-lecture"
+      ],
+      "registration_url": "https://learn.utoronto.ca/university-lecture-series",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "Official or organizer-controlled source reviewed for Set 9 on 2026-08-13.",
+      "topics": [
+        "academic-events",
+        "public-lecture"
+      ],
+      "organizer": "University of Toronto School of Continuing Studies",
+      "series_title": "University Lecture Series 2026–27",
+      "research_id": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13:utoronto-uls-tba-2027-02-05",
+      "research_source_ref": "9-Public-Intellectual-and-Academic-Events",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "tags": [
+        "Set 9",
+        "academic-events",
+        "public-intellectual",
+        "academic-event"
+      ],
+      "source_name": "University of Toronto School of Continuing Studies",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_method": "source-declared",
+      "entry_family": "public-intellectual-academic",
+      "presence_claims": [
+        {
+          "person": "Speaker TBA",
+          "role": "lecturer",
+          "category": "scholar-expert",
+          "status": "identity-unannounced",
+          "mode": "in-person",
+          "scope": "event",
+          "evidence": "Official schedule confirms the date but lists the speaker as TBA."
+        }
+      ],
+      "participant_presence": [
+        "Speaker TBA — lecturer (identity-unannounced, in-person, event)"
+      ],
+      "presence_categories": [
+        "scholar-expert"
+      ],
+      "presence_mode": "in-person",
+      "event_format": "in-person",
+      "source_inconsistency": "The official page labels the winter series as Thursdays, but February 5, 2027 falls on a Friday; the published date is preserved pending organizer correction.",
+      "education_levels": [
+        "open",
+        "undergraduate",
+        "graduate",
+        "professional"
+      ],
+      "participation_unit": "audience member or registered participant",
+      "access_route": "official event page",
+      "research_batch": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "_upsert_batches": [
+        "manual-polymythcal-public-intellectual-academic-set9-2026-08-13"
+      ],
+      "interaction_format": "public-lecture",
+      "research_set": "9-Public-Intellectual-and-Academic-Events",
+      "calendar_stage": "lecture occurrence",
+      "series_role": "child",
+      "previous_dates": [],
+      "public_intellectual_academic_formats": [
+        "public-lecture"
+      ],
+      "public_access_status": "public",
+      "audience_scope": "public and academic audience",
+      "participant_identity_status": "pending",
+      "registration_required": true,
+      "research_set_cross_tags": [],
+      "academic_event_forms": [
+        "public-lecture"
+      ],
+      "destination_url": "https://learn.utoronto.ca/university-lecture-series",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
+    },
+    "proust-readers-support-group-2026-27": {
+      "id": "proust-readers-support-group-2026-27",
+      "identity_key": "c5c3b513e008a44cbdf4",
+      "date": "2026-08-15T19:00-04:00",
+      "end_date": "2027-01-30T21:00-05:00",
+      "title": "Proust Readers Support Group — 2026–27 Reading Series",
+      "venue": "Online via The Toronto Philosophy Meetup",
+      "source_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "source_id": "toronto-philosophy-meetup",
+      "type": "reading-group",
+      "speaker_or_director": "The Toronto Philosophy Meetup",
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Online close-reading series following Marcel Proust's In Search of Lost Time through scheduled page ranges.",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "secondary_types": [
+        "academic-events"
+      ],
+      "parent_id": null,
+      "is_parent_festival": false,
+      "age_band": "public readers and philosophy/literature participants",
+      "description": "Online close-reading series following Marcel Proust's In Search of Lost Time through scheduled page ranges.",
+      "_src": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "estimated",
+      "source_quality": "official-or-institutional",
+      "source_language": "en-CA",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [],
+      "missing_count": 0,
+      "subjects": [
+        "Public Intellectual & Academic",
+        "reading-group-series",
+        "literature-and-philosophy-discussion"
+      ],
+      "registration_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "The source lists the complete reading schedule. The first occurrence displays 7:00 p.m.; later occurrence times are carried as estimated rather than silently treated as separately confirmed.",
+      "topics": [
+        "academic-events",
+        "reading-group-series",
+        "literature-and-philosophy-discussion"
+      ],
+      "organizer": "The Toronto Philosophy Meetup",
+      "series_title": "Proust Readers Support Group — 2026–27",
+      "research_id": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13:proust-readers-support-group-2026-27",
+      "research_source_ref": "9-Public-Intellectual-and-Academic-Events",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "tags": [
+        "Set 9",
+        "academic-events",
+        "public-intellectual",
+        "academic-event",
+        "reading-group",
+        "proust",
+        "online"
+      ],
+      "source_name": "The Toronto Philosophy Meetup",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_method": "source-declared",
+      "entry_family": "public-intellectual-academic",
+      "presence_mode": "online",
+      "event_format": "online",
+      "public_intellectual_academic_formats": [
+        "reading-group-series",
+        "literature-and-philosophy-discussion"
+      ],
+      "public_access_status": "public-rsvp",
+      "audience_scope": "public readers and philosophy/literature participants",
+      "participant_identity_status": "not-applicable",
+      "registration_required": true,
+      "education_levels": [
+        "open",
+        "undergraduate",
+        "graduate",
+        "professional"
+      ],
+      "participation_unit": "audience member or registered participant",
+      "access_route": "official event page",
+      "research_batch": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "_upsert_batches": [
+        "manual-polymythcal-public-intellectual-academic-set9-2026-08-13"
+      ],
+      "interaction_format": "reading-group-series",
+      "research_set": "9-Public-Intellectual-and-Academic-Events",
+      "research_set_cross_tags": [],
+      "calendar_stage": "series run",
+      "series_role": "parent",
+      "previous_dates": [],
+      "academic_event_forms": [
+        "reading-group-series",
+        "literature-and-philosophy-discussion"
+      ],
+      "academic_disciplines": [
+        "Literature",
+        "Philosophy"
+      ],
+      "destination_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
+    },
+    "proust-readers-support-group-2026-08-29": {
+      "id": "proust-readers-support-group-2026-08-29",
+      "identity_key": "3c5b7246cf1b13f793cd",
+      "date": "2026-08-29T19:00-04:00",
+      "end_date": "2026-08-29T21:00-04:00",
+      "title": "Proust Readers Support Group — The Guermantes Way, pp. 108–174",
+      "venue": "Online via The Toronto Philosophy Meetup",
+      "source_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "source_id": "toronto-philosophy-meetup",
+      "type": "reading-group",
+      "speaker_or_director": "The Toronto Philosophy Meetup",
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Online group reading and discussion: The Guermantes Way, pp. 108–174.",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "secondary_types": [
+        "academic-events"
+      ],
+      "parent_id": "proust-readers-support-group-2026-27",
+      "is_parent_festival": false,
+      "age_band": "public readers and philosophy/literature participants",
+      "description": "Online group reading and discussion: The Guermantes Way, pp. 108–174.",
+      "_src": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "estimated",
+      "source_quality": "official-or-institutional",
+      "source_language": "en-CA",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [],
+      "missing_count": 0,
+      "subjects": [
+        "Public Intellectual & Academic",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "registration_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "The source lists the reading date and page range. Only the first displayed occurrence separately confirms the 7:00 p.m. time; later times remain estimated.",
+      "topics": [
+        "academic-events",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "organizer": "The Toronto Philosophy Meetup",
+      "series_title": "Proust Readers Support Group — 2026–27",
+      "research_id": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13:proust-readers-support-group-2026-08-29",
+      "research_source_ref": "9-Public-Intellectual-and-Academic-Events",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "tags": [
+        "Set 9",
+        "academic-events",
+        "public-intellectual",
+        "academic-event",
+        "reading-group",
+        "proust",
+        "online"
+      ],
+      "source_name": "The Toronto Philosophy Meetup",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_method": "source-declared",
+      "entry_family": "public-intellectual-academic",
+      "presence_mode": "online",
+      "event_format": "online",
+      "public_intellectual_academic_formats": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "public_access_status": "public-rsvp",
+      "audience_scope": "public readers and philosophy/literature participants",
+      "participant_identity_status": "not-applicable",
+      "registration_required": true,
+      "education_levels": [
+        "open",
+        "undergraduate",
+        "graduate",
+        "professional"
+      ],
+      "participation_unit": "audience member or registered participant",
+      "access_route": "official event page",
+      "research_batch": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "_upsert_batches": [
+        "manual-polymythcal-public-intellectual-academic-set9-2026-08-13"
+      ],
+      "interaction_format": "reading-group",
+      "research_set": "9-Public-Intellectual-and-Academic-Events",
+      "research_set_cross_tags": [],
+      "calendar_stage": "reading-group occurrence",
+      "series_role": "child",
+      "previous_dates": [],
+      "academic_event_forms": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "academic_disciplines": [
+        "Literature",
+        "Philosophy"
+      ],
+      "assigned_reading": "The Guermantes Way, pp. 108–174",
+      "destination_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
+    },
+    "proust-readers-support-group-2026-09-12": {
+      "id": "proust-readers-support-group-2026-09-12",
+      "identity_key": "6a76e7ae666ef99d71e6",
+      "date": "2026-09-12T19:00-04:00",
+      "end_date": "2026-09-12T21:00-04:00",
+      "title": "Proust Readers Support Group — The Guermantes Way, pp. 177–234",
+      "venue": "Online via The Toronto Philosophy Meetup",
+      "source_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "source_id": "toronto-philosophy-meetup",
+      "type": "reading-group",
+      "speaker_or_director": "The Toronto Philosophy Meetup",
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Online group reading and discussion: The Guermantes Way, pp. 177–234.",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "secondary_types": [
+        "academic-events"
+      ],
+      "parent_id": "proust-readers-support-group-2026-27",
+      "is_parent_festival": false,
+      "age_band": "public readers and philosophy/literature participants",
+      "description": "Online group reading and discussion: The Guermantes Way, pp. 177–234.",
+      "_src": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "estimated",
+      "source_quality": "official-or-institutional",
+      "source_language": "en-CA",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [],
+      "missing_count": 0,
+      "subjects": [
+        "Public Intellectual & Academic",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "registration_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "The source lists the reading date and page range. Only the first displayed occurrence separately confirms the 7:00 p.m. time; later times remain estimated.",
+      "topics": [
+        "academic-events",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "organizer": "The Toronto Philosophy Meetup",
+      "series_title": "Proust Readers Support Group — 2026–27",
+      "research_id": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13:proust-readers-support-group-2026-09-12",
+      "research_source_ref": "9-Public-Intellectual-and-Academic-Events",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "tags": [
+        "Set 9",
+        "academic-events",
+        "public-intellectual",
+        "academic-event",
+        "reading-group",
+        "proust",
+        "online"
+      ],
+      "source_name": "The Toronto Philosophy Meetup",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_method": "source-declared",
+      "entry_family": "public-intellectual-academic",
+      "presence_mode": "online",
+      "event_format": "online",
+      "public_intellectual_academic_formats": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "public_access_status": "public-rsvp",
+      "audience_scope": "public readers and philosophy/literature participants",
+      "participant_identity_status": "not-applicable",
+      "registration_required": true,
+      "education_levels": [
+        "open",
+        "undergraduate",
+        "graduate",
+        "professional"
+      ],
+      "participation_unit": "audience member or registered participant",
+      "access_route": "official event page",
+      "research_batch": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "_upsert_batches": [
+        "manual-polymythcal-public-intellectual-academic-set9-2026-08-13"
+      ],
+      "interaction_format": "reading-group",
+      "research_set": "9-Public-Intellectual-and-Academic-Events",
+      "research_set_cross_tags": [],
+      "calendar_stage": "reading-group occurrence",
+      "series_role": "child",
+      "previous_dates": [],
+      "academic_event_forms": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "academic_disciplines": [
+        "Literature",
+        "Philosophy"
+      ],
+      "assigned_reading": "The Guermantes Way, pp. 177–234",
+      "destination_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
+    },
+    "proust-readers-support-group-2026-09-26": {
+      "id": "proust-readers-support-group-2026-09-26",
+      "identity_key": "13afb4fcd88d11f6be9c",
+      "date": "2026-09-26T19:00-04:00",
+      "end_date": "2026-09-26T21:00-04:00",
+      "title": "Proust Readers Support Group — The Guermantes Way, pp. 234–295",
+      "venue": "Online via The Toronto Philosophy Meetup",
+      "source_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "source_id": "toronto-philosophy-meetup",
+      "type": "reading-group",
+      "speaker_or_director": "The Toronto Philosophy Meetup",
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Online group reading and discussion: The Guermantes Way, pp. 234–295.",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "secondary_types": [
+        "academic-events"
+      ],
+      "parent_id": "proust-readers-support-group-2026-27",
+      "is_parent_festival": false,
+      "age_band": "public readers and philosophy/literature participants",
+      "description": "Online group reading and discussion: The Guermantes Way, pp. 234–295.",
+      "_src": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "estimated",
+      "source_quality": "official-or-institutional",
+      "source_language": "en-CA",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [],
+      "missing_count": 0,
+      "subjects": [
+        "Public Intellectual & Academic",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "registration_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "The source lists the reading date and page range. Only the first displayed occurrence separately confirms the 7:00 p.m. time; later times remain estimated.",
+      "topics": [
+        "academic-events",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "organizer": "The Toronto Philosophy Meetup",
+      "series_title": "Proust Readers Support Group — 2026–27",
+      "research_id": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13:proust-readers-support-group-2026-09-26",
+      "research_source_ref": "9-Public-Intellectual-and-Academic-Events",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "tags": [
+        "Set 9",
+        "academic-events",
+        "public-intellectual",
+        "academic-event",
+        "reading-group",
+        "proust",
+        "online"
+      ],
+      "source_name": "The Toronto Philosophy Meetup",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_method": "source-declared",
+      "entry_family": "public-intellectual-academic",
+      "presence_mode": "online",
+      "event_format": "online",
+      "public_intellectual_academic_formats": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "public_access_status": "public-rsvp",
+      "audience_scope": "public readers and philosophy/literature participants",
+      "participant_identity_status": "not-applicable",
+      "registration_required": true,
+      "education_levels": [
+        "open",
+        "undergraduate",
+        "graduate",
+        "professional"
+      ],
+      "participation_unit": "audience member or registered participant",
+      "access_route": "official event page",
+      "research_batch": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "_upsert_batches": [
+        "manual-polymythcal-public-intellectual-academic-set9-2026-08-13"
+      ],
+      "interaction_format": "reading-group",
+      "research_set": "9-Public-Intellectual-and-Academic-Events",
+      "research_set_cross_tags": [],
+      "calendar_stage": "reading-group occurrence",
+      "series_role": "child",
+      "previous_dates": [],
+      "academic_event_forms": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "academic_disciplines": [
+        "Literature",
+        "Philosophy"
+      ],
+      "assigned_reading": "The Guermantes Way, pp. 234–295",
+      "destination_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
+    },
+    "proust-readers-support-group-2026-10-10": {
+      "id": "proust-readers-support-group-2026-10-10",
+      "identity_key": "96a82595c96ea5662596",
+      "date": "2026-10-10T19:00-04:00",
+      "end_date": "2026-10-10T21:00-04:00",
+      "title": "Proust Readers Support Group — The Guermantes Way, pp. 295–353",
+      "venue": "Online via The Toronto Philosophy Meetup",
+      "source_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "source_id": "toronto-philosophy-meetup",
+      "type": "reading-group",
+      "speaker_or_director": "The Toronto Philosophy Meetup",
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Online group reading and discussion: The Guermantes Way, pp. 295–353.",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "secondary_types": [
+        "academic-events"
+      ],
+      "parent_id": "proust-readers-support-group-2026-27",
+      "is_parent_festival": false,
+      "age_band": "public readers and philosophy/literature participants",
+      "description": "Online group reading and discussion: The Guermantes Way, pp. 295–353.",
+      "_src": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "estimated",
+      "source_quality": "official-or-institutional",
+      "source_language": "en-CA",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [],
+      "missing_count": 0,
+      "subjects": [
+        "Public Intellectual & Academic",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "registration_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "The source lists the reading date and page range. Only the first displayed occurrence separately confirms the 7:00 p.m. time; later times remain estimated.",
+      "topics": [
+        "academic-events",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "organizer": "The Toronto Philosophy Meetup",
+      "series_title": "Proust Readers Support Group — 2026–27",
+      "research_id": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13:proust-readers-support-group-2026-10-10",
+      "research_source_ref": "9-Public-Intellectual-and-Academic-Events",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "tags": [
+        "Set 9",
+        "academic-events",
+        "public-intellectual",
+        "academic-event",
+        "reading-group",
+        "proust",
+        "online"
+      ],
+      "source_name": "The Toronto Philosophy Meetup",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_method": "source-declared",
+      "entry_family": "public-intellectual-academic",
+      "presence_mode": "online",
+      "event_format": "online",
+      "public_intellectual_academic_formats": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "public_access_status": "public-rsvp",
+      "audience_scope": "public readers and philosophy/literature participants",
+      "participant_identity_status": "not-applicable",
+      "registration_required": true,
+      "education_levels": [
+        "open",
+        "undergraduate",
+        "graduate",
+        "professional"
+      ],
+      "participation_unit": "audience member or registered participant",
+      "access_route": "official event page",
+      "research_batch": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "_upsert_batches": [
+        "manual-polymythcal-public-intellectual-academic-set9-2026-08-13"
+      ],
+      "interaction_format": "reading-group",
+      "research_set": "9-Public-Intellectual-and-Academic-Events",
+      "research_set_cross_tags": [],
+      "calendar_stage": "reading-group occurrence",
+      "series_role": "child",
+      "previous_dates": [],
+      "academic_event_forms": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "academic_disciplines": [
+        "Literature",
+        "Philosophy"
+      ],
+      "assigned_reading": "The Guermantes Way, pp. 295–353",
+      "destination_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
+    },
+    "proust-readers-support-group-2026-10-24": {
+      "id": "proust-readers-support-group-2026-10-24",
+      "identity_key": "fb23ec099d83d406c5c0",
+      "date": "2026-10-24T19:00-04:00",
+      "end_date": "2026-10-24T21:00-04:00",
+      "title": "Proust Readers Support Group — The Guermantes Way, pp. 357–397",
+      "venue": "Online via The Toronto Philosophy Meetup",
+      "source_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "source_id": "toronto-philosophy-meetup",
+      "type": "reading-group",
+      "speaker_or_director": "The Toronto Philosophy Meetup",
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Online group reading and discussion: The Guermantes Way, pp. 357–397.",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "secondary_types": [
+        "academic-events"
+      ],
+      "parent_id": "proust-readers-support-group-2026-27",
+      "is_parent_festival": false,
+      "age_band": "public readers and philosophy/literature participants",
+      "description": "Online group reading and discussion: The Guermantes Way, pp. 357–397.",
+      "_src": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "estimated",
+      "source_quality": "official-or-institutional",
+      "source_language": "en-CA",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [],
+      "missing_count": 0,
+      "subjects": [
+        "Public Intellectual & Academic",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "registration_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "The source lists the reading date and page range. Only the first displayed occurrence separately confirms the 7:00 p.m. time; later times remain estimated.",
+      "topics": [
+        "academic-events",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "organizer": "The Toronto Philosophy Meetup",
+      "series_title": "Proust Readers Support Group — 2026–27",
+      "research_id": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13:proust-readers-support-group-2026-10-24",
+      "research_source_ref": "9-Public-Intellectual-and-Academic-Events",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "tags": [
+        "Set 9",
+        "academic-events",
+        "public-intellectual",
+        "academic-event",
+        "reading-group",
+        "proust",
+        "online"
+      ],
+      "source_name": "The Toronto Philosophy Meetup",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_method": "source-declared",
+      "entry_family": "public-intellectual-academic",
+      "presence_mode": "online",
+      "event_format": "online",
+      "public_intellectual_academic_formats": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "public_access_status": "public-rsvp",
+      "audience_scope": "public readers and philosophy/literature participants",
+      "participant_identity_status": "not-applicable",
+      "registration_required": true,
+      "education_levels": [
+        "open",
+        "undergraduate",
+        "graduate",
+        "professional"
+      ],
+      "participation_unit": "audience member or registered participant",
+      "access_route": "official event page",
+      "research_batch": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "_upsert_batches": [
+        "manual-polymythcal-public-intellectual-academic-set9-2026-08-13"
+      ],
+      "interaction_format": "reading-group",
+      "research_set": "9-Public-Intellectual-and-Academic-Events",
+      "research_set_cross_tags": [],
+      "calendar_stage": "reading-group occurrence",
+      "series_role": "child",
+      "previous_dates": [],
+      "academic_event_forms": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "academic_disciplines": [
+        "Literature",
+        "Philosophy"
+      ],
+      "assigned_reading": "The Guermantes Way, pp. 357–397",
+      "destination_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
+    },
+    "proust-readers-support-group-2026-11-07": {
+      "id": "proust-readers-support-group-2026-11-07",
+      "identity_key": "14273e25aa0a42719a92",
+      "date": "2026-11-07T19:00-05:00",
+      "end_date": "2026-11-07T21:00-05:00",
+      "title": "Proust Readers Support Group — The Guermantes Way: Cities of the Plain, pp. 5–65",
+      "venue": "Online via The Toronto Philosophy Meetup",
+      "source_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "source_id": "toronto-philosophy-meetup",
+      "type": "reading-group",
+      "speaker_or_director": "The Toronto Philosophy Meetup",
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Online group reading and discussion: The Guermantes Way: Cities of the Plain, pp. 5–65.",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "secondary_types": [
+        "academic-events"
+      ],
+      "parent_id": "proust-readers-support-group-2026-27",
+      "is_parent_festival": false,
+      "age_band": "public readers and philosophy/literature participants",
+      "description": "Online group reading and discussion: The Guermantes Way: Cities of the Plain, pp. 5–65.",
+      "_src": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "estimated",
+      "source_quality": "official-or-institutional",
+      "source_language": "en-CA",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [],
+      "missing_count": 0,
+      "subjects": [
+        "Public Intellectual & Academic",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "registration_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "The source lists the reading date and page range. Only the first displayed occurrence separately confirms the 7:00 p.m. time; later times remain estimated.",
+      "topics": [
+        "academic-events",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "organizer": "The Toronto Philosophy Meetup",
+      "series_title": "Proust Readers Support Group — 2026–27",
+      "research_id": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13:proust-readers-support-group-2026-11-07",
+      "research_source_ref": "9-Public-Intellectual-and-Academic-Events",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "tags": [
+        "Set 9",
+        "academic-events",
+        "public-intellectual",
+        "academic-event",
+        "reading-group",
+        "proust",
+        "online"
+      ],
+      "source_name": "The Toronto Philosophy Meetup",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_method": "source-declared",
+      "entry_family": "public-intellectual-academic",
+      "presence_mode": "online",
+      "event_format": "online",
+      "public_intellectual_academic_formats": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "public_access_status": "public-rsvp",
+      "audience_scope": "public readers and philosophy/literature participants",
+      "participant_identity_status": "not-applicable",
+      "registration_required": true,
+      "education_levels": [
+        "open",
+        "undergraduate",
+        "graduate",
+        "professional"
+      ],
+      "participation_unit": "audience member or registered participant",
+      "access_route": "official event page",
+      "research_batch": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "_upsert_batches": [
+        "manual-polymythcal-public-intellectual-academic-set9-2026-08-13"
+      ],
+      "interaction_format": "reading-group",
+      "research_set": "9-Public-Intellectual-and-Academic-Events",
+      "research_set_cross_tags": [],
+      "calendar_stage": "reading-group occurrence",
+      "series_role": "child",
+      "previous_dates": [],
+      "academic_event_forms": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "academic_disciplines": [
+        "Literature",
+        "Philosophy"
+      ],
+      "assigned_reading": "The Guermantes Way: Cities of the Plain, pp. 5–65",
+      "destination_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
+    },
+    "proust-readers-support-group-2026-11-21": {
+      "id": "proust-readers-support-group-2026-11-21",
+      "identity_key": "59e0bff1c4f1ed27e9d0",
+      "date": "2026-11-21T19:00-05:00",
+      "end_date": "2026-11-21T21:00-05:00",
+      "title": "Proust Readers Support Group — Cities of the Plain, pp. 65–133",
+      "venue": "Online via The Toronto Philosophy Meetup",
+      "source_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "source_id": "toronto-philosophy-meetup",
+      "type": "reading-group",
+      "speaker_or_director": "The Toronto Philosophy Meetup",
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Online group reading and discussion: Cities of the Plain, pp. 65–133.",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "secondary_types": [
+        "academic-events"
+      ],
+      "parent_id": "proust-readers-support-group-2026-27",
+      "is_parent_festival": false,
+      "age_band": "public readers and philosophy/literature participants",
+      "description": "Online group reading and discussion: Cities of the Plain, pp. 65–133.",
+      "_src": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "estimated",
+      "source_quality": "official-or-institutional",
+      "source_language": "en-CA",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [],
+      "missing_count": 0,
+      "subjects": [
+        "Public Intellectual & Academic",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "registration_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "The source lists the reading date and page range. Only the first displayed occurrence separately confirms the 7:00 p.m. time; later times remain estimated.",
+      "topics": [
+        "academic-events",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "organizer": "The Toronto Philosophy Meetup",
+      "series_title": "Proust Readers Support Group — 2026–27",
+      "research_id": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13:proust-readers-support-group-2026-11-21",
+      "research_source_ref": "9-Public-Intellectual-and-Academic-Events",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "tags": [
+        "Set 9",
+        "academic-events",
+        "public-intellectual",
+        "academic-event",
+        "reading-group",
+        "proust",
+        "online"
+      ],
+      "source_name": "The Toronto Philosophy Meetup",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_method": "source-declared",
+      "entry_family": "public-intellectual-academic",
+      "presence_mode": "online",
+      "event_format": "online",
+      "public_intellectual_academic_formats": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "public_access_status": "public-rsvp",
+      "audience_scope": "public readers and philosophy/literature participants",
+      "participant_identity_status": "not-applicable",
+      "registration_required": true,
+      "education_levels": [
+        "open",
+        "undergraduate",
+        "graduate",
+        "professional"
+      ],
+      "participation_unit": "audience member or registered participant",
+      "access_route": "official event page",
+      "research_batch": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "_upsert_batches": [
+        "manual-polymythcal-public-intellectual-academic-set9-2026-08-13"
+      ],
+      "interaction_format": "reading-group",
+      "research_set": "9-Public-Intellectual-and-Academic-Events",
+      "research_set_cross_tags": [],
+      "calendar_stage": "reading-group occurrence",
+      "series_role": "child",
+      "previous_dates": [],
+      "academic_event_forms": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "academic_disciplines": [
+        "Literature",
+        "Philosophy"
+      ],
+      "assigned_reading": "Cities of the Plain, pp. 65–133",
+      "destination_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
+    },
+    "proust-readers-support-group-2026-12-05": {
+      "id": "proust-readers-support-group-2026-12-05",
+      "identity_key": "afd8a5f3a71157c5ee4b",
+      "date": "2026-12-05T19:00-05:00",
+      "end_date": "2026-12-05T21:00-05:00",
+      "title": "Proust Readers Support Group — Cities of the Plain, pp. 133–190",
+      "venue": "Online via The Toronto Philosophy Meetup",
+      "source_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "source_id": "toronto-philosophy-meetup",
+      "type": "reading-group",
+      "speaker_or_director": "The Toronto Philosophy Meetup",
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Online group reading and discussion: Cities of the Plain, pp. 133–190.",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "secondary_types": [
+        "academic-events"
+      ],
+      "parent_id": "proust-readers-support-group-2026-27",
+      "is_parent_festival": false,
+      "age_band": "public readers and philosophy/literature participants",
+      "description": "Online group reading and discussion: Cities of the Plain, pp. 133–190.",
+      "_src": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "estimated",
+      "source_quality": "official-or-institutional",
+      "source_language": "en-CA",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [],
+      "missing_count": 0,
+      "subjects": [
+        "Public Intellectual & Academic",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "registration_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "The source lists the reading date and page range. Only the first displayed occurrence separately confirms the 7:00 p.m. time; later times remain estimated.",
+      "topics": [
+        "academic-events",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "organizer": "The Toronto Philosophy Meetup",
+      "series_title": "Proust Readers Support Group — 2026–27",
+      "research_id": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13:proust-readers-support-group-2026-12-05",
+      "research_source_ref": "9-Public-Intellectual-and-Academic-Events",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "tags": [
+        "Set 9",
+        "academic-events",
+        "public-intellectual",
+        "academic-event",
+        "reading-group",
+        "proust",
+        "online"
+      ],
+      "source_name": "The Toronto Philosophy Meetup",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_method": "source-declared",
+      "entry_family": "public-intellectual-academic",
+      "presence_mode": "online",
+      "event_format": "online",
+      "public_intellectual_academic_formats": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "public_access_status": "public-rsvp",
+      "audience_scope": "public readers and philosophy/literature participants",
+      "participant_identity_status": "not-applicable",
+      "registration_required": true,
+      "education_levels": [
+        "open",
+        "undergraduate",
+        "graduate",
+        "professional"
+      ],
+      "participation_unit": "audience member or registered participant",
+      "access_route": "official event page",
+      "research_batch": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "_upsert_batches": [
+        "manual-polymythcal-public-intellectual-academic-set9-2026-08-13"
+      ],
+      "interaction_format": "reading-group",
+      "research_set": "9-Public-Intellectual-and-Academic-Events",
+      "research_set_cross_tags": [],
+      "calendar_stage": "reading-group occurrence",
+      "series_role": "child",
+      "previous_dates": [],
+      "academic_event_forms": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "academic_disciplines": [
+        "Literature",
+        "Philosophy"
+      ],
+      "assigned_reading": "Cities of the Plain, pp. 133–190",
+      "destination_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
+    },
+    "proust-readers-support-group-2026-12-19": {
+      "id": "proust-readers-support-group-2026-12-19",
+      "identity_key": "75e8f3c0f117f7a2b6c4",
+      "date": "2026-12-19T19:00-05:00",
+      "end_date": "2026-12-19T21:00-05:00",
+      "title": "Proust Readers Support Group — Cities of the Plain, pp. 193–260",
+      "venue": "Online via The Toronto Philosophy Meetup",
+      "source_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "source_id": "toronto-philosophy-meetup",
+      "type": "reading-group",
+      "speaker_or_director": "The Toronto Philosophy Meetup",
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Online group reading and discussion: Cities of the Plain, pp. 193–260.",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "secondary_types": [
+        "academic-events"
+      ],
+      "parent_id": "proust-readers-support-group-2026-27",
+      "is_parent_festival": false,
+      "age_band": "public readers and philosophy/literature participants",
+      "description": "Online group reading and discussion: Cities of the Plain, pp. 193–260.",
+      "_src": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "estimated",
+      "source_quality": "official-or-institutional",
+      "source_language": "en-CA",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [],
+      "missing_count": 0,
+      "subjects": [
+        "Public Intellectual & Academic",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "registration_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "The source lists the reading date and page range. Only the first displayed occurrence separately confirms the 7:00 p.m. time; later times remain estimated.",
+      "topics": [
+        "academic-events",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "organizer": "The Toronto Philosophy Meetup",
+      "series_title": "Proust Readers Support Group — 2026–27",
+      "research_id": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13:proust-readers-support-group-2026-12-19",
+      "research_source_ref": "9-Public-Intellectual-and-Academic-Events",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "tags": [
+        "Set 9",
+        "academic-events",
+        "public-intellectual",
+        "academic-event",
+        "reading-group",
+        "proust",
+        "online"
+      ],
+      "source_name": "The Toronto Philosophy Meetup",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_method": "source-declared",
+      "entry_family": "public-intellectual-academic",
+      "presence_mode": "online",
+      "event_format": "online",
+      "public_intellectual_academic_formats": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "public_access_status": "public-rsvp",
+      "audience_scope": "public readers and philosophy/literature participants",
+      "participant_identity_status": "not-applicable",
+      "registration_required": true,
+      "education_levels": [
+        "open",
+        "undergraduate",
+        "graduate",
+        "professional"
+      ],
+      "participation_unit": "audience member or registered participant",
+      "access_route": "official event page",
+      "research_batch": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "_upsert_batches": [
+        "manual-polymythcal-public-intellectual-academic-set9-2026-08-13"
+      ],
+      "interaction_format": "reading-group",
+      "research_set": "9-Public-Intellectual-and-Academic-Events",
+      "research_set_cross_tags": [],
+      "calendar_stage": "reading-group occurrence",
+      "series_role": "child",
+      "previous_dates": [],
+      "academic_event_forms": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "academic_disciplines": [
+        "Literature",
+        "Philosophy"
+      ],
+      "assigned_reading": "Cities of the Plain, pp. 193–260",
+      "destination_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
+    },
+    "proust-readers-support-group-2027-01-02": {
+      "id": "proust-readers-support-group-2027-01-02",
+      "identity_key": "cbcc15727184354cf742",
+      "date": "2027-01-02T19:00-05:00",
+      "end_date": "2027-01-02T21:00-05:00",
+      "title": "Proust Readers Support Group — Cities of the Plain, pp. 261–328",
+      "venue": "Online via The Toronto Philosophy Meetup",
+      "source_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "source_id": "toronto-philosophy-meetup",
+      "type": "reading-group",
+      "speaker_or_director": "The Toronto Philosophy Meetup",
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Online group reading and discussion: Cities of the Plain, pp. 261–328.",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "secondary_types": [
+        "academic-events"
+      ],
+      "parent_id": "proust-readers-support-group-2026-27",
+      "is_parent_festival": false,
+      "age_band": "public readers and philosophy/literature participants",
+      "description": "Online group reading and discussion: Cities of the Plain, pp. 261–328.",
+      "_src": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "estimated",
+      "source_quality": "official-or-institutional",
+      "source_language": "en-CA",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [],
+      "missing_count": 0,
+      "subjects": [
+        "Public Intellectual & Academic",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "registration_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "The source lists the reading date and page range. Only the first displayed occurrence separately confirms the 7:00 p.m. time; later times remain estimated.",
+      "topics": [
+        "academic-events",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "organizer": "The Toronto Philosophy Meetup",
+      "series_title": "Proust Readers Support Group — 2026–27",
+      "research_id": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13:proust-readers-support-group-2027-01-02",
+      "research_source_ref": "9-Public-Intellectual-and-Academic-Events",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "tags": [
+        "Set 9",
+        "academic-events",
+        "public-intellectual",
+        "academic-event",
+        "reading-group",
+        "proust",
+        "online"
+      ],
+      "source_name": "The Toronto Philosophy Meetup",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_method": "source-declared",
+      "entry_family": "public-intellectual-academic",
+      "presence_mode": "online",
+      "event_format": "online",
+      "public_intellectual_academic_formats": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "public_access_status": "public-rsvp",
+      "audience_scope": "public readers and philosophy/literature participants",
+      "participant_identity_status": "not-applicable",
+      "registration_required": true,
+      "education_levels": [
+        "open",
+        "undergraduate",
+        "graduate",
+        "professional"
+      ],
+      "participation_unit": "audience member or registered participant",
+      "access_route": "official event page",
+      "research_batch": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "_upsert_batches": [
+        "manual-polymythcal-public-intellectual-academic-set9-2026-08-13"
+      ],
+      "interaction_format": "reading-group",
+      "research_set": "9-Public-Intellectual-and-Academic-Events",
+      "research_set_cross_tags": [],
+      "calendar_stage": "reading-group occurrence",
+      "series_role": "child",
+      "previous_dates": [],
+      "academic_event_forms": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "academic_disciplines": [
+        "Literature",
+        "Philosophy"
+      ],
+      "assigned_reading": "Cities of the Plain, pp. 261–328",
+      "destination_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
+    },
+    "proust-readers-support-group-2027-01-16": {
+      "id": "proust-readers-support-group-2027-01-16",
+      "identity_key": "ab8f31c8007c3285dce6",
+      "date": "2027-01-16T19:00-05:00",
+      "end_date": "2027-01-16T21:00-05:00",
+      "title": "Proust Readers Support Group — Cities of the Plain, pp. 328–398",
+      "venue": "Online via The Toronto Philosophy Meetup",
+      "source_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "source_id": "toronto-philosophy-meetup",
+      "type": "reading-group",
+      "speaker_or_director": "The Toronto Philosophy Meetup",
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Online group reading and discussion: Cities of the Plain, pp. 328–398.",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "secondary_types": [
+        "academic-events"
+      ],
+      "parent_id": "proust-readers-support-group-2026-27",
+      "is_parent_festival": false,
+      "age_band": "public readers and philosophy/literature participants",
+      "description": "Online group reading and discussion: Cities of the Plain, pp. 328–398.",
+      "_src": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "estimated",
+      "source_quality": "official-or-institutional",
+      "source_language": "en-CA",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [],
+      "missing_count": 0,
+      "subjects": [
+        "Public Intellectual & Academic",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "registration_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "The source lists the reading date and page range. Only the first displayed occurrence separately confirms the 7:00 p.m. time; later times remain estimated.",
+      "topics": [
+        "academic-events",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "organizer": "The Toronto Philosophy Meetup",
+      "series_title": "Proust Readers Support Group — 2026–27",
+      "research_id": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13:proust-readers-support-group-2027-01-16",
+      "research_source_ref": "9-Public-Intellectual-and-Academic-Events",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "tags": [
+        "Set 9",
+        "academic-events",
+        "public-intellectual",
+        "academic-event",
+        "reading-group",
+        "proust",
+        "online"
+      ],
+      "source_name": "The Toronto Philosophy Meetup",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_method": "source-declared",
+      "entry_family": "public-intellectual-academic",
+      "presence_mode": "online",
+      "event_format": "online",
+      "public_intellectual_academic_formats": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "public_access_status": "public-rsvp",
+      "audience_scope": "public readers and philosophy/literature participants",
+      "participant_identity_status": "not-applicable",
+      "registration_required": true,
+      "education_levels": [
+        "open",
+        "undergraduate",
+        "graduate",
+        "professional"
+      ],
+      "participation_unit": "audience member or registered participant",
+      "access_route": "official event page",
+      "research_batch": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "_upsert_batches": [
+        "manual-polymythcal-public-intellectual-academic-set9-2026-08-13"
+      ],
+      "interaction_format": "reading-group",
+      "research_set": "9-Public-Intellectual-and-Academic-Events",
+      "research_set_cross_tags": [],
+      "calendar_stage": "reading-group occurrence",
+      "series_role": "child",
+      "previous_dates": [],
+      "academic_event_forms": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "academic_disciplines": [
+        "Literature",
+        "Philosophy"
+      ],
+      "assigned_reading": "Cities of the Plain, pp. 328–398",
+      "destination_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
+    },
+    "proust-readers-support-group-2027-01-30": {
+      "id": "proust-readers-support-group-2027-01-30",
+      "identity_key": "a35a76feecb7c7a8a983",
+      "date": "2027-01-30T19:00-05:00",
+      "end_date": "2027-01-30T21:00-05:00",
+      "title": "Proust Readers Support Group — Cities of the Plain, pp. 398–466",
+      "venue": "Online via The Toronto Philosophy Meetup",
+      "source_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "source_id": "toronto-philosophy-meetup",
+      "type": "reading-group",
+      "speaker_or_director": "The Toronto Philosophy Meetup",
+      "attendance_confirmed": true,
+      "confidence": 96,
+      "four_condition_test": {
+        "time_place": true,
+        "prepared_offering": true,
+        "substantive_engagement": true,
+        "intellectual_stake": true
+      },
+      "raw_excerpt": "Online group reading and discussion: Cities of the Plain, pp. 398–466.",
+      "scraped_at": "2026-08-13T20:08:00-04:00",
+      "review_status": "manual",
+      "marginalia_url": null,
+      "secondary_types": [
+        "academic-events"
+      ],
+      "parent_id": "proust-readers-support-group-2026-27",
+      "is_parent_festival": false,
+      "age_band": "public readers and philosophy/literature participants",
+      "description": "Online group reading and discussion: Cities of the Plain, pp. 398–466.",
+      "_src": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "record_kind": "event",
+      "date_precision": "date",
+      "time_precision": "estimated",
+      "source_quality": "official-or-institutional",
+      "source_language": "en-CA",
+      "platform_adapter": "manual",
+      "first_seen_at": "2026-08-13T20:08:00-04:00",
+      "last_checked_at": "2026-08-13T20:08:00-04:00",
+      "lifecycle_status": "active",
+      "city": "Online",
+      "province": "Ontario",
+      "country": "Canada",
+      "corridor_zone": "online-global",
+      "timezone": "America/Toronto",
+      "confirmation_status": "confirmed",
+      "qualification_reasons": [],
+      "legacy_ids": [],
+      "missing_count": 0,
+      "subjects": [
+        "Public Intellectual & Academic",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "registration_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "deadline_confidence": "official-current-cycle",
+      "source_notes": "The source lists the reading date and page range. Only the first displayed occurrence separately confirms the 7:00 p.m. time; later times remain estimated.",
+      "topics": [
+        "academic-events",
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "organizer": "The Toronto Philosophy Meetup",
+      "series_title": "Proust Readers Support Group — 2026–27",
+      "research_id": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13:proust-readers-support-group-2027-01-30",
+      "research_source_ref": "9-Public-Intellectual-and-Academic-Events",
+      "research_priority": "comprehensive-set-import",
+      "research_registry_status": "included",
+      "tags": [
+        "Set 9",
+        "academic-events",
+        "public-intellectual",
+        "academic-event",
+        "reading-group",
+        "proust",
+        "online"
+      ],
+      "source_name": "The Toronto Philosophy Meetup",
+      "source_languages": [
+        "en-CA"
+      ],
+      "source_language_method": "source-declared",
+      "entry_family": "public-intellectual-academic",
+      "presence_mode": "online",
+      "event_format": "online",
+      "public_intellectual_academic_formats": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "public_access_status": "public-rsvp",
+      "audience_scope": "public readers and philosophy/literature participants",
+      "participant_identity_status": "not-applicable",
+      "registration_required": true,
+      "education_levels": [
+        "open",
+        "undergraduate",
+        "graduate",
+        "professional"
+      ],
+      "participation_unit": "audience member or registered participant",
+      "access_route": "official event page",
+      "research_batch": "manual-polymythcal-public-intellectual-academic-set9-2026-08-13",
+      "_upsert_batches": [
+        "manual-polymythcal-public-intellectual-academic-set9-2026-08-13"
+      ],
+      "interaction_format": "reading-group",
+      "research_set": "9-Public-Intellectual-and-Academic-Events",
+      "research_set_cross_tags": [],
+      "calendar_stage": "reading-group occurrence",
+      "series_role": "child",
+      "previous_dates": [],
+      "academic_event_forms": [
+        "reading-group",
+        "literature-and-philosophy-discussion"
+      ],
+      "academic_disciplines": [
+        "Literature",
+        "Philosophy"
+      ],
+      "assigned_reading": "Cities of the Plain, pp. 398–466",
+      "destination_url": "https://www.meetup.com/the-toronto-philosophy-meetup/events/315943564/",
+      "destination_status": "official-series-page",
+      "destination_scope": "series",
+      "destination_kind": "detail",
+      "destination_evidence": "specific-source-series"
+    }
+  },
+  "sources": [
+    {
+      "url": "https://www.toronto.ca/news/nuit-blanches-20th-anniversary-edition-features-new-commissions-and-remounts-of-iconic-past-works/",
+      "retrieved_on": "2026-10-03",
+      "facts": "Free art event throughout Toronto from 2026-10-03 19:00 to 2026-10-04 07:00 local time."
+    },
+    {
+      "url": "https://learn.utoronto.ca/university-lecture-series",
+      "retrieved_on": "2026-10-03",
+      "facts": "Winter schedule lists Kim Echlin on Thursday February 4, 2027, 14:00–15:00 at St. George Campus."
+    }
+  ]
+}

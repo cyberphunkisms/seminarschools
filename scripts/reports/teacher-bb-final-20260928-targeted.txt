@@ -1,0 +1,9 @@
+PASS    287ms  node scripts/verify-page-size-budget.js
+PASS   1058ms  node scripts/verify-asset-weights.js
+PASS  14179ms  node scripts/verify-teacher-search-20260927.js
+PASS   8346ms  node scripts/verify-teacher-bb-audit-20260927.js
+PASS  11014ms  node scripts/verify-teacher-bb-fixes-20260927.js
+PASS     97ms  node scripts/verify-teacher-metadata-20260928.js
+PASS   5555ms  node scripts/verify-teacherresources-state-layout-browser.js
+PASS    191ms  node scripts/verify-teacherresources-finder.js
+METADATA BROWSER PASSED: phone filtering, result labels, source policy citation, evidence text and no overflow.

@@ -38,9 +38,13 @@ function loadOverrides(events) {
 }
 
 function writeIfChanged(file, text) {
-  const changed = !fs.existsSync(file) || fs.readFileSync(file, 'utf8') !== text;
+  const exists = fs.existsSync(file);
+  const priorMtime = exists ? fs.statSync(file).mtimeMs : 0;
+  const changed = !exists || fs.readFileSync(file, 'utf8') !== text;
   if (changed) fs.writeFileSync(file, text);
-  if (OUTPUT_MTIME) fs.utimesSync(file, OUTPUT_MTIME, OUTPUT_MTIME);
+  const preserved = Math.max(OUTPUT_MTIME ? OUTPUT_MTIME.getTime() : 0,
+    priorMtime > Date.now() + 60000 ? priorMtime + (changed ? 2000 : 0) : 0);
+  if (preserved) fs.utimesSync(file, preserved / 1000, preserved / 1000);
   return changed;
 }
 

@@ -22,7 +22,7 @@ const releaseTimestamp = releaseManifest.generated_at || '1970-01-01T00:00:00Z';
 const SITE = 'https://seminarschools.com';
 const checks = [];
 const add = (name, passed, details = {}) => checks.push({name, passed: Boolean(passed), details});
-const EXPECTED_DISCOVERY_COUNTS = Object.freeze({canonical: 2088, chronology: 1954, watchlist: 134});
+const EXPECTED_DISCOVERY_COUNTS = require('./lib/polymythcal-inventory-contract').currentInventoryCounts(ROOT);
 const WATCHLIST_REASON = Object.freeze({
   code: 'monitoring-marker',
   detail: 'Displayed date is a monitoring marker, not a confirmed event or deadline date.',

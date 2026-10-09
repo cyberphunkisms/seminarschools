@@ -25,10 +25,11 @@ assert(meta,'Set 10 metadata missing');
 // performances and 12 Set 14 arts/media occurrences to the preserved Set 10
 // reconstruction.  These are cross-classifications of existing identities, not
 // new Set 10 identities.
-const expected={records_enriched:486,baseline_set9_arts_records:401,post_set9_arts_records_cross_classified:85,set11_arts_records_cross_classified:62,set11_existing_records_cross_tagged:3,set12_arts_records_cross_classified:1,upsert_eligible_records:482,canonical_duplicate_records_not_upserted:4,stable_public_ids_backfilled:67,unresolved_legacy_records_without_ids:0};
+// Two reviewed exhibition duplicates were merged on 2026-09-07; original rows remain in the correction ledger.
+const expected={records_enriched:484,baseline_set9_arts_records:401,post_set9_arts_records_cross_classified:83,set11_arts_records_cross_classified:62,set11_existing_records_cross_tagged:3,set12_arts_records_cross_classified:1,upsert_eligible_records:480,canonical_duplicate_records_not_upserted:4,stable_public_ids_backfilled:67,unresolved_legacy_records_without_ids:0};
 for(const [k,v] of Object.entries(expected)) assert(meta[k]===v,`Set 10 metadata ${k} expected ${v}; found ${meta[k]}`);
 assert(meta.reconstruction_note&&/verified Set 9 archive/i.test(meta.reconstruction_note),'Set 10 reconstruction provenance missing');
-assert(ledger.research_set===SET&&ledger.record_count===486,'Set 10 ledger count/scope drifted');
+assert(ledger.research_set===SET&&ledger.record_count===484,'Set 10 ledger count/scope drifted');
 assert(ledger.set11_arts_records_cross_classified===62&&ledger.set11_existing_records_cross_tagged===3&&ledger.set12_arts_records_cross_classified===1,'Set 10 later-set cross-classification accounting drifted');
 assert(ledger.stable_public_ids_backfilled===67,'Set 10 ledger stable-ID count drifted');
 assert((ledger.unresolved_no_id||[]).length===0,'Set 10 unresolved legacy count drifted');
@@ -36,7 +37,7 @@ assert((ledger.canonical_duplicates_not_upserted||[]).length===4,'Set 10 duplica
 assert((ledger.notes||[]).some(n=>/not a claim that a missing Set 10 archive was recovered/i.test(n)),'Set 10 ledger must state reconstruction limitation');
 
 const batch=manual.filter(e=>(e._upsert_batches||[]).includes(SRC));
-assert(batch.length===482,`Expected 482 Set 10 upsert-eligible records; found ${batch.length}`);
+assert(batch.length===480,`Expected 480 Set 10 upsert-eligible records; found ${batch.length}`);
 const ids=new Set();
 for(const e of batch){
  assert(e.id&&!ids.has(e.id),`Missing/duplicate Set 10 ID ${e.id}`); ids.add(e.id);
@@ -52,7 +53,7 @@ const requiredForms=['theatre-performance','dance-performance','music-performanc
 for(const form of requiredForms) assert(batch.some(e=>e.arts_event_forms.includes(form)),`Set 10 form absent: ${form}`);
 for(const role of ['parent','child','run','single-occurrence']) assert(batch.some(e=>e.arts_occurrence_role===role),`Set 10 occurrence role absent: ${role}`);
 const roleCounts=meta.occurrence_roles||{};
-assert(roleCounts.parent===29&&roleCounts.child===104&&roleCounts.run===167&&roleCounts['single-occurrence']===186,'Set 10 occurrence-role accounting drifted');
+assert(roleCounts.parent===29&&roleCounts.child===104&&roleCounts.run===165&&roleCounts['single-occurrence']===186,'Set 10 occurrence-role accounting drifted');
 
 // Duplicate holdouts must remain represented by the canonical public identities, never as duplicate upserts.
 for(const row of ledger.canonical_duplicates_not_upserted){

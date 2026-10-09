@@ -9,6 +9,7 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from build_lock import ReleaseBuildLock, inherited_release_build_root
 from typing import Callable
 
 from polymythcal_source_health import source_health_gate_error
@@ -130,4 +131,5 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    with ReleaseBuildLock(inherited_release_build_root(ROOT)):
+        raise SystemExit(main())

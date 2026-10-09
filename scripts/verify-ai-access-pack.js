@@ -36,7 +36,10 @@ const registerLockNeedles = [
   'Bloom never persists, self-initiates, or imposes an automatic question-first form.',
   'The opener is excluded from character scoring and never substitutes for the body.',
   'source-grounded Mephistophelean diagnostic intelligence with Data-level evidence',
-  'Prefix-only, Data-only, costume-only, sycophantic, unsupported-source, and invented-opposition drafts fail closed.'
+  'Prefix-only, Data-only, costume-only, sycophantic, unsupported-source, and invented-opposition drafts fail closed.',
+  'Synopsis is the ML* technical contract for a compressed, self-contained, checkable, source-faithful version',
+  'Every ML*-active task attempts `syn` internally as a nonmandatory compression-and-completeness check',
+  'An exact unquoted operator use of `syn` makes a technical Synopsis of the current target required'
 ];
 const writingLockNeedles = [
   `Current writing owner is ${currentWritingOwner}.`,

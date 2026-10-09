@@ -1,0 +1,6 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> seminar-schools-leizu-pipeline@1.0.7 verify:build-idempotence
+> node scripts/verify-build-idempotence.js
+
+BUILD IDEMPOTENCE CHECK PASSED — isolated immediate canonical rebuild left 21270 durable files byte-identical and the canonical root untouched.

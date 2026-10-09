@@ -1,0 +1,221 @@
+{
+  "schema": "ml-concept-application-validation.v1.2026-10-05",
+  "validated_at": "2026-10-05T01:35:50.517540+00:00",
+  "target": "polymythcal-website-v9.zip",
+  "predecessor_archive_sha256": "4df57cd3e132f97a49694e03ce302663dbaedb727ab838d098d17ac6afcb18e1",
+  "ml_scope_status": "pass",
+  "canonical_owners": 1233,
+  "extended_existing_owners": 9,
+  "controlled_concept_tests": {
+    "cases": 92,
+    "permits": 15,
+    "rejects": 77,
+    "passed": 92,
+    "coverage": "Curated bounded host judgments exercise wiring and controlled examples. These cases are not a general classifier, adopted new definitions, a finished Trinity Finder, human Coherence certification or evidence of external chat-host invocation. Evidence explicitly labelled synthetic belongs only to its fixture."
+  },
+  "existing_runtime_tests": {
+    "cases": 151,
+    "permits": 43,
+    "rejections": 108
+  },
+  "existing_ouroboros_fidelity_tests": {
+    "cases": 30,
+    "permits": 10,
+    "rejections": 20
+  },
+  "checks": [
+    {
+      "check": "check-manifest",
+      "result": "pass",
+      "output_sha256": "38984bc3d82046145f170904acc8f4d789594cb7e7bcaaf6c9d46f471a43fd33",
+      "summary": "PASS  manifest exists"
+    },
+    {
+      "check": "check-core",
+      "result": "pass",
+      "output_sha256": "72237cd7ed6148508fe1bc66fe241ea46cb5b7f7bb94a932cb7154c51497539d",
+      "summary": "CORE / CORE+ / PERSONAL RULES ALIGNMENT PASSED — portable CORE 5000/5000 UTF-16 units; exact mirrors, lossless 14,331-, 4,886-, 4,485-, 4,738-, and 4,996-unit histories, active Diary dispatch, active CORE+ expansion, record sets, and canonical HF row verified"
+    },
+    {
+      "check": "check-dialectic",
+      "result": "pass",
+      "output_sha256": "1f2c66a9d1cc633d8a13766f09264995c9cfce9615f5f6bc2e74aff45ac15b1b",
+      "summary": "ML* DIALECTICAL HARDENING VERIFIED — bootstrap, canonical entries, mirrors, public copies, and activation surfaces agree"
+    },
+    {
+      "check": "check-execution",
+      "result": "pass",
+      "output_sha256": "3a5b11caad008338ce071b997a90c908eb9164b73d477e67478ee75729a4069c",
+      "summary": "ML execution gate verification passed: 1233 entries, 52 positive execution fixtures, 87 negative execution fixtures, 7 positive register fixtures, 26 negative register fixtures"
+    },
+    {
+      "check": "check-runtime",
+      "result": "pass",
+      "output_sha256": "62a0544b60eb2fef665f98e85f9df29477ba2e941f6b7255db5b6231900650f9",
+      "summary": "MEPHISTODATA RUNTIME GATE PASS — 151/151 (43 permits / 108 rejections)"
+    },
+    {
+      "check": "check-concepts",
+      "result": "pass",
+      "output_sha256": "4412d124480ac6324d910f98d60dde28e06135f0ec5d59cbb48042fbb043fa3e",
+      "summary": "92/92 controlled examples; 15 permits / 77 rejections"
+    },
+    {
+      "check": "check-definition-routes",
+      "result": "pass",
+      "output_sha256": "30f8dda225b2481cf0ffcaa7a2f2b9f6c2c8fa35adec8d7067a96870cb4bcc6e",
+      "summary": "ML RHETORIC TAXONOMY VERIFIED — 1,165 canonical SEED + 6 inherited Snakelogic examples + 24 mythology + 12 rhetoric + 1 Polymyth Coherence route + 18 Mephistodata hardening + 7 assistant-twisting / Always Already entries = 1,233 unique entries; restored register controls, document-continuity control, organized anti-twisting examples, reciprocal evidence links, mirrors, static pages, source ledgers, collision corrections, and public parity passed."
+    },
+    {
+      "check": "check-public",
+      "result": "pass",
+      "output_sha256": "aac3e57c2ccb47f057928dc7bf17da31599d7aa97621b77a7b10a39a723a1745",
+      "summary": "PUBLIC DEPLOY PARITY PASSED — 9800 allowlisted files are complete, byte-identical, and free of stale public-only files."
+    },
+    {
+      "check": "check-static",
+      "result": "pass",
+      "output_sha256": "e55166ab72c38b34c8d25229c77893f65d58c8b6f018cd992d828e24c70f86fa",
+      "summary": "METHODOLOGY SEARCH SURFACE CHECK — 1233 entries, 16 sections."
+    },
+    {
+      "check": "check-personal-rules",
+      "result": "pass",
+      "output_sha256": "419d975df04ac96ac77989c97f7aba88e6bec8867cb66cb29ef1ba611cc3312c",
+      "summary": "Portable CORE checked: core-personal-rules-current-2026-08-12 (dc7d8b75dd5af43b3272da3d587c33af20ba13bcf402c674146f688814dbdd9e; 5000/5000 UTF-16 units)"
+    },
+    {
+      "check": "check-page-size",
+      "result": "pass",
+      "output_sha256": "a55ca15bb77db6dc4cf20f816c6c79b0654e5a893ec16587df868737876a5aa7",
+      "summary": "PAGE SIZE BUDGET PASSED — 22 current heavy pages budgeted; six Discovery v2 shells stay below 32000 bytes; no stale exception and no unbudgeted HTML over 350000 bytes."
+    },
+    {
+      "check": "check-verify-ml-stop-psychologism",
+      "result": "pass",
+      "output_sha256": "e944f5db8b6904bb5a4843ebed3728b18ab533d173dd1d0983b261bc87b28c0b",
+      "summary": "ML stop psychologism guard passed."
+    },
+    {
+      "check": "check-verify-ml-ai-prose-tells",
+      "result": "pass",
+      "output_sha256": "7ddaf1fbe14d53b67878a3670c5f095685f0f6dd0c06519a672bd5431e87fbc9",
+      "summary": "ML AI prose tells guard passed."
+    },
+    {
+      "check": "check-verify-ml-antibacktracking",
+      "result": "pass",
+      "output_sha256": "408a8cf140df64bf3debb67b662b59c58bcfcbeb95e8d982ca076bc039ff41ab",
+      "summary": "ML anti-backtracking guard passed."
+    },
+    {
+      "check": "check-verify-ml-shorthand-resolution",
+      "result": "pass",
+      "output_sha256": "5dc3029607e460c2a0c1f52f37edbb33a7efb761060933a8d627624d38ffca04",
+      "summary": "General project-shorthand doctrine and mirror guard passed."
+    },
+    {
+      "check": "check-verify-ml-gorgonwars-premise-split",
+      "result": "pass",
+      "output_sha256": "8ea54d088f3079062e6c3cb8e1f79f0caaea23cbbd20a3a9d4aa362196060df1",
+      "summary": "ML* Gorgonwars premise-split guard passed for 1233 live entries with corrected MeToo 0/1/128 split."
+    },
+    {
+      "check": "check-verify-ml-power-scope",
+      "result": "pass",
+      "output_sha256": "6ef233c4f407c896b2937d5ed281197f2ecc084484710e7a590e70673dcfd887",
+      "summary": "ML* POWER SCOPE VERIFIED — 111 active source/mirror files checked"
+    },
+    {
+      "check": "check-verify-ml-document-continuity",
+      "result": "pass",
+      "output_sha256": "2d0f55c004cf705334c2f24f81241ef5c0b4c714f7f76659816246213a8b93d6",
+      "summary": "ML* DOCUMENT CONTINUITY VERIFIED — 17 fixtures, 4 permits, 13 required rejections, source and current owners bound."
+    },
+    {
+      "check": "check-verify-ml-active-form-conflicts",
+      "result": "pass",
+      "output_sha256": "f053b77e190f21d6e99fc5be891a3366ef6197b70f945a1af9c94a4267f5b29c",
+      "summary": "ML ACTIVE FORM CONFLICT PASS — 41/41"
+    },
+    {
+      "check": "check-verify-ml-project-adjudication-v2",
+      "result": "pass",
+      "output_sha256": "7e5667295494875a8bb325f5dfd8083684bcc9d1cf5bba37b97342c09bebdb9b",
+      "summary": "ML project adjudication v2 verification passed: 1233 entries, 71 positive fixtures, 144 negative fixtures (215 total; 151 adjudication v2)"
+    },
+    {
+      "check": "check-verify-ml-writing-rules",
+      "result": "pass",
+      "output_sha256": "817b3cb43934b5075c6feb0a6e0b698551a6190aa0b2d168bd5926e67844a056",
+      "summary": "ML writing rule verification passed with 66 fixtures, 27 passing drafts, 39 rejected drafts, 9 rejected mutations, and 17 covered rule families"
+    },
+    {
+      "check": "check-verify-mephistodata-articles",
+      "result": "pass",
+      "output_sha256": "4d7005613b5a040e98547f379b799dd519bda0388f16973f67f9499cc1bc688f",
+      "summary": "Mephistodata article verification passed: Be Kind While We Exploit You (August 28, 2026) and The Struggle to Control AI (August 26, 2026)"
+    },
+    {
+      "check": "check-verify-ml-geometry-hardening",
+      "result": "pass",
+      "output_sha256": "237e24188b531fa53d85f4d0ca2bb3e483123904e9deed6edc519f321a1f974f",
+      "summary": "ML* NON-STAR SCROLL GEOMETRY VERIFIED - CL-49/CL-63, the exact star/control exclusions, canonical spectrum, bounded fading, fixed-point rebuilding, final build repair, and blocking geometry gates agree across 45 route-family flavors."
+    },
+    {
+      "check": "check-verify-assistant-twisting-alwaysalready",
+      "result": "pass",
+      "output_sha256": "2b729d0d03857708776879a161d8611cddddfc2e8f6c145bb3164a556e5e3e17",
+      "summary": "ASSISTANT-TWISTING / ALWAYS ALREADY UPDATE PASSED — 7 new ML* records, preserved anchor identities, reciprocal archive links, generated mirrors, and evidence-status boundaries verified."
+    },
+    {
+      "check": "dataset-final",
+      "result": "pass",
+      "output_sha256": "7f6b67dd9faacab886897d77758c87890ab89374e30a0f165904e3d5d701242f",
+      "summary": "PASS: found hf_export/README.md"
+    },
+    {
+      "check": "search-final",
+      "result": "pass",
+      "output_sha256": "87477be2efa9c1d42222b198020e935b69db0cebc3d757315897d563f54eaa17",
+      "summary": "PASS: index doc count 2015"
+    },
+    {
+      "check": "access-final",
+      "result": "pass",
+      "output_sha256": "8e46e5ce87f45ecd3bb283ef941133e1187ea070a86bbf55de495e45e8dc31c9",
+      "summary": "AI Access Pack verification passed"
+    },
+    {
+      "check": "preservation-final",
+      "result": "pass",
+      "output_sha256": "7196e15b28b93a373c8b50a755c4390f4464d91116eb6dbafc344569deb5b293",
+      "summary": "ML CONCEPT PRESERVATION PASS — 1233 owners; nine additive body extensions; 21222 predecessor payloads unchanged / 64 explicitly bound changes; 5 hostile mutations rejected. No semantic-adoption or host-invocation certification."
+    }
+  ],
+  "full_website_release_status": "blocked",
+  "remaining_release_blockers": [
+    {
+      "check": "verify-asset-weights.js",
+      "status": "pre-existing-v9-failure",
+      "detail": "Calendar JS/CSS measured baselines/ceilings and watchlist ceiling are stale; the untouched archive reproduces all five failures."
+    },
+    {
+      "check": "verify-release-gates.js",
+      "status": "pre-existing-website-only-boundary-failure",
+      "detail": "The full-handoff test requires SITE_PACKAGE outer/inner exclusions to agree; the untouched website-only archive fails it too. Its stale ML hash failures have been repaired."
+    },
+    {
+      "check": "verify-all-runner.js --reuse-build --site-only",
+      "status": "blocked-environment",
+      "detail": "Runner stops in read-only-harvest tests because jsonschema is absent in the available Python audit runtime, for both archives. No full-run pass is claimed."
+    }
+  ],
+  "boundaries": {
+    "semantic_classifier": "Curated exact-task/draft fixture judgments only; no general classifier.",
+    "host_integration": "External chat-host invocation and verifier honesty remain unverified.",
+    "trinity_finder": "Unfinished requirement; no new adopted definition or finished classifier.",
+    "coherence_certification": "No autonomous repair ruling, Deep verdict or Full qualification; existing human and independent-review limits remain.",
+    "unrelated_source": "Calendar, sibling star canon, research, instrument, portable CORE and corehistory preserved."
+  }
+}

@@ -230,6 +230,11 @@ function specialStudentTitle(entry){
 }
 
 function specialStudentSummary(entry){
+  if(entry.id === 'dm-115') return [
+    'Use bookwormburrows (BB) for how to play, modulecanon (MC) for the reusable text-world and its sources, and campaigncodex (CC) for this group’s session record.',
+    'For Thank You, Ma’am, read the MC module and linked source dossier before describing the world or starting play.',
+    'A requested pretend game with three people uses three clearly fictional players, keeps story characters separate, and starts a new demo without changing saved student sessions.'
+  ];
   const text = entryAllText(entry);
   if(hasAny(text,['[superseded','historical record'])){
     return [

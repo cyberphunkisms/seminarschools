@@ -32,7 +32,7 @@ const metrics = {
   chronology_records: 0,
   quarantined_monitoring_records: 0,
 };
-const EXPECTED_DISCOVERY_COUNTS = Object.freeze({canonical: 2088, chronology: 1954, watchlist: 134});
+const EXPECTED_DISCOVERY_COUNTS = require('./lib/polymythcal-inventory-contract').currentInventoryCounts(ROOT);
 const WATCHLIST_REASON = Object.freeze({
   code: 'monitoring-marker',
   detail: 'Displayed date is a monitoring marker, not a confirmed event or deadline date.',
@@ -245,8 +245,10 @@ if (
   fail('browser harvest dependency layer is incomplete');
 }
 const protestWorkflow = read('.github/workflows/scrape-polymythcal-protests.yml');
-if (!protestWorkflow.includes('--requirement requirements-harvest-browser.txt')) {
-  fail('protest browser harvest does not install its browser dependency layer');
+const auditRequirements = read('requirements-audit.lock');
+if (!protestWorkflow.includes('--require-hashes --requirement requirements-audit.lock')
+  || !/playwright==1\.53\.0\s*\\\s*\n\s*--hash=sha256:[0-9a-f]{64}/.test(auditRequirements)) {
+  fail('protest browser harvest does not install the hash-locked audit layer with pinned Playwright');
 }
 for (const [relative, cron] of [
   ['.github/workflows/scrape-seminars.yml', '47 8 * * 1'],

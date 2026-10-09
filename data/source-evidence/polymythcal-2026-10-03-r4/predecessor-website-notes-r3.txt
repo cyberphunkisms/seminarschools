@@ -1,0 +1,78 @@
+POLYMYTHCAL WEBSITE FIXES — 2 OCTOBER 2026
+Revision 3: source-evidence and event-data follow-up.
+
+SCOPE
+One complete editable website ZIP, including built public/. All other Seminar
+Schools sections remain included. This is not the full Polymyth research/project
+archive. No production deployment, repository push or paid collection run occurred.
+
+THIS REVISION
+49 existing records received field-specific source reviews and corrections.
+All 2,086 canonical IDs remain: 1,871 chronology and 215 watchlist records.
+
+- Princeton: corrected 15 records from Unknown/Ontario/Canada to Princeton,
+  New Jersey, United States, with the correct named timezone. Fourteen occurrences
+  were verified; the Eric Matthew Nelson occurrence remains unconfirmed and
+  received only the location correction. Direct source links were verified for
+  13 records. Gerontocracy's actual lunchtime slot, room and public access replace
+  incorrectly inherited afternoon details; its broad archive remains research-only.
+  Corrected Stefan Eich's name, updated published lecture titles and rooms, kept
+  audience restrictions explicit, and removed three unsupported end times.
+- Canadian Opera Company: seven production/event pages now have verified direct
+  destinations and Toronto locations. Production runs remain date ranges with
+  individual performance times deferred to the official pages. Centre Stage's
+  day and location are verified; its unverified start time remains qualified.
+- Toronto election: 25 milestones link to the official schedule for the specific
+  2026 election cycle, including its 2027 reporting stages. These actions are
+  labelled as a series schedule. Daily voting windows are described explicitly;
+  their range exports no longer imply continuous overnight voting. The sign-removal
+  deadline uses the published day/end-of-day wording, not an invented exact minute.
+- National Humanities Center: both existing 2027–28 fellowship records now cite
+  the dated April 1, 2026 announcement confirming the October 1, 2026 deadline.
+  Both retain their IDs and closed status. The rolling program page has moved to
+  2028–29 and no longer serves as the historical record's main evidence.
+- Private evidence preserves reviewed values, short publisher excerpts, retrieval
+  dates, source URLs, available response hashes, and complete predecessor records.
+  Prior correction snapshots, receipt and revision-2 notes are retained. Evidence
+  stays outside the public website. Corrections use the normal dated ledger so
+  routine builds retain them.
+
+MEASURED CHANGE FROM REVISION 2
+Verified specific external destinations: 869 -> 915 (+46).
+Unresolved specific destinations: 1,217 -> 1,171.
+Records with unknown city: 389 -> 367 (-22).
+Qualified/unconfirmed records: 865 -> 851 (-14).
+These backlog counts overlap. A source review verifies only its listed fields.
+This revision does not certify all remaining source records.
+
+EARLIER FIXES RETAINED
+The revision-2 projected-date/watchlist corrections, Scholastic fees, funding
+filters, lifecycle labels, wrapping and scroll-geometry repairs remain in place.
+The earlier audit claim that the main calendar had no useful no-JavaScript
+content remains withdrawn: the existing static listing links were verified.
+See private predecessor notes for the complete earlier change list.
+
+VALIDATION
+The accompanying change receipt records the completed canonical build, semantic
+and publication checks, browser checks, rebuild idempotence and archive integrity.
+This is a scoped website update, not a rerun of the historical 196-gate full-project
+release suite. Native assistive-technology and physical-device checks remain open.
+
+IMPORTANT FILES
+- data/polymythcal-reviewed-corrections-2026-10-02.json
+- data/polymythcal-destination-overrides.json
+- data/source-evidence/polymythcal-2026-10-02-r3/reviewed-evidence.json
+- POLYMYTHCAL_WEBSITE_CHANGE_RECEIPT_2026-10-02.json
+- PACKAGE_CONTENTS_SHA256.json
+
+BUILD
+Use the versions pinned by this project's runtime files and package.json.
+  npm ci
+  python3 -m pip install --require-hashes -r requirements-audit.lock
+  SITE_BUILD_DATE=2026-10-02 npm run build
+For a later normal build, use that day's SITE_BUILD_DATE. The build date does not
+assert that all event sources were rechecked that day.
+
+For repository handoff, use a review branch, inspect the source diff, and remove
+obsolete paths listed in the receipt. Extracting an overlay alone does not remove
+retired files. Hosting publishes public/; private source/evidence remains outside it.

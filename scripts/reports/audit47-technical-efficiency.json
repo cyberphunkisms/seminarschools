@@ -4,18 +4,18 @@
   "generated_at": "2026-07-26T16:00:00-04:00",
   "status": "passed",
   "metrics": {
-    "canonical_events": 2088,
+    "canonical_events": 2086,
     "event_types": 64,
     "sources": 779,
-    "explicit_legacy_identifiers": 28,
-    "generated_english_alias_routes": 2144,
-    "french_alias_routes": 28,
+    "explicit_legacy_identifiers": 32,
+    "generated_english_alias_routes": 2150,
+    "french_alias_routes": 32,
     "methodology_archive_sections": 16,
-    "methodology_archive_rows": 1224,
+    "methodology_archive_rows": 1233,
     "localized_leizu_secondary_routes": 36,
     "predeploy_npm_dependency_installs": 1,
-    "source_html_files": 7216,
-    "public_html_files": 7568
+    "source_html_files": 7226,
+    "public_html_files": 7578
   },
   "fixes": [
     "deduplicated-calendar-identity-continuity",

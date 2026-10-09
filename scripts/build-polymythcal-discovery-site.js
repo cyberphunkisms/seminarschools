@@ -23,8 +23,8 @@ if (outputMtime && Number.isNaN(outputMtime.getTime())) {
 
 const surfaces = {
   main: {
-    en: { relative: 'polymythseminars/index.html', path: '/polymythseminars/', alternate: '/polymythseminars/fr/', title: 'Polymythcal | Seminar Schools', heading: 'Polymythcal', kicker: 'Seminar Schools public calendar', lede: 'Find public events to attend and opportunities to apply for, with dates and sources you can verify.', description: 'Search and filter public events, opportunities, celestial occurrences, and observances without opening the full research taxonomy.' },
-    fr: { relative: 'polymythseminars/fr/index.html', path: '/polymythseminars/fr/', alternate: '/polymythseminars/', title: 'Polymythcal | Seminar Schools', heading: 'Polymythcal', kicker: 'Calendrier public de Seminar Schools', lede: 'Trouvez des événements publics auxquels assister et des possibilités auxquelles postuler, avec des dates et des sources vérifiables.', description: 'Recherchez et filtrez les événements publics, les possibilités, les phénomènes célestes et les observances sans ouvrir toute la taxonomie de recherche.' },
+    en: { relative: 'polymythseminars/index.html', path: '/polymythseminars/', alternate: '/polymythseminars/fr/', title: 'Polymythcal | Seminar Schools', heading: 'Polymythcal', kicker: 'Seminar Schools public calendar', lede: 'Find public events to attend and opportunities to apply for.', description: 'Search and filter public events, opportunities, celestial occurrences, and observances without opening the full research taxonomy.' },
+    fr: { relative: 'polymythseminars/fr/index.html', path: '/polymythseminars/fr/', alternate: '/polymythseminars/', title: 'Polymythcal | Seminar Schools', heading: 'Polymythcal', kicker: 'Calendrier public de Seminar Schools', lede: 'Trouvez des événements publics et des appels à candidatures.', description: 'Recherchez et filtrez les événements publics, les possibilités, les phénomènes célestes et les observances sans ouvrir toute la taxonomie de recherche.' },
   },
   research: {
     en: { relative: 'polymythseminars/research/index.html', path: '/polymythseminars/research/', alternate: '/polymythseminars/fr/research/', title: 'Research filters | Polymythcal | Seminar Schools', heading: 'Research filters', kicker: 'Polymythcal connected research view', lede: 'Use the specialist taxonomy when a broad calendar filter is not precise enough.', description: 'Search the complete Polymythcal research taxonomy by people, academic form, arts format, participation, civic form, community form, live media, programme, and celestial kind.' },
@@ -88,26 +88,24 @@ ${links.map(([label, href, key]) => `<a href="${href}" data-state-link="${key}"$
 </nav>`;
 }
 
-function focusedCalendars(locale) {
+function focusedCalendars(locale, includePopular = false) {
   const labels = locale === 'fr'
     ? [['Club d’écriture', 'writingclub'], ['Écriture : enfants', 'writingkids'], ['Écriture : juniors', 'writingjuniors'], ['Écriture : adolescents', 'writingteens'], ['Écriture : cycles supérieurs', 'writinggrads'], ['Université', 'university'], ['Philosophie', 'philosophy'], ['Sciences humaines', 'humanities'], ['Appels à contributions', 'cfps'], ['Conférences', 'lectures'], ['Bourses', 'fellowships']]
     : [['Writing Club', 'writingclub'], ['Writing Kids', 'writingkids'], ['Writing Juniors', 'writingjuniors'], ['Writing Teens', 'writingteens'], ['Writing Grads', 'writinggrads'], ['University', 'university'], ['Philosophy', 'philosophy'], ['Humanities', 'humanities'], ['Calls for papers', 'cfps'], ['Lectures', 'lectures'], ['Fellowships', 'fellowships']];
-  const title = locale === 'fr' ? 'Calendriers ciblés' : 'Focused calendars';
-  const help = locale === 'fr' ? 'Ouvrir un calendrier consacré à un seul public ou sujet' : 'Open a calendar dedicated to one audience or subject';
-  return `<details class="pmd-focused"><summary><strong>${title}</strong><span>${help}</span></summary><nav aria-label="${title}">${labels.map(([label, slug]) => `<a href="/${slug}/${locale === 'fr' ? 'fr/' : ''}">${label}</a>`).join('')}</nav></details>`;
+  const title = includePopular ? (locale === 'fr' ? 'Raccourcis du calendrier' : 'Calendar shortcuts') : (locale === 'fr' ? 'Calendriers ciblés' : 'Focused calendars');
+  return `<details class="pmd-focused"><summary><strong>${title}</strong></summary>${includePopular ? popularStarts(locale) : ''}<nav aria-label="${title}">${labels.map(([label, slug]) => `<a href="/${slug}/${locale === 'fr' ? 'fr/' : ''}">${label}</a>`).join('')}</nav></details>`;
 }
 
 function popularStarts(locale) {
   const t = ui[locale];
   return `<nav class="pmd-popular" aria-labelledby="pmdPopularTitle">
-<div class="pmd-section-heading"><h2 id="pmdPopularTitle" data-i18n-key="popular-title">${t.popularTitle}</h2><p data-i18n-key="popular-help">${t.popularHelp}</p></div>
+<div class="pmd-section-heading"><h2 id="pmdPopularTitle" data-i18n-key="popular-title">${t.popularTitle}</h2></div>
 <div class="pmd-popular-links">
 <a href="?date=7d" data-i18n-key="popular-week">${t.week}</a>
 <a href="?kind=apply" data-i18n-key="popular-apply">${t.apply}</a>
 <a href="?places=toronto-gta" data-i18n-key="popular-toronto">${t.toronto}</a>
 <a href="?formats=online" data-i18n-key="popular-online">${t.online}</a>
 <a href="?what=event%3Acelestial-occurrence" data-i18n-key="popular-celestial">${t.celestial}</a>
-<a href="${surfaces.research[locale].path}" data-state-link="research" data-i18n-key="popular-research">${t.openResearch}</a>
 </div></nav>`;
 }
 
@@ -120,10 +118,10 @@ function searchPanel(surface, locale) {
   return `<section class="pmd-search-panel" aria-labelledby="pmdSearchLabel">
 <label id="pmdSearchLabel" for="pmdSearch" data-i18n-key="search-label">${monitoring ? t.searchMonitoring : t.searchCalendar}</label>
 <div class="pmd-search-control">
-<input id="pmdSearch" type="search" inputmode="search" autocomplete="off" spellcheck="false" maxlength="240" placeholder="${placeholder}" aria-describedby="pmdSearchHelp pmdSearchStatus" data-i18n-key="search-placeholder">
+<input id="pmdSearch" type="search" inputmode="search" autocomplete="off" spellcheck="false" maxlength="240" placeholder="${placeholder}" aria-describedby="pmdSearchStatus" data-i18n-key="search-placeholder">
 <button id="pmdClearSearch" type="button" hidden aria-label="${t.clear}" data-i18n-key="clear-search">${t.clear}</button>
 </div>
-<p id="pmdSearchHelp" class="pmd-help" data-i18n-key="search-help">${t.searchHelp}</p>
+<details class="pmd-search-tips"><summary>${locale === 'fr' ? 'Aide à la recherche' : 'Search tips'}</summary><p id="pmdSearchHelp" class="pmd-help" data-i18n-key="search-help">${t.searchHelp}</p></details>
 <div id="pmdSearchAssist" class="pmd-search-assist" hidden></div>
 <p id="pmdSearchStatus" class="pmd-status" role="status" aria-live="polite"></p>
 </section>`;
@@ -133,7 +131,7 @@ function filters(surface, locale) {
   const t = ui[locale];
   if (surface === 'monitoring') {
     return `<details class="pmd-filter-drawer" id="pmdFilterDrawer">
-<summary><span><strong data-i18n-key="filters">${t.filters}</strong><span id="pmdFilterSummary">${t.none}</span></span><span id="pmdFilterPreview">${t.loading}</span></summary>
+<summary><span><strong data-i18n-key="filters">${t.filters}</strong><span id="pmdFilterSummary">${t.none}</span></span><span id="pmdFilterPreview" hidden>${t.loading}</span></summary>
 <div class="pmd-filter-body"><div id="pmdCommonFilters" class="pmd-filter-grid" data-filter-mode="monitoring"></div></div>
 </details>`;
   }
@@ -141,7 +139,7 @@ function filters(surface, locale) {
     return `<section class="pmd-research-tools" aria-labelledby="pmdResearchTitle">
 <div class="pmd-section-heading"><h2 id="pmdResearchTitle" data-i18n-key="research-taxonomy">${t.researchTaxonomy}</h2><p data-i18n-key="research-taxonomy-help">${t.researchHelp}</p></div>
 <details class="pmd-filter-drawer pmd-research-common" id="pmdResearchCommonDrawer">
-<summary><span><strong>${t.commonFilters}</strong><span id="pmdFilterSummary">${t.none}</span></span><span id="pmdFilterPreview">${t.loading}</span></summary>
+<summary><span><strong>${t.commonFilters}</strong><span id="pmdFilterSummary">${t.none}</span></span><span id="pmdFilterPreview" hidden>${t.loading}</span></summary>
 <div class="pmd-filter-body"><p class="pmd-help">${t.commonHelp}</p><div id="pmdResearchCommonFilters" class="pmd-filter-grid" data-filter-mode="research-common"></div></div>
 </details>
 <label for="pmdFacetSearch" data-i18n-key="find-filter">${t.findFilter}</label>
@@ -151,11 +149,30 @@ function filters(surface, locale) {
 <div id="pmdResearchFilters" class="pmd-research-families" aria-label="${t.families}"></div>`;
   }
   return `<details class="pmd-filter-drawer" id="pmdFilterDrawer">
-<summary><span><strong data-i18n-key="filters">${t.filters}</strong><span id="pmdFilterSummary">${t.none}</span></span><span id="pmdFilterPreview">${t.loading}</span></summary>
+<summary><span><strong data-i18n-key="filters">${t.filters}</strong><span id="pmdFilterSummary">${t.none}</span></span><span id="pmdFilterPreview" hidden>${t.loading}</span></summary>
 <div class="pmd-filter-body">
 <div id="pmdCommonFilters" class="pmd-filter-grid" data-filter-mode="common"></div>
 <p class="pmd-research-path"><a href="${surfaces.research[locale].path}" data-state-link="research" data-i18n-key="research-path">${t.precise}</a></p>
 </div></details>`;
+}
+
+function sourceTitleLanguage(event) {
+  const value = String(event?.content_language || '').trim();
+  const lang = /^[a-z]{2,3}(?:-[A-Za-z0-9]+)*$/.test(value) ? value : 'und';
+  return ` lang="${esc(lang)}" data-source-language="${esc(lang)}"`;
+}
+function fallbackListings(surface, locale) {
+  const filename = surface === 'monitoring' ? 'watchlist.json' : 'browse.json';
+  const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'polymythseminars', filename), 'utf8'));
+  const today = String(release.polymythcal_discovery_built_at || release.generated_at || release.build_date || '2026-09-07').slice(0, 10);
+  const records = (data.events || data.items || []).filter(event => surface === 'monitoring' || String(event.end_date || event.date || '') >= today).slice(0, 24);
+  const label = locale === 'fr' ? 'Liens vers les fiches' : 'Listing links';
+  const note = locale === 'fr' ? 'Sélection statique de 24 fiches au maximum. Les filtres et toutes les fiches se chargent avec JavaScript.' : 'Static selection of up to 24 listings. Filters and the full collection load with JavaScript.';
+  return `<section id="pmdFallback" class="pmd-fallback"><h2>${label}</h2><p>${note}</p><ul>${records.map(event => {
+    const href = `/polymythseminars/${locale === 'fr' ? 'fr/' : ''}events/${encodeURIComponent(event.id)}/`;
+    const action = (event.actions || []).find(item => item.kind !== 'details' && /^https:\/\//.test(item.url));
+    return `<li><a href="${href}"${sourceTitleLanguage(event)}>${esc(event.title)}</a>${event.date ? ` · ${esc(event.date.slice(0, 10))}` : ''}${action ? ` · <a href="${esc(action.url)}">${locale === 'fr' ? 'Page source' : 'Source page'}</a>` : ''}</li>`;
+  }).join('')}</ul></section>`;
 }
 
 function results(surface, locale) {
@@ -240,6 +257,7 @@ function page(surface, locale) {
 <link rel="stylesheet" href="/css/theme.css?v=${esc(siteAssetVersion)}">
 <link rel="stylesheet" href="/css/alive.css?v=${esc(geometryVersion)}">
 <link rel="stylesheet" href="/css/site-wide-type-zoom.css?v=${esc(SITEWIDE_TYPE_ZOOM_VERSION)}" data-site-wide-type-zoom="${esc(SITEWIDE_TYPE_ZOOM_VERSION)}">
+<link rel="stylesheet" href="/css/polymythcal-features.css?v=${esc(siteAssetVersion)}">
 <link rel="stylesheet" href="/css/polymythcal-discovery.css?v=${esc(discoveryAssetVersion)}">
 ${locale === 'fr' ? `${localizationStyle}\n` : ''}<link rel="stylesheet" href="/css/audit43-approved.css?v=20260725-audit43">
 <link rel="stylesheet" href="/css/calm-ux.css?v=20260723-steady">
@@ -248,13 +266,13 @@ ${locale === 'fr' ? `${localizationStyle}\n` : ''}<link rel="stylesheet" href="/
 <a class="skip-link" href="#pmdResultsTitle">${t.skip}</a>
 <button class="theme-toggle" type="button" aria-label="${t.theme}" aria-pressed="false"><span class="sun" aria-hidden="true">☀</span><span class="moon" aria-hidden="true">☾</span></button>
 <main class="pmd-shell" id="main-content">
-<header class="pmd-header"><p class="pmd-kicker"><a href="/">${esc(cfg.kicker)}</a></p><p class="pmd-commons"><a href="/polymythcommons/">Polymyth Commons</a><span aria-hidden="true"> / </span>${surface === 'main' ? t.publicCalendar : surface === 'research' ? t.researchView : t.monitoringView}</p><h1>${esc(cfg.heading)}</h1><p>${esc(cfg.lede)}</p></header>
+<header class="pmd-header"><p class="pmd-commons"><a href="/">Seminar Schools</a><span aria-hidden="true"> / </span><a href="/polymythcommons/">Polymyth Commons</a></p><h1>${esc(cfg.heading)}</h1><p>${esc(cfg.lede)}</p></header>
 ${staticNavigation(surface, locale)}
 ${searchPanel(surface, locale)}
-${surface === 'main' ? popularStarts(locale) : ''}
-${focusedCalendars(locale)}
+${focusedCalendars(locale, surface === 'main')}
 ${filters(surface, locale)}
 ${results(surface, locale)}
+${fallbackListings(surface, locale)}
 ${utilityTools(surface, locale)}
 <nav class="pmd-related" aria-label="${t.related}"><a href="/polymythcommons/"><strong>${t.commons}</strong><span>${t.commonsText}</span></a><a href="/teacherresources/"><strong>${t.teacher}</strong><span>${t.teacherText}</span></a><a href="/polymythlib/"><strong>${t.library}</strong><span>${t.libraryText}</span></a></nav>
 <noscript><p class="pmd-noscript">${noScript}</p></noscript>
@@ -262,6 +280,7 @@ ${utilityTools(surface, locale)}
 <div class="pmd-mobile-bar" id="pmdMobileBar" hidden><button id="pmdMobileFilters" type="button" ${mobileFilterAttributes}>${t.filters} <span id="pmdMobileFilterCount">0</span></button><a id="pmdMobileResults" href="#pmdResults">${t.viewResults}</a></div>
 <script defer src="/js/polymythcal-discovery-core.js?v=${esc(discoveryAssetVersion)}"></script>
 <script defer src="/js/polymythcal-discovery.js?v=${esc(discoveryAssetVersion)}"></script>
+<script defer src="/js/polymythcal-features.js?v=${esc(siteAssetVersion)}"></script>
 <script defer src="/js/theme.js?v=cl91"></script>
 <script src="/js/mandala.js?v=${esc(geometryVersion)}" defer></script>
 <script src="/js/indra.js?v=${esc(geometryVersion)}" defer></script>

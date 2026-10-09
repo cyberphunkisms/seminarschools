@@ -24,6 +24,15 @@
   const CONFIRMATION_LABELS = Object.freeze(locale === 'fr'
     ? { confirmed: 'Confirmé', unconfirmed: 'Non confirmé' }
     : { confirmed: 'Confirmed', unconfirmed: 'Unconfirmed' });
+  const LIFECYCLE_LABELS = Object.freeze(locale === 'fr' ? {
+    'missing-on-source': 'Absent de la source', postponed: 'Reporté', rescheduled: 'Reprogrammé',
+    cancelled: 'Annulé ou suspendu', 'sold-out': 'Complet', 'registration-closed': 'Inscriptions fermées',
+    superseded: 'Remplacé', archived: 'Archivé',
+  } : {
+    'missing-on-source': 'Missing on source', postponed: 'Postponed', rescheduled: 'Rescheduled',
+    cancelled: 'Cancelled or paused', 'sold-out': 'Sold out', 'registration-closed': 'Registration closed',
+    superseded: 'Superseded', archived: 'Archived',
+  });
   const DESTINATION_LABELS = Object.freeze(locale === 'fr' ? {
     'official-event-page': 'page officielle de l’événement', 'official-series-page': 'page officielle de la série', 'source-event-page': 'page source de l’événement', 'unavailable-specific-page': 'page précise indisponible',
   } : {
@@ -485,6 +494,8 @@
 
   function eventMatchesDate(event) {
     if (surface === 'monitoring' || state.date === 'all') return true;
+    // Keep cancelled occurrences in all-date history, outside attendance windows.
+    if (event.lifecycle_status === 'cancelled') return false;
     if (!event._startDay) return false;
     const today = activeToday || calendarToday();
     if (state.date === 'upcoming') return event._endDay ? event._endDay >= today : event._startDay >= today;
@@ -515,9 +526,13 @@
     return CORE.matchesFacets(event, state.facets, omittedAxis);
   }
 
+  var optionCounts = new Map();
+  var eligibleForCounts = null;
   function optionCount(key, value) {
+    const cacheKey = key + ":" + value;
+    if (optionCounts.has(cacheKey)) return optionCounts.get(cacheKey);
     if (key === 'date') {
-      return events.reduce((count, event) => {
+      const count = events.reduce((count, event) => {
         if (!eventPasses(event, 'date')) return count;
         const prior = state.date;
         state.date = value;
@@ -525,10 +540,17 @@
         state.date = prior;
         return count + (matches ? 1 : 0);
       }, 0);
+      optionCounts.set(cacheKey, count);
+      return count;
     }
-    const eligible = events.filter(event => routeMatches(event) && eventMatchesDate(event) && (!state.q || event._queryMatched));
-    if (key === 'kind' && value === 'all') return eligible.filter(event => CORE.matchesFacets(event, state.facets, key)).length;
-    return CORE.facetCounts(eligible, state.facets, key).get(value) || 0;
+    if (!eligibleForCounts) eligibleForCounts = events.filter(event => routeMatches(event) && eventMatchesDate(event) && (!state.q || event._queryMatched));
+    if (key === 'kind' && value === 'all') {
+      const count = eligibleForCounts.filter(event => CORE.matchesFacets(event, state.facets, key)).length;
+      optionCounts.set(cacheKey, count);
+      return count;
+    }
+    if (!optionCounts.has(key)) optionCounts.set(key, CORE.facetCounts(eligibleForCounts, state.facets, key));
+    return optionCounts.get(key).get(value) || 0;
   }
 
   function countSelections() {
@@ -708,7 +730,7 @@
     }
     const count = countSelections();
     const summary = $('#pmdFilterSummary');
-    if (summary) summary.textContent = count ? COPY.filtersSelected(count) : COPY.noFilters;
+    if (summary) summary.textContent = count ? COPY.filtersSelected(count) : '';
     const filterCount = $('#pmdMobileFilterCount');
     if (filterCount) filterCount.textContent = String(count);
   }
@@ -805,7 +827,12 @@
     if (group.event) return group.event;
     const chronology = ['soonest', 'latest'].includes(sort);
     const candidates = chronology && group.occurrences.length ? group.occurrences : group.events;
-    return [...candidates].sort((left, right) => compareEvents(left, right, sort))[0] || group.parent || group.occurrences[0];
+    // A series can mix months-long open periods with forthcoming sessions.
+    // In a current-date view, place it by its next matching session.
+    const forthcoming = chronology && state.date !== 'all'
+      ? candidates.filter(event => event._startDay >= (activeToday || calendarToday())) : [];
+    const dated = forthcoming.length ? forthcoming : candidates;
+    return [...dated].sort((left, right) => compareEvents(left, right, sort))[0] || group.parent || group.occurrences[0];
   }
 
   function compareGroups(left, right, sort = effectiveSort()) {
@@ -815,7 +842,7 @@
   }
 
   function buildResultGroups(list) {
-    return CORE.groupSeries(list, effectiveSort(), UI_LOCALE).sort((left, right) => compareGroups(left, right));
+    return CORE.groupSeries(list, effectiveSort(), UI_LOCALE, events).sort((left, right) => compareGroups(left, right));
   }
 
   function applyFiltersAndSort() {
@@ -840,7 +867,24 @@
   }
 
   function detailHref(event) {
-    return `${locale === 'fr' ? '/polymythseminars/fr/events/' : '/polymythseminars/events/'}${encodeURIComponent(event.id)}/`;
+    return `${locale === 'fr' ? '/polymythseminars/fr/events/' : '/polymythseminars/events/'}${encodeURIComponent(event.id)}/?from=${encodeURIComponent(targetUrl())}`;
+  }
+
+  // Formatting options are shared by thousands of records and repeated renders.
+  const dateFormatters = new Map();
+  const savedDisplayCache = new WeakMap();
+  function dateFormatter(options) {
+    const key = JSON.stringify(options);
+    if (!dateFormatters.has(key)) dateFormatters.set(key, new Intl.DateTimeFormat(UI_LOCALE, options));
+    return dateFormatters.get(key);
+  }
+
+  function savedDisplay(event) {
+    if (!savedDisplayCache.has(event)) savedDisplayCache.set(event, {
+      date: surface === 'monitoring' ? COPY.datePending : `${displayDate(event)} · ${displayTime(event)}`,
+      place: displayPlace(event)
+    });
+    return savedDisplayCache.get(event);
   }
 
   function displayDate(event, compact = false) {
@@ -851,11 +895,11 @@
       : compact
         ? { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }
         : { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' };
-    const formatter = new Intl.DateTimeFormat(UI_LOCALE, options);
+    const formatter = dateFormatter(options);
     const start = formatter.format(event._startDay);
     const value = !event._endDay || isoDay(event._endDay) === isoDay(event._startDay)
       ? start
-      : `${start} ${locale === 'fr' ? 'au' : 'to'} ${formatter.format(event._endDay)}`;
+      : `${start} ${locale === 'fr' ? 'au' : 'to'} ${event.end_date_precision === 'month' ? dateFormatter({ month: 'long', year: 'numeric', timeZone: 'UTC' }).format(event._endDay) : formatter.format(event._endDay)}`;
     return event.temporal?.type === 'estimated' || ['estimated', 'approximate'].includes(event.date_precision) ? COPY.estimatedDate(value) : value;
   }
 
@@ -882,12 +926,13 @@
 
   function trustLine(event) {
     const parts = [];
+    if (LIFECYCLE_LABELS[event.lifecycle_status]) parts.push(LIFECYCLE_LABELS[event.lifecycle_status]);
     if (event.confirmation_status) parts.push(CONFIRMATION_LABELS[event.confirmation_status] || titleCase(event.confirmation_status));
     if (event.destination_status) parts.push(`${TEXT.link}${locale === 'fr' ? ' :' : ':'} ${DESTINATION_LABELS[event.destination_status] || titleCase(event.destination_status).toLocaleLowerCase(UI_LOCALE)}`);
     const checkedValue = event.checked_on || event.last_checked_at;
     if (checkedValue) {
       const checked = parseDate(checkedValue);
-      parts.push(`${COPY.checked} ${checked ? new Intl.DateTimeFormat(UI_LOCALE, { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(checked) : checkedValue}`);
+      parts.push(`${COPY.checked} ${checked ? dateFormatter({ month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(checked) : checkedValue}`);
     }
     return parts.join(' · ');
   }
@@ -906,8 +951,8 @@
     // stable internal detail route. The payload repeats this as a `details`
     // action so either layer can fail independently without removing the
     // visitor's path; `seen` makes the rendered action singular.
-    addAction(detailHref(event), COPY.details, 'primary-link');
-    for (const action of asArray(event.actions)) {
+    let externalCount = 0;
+    for (const action of asArray(event.actions).filter(action => action?.kind !== 'details')) {
       if (!action || typeof action !== 'object') continue;
       const kind = String(action.kind || 'detail');
       const scope = String(action.scope || '');
@@ -919,10 +964,12 @@
             ? COPY.officialSeries
             : (ACTION_LABELS[kind] || titleCase(kind));
       const href = kind === 'details' ? detailHref(event) : action.url;
-      addAction(href, label, kind === 'source' ? 'pm-source-action' : '');
+      const before = rendered.length;
+      addAction(href, label, externalCount === 0 ? 'primary-link' : 'pm-source-action');
+      if (rendered.length > before) externalCount += 1;
     }
-    if (!rendered.length) return `<p class="pmd-card-trust">${COPY.noVerifiedLink}</p>`;
-    return `<div class="pmd-card-actions pm-card-actions">${rendered.join('')}</div>`;
+    addAction(detailHref(event), COPY.details);
+    return `${externalCount ? '' : `<p class="pmd-link-missing">${COPY.noVerifiedLink}</p>`}<div class="pmd-card-actions pm-card-actions">${rendered.join('')}</div>`;
   }
 
   function eventCard(event) {
@@ -930,14 +977,12 @@
     const kind = event.facets.kind?.[0] || 'attend';
     const what = event.facets.what?.[0];
     const description = event.description.length > 420 ? `${event.description.slice(0, 417).trim()}…` : event.description;
-    const title = surface === 'monitoring'
-      ? escapeHtml(event.title)
-      : `<a href="${escapeHtml(detailHref(event))}">${escapeHtml(event.title)}</a>`;
+    const title = `<a href="${escapeHtml(detailHref(event))}">${escapeHtml(event.title)}</a>`;
     const datePanel = surface === 'monitoring'
-      ? `<div class="pmd-card-date"><strong>${COPY.datePending}</strong></div>`
+      ? `<div class="pmd-card-date"><strong>${escapeHtml(LIFECYCLE_LABELS[event.lifecycle_status] || COPY.datePending)}</strong></div>`
       : `<div class="pmd-card-date"><strong>${escapeHtml(displayDate(event, true))}</strong><span>${escapeHtml(displayTime(event))}</span></div>`;
     const reason = state.q && event._match ? `<p class="pmd-match-reason">${escapeHtml(COPY.matched(event._match.field, event._match.source))} <span>(${escapeHtml(event._match.kind)})</span></p>` : '';
-    return `<article class="pmd-card pm-event-card" data-event-id="${escapeHtml(event.id)}" id="${escapeHtml(eventDomId(event))}">${datePanel}<div class="pmd-card-main"><div class="pmd-card-badges"><span class="pmd-badge ${escapeHtml(kind)}">${kind === 'apply' ? TEXT.apply : TEXT.attend}</span>${what ? `<span class="pmd-badge">${escapeHtml(optionLabel('what', what))}</span>` : ''}</div><h3 lang="${escapeHtml(lang)}">${title}</h3>${event.speaker_or_director ? `<p class="pmd-card-meta" lang="${escapeHtml(lang)}">${escapeHtml(event.speaker_or_director)}</p>` : ''}<p class="pmd-card-meta">${escapeHtml(displayPlace(event))}</p>${description ? `<p class="pmd-card-description" lang="${escapeHtml(lang)}">${escapeHtml(description)}</p>` : ''}${reason}${trustLine(event) ? `<p class="pmd-card-trust">${escapeHtml(trustLine(event))}</p>` : ''}${eventActions(event)}</div></article>`;
+    return `<article class="pmd-card pm-event-card" data-event-id="${escapeHtml(event.id)}" id="${escapeHtml(eventDomId(event))}">${datePanel}<div class="pmd-card-main"><div class="pmd-card-badges"><span class="pmd-badge ${escapeHtml(kind)}">${kind === 'apply' ? (locale === 'fr' ? 'Possibilité' : 'Opportunity') : (locale === 'fr' ? 'Événement' : 'Event')}</span>${what ? `<span class="pmd-badge">${escapeHtml(optionLabel('what', what))}</span>` : ''}</div><h3 lang="${escapeHtml(lang)}">${title}</h3>${event.speaker_or_director ? `<p class="pmd-card-meta" lang="${escapeHtml(lang)}">${escapeHtml(event.speaker_or_director)}</p>` : ''}<p class="pmd-card-meta">${escapeHtml(displayPlace(event))}</p>${description ? `<p class="pmd-card-description" lang="${escapeHtml(lang)}">${escapeHtml(description)}</p>` : ''}${reason}${trustLine(event) ? `<p class="pmd-card-trust">${escapeHtml(trustLine(event))}</p>` : ''}${eventActions(event)}</div></article>`;
   }
 
   function seriesCard(group) {
@@ -949,7 +994,7 @@
       ? COPY.matchingOccurrences(matchingCount, declaredCount)
       : COPY.seriesOccurrences(declaredCount);
     const title = representative.series?.title || representative.title;
-    const summarySort = surface === 'monitoring' ? 'checked' : ['soonest', 'latest', 'relevance'].includes(effectiveSort()) ? effectiveSort() : 'soonest';
+    const summarySort = surface === 'monitoring' ? 'checked' : effectiveSort() === 'latest' ? 'latest' : 'soonest';
     const summaryEvent = groupSortEvent(group, summarySort) || representative;
     const heading = surface === 'monitoring'
       ? escapeHtml(title)
@@ -960,19 +1005,21 @@
     const occurrences = visibleOccurrences.length
       ? `<details class="pmd-series-occurrences"><summary>${COPY.openOccurrences}</summary><ol>${visibleOccurrences.map(event => surface === 'monitoring'
         ? `<li lang="${escapeHtml(eventLanguage(event))}">${escapeHtml(event.title)}</li>`
-        : `<li><a href="${escapeHtml(detailHref(event))}" lang="${escapeHtml(eventLanguage(event))}">${escapeHtml(displayDate(event))}: ${escapeHtml(event.title)}</a></li>`).join('')}</ol></details>`
+        : `<li><a href="${escapeHtml(detailHref(event))}" lang="${escapeHtml(eventLanguage(event))}">${escapeHtml(displayDate(event))} · ${escapeHtml(displayTime(event))}: ${escapeHtml(event.title)}</a></li>`).join('')}</ol></details>`
       : '';
+    const occurrencePrefix = matchingCount && surface !== 'monitoring'
+      ? `${locale === 'fr' ? 'Séance correspondante' : 'Matching occurrence'}: ${summaryEvent.title} · ` : '';
     const summaryMeta = surface === 'monitoring'
       ? displayPlace(summaryEvent)
-      : `${displayDate(summaryEvent)} · ${displayTime(summaryEvent)} · ${displayPlace(summaryEvent)}`;
-    const trust = trustLine(summaryEvent);
+      : `${occurrencePrefix}${displayDate(summaryEvent)} · ${displayTime(summaryEvent)} · ${displayPlace(summaryEvent)}`;
+    const trust = trustLine(representative);
     return `<article class="pmd-series-card pm-event-card" data-event-id="${escapeHtml(representative.id)}"><div class="pmd-series-summary"><div><div class="pmd-card-badges"><span class="pmd-badge">${TEXT.series}</span></div><h3 lang="${escapeHtml(eventLanguage(representative))}">${heading}</h3></div><span class="pmd-series-count">${escapeHtml(occurrenceLabel)}</span></div><p class="pmd-card-meta">${escapeHtml(summaryMeta)}</p>${representative.description ? `<p class="pmd-card-description" lang="${escapeHtml(eventLanguage(representative))}">${escapeHtml(representative.description.slice(0, 420))}</p>` : ''}${reason}${trust ? `<p class="pmd-card-trust">${escapeHtml(trust)}</p>` : ''}${occurrences}${eventActions(representative)}</article>`;
   }
 
   function chronologyHeading(group) {
     const representative = groupSortEvent(group, effectiveSort());
     if (!representative?._startDay) return TEXT.dateConfirm;
-    return new Intl.DateTimeFormat(UI_LOCALE, { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(representative._startDay);
+    return dateFormatter({ month: 'long', year: 'numeric', timeZone: 'UTC' }).format(representative._startDay);
   }
 
   function renderPagination(totalPages) {
@@ -1001,7 +1048,12 @@
   function renderList() {
     const root = $('#pmdList');
     if (!root) return;
-    const page = CORE.paginate(resultGroups, state.page, PAGE_SIZE);
+    const ongoing = state.date === 'all' || state.q ? [] : resultGroups.filter(group => {
+      const candidates = group.occurrences?.length ? group.occurrences : group.events;
+      return candidates.every(event => isDateRange(event) && event._startDay < (activeToday || calendarToday()));
+    });
+    const datedGroups = resultGroups.filter(group => !ongoing.includes(group));
+    const page = CORE.paginate(datedGroups, state.page, PAGE_SIZE);
     const totalPages = page.pages;
     state.page = page.page;
     const start = page.start;
@@ -1018,10 +1070,15 @@
         return `${header}${group.type === 'series' ? seriesCard(group) : eventCard(group.event)}`;
       }).join('');
     }
+    if (ongoing.length) {
+      const label = locale === 'fr' ? 'En cours et périodes ouvertes' : 'Ongoing events and open periods';
+      if (!pageGroups.length) root.innerHTML = '';
+      root.insertAdjacentHTML('afterbegin', `<details class="pmd-ongoing"><summary>${label} (${ongoing.length})</summary>${ongoing.map(group => group.type === 'series' ? seriesCard(group) : rangeList([group.event])).join('')}</details>`);
+    }
     renderPagination(totalPages);
     const first = resultGroups.length ? start + 1 : 0;
     const last = page.end;
-    $('#pmdLiveStatus').textContent = resultGroups.length ? COPY.showing(first, last, resultGroups.length) : COPY.noResults;
+    $('#pmdLiveStatus').textContent = [datedGroups.length ? COPY.showing(start + 1, last, datedGroups.length) : '', ongoing.length ? `${ongoing.length} ${locale === 'fr' ? 'périodes en cours' : 'ongoing ranges'}` : ''].filter(Boolean).join(' · ') || COPY.noResults;
   }
 
   function calendarMonth() {
@@ -1030,7 +1087,7 @@
       if (year >= 1900 && month >= 1 && month <= 12) return new Date(Date.UTC(year, month - 1, 1, 12));
     }
     const firstDated = filteredEvents.find(event => event._startDay && event.series?.role !== 'parent');
-    const basis = firstDated?._startDay || calendarToday();
+    const basis = state.date === 'all' ? (firstDated?._startDay || calendarToday()) : calendarToday();
     state.month = monthValue(basis);
     return new Date(Date.UTC(basis.getUTCFullYear(), basis.getUTCMonth(), 1, 12));
   }
@@ -1043,8 +1100,25 @@
   function eventOccursOnDay(event, day) {
     return event.series?.role !== 'parent'
       && Boolean(event._startDay)
-      && event._startDay <= day
-      && (event._endDay || event._startDay) >= day;
+      && !isDateRange(event)
+      && dayInSelectedWindow(day)
+      && isoDay(event._startDay) === isoDay(day);
+  }
+
+  function isDateRange(event) {
+    return Boolean(event._startDay && event._endDay && event._endDay > event._startDay);
+  }
+
+  function dayInSelectedWindow(day) {
+    if (state.date === 'all') return true;
+    const today = activeToday || calendarToday();
+    if (day < today) return false;
+    const days = { today: 1, '7d': 7, '30d': 30 }[state.date];
+    return !days || day < addDays(today, days);
+  }
+
+  function rangeList(list) {
+    return `<ul class="pmd-range-list">${list.map(event => `<li>${calendarEventLink(event)}<p>${escapeHtml(displayDate(event))}</p></li>`).join('')}</ul>`;
   }
 
   function calendarDayEvents(day) {
@@ -1057,6 +1131,9 @@
 
   function calendarMonthEvents(month = calendarMonth()) {
     const monthEnd = addMonths(month, 1);
+    const today = activeToday || calendarToday();
+    const days = { today: 1, '7d': 7, '30d': 30 }[state.date];
+    if (state.date !== 'all' && (monthEnd <= today || (days && month >= addDays(today, days)))) return [];
     return calendarVisibleEvents().filter(event => event._startDay < monthEnd && (event._endDay || event._startDay) >= month);
   }
 
@@ -1065,13 +1142,13 @@
     if (!root) return;
     const month = calendarMonth();
     state.month = monthValue(month);
-    const title = new Intl.DateTimeFormat(UI_LOCALE, { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(month);
+    const title = dateFormatter({ month: 'long', year: 'numeric', timeZone: 'UTC' }).format(month);
     const monthCount = calendarMonthEvents(month).length;
     const overallCount = calendarVisibleEvents().length;
     const calendarSummary = COPY.calendarShowing(monthCount, overallCount, title);
     const firstCell = addDays(month, -month.getUTCDay());
     const today = calendarToday();
-    const weekdayNames = Array.from({ length: 7 }, (_, index) => new Intl.DateTimeFormat(UI_LOCALE, { weekday: 'long', timeZone: 'UTC' }).format(addDays(new Date(Date.UTC(2026, 7, 2, 12)), index)));
+    const weekdayNames = Array.from({ length: 7 }, (_, index) => dateFormatter({ weekday: 'long', timeZone: 'UTC' }).format(addDays(new Date(Date.UTC(2026, 7, 2, 12)), index)));
     const weeks = [];
     const agenda = [];
     for (let week = 0; week < 6; week += 1) {
@@ -1083,7 +1160,7 @@
         const expanded = expandedDays.has(key);
         const visible = expanded ? dayEvents : dayEvents.slice(0, 3);
         const classes = [day.getUTCMonth() !== month.getUTCMonth() ? 'pmd-outside' : '', key === isoDay(today) ? 'pmd-today' : ''].filter(Boolean).join(' ');
-        const label = new Intl.DateTimeFormat(UI_LOCALE, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(day);
+        const label = dateFormatter({ weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(day);
         cells.push(`<td class="${classes}" data-calendar-day="${key}"><time class="pmd-calendar-day-number" datetime="${key}" aria-label="${escapeHtml(label)}">${day.getUTCDate()}</time>${dayEvents.length ? `<ul class="pmd-calendar-events">${visible.map(event => `<li>${calendarEventLink(event)}</li>`).join('')}</ul>` : ''}${dayEvents.length > 3 ? `<button class="pmd-calendar-more" type="button" data-action="toggle-day" data-value="${key}" aria-expanded="${expanded}" aria-label="${escapeHtml(expanded ? `${COPY.showFewerDay} ${TEXT.onDate} ${label}` : `${COPY.showMoreDay(dayEvents.length - 3)} ${TEXT.onDate} ${label}`)}">${escapeHtml(expanded ? COPY.showFewerDay : COPY.showMoreDay(dayEvents.length - 3))}</button>` : ''}</td>`);
         if (day.getUTCMonth() === month.getUTCMonth() && dayEvents.length) {
           agenda.push(`<section class="pmd-agenda-day"><h4><time datetime="${key}">${escapeHtml(label)}</time></h4><ul>${dayEvents.map(event => `<li>${calendarEventLink(event)}</li>`).join('')}</ul></section>`);
@@ -1091,7 +1168,9 @@
       }
       weeks.push(`<tr>${cells.join('')}</tr>`);
     }
-    root.innerHTML = `<div class="pmd-calendar-head"><div class="pmd-calendar-nav"><button type="button" data-action="calendar-previous" aria-label="${COPY.previousMonth}">${COPY.previous}</button><button class="pmd-calendar-today" type="button" data-action="calendar-today">${COPY.today}</button></div><h3 aria-live="polite"><span>${escapeHtml(title)}</span><small>${escapeHtml(calendarSummary)}</small></h3><div class="pmd-calendar-nav"><button type="button" data-action="calendar-next" aria-label="${COPY.nextMonth}">${COPY.next}</button></div></div><div class="pmd-calendar-table-wrap"><table class="pmd-calendar-table"><caption>${escapeHtml(TEXT.calendarCaption(title))} ${escapeHtml(calendarSummary)}</caption><thead><tr>${weekdayNames.map(name => `<th scope="col">${escapeHtml(name)}</th>`).join('')}</tr></thead><tbody>${weeks.join('')}</tbody></table></div><div class="pmd-calendar-agenda" aria-label="${escapeHtml(`${title} ${locale === 'fr' ? 'ordre du jour' : 'agenda'}`)}">${agenda.length ? agenda.join('') : `<div class="pmd-empty"><h3>${escapeHtml(TEXT.emptyMonth(title))}</h3><p>${TEXT.changeMonth}</p></div>`}</div>`;
+    const ranges = calendarMonthEvents(month).filter(isDateRange);
+    const rangeSection = ranges.length ? `<details class="pmd-ongoing"><summary>${locale === 'fr' ? 'Périodes en cours ce mois-ci' : 'Date ranges this month'} (${ranges.length})</summary><p>${locale === 'fr' ? 'Consultez la fiche pour les séances et heures d’ouverture.' : 'Open a listing for individual sessions and opening hours.'}</p>${rangeList(ranges)}</details>` : '';
+    root.innerHTML = `${rangeSection}<div class="pmd-calendar-head"><div class="pmd-calendar-nav"><button type="button" data-action="calendar-previous" aria-label="${COPY.previousMonth}">${COPY.previous}</button><button class="pmd-calendar-today" type="button" data-action="calendar-today">${COPY.today}</button></div><h3 aria-live="polite"><span>${escapeHtml(title)}</span><small>${escapeHtml(calendarSummary)}</small></h3><div class="pmd-calendar-nav"><button type="button" data-action="calendar-next" aria-label="${COPY.nextMonth}">${COPY.next}</button></div></div><div class="pmd-calendar-table-wrap"><table class="pmd-calendar-table"><caption>${escapeHtml(TEXT.calendarCaption(title))} ${escapeHtml(calendarSummary)}</caption><thead><tr>${weekdayNames.map(name => `<th scope="col">${escapeHtml(name)}</th>`).join('')}</tr></thead><tbody>${weeks.join('')}</tbody></table></div><div class="pmd-calendar-agenda" aria-label="${escapeHtml(`${title} ${locale === 'fr' ? 'ordre du jour' : 'agenda'}`)}">${agenda.length ? agenda.join('') : ranges.length ? `<p class="pmd-help">${locale === 'fr' ? 'Les périodes figurent ci-dessus; aucune séance distincte n’est publiée pour cette vue.' : 'Date ranges are listed above; no individual sessions are listed in this view.'}</p>` : `<div class="pmd-empty"><h3>${escapeHtml(TEXT.emptyMonth(title))}</h3><p>${TEXT.changeMonth}</p></div>`}</div>`;
     renderPagination(1);
     $('#pmdLiveStatus').textContent = calendarSummary;
     if (focusDay) restoreFocus({ action: 'toggle-day', value: focusDay }, '#pmdCalendar h3');
@@ -1106,11 +1185,12 @@
     if (calendar) calendar.hidden = !inCalendar;
     if (inCalendar) renderCalendar();
     else renderList();
+    const fallback = $('#pmdFallback'); if (fallback) fallback.hidden = true;
     const title = $('#pmdResultsTitle');
     if (title) title.textContent = surface === 'monitoring' ? TEXT.monitored : inCalendar ? TEXT.calendarResults : TEXT.listings;
     const count = $('#pmdResultsCount');
     if (count) count.textContent = inCalendar
-      ? COPY.calendarShowing(calendarMonthEvents().length, visibleCount, new Intl.DateTimeFormat(UI_LOCALE, { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(calendarMonth()))
+      ? COPY.calendarShowing(calendarMonthEvents().length, visibleCount, dateFormatter({ month: 'long', year: 'numeric', timeZone: 'UTC' }).format(calendarMonth()))
       : resultGroups.some(group => group.type === 'series') ? COPY.groups(filteredEvents.length, resultGroups.length) : COPY.results(filteredEvents.length);
     const preview = $('#pmdFilterPreview');
     if (preview) preview.textContent = COPY.results(visibleCount);
@@ -1130,6 +1210,25 @@
     if (sortControl) sortControl.hidden = inCalendar;
     if (sort) sort.disabled = inCalendar;
     $$('[data-view]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.view === state.view)));
+    // Geometry and other listeners need the final layout, including removal
+    // of the static fallback and the current result controls.
+    const searchLabel = [
+      routeScope ? ROUTE_LABELS[routeScope] || titleCase(routeScope) : '',
+      state.q ? `“${state.q}”` : '',
+      surface === 'monitoring' ? TEXT.dateConfirm : optionLabel('date', state.date),
+      ...allSelectedItems().filter(item => !['date', 'route'].includes(item.key)).map(item => item.label)
+    ].filter(Boolean).join(' · ');
+    const shell = $('.pmd-shell');
+    if (shell) shell.dataset.savedSearchLabel = searchLabel;
+    const detailBase = locale === 'fr' ? '/polymythseminars/fr/events/' : '/polymythseminars/events/';
+    const returnQuery = `?from=${encodeURIComponent(targetUrl())}`;
+    document.dispatchEvent(new CustomEvent('polymythcal:results', { detail: {
+      catalogue: events.map(event => ({ id: event.id, title: event.title,
+        href: `${detailBase}${encodeURIComponent(event.id)}/${returnQuery}`,
+        // Only visible or saved records need a formatted description.
+        get date() { return savedDisplay(event).date; },
+        get place() { return savedDisplay(event).place; } }))
+    } }));
   }
 
   function renderAll({ history = 'replace', focus = null } = {}) {
@@ -1139,6 +1238,8 @@
       state.sortExplicit = false;
     }
     applyFiltersAndSort();
+    optionCounts.clear();
+    eligibleForCounts = null;
     if (surface === 'research') {
       renderResearchFamilies();
       if ($('#pmdFacetSearch')?.value) filterResearchFamilies();
@@ -1159,6 +1260,8 @@
     if (['attend', 'apply'].includes(defaultContent)) selectedFor('kind').add(defaultContent);
     state.date = surface === 'monitoring' ? 'all' : 'upcoming';
     state.page = 1;
+    state.month = '';
+    expandedDays.clear();
     if (includeSearch) state.q = '';
   }
 
@@ -1166,7 +1269,7 @@
     const key = input.dataset.axis;
     const value = input.dataset.value;
     const token = focusToken(input);
-    if (key === 'date') state.date = value;
+    if (key === 'date') { state.date = value; state.month = ''; }
     else if (key === 'kind') {
       if (value === 'all') {
         selectedFor('kind').clear();
@@ -1490,6 +1593,7 @@
         results.setAttribute('aria-busy', 'false');
         $('#pmdResultsTitle').textContent = COPY.unavailable;
         $('#pmdResultsCount').textContent = COPY.unavailableHelp;
+        const fallback = $('#pmdFallback'); if (fallback) fallback.hidden = false;
         if (list) list.innerHTML = `<div class="pmd-empty"><h3>${COPY.unavailable}</h3><p>${COPY.unavailableHelp}</p><button type="button" id="pmdRetry">${COPY.retry}</button></div>`;
         $('#pmdRetry')?.addEventListener('click', loadData, { once: true });
       }
