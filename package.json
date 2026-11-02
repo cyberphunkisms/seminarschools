@@ -199,7 +199,7 @@
     "verify:audit12": "node scripts/verify-audit12-mobile-web-hybrid.js",
     "verify:polymythcal-truth": "node scripts/run-python.js scripts/validate-polymythcal.py && node scripts/verify-polymythcal-audit13.js",
     "test:polymythcal-adapters": "node scripts/run-python.js -m unittest scripts/test_polymythcal_adapters.py",
-    "test:polymythcal-harvest": "node scripts/run-python.js -m unittest scripts/test_polymythcal_protest_harvest.py",
+    "test:polymythcal-harvest": "node scripts/run-python.js -m unittest scripts.test_polymythcal_protest_harvest scripts.test_harvest_source_urls",
     "test:polymythcal-lifecycle": "node scripts/run-python.js -m unittest scripts/test_polymythcal_lifecycle.py",
     "test:polymythcal-sharding": "node scripts/run-python.js -m unittest scripts/test_polymythcal_sharding.py",
     "test:harvest-source-ledger": "node scripts/run-python.js -m unittest scripts/test_harvest_source_ledger.py",

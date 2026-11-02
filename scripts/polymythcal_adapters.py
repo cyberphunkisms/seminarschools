@@ -665,11 +665,31 @@ def classify_adapter_event_type(adapter: str, text: str, source: dict) -> str:
     return _profile_type(adapter, text, source)
 
 
+def http_source_url(value: str, base: str = "") -> str:
+    """Resolve a source link only when it identifies an HTTP(S) document."""
+    try:
+        resolved = urllib.parse.urljoin(base, str(value or "").strip())
+        parsed = urllib.parse.urlsplit(resolved)
+        if parsed.scheme.lower() in {"http", "https"} and parsed.hostname:
+            return resolved
+    except ValueError:
+        pass
+    return ""
+
+
+def _document_link(value: str) -> bool:
+    value = str(value or "").strip()
+    return bool(value and not value.startswith("#") and http_source_url(value, "https://source.invalid/"))
+
+
 def _record(source: dict, adapter: str, title: str, dt: datetime, has_time: bool, url: str,
             venue: str, raw: str, *, end_date: datetime | None = None, organizer: str | None = None,
             series_title: str | None = None, lifecycle_status: str | None = None,
             external_uid: str | None = None) -> dict:
-    full_url = urllib.parse.urljoin(source_url(source), url or source_url(source))
+    document_url = http_source_url(str(source.get("_document_url") or ""), source_url(source))
+    full_url = http_source_url(url, document_url) or document_url
+    if not full_url:
+        raise ValueError("event has no HTTP(S) source document")
     explicit_organizer = organizer or (
         str(source.get("name") or "") if source.get("source_is_organizer") else ""
     )
@@ -967,11 +987,13 @@ def _event_title_and_href(node) -> tuple[str, str]:
                 parent_link = title_node.find_parent("a", href=True)
                 if parent_link and node in parent_link.parents:
                     preferred = parent_link
-    if preferred:
+    if preferred and _document_link(preferred.get("href")):
         return title or preferred.get_text(" ", strip=True), str(preferred.get("href") or "")
 
     scored = []
     for index, anchor in enumerate(node.find_all("a", href=True)):
+        if not _document_link(anchor.get("href")):
+            continue
         anchor_text = anchor.get_text(" ", strip=True)
         low = anchor_text.lower()
         score = 0

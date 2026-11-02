@@ -7,11 +7,42 @@ from types import SimpleNamespace
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from run_readonly_harvest import collect, parse_result, ROOT
+from run_readonly_harvest import collect, parse_result, ROOT, OUTPUT_SCHEMA
 from atomic_json import write_text_atomic
 
 
 class ReadOnlyHarvestTests(unittest.TestCase):
+    def test_structured_output_and_single_json_fence(self):
+        payload = {'events': [], 'source_yields': []}
+        for envelope in [
+            {'subtype': 'success', 'structured_output': payload, 'result': ''},
+            {'subtype': 'success', 'result': '```json\n' + json.dumps(payload) + '\n```'},
+        ]:
+            self.assertEqual(parse_result(json.dumps(envelope)), payload)
+        for text, reason in [
+            ('', 'stdout is empty'),
+            ('prose', 'envelope is not JSON'),
+            (json.dumps({'subtype': 'success', 'result': ''}), 'result is not harvest JSON'),
+            (json.dumps({'subtype': 'success', 'result': 'Here is JSON: ' + json.dumps(payload)}), 'result is not harvest JSON'),
+        ]:
+            with self.assertRaisesRegex(ValueError, reason):
+                parse_result(text)
+
+    def test_failed_response_preserves_redacted_evidence_and_prior_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / 'result.json'
+            output.write_text('prior')
+            base = Path(directory) / 'attempt-1'
+            fake = lambda *a, **k: SimpleNamespace(
+                returncode=0, stdout='invalid hunter2-secret', stderr='Bearer token-value')
+            with patch.dict('os.environ', {'API_KEY': 'hunter2-secret'}):
+                self.assertEqual(collect('festivals', 'collect', output, 'test', 2, 1,
+                                         fake, diagnostics_base=base), 65)
+            self.assertEqual(output.read_text(), 'prior')
+            self.assertEqual(Path(str(base) + '.stdout.txt').read_text(), 'invalid [REDACTED]')
+            self.assertEqual(Path(str(base) + '.stderr.txt').read_text(), 'Bearer [REDACTED]')
+            self.assertFalse(json.loads(Path(str(base) + '.diagnostics.json').read_text())['envelope_json'])
+
     def test_collector_has_only_web_access_and_no_checkout_configuration(self):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / 'result.json'
@@ -19,6 +50,7 @@ class ReadOnlyHarvestTests(unittest.TestCase):
                 self.assertEqual(cmd[cmd.index('--tools') + 1], 'WebFetch')
                 self.assertEqual(cmd[cmd.index('--allowedTools') + 1], 'WebFetch')
                 self.assertEqual(cmd[cmd.index('--permission-mode') + 1], 'default')
+                self.assertEqual(json.loads(cmd[cmd.index('--json-schema') + 1]), OUTPUT_SCHEMA)
                 self.assertEqual(cmd[cmd.index('--setting-sources') + 1], '')
                 self.assertIn('--strict-mcp-config', cmd)
                 self.assertEqual(json.loads(cmd[cmd.index('--mcp-config') + 1]), {'mcpServers': {}})

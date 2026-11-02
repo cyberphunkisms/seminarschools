@@ -150,6 +150,7 @@ for ATTEMPT in $(seq 1 "${HARVEST_ATTEMPTS}"); do
       --stream "${STREAM}" --prompt "${PROMPT_BODY}" --output "${OUTPUT_FILE}" \
       --model "${CLAUDE_MODEL}" \
       --max-turns "${MAX_TURNS}" \
+      --diagnostics-base "${LOG_DIR}/${STREAM}-${RUN_ID}-attempt-${ATTEMPT}" \
       --max-budget-usd "${MAX_BUDGET_USD}" 2>&1 | tee -a "${LOG_FILE}"
   CLAUDE_STATUS="${PIPESTATUS[0]}"
   set -e

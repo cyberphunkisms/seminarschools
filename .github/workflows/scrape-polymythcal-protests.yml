@@ -54,6 +54,7 @@ jobs:
       - name: Detect mature per-source protest anomalies
         run: python3 scripts/check-polymythcal-source-anomalies.py --stream protests-deterministic --current /tmp/polymythcal-protests.json --history data/harvest-source-history.json --report /tmp/protests-deterministic-source-anomalies.json --strict --write-history
       - name: Publish native confirmed and unconfirmed protest records
+        id: protest_publication
         run: python3 scripts/publish_protest_harvest.py --input /tmp/polymythcal-protests.json
       - name: Build separate undated-announcement surface
         run: python3 scripts/build-polymythcal-candidate-surface.py
@@ -89,7 +90,7 @@ jobs:
           body: "All enabled protest sources were crawled without sharding. Review event changes, visible qualification reasons, lifecycle changes, and explicit source-health diagnostics."
           labels: polymythcal,automated-harvest
       - name: Preserve deterministic diagnostics
-        if: failure()
+        if: failure() || steps.protest_publication.outputs.rejected == 'true'
         uses: actions/upload-artifact@v7
         with:
           name: polymythcal-protest-harvest
@@ -102,6 +103,7 @@ jobs:
             data/polymythcal-protest-candidates.json
             data/polymythcal-http-cache.json
             data/polymythcal-identity-shadow.json
+            data/harvest-runs/protests-rejected.json
       - name: Save retained parsed-response cache
         if: always() && hashFiles('data/polymythcal-http-cache.json') != ''
         uses: actions/cache/save@v5

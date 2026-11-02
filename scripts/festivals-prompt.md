@@ -1,6 +1,6 @@
 # polymythcalendar regional festivals harvest (two-pass scrape-within-scrape)
 
-You are running headless inside a GitHub Action. Your job is to produce a JSON array of upcoming festivals and festival-class events for polymythcalendar across Toronto and Southern Ontario, Kingston, and Montréal.
+You are running headless inside a GitHub Action. Produce a JSON object containing events and source_yields for upcoming festivals and festival-class events across Toronto and Southern Ontario, Kingston, and Montréal.
 
 Today's date is provided via the runner shell. Treat the current date as **today**. Find festivals running from today through the next 180 days (six-month window; festivals announce farther ahead than lectures).
 
@@ -97,10 +97,12 @@ Return a single JSON object matching the host-supplied `data/seminars-schema.jso
 
 The output JSON must also include a `source_yields` array with exactly one entry for every `primary_sources` record, in roster order, using `crawled`, `skipped-shard`, `unreachable`, or `budget-exhausted`. Every event must use a primary-source `source_id`, and each row's non-negative integer `events` value must equal the exact number of output events carrying that ID. `skipped-shard`, `unreachable`, and `budget-exhausted` rows must report zero. Duplicate, missing, unknown, reordered, invalid-status, or miscounted rows fail validation and leave public data unchanged. This gives the next run a trustworthy visible coverage ledger.
 
-Each record's `type` field uses one of the new polymyth types when appropriate:
+Parent records use `type: "festival"` and `is_parent_festival: true`. Put the applicable festival subtype in `secondary_types`:
 - `festival-of-form` for jazz festivals, music festivals, fringe theatre, literary festivals
 - `cultural-reproduction` for diasporic-cultural festivals, Pride, indigenous gatherings
 - `site-specific-art` for CONTACT, Nuit Blanche, Luminato, SummerWorks
+
+Child records use their qualifying event type:
 - `screening` for in-festival film events with director Q&A
 - `reading` / `lecture` / `panel` for in-festival literary or talk programming
 
@@ -129,7 +131,7 @@ Do not read `/data/manual-events.json` and do not include its entries in your ou
 
 ## Tool budget
 
-You have only `WebFetch`. The host supplies the roster and schema. The runner caps spend at the MAX_BUDGET_USD value announced by the workflow. Festivals normally run with a higher cap than seminars because two-pass crawl doubles fetch count. Use the budget. Crawl every discovery source. Verify every candidate. Do not stop early when budget remains.
+You have only `WebFetch`. The host supplies the roster and schema. The runner caps spend at MAX_BUDGET_USD. Prioritize the every-run anchors and assigned shard, and reserve enough turns and budget to return the complete structured output. Mark sources actually left unfinished as `budget-exhausted`. Verification and exact source accounting remain required even for an empty harvest.
 
 ## Output destination
 
