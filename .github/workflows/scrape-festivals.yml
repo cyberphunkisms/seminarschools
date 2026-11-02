@@ -60,7 +60,7 @@ jobs:
           python3 scripts/validate-polymythcal.py
           npm run verify:calendar-data
       - name: Create publication pull request
-        if: success()
+        if: success() && steps.harvest_summary.outputs.degraded == 'false'
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -79,6 +79,8 @@ jobs:
           if-no-files-found: warn
           path: |
             data/harvest-runs/**
+            data/harvest-runs/*.json
+            data/harvest-runs/*.txt
             data/polymythcal-lifecycle-log.json
             data/polymythcal-lifecycle-state.json
       - name: Summarize harvest diagnostics

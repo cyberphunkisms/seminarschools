@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import argparse
+from copy import deepcopy
 import json
+import os
 import subprocess
 import sys
 from collections import Counter
@@ -15,6 +17,7 @@ from build_lock import ReleaseBuildLock, inherited_release_build_root
 from polymythcal_adapters import (
     event_identity_aliases,
     event_occurrence_key,
+    http_source_url,
 )
 from polymythcal_source_health import source_health_gate_error as _shared_gate_error
 from polymythcal_identity_shadow import identity_shadow_decision
@@ -23,6 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_PATH = ROOT / "polymythseminars" / "events.json"
 MASTER_PATH = ROOT / "data" / "polymyth-seminar-events.json"
 SHADOW_PATH = ROOT / "data" / "polymythcal-identity-shadow.json"
+REJECTED_PATH = ROOT / "data" / "harvest-runs" / "protests-rejected.json"
 
 
 def _key(event: dict) -> str:
@@ -51,12 +55,18 @@ def upsert(
     incoming: list[dict],
     *,
     shadow_sink: list[dict] | None = None,
+    rejected_sink: list[dict] | None = None,
 ) -> tuple[dict, dict]:
-    events = list(public_data.get("events") or [])
+    events = deepcopy(public_data.get("events") or [])
     added = refreshed = 0
     prepared = []
     for raw in incoming:
         if raw.get("type") != "protest":
+            continue
+        if not http_source_url(raw.get("source_url")):
+            if rejected_sink is None:
+                raise ValueError("protest has no HTTP(S) source_url; a rejection ledger is required")
+            rejected_sink.append({"reason": "invalid-source-url", "event": deepcopy(raw)})
             continue
         if not all(raw.get(key) for key in ("title", "date", "source_url")):
             continue
@@ -181,7 +191,18 @@ def main() -> int:
         return 2
     public_data = _read(PUBLIC_PATH)
     shadow = []
-    updated, counts = upsert(public_data, events, shadow_sink=shadow)
+    rejected = []
+    updated, counts = upsert(public_data, events, shadow_sink=shadow, rejected_sink=rejected)
+    write_text_atomic(REJECTED_PATH, json.dumps({
+        "generated_at": payload.get("generated_at"),
+        "rejected_count": len(rejected),
+        "items": rejected,
+    }, indent=2, ensure_ascii=False) + "\n")
+    if rejected:
+        print(f"Quarantined {len(rejected)} incoming records with invalid source URLs; evidence retained in {REJECTED_PATH}.", file=sys.stderr)
+    if os.environ.get("GITHUB_OUTPUT"):
+        with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as handle:
+            handle.write(f"rejected={'true' if rejected else 'false'}\n")
     text = json.dumps(updated, indent=2, ensure_ascii=False) + "\n"
     write_text_atomic(PUBLIC_PATH, text)
     write_text_atomic(MASTER_PATH, text)

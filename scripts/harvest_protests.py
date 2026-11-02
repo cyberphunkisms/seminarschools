@@ -27,6 +27,7 @@ from polymythcal_adapters import (
     event_identity_aliases,
     event_identity_key,
     event_occurrence_key,
+    http_source_url,
 )
 from polymythcal_discovery import (
     FETCH_STATUSES,
@@ -594,12 +595,10 @@ def extract_undated_announcements(
             " ",
             heading.get_text(" ", strip=True) if heading else text[:180],
         ).strip()[:240]
-        link = node.find("a", href=True)
-        announcement_url = (
-            urljoin(source_url, str(link.get("href") or ""))
-            if link
-            else source_url
-        )
+        announcement_url = next((
+            resolved for link in node.find_all("a", href=True)
+            if (resolved := http_source_url(link.get("href"), source_url))
+        ), source_url)
         basis = "::".join(
             (
                 str(source.get("id") or ""),

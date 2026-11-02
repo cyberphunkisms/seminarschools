@@ -17,7 +17,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlsplit, urlunsplit
 
-PARSER_CACHE_VERSION = "polymythcal-parser-audit43-v1"
+PARSER_CACHE_VERSION = "polymythcal-parser-http-sources-v2"
 MAX_CACHE_ENTRIES = 2500
 
 
